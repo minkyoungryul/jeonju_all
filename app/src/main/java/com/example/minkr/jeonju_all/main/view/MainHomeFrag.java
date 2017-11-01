@@ -26,8 +26,8 @@ public class MainHomeFrag extends Fragment implements MainView{
     @BindView(R.id.rl_kind_food)
     RelativeLayout rl_kind_food;
 
-    @BindView(R.id.rl_parking)
-    RelativeLayout rl_parking;
+//    @BindView(R.id.rl_parking)
+//    RelativeLayout rl_parking;
 
     MainPresenter presenter;
 
@@ -61,10 +61,10 @@ public class MainHomeFrag extends Fragment implements MainView{
             startActivity(intent);
         });
 
-        rl_parking.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ParkingActivity.class);
-            startActivity(intent);
-        });
+//        rl_parking.setOnClickListener(v -> {
+//            Intent intent = new Intent(getContext(), ParkingActivity.class);
+//            startActivity(intent);
+//        });
     }
 
     @Override
