@@ -63,6 +63,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
         ib_map.setOnClickListener(v->{
             Intent intent = new Intent(KindFoodActivity.this, KindFoodMapActivity.class);
+            //intent.putExtra("data", data);
             startActivity(intent);
         });
     }

@@ -35,12 +35,12 @@ import com.nhn.android.mapviewer.overlay.NMapCalloutOverlay;
  */
 public class NMapCalloutBasicOverlay extends NMapCalloutOverlay {
 
-	private static final int CALLOUT_TEXT_PADDING_X = 10;
-	private static final int CALLOUT_TEXT_PADDING_Y = 10;
-	private static final int CALLOUT_TAG_WIDTH = 10;
-	private static final int CALLOUT_TAG_HEIGHT = 10;
-	private static final int CALLOUT_ROUND_RADIUS_X = 5;
-	private static final int CALLOUT_ROUND_RADIUS_Y = 5;
+	private static final int CALLOUT_TEXT_PADDING_X = 40;
+	private static final int CALLOUT_TEXT_PADDING_Y = 40;
+	private static final int CALLOUT_TAG_WIDTH = 50;//화살표
+	private static final int CALLOUT_TAG_HEIGHT = 50;
+	private static final int CALLOUT_ROUND_RADIUS_X = 20;
+	private static final int CALLOUT_ROUND_RADIUS_Y = 20;
 
 	private final Paint mInnerPaint, mBorderPaint, mTextPaint;
 	private final Path mPath;
@@ -57,11 +57,12 @@ public class NMapCalloutBasicOverlay extends NMapCalloutOverlay {
 		mBorderPaint.setARGB(255, 255, 255, 255);
 		mBorderPaint.setAntiAlias(true);
 		mBorderPaint.setStyle(Style.STROKE);
-		mBorderPaint.setStrokeWidth(2);
+		mBorderPaint.setStrokeWidth(0);
 
 		mTextPaint = new Paint();
 		mTextPaint.setARGB(255, 255, 255, 255);
 		mTextPaint.setAntiAlias(true);
+		mTextPaint.setTextSize(80);
 
 		mPath = new Path();
 		mPath.setFillType(Path.FillType.WINDING);
