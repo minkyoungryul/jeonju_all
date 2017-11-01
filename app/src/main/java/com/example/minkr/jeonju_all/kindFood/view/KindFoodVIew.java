@@ -12,4 +12,6 @@ import java.util.List;
 
 public interface KindFoodVIew extends MvpView {
     void getKindFoodDatas(List<KindFoodListData> kindFoodListDatas);
+
+    void getFoodStoreInfo(KindFoodListData data);
 }

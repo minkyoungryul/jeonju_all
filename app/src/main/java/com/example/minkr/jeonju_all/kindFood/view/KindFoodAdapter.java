@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
+import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
+import com.example.minkr.jeonju_all.util.Logger;
 
 import java.util.List;
 
@@ -23,12 +25,17 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
 
     Context mContext;
     List<KindFoodListData> datas;
-    int[] food_images = {R.drawable.img_fork, R.drawable.img_rib_soup, 0, R.drawable.img_black_nodle, R.drawable.img_korean_food,
+    KindFoodPresenter mPresenter;
+
+    int[] menu_images = {R.drawable.img_fork, R.drawable.img_rib_soup, 0, R.drawable.img_black_nodle, R.drawable.img_korean_food,
             R.drawable.img_nodle, R.drawable.img_siraegi, R.drawable.img_bibimbap, R.drawable.img_black_nodle, R.drawable.img_nodle};
 
-    public KindFoodAdapter(Context mContext, List<KindFoodListData> datas){
+    int[] store_ids = {16953705, 16784799, 34005058, 16986870, 11710472, 19555701, 16985833, 36004947, 36004175};
+
+    public KindFoodAdapter(Context mContext, List<KindFoodListData> datas, KindFoodPresenter presenter){
         this.mContext = mContext;
         this.datas = datas;
+        this.mPresenter = presenter;
     }
 
     @Override
@@ -40,8 +47,8 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         KindFoodListData data = datas.get(position);
-
-        holder.iv_food.setBackgroundResource(food_images[data.getId()-1]);
+        data.setStoreId(store_ids[position]+"");
+        holder.iv_food.setBackgroundResource(menu_images[data.getId()-1]);
         holder.tv_shop_name.setText(data.getName());
         holder.tv_address.setText(data.getAddress());
         holder.tv_tel.setText(data.getTel());
@@ -52,6 +59,11 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
             Intent call = new Intent(Intent.ACTION_DIAL);
             call.setData(Uri.parse("tel:"+data.getTel()));
             mContext.startActivity(call);
+        });
+
+        holder.getView().setOnClickListener(v->{
+            Logger.log("#12 data->"+ data.toString());
+            mPresenter.getFoodStoreInfo(data);
         });
     }
 
@@ -67,15 +79,21 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
         TextView tv_tel;
         TextView tv_menu;
         TextView tv_price;
+        View view;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            view = itemView;
             iv_food = (ImageView) itemView.findViewById(R.id.iv_food);
             tv_shop_name = (TextView) itemView.findViewById(R.id.tv_shop_name);
             tv_address = (TextView) itemView.findViewById(R.id.tv_address);
             tv_tel = (TextView) itemView.findViewById(R.id.tv_tel);
             tv_menu = (TextView) itemView.findViewById(R.id.tv_menu);
             tv_price = (TextView) itemView.findViewById(R.id.tv_price);
+        }
+
+        public View getView(){
+            return view;
         }
     }
 }

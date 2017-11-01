@@ -69,7 +69,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
     private void init() {
         mLayoutManager = new LinearLayoutManager(this);
-        adapter = new KindFoodAdapter(this,kindFoodList);
+        adapter = new KindFoodAdapter(this,kindFoodList,presenter);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
     }
@@ -95,5 +95,12 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         kindFoodList.addAll(kindFoodListDatas);
         Logger.log("#6 kindFoodList ->"+ kindFoodList.toString());
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getFoodStoreInfo(KindFoodListData data) {
+        Intent intent = new Intent(KindFoodActivity.this, FoodStoreInfoActivity.class);
+        intent.putExtra("data", data);
+        startActivity(intent);
     }
 }

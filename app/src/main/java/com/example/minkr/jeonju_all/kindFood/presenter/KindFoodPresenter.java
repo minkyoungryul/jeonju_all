@@ -77,4 +77,8 @@ public class KindFoodPresenter implements Presenter<KindFoodVIew> {
         compositeDisposable.add(disposable);
 
     }
+
+    public void getFoodStoreInfo(KindFoodListData data) {
+        view.getFoodStoreInfo(data);
+    }
 }

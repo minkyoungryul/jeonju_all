@@ -3,12 +3,14 @@ package com.example.minkr.jeonju_all.kindFood.data;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /**
  * Created by minkr on 2017-10-25.
  */
 
 @Root(name = "list")
-public class KindFoodListData {
+public class KindFoodListData implements Serializable{
     @Element(name = "apiSid")
     private int id;
     @Element(name = "apiCeoName")
@@ -29,6 +31,8 @@ public class KindFoodListData {
     private String regDate;
     @Element(name = "apiTel")
     private String tel;
+
+    private String storeId;
 
     public int getId() {
         return id;
@@ -110,19 +114,28 @@ public class KindFoodListData {
         this.tel = tel;
     }
 
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
     @Override
     public String toString() {
         return "KindFoodListData{" +
                 "id=" + id +
                 ", ceoName='" + ceoName + '\'' +
-                ", x=" + x +
-                ", y=" + y +
+                ", x='" + x + '\'' +
+                ", y='" + y + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", price='" + price + '\'' +
                 ", foodName='" + foodName + '\'' +
                 ", regDate='" + regDate + '\'' +
                 ", tel='" + tel + '\'' +
+                ", storeId='" + storeId + '\'' +
                 '}';
     }
 }
