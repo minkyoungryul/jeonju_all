@@ -13,43 +13,107 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rl_kind_food"
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/rl_kind_food"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp">-->
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_shop"
-                    android:src="#55000000" />
+            <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/bg_shop"-->
+            <!--android:src="#55000000" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:gravity="center"
-                    android:text="착한모범업소"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="착한모범업소"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="20dp"-->
+            <!--android:textStyle="bold" />-->
+            <!--</RelativeLayout>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.3dp"
-                android:background="#bdbdbd" />
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.3dp"-->
+            <!--android:background="#bdbdbd" />-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="음식"
-                android:textStyle="bold"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="모범업소"
                 android:textColor="@color/black"
                 android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_marginBottom="20dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_kind_food"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_shop"
+
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center|bottom"
+                    android:background="@drawable/border_background"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="전주의 착한모범업소"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="음식점, 세탁소 등 모범업소"
+                        android:textColor="@color/light_gray"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"/>
+                android:text="음식"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -60,9 +124,9 @@
                     android:id="@+id/rl_food"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -76,31 +140,32 @@
                 <LinearLayout
                     android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:layout_gravity="center|bottom"
                     android:background="@drawable/border_background"
+                    android:gravity="center"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        android:text="맛집의 고향, 전주"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="맛집의 고향, 전주"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:text="맛집리스트를 제공합니다"
                         android:textColor="@color/light_gray"
-                        android:textSize="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
+                        android:textSize="15dp" />
                 </LinearLayout>
 
             </FrameLayout>
@@ -108,60 +173,61 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="숙박"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:layout_marginLeft="15dp"/>
+                android:textStyle="bold" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
                 android:layout_marginBottom="20dp">
+
                 <RelativeLayout
                     android:id="@+id/rl_house"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_house"
-                         />
+                        android:background="@drawable/bg_house" />
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:layout_gravity="center|bottom"
                     android:background="@drawable/border_background"
+                    android:gravity="center"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        android:text="전주에서만 느낄 수 있는 숙소"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="전주에서만 느낄 수 있는 숙소"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:text="한옥을 경험해보세요"
                         android:textColor="@color/light_gray"
-                        android:textSize="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
+                        android:textSize="15dp" />
                 </LinearLayout>
 
             </FrameLayout>
@@ -169,119 +235,122 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="여행"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:layout_marginLeft="15dp"/>
+                android:textStyle="bold" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
                 android:layout_marginBottom="20dp">
+
                 <RelativeLayout
                     android:id="@+id/rl_travel"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_travel"
-                        />
+                        android:background="@drawable/bg_travel" />
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:layout_gravity="center|bottom"
                     android:background="@drawable/border_background"
+                    android:gravity="center"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        android:text="야외 여행은 어떤가요?"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="야외 여행은 어떤가요?"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:text="가까운 여행지 리스트입니다"
                         android:textColor="@color/light_gray"
-                        android:textSize="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
+                        android:textSize="15dp" />
                 </LinearLayout>
             </FrameLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="문화"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:layout_marginLeft="15dp"/>
+                android:textStyle="bold" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
                 android:layout_marginBottom="20dp">
+
                 <RelativeLayout
                     android:id="@+id/rl_culture"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_culture"
-                        />
+                        android:background="@drawable/bg_culture" />
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:layout_gravity="center|bottom"
                     android:background="@drawable/border_background"
+                    android:gravity="center"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        android:text="전주의 문화"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="전주의 문화"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:text="문화, 공연을 경험해보세요"
                         android:textColor="@color/light_gray"
-                        android:textSize="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
+                        android:textSize="15dp" />
                 </LinearLayout>
 
             </FrameLayout>
@@ -289,92 +358,93 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="편의 시설"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:layout_marginLeft="15dp"/>
+                android:textStyle="bold" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
                 android:layout_marginBottom="20dp">
+
                 <RelativeLayout
                     android:id="@+id/rl_facilities"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_convenience"
-                        />
+                        android:background="@drawable/bg_convenience" />
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:layout_gravity="center|bottom"
                     android:background="@drawable/border_background"
+                    android:gravity="center"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        android:text="전주의 모든 편의 시설"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="전주의 모든 편의 시설"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:text="병원, 공원, 경찰서 등 편의 시설"
                         android:textColor="@color/light_gray"
-                        android:textSize="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"/>
+                        android:textSize="15dp" />
                 </LinearLayout>
 
             </FrameLayout>
 
             <!--<RelativeLayout-->
-                <!--android:id="@+id/rl_parking"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_marginTop="20dp">-->
+            <!--android:id="@+id/rl_parking"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_marginTop="20dp">-->
 
-                <!--<ImageView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:background="@drawable/bg_parking"-->
-                    <!--android:src="#55000000" />-->
+            <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/bg_parking"-->
+            <!--android:src="#55000000" />-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_marginLeft="15dp"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="주차장"-->
-                    <!--android:textColor="@color/white"-->
-                    <!--android:textSize="20dp"-->
-                    <!--android:textStyle="bold" />-->
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="주차장"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="20dp"-->
+            <!--android:textStyle="bold" />-->
             <!--</RelativeLayout>-->
 
             <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0.3dp"-->
-                <!--android:background="#bdbdbd" />-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.3dp"-->
+            <!--android:background="#bdbdbd" />-->
 
         </LinearLayout>
 
