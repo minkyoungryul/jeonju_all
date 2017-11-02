@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.food.view.FoodActivity;
 import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
@@ -28,6 +29,9 @@ public class MainHomeFrag extends Fragment implements MainView{
 
 //    @BindView(R.id.rl_parking)
 //    RelativeLayout rl_parking;
+
+    @BindView(R.id.rl_food)
+    RelativeLayout rl_food;
 
     MainPresenter presenter;
 
@@ -61,6 +65,10 @@ public class MainHomeFrag extends Fragment implements MainView{
             startActivity(intent);
         });
 
+        rl_food.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), FoodActivity.class);
+            startActivity(intent);
+        });
 //        rl_parking.setOnClickListener(v -> {
 //            Intent intent = new Intent(getContext(), ParkingActivity.class);
 //            startActivity(intent);
