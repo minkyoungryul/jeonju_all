@@ -56,10 +56,10 @@ public class KindFoodPresenter implements Presenter<KindFoodVIew> {
                 .flatMap(new Function<KindFoodTotalData, Flowable<List<KindFoodListData>>>() {
                     @Override
                     public Flowable<List<KindFoodListData>> apply(KindFoodTotalData kindFoodTotalData) throws Exception {
-                        if(kindFoodTotalData.getBody().getData().getList().get(2) != null
-                                &&kindFoodTotalData.getBody().getData().getList().get(2).getName().equals("제일크리너스샵")){
-                            kindFoodTotalData.getBody().getData().getList().remove(2);
-                        }
+//                        if(kindFoodTotalData.getBody().getData().getList().get(2) != null
+//                                &&kindFoodTotalData.getBody().getData().getList().get(2).getName().equals("제일크리너스샵")){
+//                            kindFoodTotalData.getBody().getData().getList().remove(2);
+//                        }
 
                         return Flowable.just(kindFoodTotalData.getBody().getData().getList());
                     }
