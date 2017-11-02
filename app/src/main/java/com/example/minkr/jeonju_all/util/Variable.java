@@ -15,5 +15,6 @@ public class Variable {
     public final static String _KINDFOOD_SERVICE_KEY = "87NcRP27j9AqfHfoumvpLSAtoostJ8siaBAWmfdnjQEah1RTAis3mcJZh8CT/xCFzYT8zSwydcuevHEBQmVvrQ==";
     public final static String _PARKING_LIST_SERVER_REQUEST_URL = "parking/getParkingList?pageSize=76";
     public final static String _KINDFOOD_LIST_SERVER_REQUEST_URL = "chakhanpriceservice/getChakHan";
+    public final static String _FOOD_RICE_LIST_SERVER_REQUEST_URL = "jeonjufood/getWhiteRiceList";
 
 }
