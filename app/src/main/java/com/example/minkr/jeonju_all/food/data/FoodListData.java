@@ -5,21 +5,23 @@ import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /**
  * Created by minkr on 2017-11-03.
  */
 
 @Root(name = "list")
-public class FoodListData {
+public class FoodListData implements Serializable {
 
     @Element(name = "closeTime")
     private String closeTime;
     @Element(name = "holiday")
     private String holiday;
     @Element(name = "isPaking")
-    private boolean isParking;
+    private int isParking;
     @Element(name = "isReserve")
-    private boolean isReserve;
+    private int isReserve;
     @Element(name = "mainImgUrl")
     private String mainImg;
     @Element(name = "mainMenu", required = false)
@@ -43,6 +45,40 @@ public class FoodListData {
     @Element(name = "tel")
     private String tel;
 
+    private String storeId;
+
+    public int getIsParking() {
+        return isParking;
+    }
+
+    public void setIsParking(int isParking) {
+        this.isParking = isParking;
+    }
+
+    public int getIsReserve() {
+        return isReserve;
+    }
+
+    public void setIsReserve(int isReserve) {
+        this.isReserve = isReserve;
+    }
+
+    public String getParkingDetail() {
+        return parkingDetail;
+    }
+
+    public void setParkingDetail(String parkingDetail) {
+        this.parkingDetail = parkingDetail;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
     public String getCloseTime() {
         return closeTime;
     }
@@ -59,19 +95,19 @@ public class FoodListData {
         this.holiday = holiday;
     }
 
-    public boolean isParking() {
+    public int isParking() {
         return isParking;
     }
 
-    public void setParking(boolean parking) {
+    public void setParking(int parking) {
         isParking = parking;
     }
 
-    public boolean isReserve() {
+    public int isReserve() {
         return isReserve;
     }
 
-    public void setReserve(boolean reserve) {
+    public void setReserve(int reserve) {
         isReserve = reserve;
     }
 
@@ -181,6 +217,7 @@ public class FoodListData {
                 ", StoreName='" + StoreName + '\'' +
                 ", tableCnt=" + tableCnt +
                 ", tel='" + tel + '\'' +
+                ", storeId='" + storeId + '\'' +
                 '}';
     }
 }

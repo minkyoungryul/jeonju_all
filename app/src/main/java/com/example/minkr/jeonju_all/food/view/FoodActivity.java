@@ -1,16 +1,20 @@
 package com.example.minkr.jeonju_all.food.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +41,24 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
 
     @BindView(R.id.hanok_recyclerView)
     RecyclerView hanok_recyclerView;
+
+    @BindView(R.id.ll_rice_show)
+    LinearLayout ll_rice_show;
+
+    @BindView(R.id.ll_bibimbap_show)
+    LinearLayout ll_bibimbap_show;
+
+    @BindView(R.id.ll_hanok_show)
+    LinearLayout ll_hanok_show;
+
+    @BindView(R.id.ll_wine_show)
+    LinearLayout ll_wine_show;
+
+    @BindView(R.id.ll_kongbap_show)
+    LinearLayout ll_kongbap_show;
+
+    @BindView(R.id.ib_back)
+    ImageButton ib_back;
 
     LinearLayoutManager mLayoutManager;
     LinearLayoutManager mLayoutManager2;
@@ -111,7 +133,33 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
     }
 
     private void setListener() {
+        ll_rice_show.setOnClickListener(v->{
+            nextActivity(all_riceList);
+        });
 
+        ll_bibimbap_show.setOnClickListener(v->{
+            nextActivity(all_bibimbapList);
+        });
+
+        ll_hanok_show.setOnClickListener(v->{
+            nextActivity(all_hanokList);
+        });
+
+        ll_kongbap_show.setOnClickListener(v->{
+            nextActivity(all_kongbapList);
+        });
+
+        ll_wine_show.setOnClickListener(v->{
+            nextActivity(all_wineList);
+        });
+
+        ib_back.setOnClickListener(v->finish());
+    }
+
+    public void nextActivity(List<FoodListData> datas){
+        Intent intent = new Intent(FoodActivity.this, FoodDetailActivity.class);
+        intent.putExtra("data", (Serializable) datas);
+        startActivity(intent);
     }
 
     @Override

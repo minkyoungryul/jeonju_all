@@ -14,6 +14,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -61,7 +62,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .subscribe(new Consumer<List<FoodListData>>() {
                     @Override
                     public void accept(List<FoodListData> foodListData) throws Exception {
-                        Logger.log("#1 #13 foodListData->"+foodListData.toString());
+                        Logger.log("#1 #13 foodListData->" + foodListData.toString());
                         view.getFoodRiceDatas(foodListData);
                     }
                 });

@@ -19,4 +19,5 @@ public interface FoodView extends MvpView{
     void getFoodWineDatas(List<FoodListData> foodListData);
 
     void getFoodHanokDatas(List<FoodListData> foodListData);
+
 }
