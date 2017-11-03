@@ -30,6 +30,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     KindFoodListData data;
+    int data_map = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,12 +40,19 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         data = (KindFoodListData) intent.getSerializableExtra("data");
+        data_map = intent.getIntExtra("datas",0);
         init();
     }
 
     private void init() {
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data.getStoreId());
+
+        if (data_map == 0){
+            mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data.getStoreId());
+        }else{
+            mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data_map);
+        }
+        //mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data.getStoreId());
 //        http://map.naver.com/local/siteview.nhn?code=17115770
         mWebView.setWebViewClient(new WebViewClientClass());
         // WebViewClient 지정

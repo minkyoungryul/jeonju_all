@@ -50,6 +50,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         KindFoodListData data = datas.get(position);
         data.setStoreId(store_ids[position]+"");
+        //Logger.log("#16 data -> "+datas);
         holder.iv_food.setBackgroundResource(menu_images[data.getId()-1]);
         holder.tv_shop_name.setText(data.getName());
         holder.tv_address.setText(data.getAddress());

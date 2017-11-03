@@ -109,6 +109,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
     public void getFoodStoreInfo(KindFoodListData data) {
         Intent intent = new Intent(KindFoodActivity.this, FoodStoreInfoActivity.class);
         intent.putExtra("data", data);
+        intent.putExtra("datas",0);
         startActivity(intent);
     }
 }
