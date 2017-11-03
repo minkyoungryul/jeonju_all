@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
@@ -34,6 +36,9 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
     @BindView(R.id.ib_map)
     ImageButton ib_map;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     LinearLayoutManager mLayoutManager;
     KindFoodAdapter adapter;
@@ -69,6 +74,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
     }
 
     private void init() {
+        progressBar.setVisibility(View.VISIBLE);
         mLayoutManager = new LinearLayoutManager(this);
         adapter = new KindFoodAdapter(this,kindFoodList,presenter);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -96,6 +102,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         kindFoodList.addAll(kindFoodListDatas);
         Logger.log("#6 kindFoodList ->"+ kindFoodList.toString());
         adapter.notifyDataSetChanged();
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

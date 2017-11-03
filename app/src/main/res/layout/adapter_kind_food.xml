@@ -13,6 +13,16 @@
             android:background="@drawable/img_bibimbap"
             android:src="#66000000"/>
 
+        <ImageButton
+            android:id="@+id/ib_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_like_n"
+            android:background="@null"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"/>
+
         <LinearLayout
             android:id="@+id/ll_info"
             android:layout_alignParentBottom="true"

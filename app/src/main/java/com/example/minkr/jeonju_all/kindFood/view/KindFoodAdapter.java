@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,11 +27,12 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     Context mContext;
     List<KindFoodListData> datas;
     KindFoodPresenter mPresenter;
+    boolean isLike = false;
 
-    int[] menu_images = {R.drawable.img_fork, R.drawable.img_rib_soup, 0, R.drawable.img_black_nodle, R.drawable.img_korean_food,
+    int[] menu_images = {R.drawable.img_fork, R.drawable.img_rib_soup, R.drawable.img_laundry, R.drawable.img_black_nodle, R.drawable.img_korean_food,
             R.drawable.img_nodle, R.drawable.img_siraegi, R.drawable.img_bibimbap, R.drawable.img_black_nodle, R.drawable.img_nodle};
 
-    int[] store_ids = {16953705, 16784799, 34005058, 16986870, 11710472, 19555701, 16985833, 36004947, 36004175};
+    int[] store_ids = {16953705, 16784799, 17115770, 34005058, 16986870, 11710472, 19555701, 16985833, 36004947, 36004175};
 
     public KindFoodAdapter(Context mContext, List<KindFoodListData> datas, KindFoodPresenter presenter){
         this.mContext = mContext;
@@ -65,6 +67,15 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
             Logger.log("#12 data->"+ data.toString());
             mPresenter.getFoodStoreInfo(data);
         });
+
+        holder.ib_like.setOnClickListener(v->{
+            if(isLike)
+                holder.ib_like.setImageResource(R.drawable.ic_like_n);
+            else
+                holder.ib_like.setImageResource(R.drawable.ic_like_p);
+
+            isLike = !isLike;
+        });
     }
 
     @Override
@@ -80,6 +91,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
         TextView tv_menu;
         TextView tv_price;
         View view;
+        ImageButton ib_like;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -90,6 +102,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
             tv_tel = (TextView) itemView.findViewById(R.id.tv_tel);
             tv_menu = (TextView) itemView.findViewById(R.id.tv_menu);
             tv_price = (TextView) itemView.findViewById(R.id.tv_price);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
         }
 
         public View getView(){

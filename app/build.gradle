@@ -18,7 +18,7 @@ apply plugin: 'me.tatarka.retrolambda' // ----- add
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.example.minkr.jeonju_all"
         minSdkVersion 16
@@ -117,9 +117,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.naver.maps.open:naver-map-api:2.1.2@aar'
     compile 'gun0912.ted:tedpermission:2.0.0'
-
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
-    compile project(':library-SlidingMenu')
 }

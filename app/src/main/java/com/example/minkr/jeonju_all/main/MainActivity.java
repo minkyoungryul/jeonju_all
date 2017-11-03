@@ -18,7 +18,6 @@ import com.example.minkr.jeonju_all.main.view.MainBookmarkFrag;
 import com.example.minkr.jeonju_all.main.view.MainHomeFrag;
 import com.example.minkr.jeonju_all.main.view.MainSettingFrag;
 import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(tag -> {
             return findViewById(android.R.id.tabcontent);
         });
-        spec.setIndicator(createTabView(R.drawable.selector_bookmark, "최근 이용"));
+        spec.setIndicator(createTabView(R.drawable.selector_bookmark, "즐겨찾기"));
         mTabHost.addTab(spec, MainBookmarkFrag.class, null);
 
         spec = mTabHost.newTabSpec("settings");
