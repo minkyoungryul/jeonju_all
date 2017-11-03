@@ -61,8 +61,88 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .subscribe(new Consumer<List<FoodListData>>() {
                     @Override
                     public void accept(List<FoodListData> foodListData) throws Exception {
-                        Logger.log("#13 foodListData->"+foodListData.toString());
+                        Logger.log("#1 #13 foodListData->"+foodListData.toString());
                         view.getFoodRiceDatas(foodListData);
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
+
+    public void getFoodBibimbapList() {
+        Disposable disposable = model.getFoodBibimbapList()
+                .map(new Function<FoodTotalData, List<FoodListData>>() {
+                    @Override
+                    public List<FoodListData> apply(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData.getBody().getData().getList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<FoodListData>>() {
+                    @Override
+                    public void accept(List<FoodListData> foodListData) throws Exception {
+                        Logger.log("#1 #14 foodListData->"+foodListData.toString());
+                        view.getFoodBibimbapDatas(foodListData);
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
+
+    public void getFoodKongbapList() {
+        Disposable disposable = model.getFoodKongbapList()
+                .map(new Function<FoodTotalData, List<FoodListData>>() {
+                    @Override
+                    public List<FoodListData> apply(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData.getBody().getData().getList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<FoodListData>>() {
+                    @Override
+                    public void accept(List<FoodListData> foodListData) throws Exception {
+                        Logger.log("#1 #15 foodListData->"+foodListData.toString());
+                        view.getFoodKongbapDatas(foodListData);
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
+
+    public void getFoodWineList() {
+        Disposable disposable = model.getFoodWineList()
+                .map(new Function<FoodTotalData, List<FoodListData>>() {
+                    @Override
+                    public List<FoodListData> apply(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData.getBody().getData().getList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<FoodListData>>() {
+                    @Override
+                    public void accept(List<FoodListData> foodListData) throws Exception {
+                        Logger.log("#1 #16 foodListData->"+foodListData.toString());
+                        view.getFoodWineDatas(foodListData);
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
+
+    public void getFoodHanokList() {
+        Disposable disposable = model.getFoodHanokList()
+                .map(new Function<FoodTotalData, List<FoodListData>>() {
+                    @Override
+                    public List<FoodListData> apply(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData.getBody().getData().getList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<FoodListData>>() {
+                    @Override
+                    public void accept(List<FoodListData> foodListData) throws Exception {
+                        Logger.log("#1 #16 foodListData->"+foodListData.toString());
+                        view.getFoodHanokDatas(foodListData);
                     }
                 });
         compositeDisposable.add(disposable);

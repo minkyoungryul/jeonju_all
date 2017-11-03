@@ -11,4 +11,12 @@ import java.util.List;
 
 public interface FoodView extends MvpView{
     void getFoodRiceDatas(List<FoodListData> foodListData);
+
+    void getFoodBibimbapDatas(List<FoodListData> foodListData);
+
+    void getFoodKongbapDatas(List<FoodListData> foodListData);
+
+    void getFoodWineDatas(List<FoodListData> foodListData);
+
+    void getFoodHanokDatas(List<FoodListData> foodListData);
 }

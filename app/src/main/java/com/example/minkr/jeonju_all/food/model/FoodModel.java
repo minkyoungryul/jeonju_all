@@ -29,4 +29,32 @@ public class FoodModel {
 
         return FoodRiceListApiService.Factory.create().getFoodRiceList(hashMap);
     }
+
+    public Maybe<FoodTotalData> getFoodBibimbapList() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("authApiKey", Variable._PARKING_SERVICE_KEY);
+
+        return FoodBibimbapListApiService.Factory.create().getFoodBibimbapList(hashMap);
+    }
+
+    public Maybe<FoodTotalData> getFoodKongbapList() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("authApiKey", Variable._PARKING_SERVICE_KEY);
+
+        return FoodKongbapListApiService.Factory.create().getFoodKongbapList(hashMap);
+    }
+
+    public Maybe<FoodTotalData> getFoodWineList() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("authApiKey", Variable._PARKING_SERVICE_KEY);
+
+        return FoodWineListApiService.Factory.create().getFoodWineList(hashMap);
+    }
+
+    public Maybe<FoodTotalData> getFoodHanokList() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("authApiKey", Variable._PARKING_SERVICE_KEY);
+
+        return FoodHanokListApiService.Factory.create().getFoodHanokList(hashMap);
+    }
 }

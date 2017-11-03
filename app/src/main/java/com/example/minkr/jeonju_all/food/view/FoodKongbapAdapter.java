@@ -19,13 +19,13 @@ import java.util.List;
  * Created by minkr on 2017-11-03.
  */
 
-public class FoodRiceAdapter extends RecyclerView.Adapter<FoodRiceAdapter.ViewHolder> {
+public class FoodKongbapAdapter extends RecyclerView.Adapter<FoodKongbapAdapter.ViewHolder> {
 
     Context mContext;
     List<FoodListData> datas;
     boolean isLike = false;
 
-    public FoodRiceAdapter(Context mContext, List<FoodListData> datas){
+    public FoodKongbapAdapter(Context mContext, List<FoodListData> datas) {
         this.mContext = mContext;
         this.datas = datas;
     }
@@ -47,7 +47,6 @@ public class FoodRiceAdapter extends RecyclerView.Adapter<FoodRiceAdapter.ViewHo
         holder.tv_store_name.setText(data.getStoreName());
         holder.tv_address.setText(data.getNewAddr());
         holder.tv_main_menu.setText(data.getMainMenu());
-
 
         holder.ib_like.setOnClickListener(v->{
             if(isLike)

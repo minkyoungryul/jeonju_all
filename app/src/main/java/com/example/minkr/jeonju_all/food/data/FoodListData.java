@@ -22,9 +22,9 @@ public class FoodListData {
     private boolean isReserve;
     @Element(name = "mainImgUrl")
     private String mainImg;
-    @Element(name = "mainMenu")
+    @Element(name = "mainMenu", required = false)
     private String mainMenu;
-    @Element(name = "newAddr")
+    @Element(name = "newAddr", required = false)
     private String newAddr;
     @Element(name = "openTime")
     private String openTime;

@@ -16,5 +16,9 @@ public class Variable {
     public final static String _PARKING_LIST_SERVER_REQUEST_URL = "parking/getParkingList?pageSize=76";
     public final static String _KINDFOOD_LIST_SERVER_REQUEST_URL = "chakhanpriceservice/getChakHan";
     public final static String _FOOD_RICE_LIST_SERVER_REQUEST_URL = "jeonjufood/getWhiteRiceList";
+    public final static String _FOOD_BIBIMBAP_LIST_SERVER_REQUEST_URL = "jeonjufood/getMimbapList";
 
+    public static final String _FOOD_KONGBAP_LIST_SERVER_REQUEST_URL = "jeonjufood/getGongBapList";
+    public static final String _FOOD_WINE_LIST_SERVER_REQUEST_URL = "jeonjufood/getKoreaWineList";
+    public static final String _FOOD_HANOK_LIST_SERVER_REQUEST_URL = "jeonjufood/getHanOkFoodList";
 }

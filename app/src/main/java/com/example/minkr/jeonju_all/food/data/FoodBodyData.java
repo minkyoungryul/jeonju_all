@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root;
  * Created by minkr on 2017-11-03.
  */
 
-@Root(name = "body")
+@Root(name = "body", strict = false)
 public class FoodBodyData {
 
     @Element(name = "data")
