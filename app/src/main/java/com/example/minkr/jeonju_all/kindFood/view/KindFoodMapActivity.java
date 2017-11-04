@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -71,11 +73,13 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     @BindView(R.id.mapView)
     NMapView mMapView = null;
 
-    @BindView(R.id.txtMyLocation)
-    TextView txtMyLocation;
+    @BindView(R.id.txtLocation)
+    TextView txtLocation;
 
-    @BindView(R.id.txtJeonjuLocation)
-    TextView txtJeonJuLocation;
+    @BindView(R.id.imgbt1)
+    ImageButton imgbtLocation;
+
+    int locationType = 0;
 
 
     //위치정보 허가
@@ -109,21 +113,28 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     }
 
     public void setListener(){
-        txtMyLocation.setOnClickListener(new View.OnClickListener() {
+        imgbtLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopMyLocation();
-                startMyLocation();
+                if (locationType == 0){
+                    imgbtLocation.setImageResource(R.drawable.jeonjulocation);
+                    imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
+                    txtLocation.setText("전주위치");
+                    stopMyLocation();
+                    startMyLocation();
+                    locationType = 1;
+                }else {
+                    imgbtLocation.setImageResource(R.drawable.mylocation);
+                    imgbtLocation.setBackgroundResource(R.drawable.mylocation);
+                    txtLocation.setText("현재위치");
+                    stopMyLocation();
+                    mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+                    locationType = 0;
+                }
+
             }
         });
 
-        txtJeonJuLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopMyLocation();
-                mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
-            }
-        });
     }
 
 
@@ -339,7 +350,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
         @Override
         public void onLocationUpdateTimeout(NMapLocationManager locationManager) {
-            Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
+            //Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
         }
 
         @Override

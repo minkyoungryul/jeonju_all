@@ -177,8 +177,8 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 	// Resource Ids for single icons
 	private final ResourceIdsOnMap mResourceIdsForMarkerOnMap[] = {
 		// Spot, Pin icons
-		new ResourceIdsOnMap(NMapPOIflagType.PIN, R.drawable.ic_pin_01,R.drawable.ic_pin_02),
-		new ResourceIdsOnMap(NMapPOIflagType.SPOT, R.drawable.ic_pin_01, R.drawable.ic_pin_02),
+		new ResourceIdsOnMap(NMapPOIflagType.PIN, R.drawable.pin,R.drawable.pin),
+		new ResourceIdsOnMap(NMapPOIflagType.SPOT, R.drawable.pin, R.drawable.pin),
 
 		// Direction POI icons: From, To
 		new ResourceIdsOnMap(NMapPOIflagType.FROM, R.drawable.ic_map_start, R.drawable.ic_map_start_over),
@@ -251,8 +251,8 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 	public Drawable[] getLocationDot() {
 		Drawable[] drawable = new Drawable[2];
 
-		drawable[0] = mContext.getResources().getDrawable(R.drawable.pubtrans_ic_mylocation_off);
-		drawable[1] = mContext.getResources().getDrawable(R.drawable.pubtrans_ic_mylocation_on);
+		drawable[0] = mContext.getResources().getDrawable(R.drawable.pin_mylocation);
+		drawable[1] = mContext.getResources().getDrawable(R.drawable.pin_mylocation);
 
 		for (int i = 0; i < drawable.length; i++) {
 			int w = drawable[i].getIntrinsicWidth() / 2;

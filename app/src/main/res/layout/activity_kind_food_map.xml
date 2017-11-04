@@ -14,19 +14,22 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="right|top"
-        android:layout_margin="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp">
+        
+        <ImageButton
+            android:id="@+id/imgbt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mylocation"
+            android:background="@drawable/mylocation"
+            android:scaleType="fitXY" />
 
         <TextView
-            android:id="@+id/txtMyLocation"
+            android:id="@+id/txtLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="현재위치" />
-
-        <TextView
-            android:id="@+id/txtJeonjuLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전주위치"/>
 
     </LinearLayout>
 
