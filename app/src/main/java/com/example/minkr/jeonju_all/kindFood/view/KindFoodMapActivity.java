@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
@@ -65,12 +66,16 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     NMapLocationManager nMapLocationManager;
     NMapMyLocationOverlay nMapMyLocationOverlay;
     NMapCompassManager nMapCompassManager;
-    MapContainerView mMapContainerView;
-
-
+    //MapContainerView mMapContainerView;
 
     @BindView(R.id.mapView)
     NMapView mMapView = null;
+
+    @BindView(R.id.txtMyLocation)
+    TextView txtMyLocation;
+
+    @BindView(R.id.txtJeonjuLocation)
+    TextView txtJeonJuLocation;
 
 
     //위치정보 허가
@@ -87,6 +92,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         init();
+        setListener();
 
     }
 
@@ -102,8 +108,26 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         }
     }
 
+    public void setListener(){
+        txtMyLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopMyLocation();
+                startMyLocation();
+            }
+        });
 
-    //위치정보 동의 퍼미션 받기
+        txtJeonJuLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopMyLocation();
+                mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+            }
+        });
+    }
+
+
+    //위치정보 동의 퍼미션 받기(앱 첫 시작후 지도 들어갈 시)
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
@@ -113,7 +137,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                     doLocationThing();
                 }
                 else {//비동의시
-                    Toast.makeText(this, "위치정보를 받아올 수 없습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "위치 정보를 받아올 수 없습니다.", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -191,8 +215,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            //mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
-            startMyLocation();//\\\\\\\\\\ 현재위치 에뮬에서는 안댐
+            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+            //startMyLocation();//\\\\\\\\\\ 현재위치 에뮬에서는 안댐
         }else{
             //35.8241930
             //127.1480000
@@ -237,6 +261,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onFocusChanged(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {}
 
+    //마커 풍선말 클릭시 넘어가는 메소드
     @Override
     public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
 
@@ -261,10 +286,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                     nMapMyLocationOverlay.setCompassHeadingVisible(true);
 
                     nMapCompassManager.enableCompass();
-
                     mMapView.setAutoRotateEnabled(true, false);
 
-                    mMapContainerView.requestLayout();
                 } else {
                     stopMyLocation();
                 }
@@ -273,11 +296,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
             } else {
                 boolean isMyLocationEnabled = nMapLocationManager.enableMyLocation(true);
                 if (!isMyLocationEnabled) {
-                    Toast.makeText(KindFoodMapActivity.this, "현재위치를 찾기 위해 GPS를 활성화 해주세요.",
+                    Toast.makeText(KindFoodMapActivity.this, "GPS를 활성화 해주세요.",
                             Toast.LENGTH_LONG).show();
-
-                    Intent goToSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(goToSettings);
 
                     return;
                 }
@@ -293,10 +313,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                 nMapMyLocationOverlay.setCompassHeadingVisible(false);
 
                 nMapCompassManager.disableCompass();
-
                 mMapView.setAutoRotateEnabled(false, false);
-
-                mMapContainerView.requestLayout();
             }
         }
     }
@@ -322,69 +339,15 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
         @Override
         public void onLocationUpdateTimeout(NMapLocationManager locationManager) {
-            Toast.makeText(KindFoodMapActivity.this, "Your current location is temporarily unavailable.", Toast.LENGTH_LONG).show();
+            Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onLocationUnavailableArea(NMapLocationManager locationManager, NGeoPoint myLocation) {
-
-            Toast.makeText(KindFoodMapActivity.this, "Your current location is unavailable area.", Toast.LENGTH_LONG).show();
+            //Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
             stopMyLocation();
         }
 
     };
-
-
-
-    //
-    private class MapContainerView extends ViewGroup {
-
-        public MapContainerView(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-            final int width = getWidth();
-            final int height = getHeight();
-            final int count = getChildCount();
-            for (int i = 0; i < count; i++) {
-                final View view = getChildAt(i);
-                final int childWidth = view.getMeasuredWidth();
-                final int childHeight = view.getMeasuredHeight();
-                final int childLeft = (width - childWidth) / 2;
-                final int childTop = (height - childHeight) / 2;
-                view.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
-            }
-
-            if (changed) {
-                nMapOverlayManager.onSizeChanged(width, height);
-            }
-        }
-
-        @Override
-        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            int w = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
-            int h = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
-            int sizeSpecWidth = widthMeasureSpec;
-            int sizeSpecHeight = heightMeasureSpec;
-
-            final int count = getChildCount();
-            for (int i = 0; i < count; i++) {
-                final View view = getChildAt(i);
-
-                if (view instanceof NMapView) {
-                    if (mMapView.isAutoRotateEnabled()) {
-                        int diag = (((int)(Math.sqrt(w * w + h * h)) + 1) / 2 * 2);
-                        sizeSpecWidth = MeasureSpec.makeMeasureSpec(diag, MeasureSpec.EXACTLY);
-                        sizeSpecHeight = sizeSpecWidth;
-                    }
-                }
-
-                view.measure(sizeSpecWidth, sizeSpecHeight);
-            }
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        }
-    }
 
 }
