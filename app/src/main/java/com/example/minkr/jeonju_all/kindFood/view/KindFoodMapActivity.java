@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,7 +69,6 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     NMapLocationManager nMapLocationManager;
     NMapMyLocationOverlay nMapMyLocationOverlay;
     NMapCompassManager nMapCompassManager;
-    //MapContainerView mMapContainerView;
 
     @BindView(R.id.mapView)
     NMapView mMapView = null;
@@ -78,6 +78,12 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
     @BindView(R.id.imgbt1)
     ImageButton imgbtLocation;
+
+    @BindView(R.id.progressBarMap)
+    ProgressBar progressBar;
+
+    @BindView(R.id.layout_progressbar)
+    LinearLayout layoutProgressbar;
 
     int locationType = 0;
 
@@ -117,6 +123,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
             @Override
             public void onClick(View v) {
                 if (locationType == 0){
+                    layoutProgressbar.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
                     imgbtLocation.setImageResource(R.drawable.jeonjulocation);
                     imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
                     txtLocation.setText("전주위치");
@@ -132,6 +140,13 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                     locationType = 0;
                 }
 
+            }
+        });
+
+        layoutProgressbar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
             }
         });
 
@@ -189,7 +204,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         int markerId = NMapPOIflagType.PIN;
         NMapPOIdata poiData = new NMapPOIdata(2,nMapViewerResourceProvider);
         poiData.beginPOIdata(10);
-        poiData.addPOIitem(127.1170040,35.8032230,"만나별",markerId,16953705);
+        poiData.addPOIitem(127.1170040,35.8032230,"만나별미",markerId,16953705);
         poiData.addPOIitem(127.1485280,35.8176730,"이래면옥",markerId,16784799);
         poiData.addPOIitem(127.0779630,35.8658280,"제일크리너스샵",markerId,17115770);
         poiData.addPOIitem(127.1395400,35.8260960,"중본이쟁반짜장",markerId,34005058);
@@ -341,6 +356,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                 mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()),12);
 
                 mMapController.animateTo(myLocation);
+                progressBar.setVisibility(View.GONE);
+                layoutProgressbar.setVisibility(View.INVISIBLE);
             }
 
             //findPlacemarkAtLocation(myLocation.getLongitude(), myLocation.getLatitude());
@@ -350,13 +367,14 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
         @Override
         public void onLocationUpdateTimeout(NMapLocationManager locationManager) {
+            //stopMyLocation();
             //Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onLocationUnavailableArea(NMapLocationManager locationManager, NGeoPoint myLocation) {
             //Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
-            stopMyLocation();
+            //stopMyLocation();
         }
 
     };
