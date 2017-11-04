@@ -1,11 +1,14 @@
 package com.example.minkr.jeonju_all.intro;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.VideoView;
 
 import com.example.minkr.jeonju_all.main.MainActivity;
 import com.example.minkr.jeonju_all.R;
@@ -16,6 +19,7 @@ import com.facebook.stetho.Stetho;
  */
 
 public class IntroActivity extends AppCompatActivity{
+    VideoView videoView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,7 +28,23 @@ public class IntroActivity extends AppCompatActivity{
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_intro);
 
+
+        videoView = (VideoView) findViewById(R.id.introvideo);
+        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.intro));
+        videoView.requestFocus();
+        videoView.start();
+
+        /*
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                videoView.start();
+            }
+        });
+        */
+
         Stetho.initializeWithDefaults(this);
+
 
         Handler mHanlder = new Handler();
         mHanlder.postDelayed(new Runnable() {
@@ -34,6 +54,8 @@ public class IntroActivity extends AppCompatActivity{
                 startActivity(intent);
                 finish();
             }
-        },1500);
+        },3500);
+
     }
+
 }

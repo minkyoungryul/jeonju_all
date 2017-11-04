@@ -311,7 +311,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
             if (mMapController != null) {
                 mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()),12);
-                
+
                 mMapController.animateTo(myLocation);
             }
 
