@@ -21,4 +21,5 @@ public class Variable {
     public static final String _FOOD_KONGBAP_LIST_SERVER_REQUEST_URL = "jeonjufood/getGongBapList";
     public static final String _FOOD_WINE_LIST_SERVER_REQUEST_URL = "jeonjufood/getKoreaWineList";
     public static final String _FOOD_HANOK_LIST_SERVER_REQUEST_URL = "jeonjufood/getHanOkFoodList";
+    public static final String _HOUSE_LIST_SERVER_REQUEST_URL = "hanokhouse/getHanokHouseList";
 }
