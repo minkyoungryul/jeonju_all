@@ -88,7 +88,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/build-info" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
@@ -98,13 +97,10 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
@@ -115,13 +111,13 @@
       <excludeFolder url="file://$MODULE_DIR$/build/retrolambda" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 25 Platform (2)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.android.support:multidex-1.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="com.android.support.test:exposed-instrumentation-api-publish-0.5" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.0@jar" level="project" />
-    <orderEntry type="library" name="com.kakao.sdk:kakaolink-1.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="com.android.support:multidex-1.0.0" level="project" />
+    <orderEntry type="library" name="com.kakao.sdk:kakaolink-1.1.36" level="project" />
     <orderEntry type="library" name="com.android.support:cardview-v7-25.3.1" level="project" />
     <orderEntry type="library" name="com.jakewharton:butterknife-annotations:8.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-ui-25.3.1" level="project" />
@@ -129,6 +125,7 @@
     <orderEntry type="library" scope="TEST" name="com.squareup:javawriter:2.1.1@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-25.3.1" level="project" />
     <orderEntry type="library" name="com.facebook.stetho:stetho-okhttp3-1.4.2" level="project" />
+    <orderEntry type="library" name="com.kakao.sdk:util-1.1.36" level="project" />
     <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-utils-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
@@ -154,15 +151,16 @@
     <orderEntry type="library" name="org.reactivestreams:reactive-streams:1.0.0@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="com.android.support:multidex-instrumentation-1.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="com.android.support.test.espresso:espresso-idling-resource-2.2.2" level="project" />
+    <orderEntry type="library" name="com.kakao.sdk:auth-1.1.36" level="project" />
     <orderEntry type="library" scope="TEST" name="javax.annotation:javax.annotation-api:1.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:customtabs-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:recyclerview-v7-25.3.1" level="project" />
+    <orderEntry type="library" name="com.kakao.sdk:network-1.1.36" level="project" />
     <orderEntry type="library" name="com.jakewharton.rxbinding:rxbinding-0.4.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-base-11.0.4" level="project" />
     <orderEntry type="library" name="com.google.code.findbugs:jsr305:3.0.1@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="junit:junit:4.12@jar" level="project" />
-    <orderEntry type="library" name="com.kakao.sdk:util-1.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="javax.inject:javax.inject:1@jar" level="project" />
     <orderEntry type="library" name="com.squareup.okhttp3:okhttp-urlconnection:3.5.0@jar" level="project" />
     <orderEntry type="library" name="io.reactivex:rxandroid-1.1.0" level="project" />
@@ -172,10 +170,12 @@
     <orderEntry type="library" name="com.android.support:support-fragment-25.3.1" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:retrofit:2.3.0@jar" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:converter-simplexml:2.3.0@jar" level="project" />
+    <orderEntry type="library" name="com.kakao.sdk:friends-1.1.36" level="project" />
     <orderEntry type="library" name="org.simpleframework:simple-xml:2.7.1@jar" level="project" />
     <orderEntry type="library" name="com.yarolegovich:sliding-root-nav-1.0.2" level="project" />
     <orderEntry type="library" name="com.jakewharton:butterknife-8.4.0" level="project" />
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" name="com.kakao.sdk:usermgmt-1.1.36" level="project" />
     <orderEntry type="library" name="io.reactivex.rxjava2:rxandroid-2.0.1" level="project" />
     <orderEntry type="library" name="commons-cli:commons-cli:1.2@jar" level="project" />
     <orderEntry type="library" name="org.mozilla:rhino:1.7.6@jar" level="project" />
@@ -184,10 +184,10 @@
     <orderEntry type="library" name="com.android.support:appcompat-v7-25.3.1" level="project" />
     <orderEntry type="library" scope="TEST" name="com.android.support.test:runner-0.5" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-maps-11.0.4" level="project" />
+    <orderEntry type="library" name="com.kakao.sdk:kakaotalk-1.1.36" level="project" />
     <orderEntry type="library" name="com.trello:rxlifecycle-android-1.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-annotations:25.3.1@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-location-11.0.4" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:glide:3.7.0@jar" level="project" />
-    <orderEntry type="library" name="android-android-25" level="project" />
   </component>
 </module>
