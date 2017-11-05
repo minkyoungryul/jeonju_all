@@ -79,7 +79,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
             isLike = !isLike;
         });
         holder.ib_share.setOnClickListener(v->{
-            showShareDialog();
+            mPresenter.showDialog();
         });
     }
 
@@ -116,11 +116,4 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
             return view;
         }
     }
-
-    CustomShareDialog shareDialog;
-    public void showShareDialog() {
-        shareDialog = new CustomShareDialog(this.mContext);
-        shareDialog.show();
-    }
-
 }

@@ -14,4 +14,6 @@ public interface KindFoodVIew extends MvpView {
     void getKindFoodDatas(List<KindFoodListData> kindFoodListDatas);
 
     void getFoodStoreInfo(KindFoodListData data);
+
+    void showDialog();
 }

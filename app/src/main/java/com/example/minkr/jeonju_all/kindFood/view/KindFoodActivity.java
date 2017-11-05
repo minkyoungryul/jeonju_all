@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.custom.CustomShareDialog;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -119,4 +120,10 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         startActivity(intent);
     }
 
+    CustomShareDialog shareDialog;
+    @Override
+    public void showDialog() {
+        shareDialog = new CustomShareDialog(this);
+        shareDialog.show();
+    }
 }
