@@ -3,6 +3,7 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
+        maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
     }
 
     dependencies {
@@ -120,4 +121,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
+    compile group: 'com.kakao.sdk', name: 'kakaolink', version: project.KAKAO_SDK_VERSION
 }

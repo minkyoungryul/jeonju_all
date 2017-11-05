@@ -44,7 +44,7 @@
             android:paddingRight="10dp"
             android:paddingLeft="10dp">
             <ImageButton
-                android:id="@+id/ib_push"
+                android:id="@+id/ib_kakao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -70,7 +70,7 @@
             android:paddingRight="10dp"
             android:paddingLeft="10dp">
             <ImageButton
-                android:id="@+id/ib_sound"
+                android:id="@+id/ib_facebook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -96,7 +96,7 @@
             android:paddingRight="10dp"
             android:paddingLeft="10dp">
             <ImageButton
-                android:id="@+id/ib_vibrator"
+                android:id="@+id/ib_weblink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
