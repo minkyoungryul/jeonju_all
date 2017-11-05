@@ -112,4 +112,5 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         intent.putExtra("datas",0);
         startActivity(intent);
     }
+
 }

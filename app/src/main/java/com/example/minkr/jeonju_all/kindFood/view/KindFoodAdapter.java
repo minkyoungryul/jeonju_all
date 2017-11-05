@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.custom.CustomShareDialog;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -28,6 +29,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     List<KindFoodListData> datas;
     KindFoodPresenter mPresenter;
     boolean isLike = false;
+    KindFoodActivity kindFoodActivity;
 
     int[] menu_images = {R.drawable.img_fork, R.drawable.img_rib_soup, R.drawable.img_laundry, R.drawable.img_black_nodle, R.drawable.img_korean_food,
             R.drawable.img_nodle, R.drawable.img_siraegi, R.drawable.img_bibimbap, R.drawable.img_black_nodle, R.drawable.img_nodle};
@@ -77,6 +79,9 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
 
             isLike = !isLike;
         });
+        holder.ib_share.setOnClickListener(v->{
+            showShareDialog();
+        });
     }
 
     @Override
@@ -93,6 +98,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
         TextView tv_price;
         View view;
         ImageButton ib_like;
+        ImageButton ib_share;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -104,10 +110,18 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
             tv_menu = (TextView) itemView.findViewById(R.id.tv_menu);
             tv_price = (TextView) itemView.findViewById(R.id.tv_price);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            ib_share = (ImageButton) itemView.findViewById(R.id.ib_share);
         }
 
         public View getView(){
             return view;
         }
     }
+
+    CustomShareDialog shareDialog;
+    public void showShareDialog() {
+        shareDialog = new CustomShareDialog(this.mContext);
+        shareDialog.show();
+    }
+
 }
