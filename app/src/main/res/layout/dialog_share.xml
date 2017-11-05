@@ -57,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:text="카카오톡\n공유"
                 android:gravity="center"
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -83,7 +84,7 @@
                 android:text="페이스북\n공유"
                 android:gravity="center"
                 android:textSize="12dp"
-                />
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -108,7 +109,8 @@
                 android:layout_height="wrap_content"
                 android:text="링크복사"
                 android:gravity="center"
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
     </LinearLayout>

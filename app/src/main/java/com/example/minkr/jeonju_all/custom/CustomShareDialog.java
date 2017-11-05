@@ -31,6 +31,7 @@ public class CustomShareDialog extends Dialog {
 
     Context mContext;
 
+
     public CustomShareDialog(@NonNull Context context) {
         super(context);
         mContext = context;
@@ -50,19 +51,11 @@ public class CustomShareDialog extends Dialog {
     }
     private void init() {
         ib_kakao = (ImageButton) findViewById(R.id.ib_kakao);
-        ib_facebook = (ImageButton) findViewById(R.id.ib_facebook);
-        ib_weblink = (ImageButton) findViewById(R.id.ib_weblink);
     }
 
     private void setListener() {
         ib_kakao.setOnClickListener(v -> {
             shareKakao();
-        });
-        ib_facebook.setOnClickListener(v -> {
-
-        });
-        ib_weblink.setOnClickListener(v -> {
-
         });
     }
 
