@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 
@@ -16,7 +15,6 @@ import com.kakao.kakaolink.KakaoLink;
 import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by Jun on 2017. 11. 3..
@@ -56,24 +54,8 @@ public class CustomShareDialog extends Dialog {
 
     private void setListener() {
         ib_kakao.setOnClickListener(v -> {
-            Logger.log("버튼누름");
             shareKakao();
         });
-    }
-
-    @OnClick({R.id.ib_kakao, R.id.ib_facebook, R.id.ib_weblink})
-    public void OnClick(View v) {
-        switch (v.getId()) {
-            case R.id.ib_kakao :
-                shareKakao();
-                break;
-
-            case R.id.ib_facebook :
-                break;
-
-            case R.id.ib_weblink :
-                break;
-        }
     }
 
     public void shareKakao() {
