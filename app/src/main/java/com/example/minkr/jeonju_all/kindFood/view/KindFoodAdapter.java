@@ -32,7 +32,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     int[] menu_images = {R.drawable.img_fork, R.drawable.img_rib_soup, R.drawable.img_laundry, R.drawable.img_black_nodle, R.drawable.img_korean_food,
             R.drawable.img_nodle, R.drawable.img_siraegi, R.drawable.img_bibimbap, R.drawable.img_black_nodle, R.drawable.img_nodle};
 
-    int[] store_ids = {16953705, 16784799, 17115770, 34005058, 16986870, 11710472, 19555701, 16985833, 36004947, 36004175};
+//    int[] store_ids = {16953705, 16784799, 17115770, 34005058, 16986870, 11710472, 19555701, 16985833, 36004947, 36004175};
 
     public KindFoodAdapter(Context mContext, List<KindFoodListData> datas, KindFoodPresenter presenter){
         this.mContext = mContext;
@@ -49,7 +49,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         KindFoodListData data = datas.get(position);
-        data.setStoreId(store_ids[position]+"");
+//        data.setStoreId(store_ids[position]+"");
         //Logger.log("#16 data -> "+datas);
         holder.iv_food.setBackgroundResource(menu_images[data.getId()-1]);
         holder.tv_shop_name.setText(data.getName());

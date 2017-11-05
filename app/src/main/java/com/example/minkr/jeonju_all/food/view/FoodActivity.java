@@ -9,10 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
+import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -111,23 +113,23 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         mLayoutManager4 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mLayoutManager5 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        rice_adapter = new FoodRiceAdapter(this, riceList);
+        rice_adapter = new FoodRiceAdapter(this, riceList, presenter);
         rice_recyclerView.setLayoutManager(mLayoutManager);
         rice_recyclerView.setAdapter(rice_adapter);
 
-        bibimbap_adapter = new FoodBibimbapAdapter(this, bibimbapList);
+        bibimbap_adapter = new FoodBibimbapAdapter(this, bibimbapList, presenter);
         bibimbap_recyclerView.setLayoutManager(mLayoutManager2);
         bibimbap_recyclerView.setAdapter(bibimbap_adapter);
 
-        kongbap_adapter = new FoodKongbapAdapter(this, kongbapList);
+        kongbap_adapter = new FoodKongbapAdapter(this, kongbapList, presenter);
         kongbap_recyclerView.setLayoutManager(mLayoutManager3);
         kongbap_recyclerView.setAdapter(kongbap_adapter);
 
-        wine_adapter = new FoodWineAdapter(this, wineList);
+        wine_adapter = new FoodWineAdapter(this, wineList, presenter);
         wine_recyclerView.setLayoutManager(mLayoutManager4);
         wine_recyclerView.setAdapter(wine_adapter);
 
-        hanok_adapter = new FoodHanokAdapter(this, hanokList);
+        hanok_adapter = new FoodHanokAdapter(this, hanokList, presenter);
         hanok_recyclerView.setLayoutManager(mLayoutManager5);
         hanok_recyclerView.setAdapter(hanok_adapter);
     }
@@ -176,48 +178,59 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         super.onDestroy();
     }
 
+    public void getFoodDatas(String[] storeId, List<FoodListData> datas, List<FoodListData> foodListData, List<FoodListData> all_foodListData){
+        for(int i=0; i<datas.size(); i++){
+            datas.get(i).setStoreId(storeId[i]);
+        }
+        all_foodListData.addAll(datas);
+        for(int i=0; i<5; i++){
+            foodListData.add(datas.get(i));
+        }
+    }
+
     @Override
     public void getFoodRiceDatas(List<FoodListData> foodListData) {
-        all_riceList.addAll(foodListData);
-        for(int i=0; i<5; i++){
-            riceList.add(foodListData.get(i));
-        }
+        String[] storeId = {"21037888", "13447430", "11555125", "34827805", "11522746", "11847873", "0", "12012617", "11874167", "11720563"};
+        getFoodDatas(storeId, foodListData, riceList, all_riceList);
         rice_adapter.notifyDataSetChanged();
     }
 
     @Override
     public void getFoodBibimbapDatas(List<FoodListData> foodListData) {
-        all_bibimbapList.addAll(foodListData);
-        for(int i=0; i<5; i++){
-            bibimbapList.add(foodListData.get(i));
-        }
+        String[] storeId = {"35749244", "11707231", "36410653", "11710588", "11627365", "11728244", "16795216"};
+        getFoodDatas(storeId, foodListData, bibimbapList, all_bibimbapList);
         bibimbap_adapter.notifyDataSetChanged();
     }
 
     @Override
     public void getFoodKongbapDatas(List<FoodListData> foodListData) {
-        all_kongbapList.addAll(foodListData);
-        for(int i=0; i<5; i++){
-            kongbapList.add(foodListData.get(i));
-        }
+        String[] storeId = {"31498549", "31991353", "38327383", "36601205", "32236577", "33418635", "37106493", "13548405", "17453618", "11623233"};
+        getFoodDatas(storeId, foodListData, kongbapList, all_kongbapList);
         kongbap_adapter.notifyDataSetChanged();
     }
 
     @Override
     public void getFoodWineDatas(List<FoodListData> foodListData) {
-        all_wineList.addAll(foodListData);
-        for(int i=0; i<5; i++){
-            wineList.add(foodListData.get(i));
-        }
+        String[] storeId = {"37589832", "38337667", "11886663", "16881956", "21007374"};
+        getFoodDatas(storeId,foodListData, wineList, all_wineList);
         wine_adapter.notifyDataSetChanged();
     }
 
     @Override
     public void getFoodHanokDatas(List<FoodListData> foodListData) {
-        all_hanokList.addAll(foodListData);
-        for(int i=0; i<5; i++){
-            hanokList.add(foodListData.get(i));
-        }
+        String[] storeId = {"13141208", "36438524", "36601205", "35494447", "36038864", "38275608", "0", "38275894", "16808637", "0"};
+        getFoodDatas(storeId, foodListData, hanokList, all_hanokList);
         hanok_adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getStoreInfo(FoodListData data) {
+        if (data.getStoreId() == null || data.getStoreId().equals("0")){
+            Toast.makeText(this, "상세 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+        }else {
+            Intent intent = new Intent(FoodActivity.this, FoodStoreInfoActivity.class);
+            intent.putExtra("storeId", data.getStoreId());
+            startActivity(intent);
+        }
     }
 }

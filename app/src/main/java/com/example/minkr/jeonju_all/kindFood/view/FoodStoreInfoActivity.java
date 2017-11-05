@@ -29,7 +29,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
-    KindFoodListData data;
+    String storeId;
     int data_map = 0;
 
     @Override
@@ -39,7 +39,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        data = (KindFoodListData) intent.getSerializableExtra("data");
+        storeId = intent.getStringExtra("storeId");
         data_map = intent.getIntExtra("datas",0);
         init();
     }
@@ -48,7 +48,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
         mWebView.getSettings().setJavaScriptEnabled(true);
 
         if (data_map == 0){
-            mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data.getStoreId());
+            mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+storeId);
         }else{
             mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data_map);
         }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
@@ -67,9 +68,13 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
 
     @Override
     public void getStoreInfo(FoodListData data) {
-        Intent intent = new Intent(FoodDetailActivity.this, FoodStoreInfoActivity.class);
-        intent.putExtra("data", data.getStoreId());
-        startActivity(intent);
+        if (data.getStoreId() == null || data.getStoreId().equals("0")){
+            Toast.makeText(this, "상세 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+        }else {
+            Intent intent = new Intent(FoodDetailActivity.this, FoodStoreInfoActivity.class);
+            intent.putExtra("storeId", data.getStoreId());
+            startActivity(intent);
+        }
     }
 
     @Override

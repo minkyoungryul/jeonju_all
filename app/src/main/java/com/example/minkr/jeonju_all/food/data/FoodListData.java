@@ -45,7 +45,16 @@ public class FoodListData implements Serializable {
     @Element(name = "tel")
     private String tel;
 
+    private String type;
     private String storeId;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getIsParking() {
         return isParking;
@@ -217,6 +226,7 @@ public class FoodListData implements Serializable {
                 ", StoreName='" + StoreName + '\'' +
                 ", tableCnt=" + tableCnt +
                 ", tel='" + tel + '\'' +
+                ", type='" + type + '\'' +
                 ", storeId='" + storeId + '\'' +
                 '}';
     }

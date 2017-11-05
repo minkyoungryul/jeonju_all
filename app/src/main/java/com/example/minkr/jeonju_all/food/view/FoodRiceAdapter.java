@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
+import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
 
 import java.util.List;
 
@@ -24,10 +25,12 @@ public class FoodRiceAdapter extends RecyclerView.Adapter<FoodRiceAdapter.ViewHo
     Context mContext;
     List<FoodListData> datas;
     boolean isLike = false;
+    FoodPresenter presenter;
 
-    public FoodRiceAdapter(Context mContext, List<FoodListData> datas){
+    public FoodRiceAdapter(Context mContext, List<FoodListData> datas, FoodPresenter presenter){
         this.mContext = mContext;
         this.datas = datas;
+        this.presenter = presenter;
     }
 
     @Override
@@ -56,6 +59,10 @@ public class FoodRiceAdapter extends RecyclerView.Adapter<FoodRiceAdapter.ViewHo
                 holder.ib_like.setImageResource(R.drawable.ic_like_p);
 
             isLike = !isLike;
+        });
+
+        holder.getView().setOnClickListener(v->{
+            presenter.getStoreInfo(data);
         });
     }
 

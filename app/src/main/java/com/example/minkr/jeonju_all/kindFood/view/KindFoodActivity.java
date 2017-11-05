@@ -16,6 +16,7 @@ import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
         ib_map.setOnClickListener(v->{
             Intent intent = new Intent(KindFoodActivity.this, KindFoodMapActivity.class);
-            //intent.putExtra("data", data);
+            intent.putExtra("data", (Serializable) kindFoodList);
             startActivity(intent);
         });
     }
@@ -99,6 +100,11 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
     @Override
     public void getKindFoodDatas(List<KindFoodListData> kindFoodListDatas) {
+        int[] store_ids = {16953705, 16784799, 17115770, 34005058, 16986870, 11710472, 19555701, 16985833, 36004947, 36004175};
+        for(int i=0; i<kindFoodListDatas.size(); i++){
+            kindFoodListDatas.get(i).setStoreId(store_ids[i]+"");
+        }
+
         kindFoodList.addAll(kindFoodListDatas);
         Logger.log("#6 kindFoodList ->"+ kindFoodList.toString());
         adapter.notifyDataSetChanged();
@@ -108,7 +114,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
     @Override
     public void getFoodStoreInfo(KindFoodListData data) {
         Intent intent = new Intent(KindFoodActivity.this, FoodStoreInfoActivity.class);
-        intent.putExtra("data", data);
+        intent.putExtra("storeId", data.getStoreId());
         intent.putExtra("datas",0);
         startActivity(intent);
     }

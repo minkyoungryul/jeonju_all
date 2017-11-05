@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -94,12 +95,16 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     };
     private static final int LOCATION_REQUEST=3;
 
+    List<KindFoodListData> datas;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kind_food_map);
         ButterKnife.bind(this);
+
+        Intent intent = getIntent();
+        datas = (List<KindFoodListData>) intent.getSerializableExtra("data");
 
         init();
         setListener();

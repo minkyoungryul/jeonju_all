@@ -28,6 +28,7 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
     boolean isLike = false;
     FoodDetailPresenter presenter;
 
+
     public FoodDetailAdapter(Context mContext, List<FoodListData> datas, FoodDetailPresenter presenter) {
         this.mContext = mContext;
         this.datas = datas;
