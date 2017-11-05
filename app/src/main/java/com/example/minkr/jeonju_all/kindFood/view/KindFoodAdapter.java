@@ -29,7 +29,6 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     List<KindFoodListData> datas;
     KindFoodPresenter mPresenter;
     boolean isLike = false;
-    KindFoodActivity kindFoodActivity;
 
     int[] menu_images = {R.drawable.img_fork, R.drawable.img_rib_soup, R.drawable.img_laundry, R.drawable.img_black_nodle, R.drawable.img_korean_food,
             R.drawable.img_nodle, R.drawable.img_siraegi, R.drawable.img_bibimbap, R.drawable.img_black_nodle, R.drawable.img_nodle};
