@@ -5,6 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
@@ -33,7 +36,12 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        HouseListData data = datas.get(position);
 
+        holder.iv_house.setImageResource(R.drawable.bg_house);
+        holder.tv_store_name.setText(data.getStoreName());
+        holder.tv_address.setText(data.getAddress());
+        holder.tv_content.setText(data.getContent());
     }
 
     @Override
@@ -42,8 +50,24 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+
+        ImageView iv_house;
+        TextView tv_store_name;
+        TextView tv_address;
+        TextView tv_content;
+        View view;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            iv_house = (ImageView) itemView.findViewById(R.id.iv_house);
+            tv_store_name = (TextView) itemView.findViewById(R.id.tv_store_name);
+            tv_address = (TextView) itemView.findViewById(R.id.tv_address);
+            tv_content = (TextView) itemView.findViewById(R.id.tv_content);
+            this.view = itemView;
+        }
+
+        public View getView(){
+            return view;
         }
     }
 }
