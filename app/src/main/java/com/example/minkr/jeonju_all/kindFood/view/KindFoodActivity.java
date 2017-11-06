@@ -122,8 +122,8 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
     CustomShareDialog shareDialog;
     @Override
-    public void showDialog() {
-        shareDialog = new CustomShareDialog(this);
+    public void showDialog(KindFoodListData data) {
+        shareDialog = new CustomShareDialog(this,data);
         shareDialog.show();
     }
 }

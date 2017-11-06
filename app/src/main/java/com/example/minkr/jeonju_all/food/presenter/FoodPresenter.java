@@ -19,6 +19,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -75,6 +76,12 @@ public class FoodPresenter implements Presenter<FoodView> {
 
     public void getFoodRiceList() {
         Disposable disposable = model.getFoodRiceList()
+                .filter(new Predicate<FoodTotalData>() {
+                    @Override
+                    public boolean test(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData == null ? false : true;
+                    }
+                })
                 .toFlowable()
                 .flatMap(new Function<FoodTotalData, Flowable<FoodListData>>() {
                     @Override
@@ -103,6 +110,12 @@ public class FoodPresenter implements Presenter<FoodView> {
 
     public void getFoodBibimbapList() {
         Disposable disposable = model.getFoodBibimbapList()
+                .filter(new Predicate<FoodTotalData>() {
+                    @Override
+                    public boolean test(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData == null ? false : true;
+                    }
+                })
                 .toFlowable()
                 .flatMap(new Function<FoodTotalData, Flowable<FoodListData>>() {
                     @Override
@@ -131,6 +144,12 @@ public class FoodPresenter implements Presenter<FoodView> {
 
     public void getFoodKongbapList() {
         Disposable disposable = model.getFoodKongbapList()
+                .filter(new Predicate<FoodTotalData>() {
+                    @Override
+                    public boolean test(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData == null ? false : true;
+                    }
+                })
                 .toFlowable()
                 .flatMap(new Function<FoodTotalData, Flowable<FoodListData>>() {
                     @Override
@@ -159,6 +178,12 @@ public class FoodPresenter implements Presenter<FoodView> {
 
     public void getFoodWineList() {
         Disposable disposable = model.getFoodWineList()
+                .filter(new Predicate<FoodTotalData>() {
+                    @Override
+                    public boolean test(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData == null ? false : true;
+                    }
+                })
                 .toFlowable()
                 .flatMap(new Function<FoodTotalData, Flowable<FoodListData>>() {
                     @Override
@@ -187,6 +212,12 @@ public class FoodPresenter implements Presenter<FoodView> {
 
     public void getFoodHanokList() {
         Disposable disposable = model.getFoodHanokList()
+                .filter(new Predicate<FoodTotalData>() {
+                    @Override
+                    public boolean test(FoodTotalData foodTotalData) throws Exception {
+                        return foodTotalData == null ? false : true;
+                    }
+                })
                 .toFlowable()
                 .flatMap(new Function<FoodTotalData, Flowable<FoodListData>>() {
                     @Override

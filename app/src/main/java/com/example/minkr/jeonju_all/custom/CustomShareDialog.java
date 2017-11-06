@@ -11,6 +11,9 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.util.Logger;
+import com.kakao.kakaolink.KakaoLink;
+import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
@@ -40,12 +43,13 @@ public class CustomShareDialog extends Dialog {
     ImageButton ib_weblink;
 
     Context mContext;
-    List<KindFoodListData> datas;
 
+    KindFoodListData data;
 
-    public CustomShareDialog(@NonNull Context context) {
+    public CustomShareDialog(@NonNull Context context, KindFoodListData data) {
         super(context);
         mContext = context;
+        this.data = data;
     }
 
 
@@ -56,6 +60,7 @@ public class CustomShareDialog extends Dialog {
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setContentView(R.layout.dialog_share);
 
+        Logger.log("data ->"+data.toString());
         init();
         setListener();
 
