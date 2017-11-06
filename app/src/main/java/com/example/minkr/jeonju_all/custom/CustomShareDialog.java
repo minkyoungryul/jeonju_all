@@ -86,7 +86,7 @@ public class CustomShareDialog extends Dialog {
 
         FeedTemplate params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder(data.getName(),
-                        "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150727_135%2Fmaxddong00_14379825629150FDh0_PNG%2F%25B8%25B8%25B3%25AA%25BA%25B0%25B9%25CC_%25B5%25B7%25B0%25A1%25BD%25BA_%25BB%25E7%25B6%25FB%25B5%25B5_%25C0%25CC%25B7%25B1_%25BB%25E7%25B6%25FB%25C0%25CC_%25BE%25F8%25B3%25D7%25BF%25E4_%25A4%25BE9.png&type=f420_312&quality=95&autoRotate=true",
+                        data.getImg_url(),
                         LinkObject.newBuilder().setWebUrl(url)
                                 .setMobileWebUrl(url).build())
                         .setDescrption(data.getAddress())
