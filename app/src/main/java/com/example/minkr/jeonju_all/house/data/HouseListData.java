@@ -25,6 +25,16 @@ public class HouseListData {
     @Element(name = "posy")
     private String posY;
 
+    private int img;
+
+    public int getImg() {
+        return img;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -91,6 +101,7 @@ public class HouseListData {
                 ", introContent='" + introContent + '\'' +
                 ", posX='" + posX + '\'' +
                 ", posY='" + posY + '\'' +
+                ", img=" + img +
                 '}';
     }
 }

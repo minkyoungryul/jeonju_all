@@ -102,8 +102,10 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
     @Override
     public void getKindFoodDatas(List<KindFoodListData> kindFoodListDatas) {
         int[] store_ids = {16953705, 16784799, 17115770, 34005058, 16986870, 11710472, 19555701, 16985833, 36004947, 36004175};
+        String[] img_url = {};
         for(int i=0; i<kindFoodListDatas.size(); i++){
             kindFoodListDatas.get(i).setStoreId(store_ids[i]+"");
+            kindFoodListDatas.get(i).setImg_url(img_url[i]);
         }
 
         kindFoodList.addAll(kindFoodListDatas);

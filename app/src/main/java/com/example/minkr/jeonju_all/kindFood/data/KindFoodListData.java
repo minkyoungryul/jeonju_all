@@ -33,6 +33,15 @@ public class KindFoodListData implements Serializable{
     private String tel;
 
     private String storeId;
+    private String img_url;
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
 
     public int getId() {
         return id;
@@ -136,6 +145,7 @@ public class KindFoodListData implements Serializable{
                 ", regDate='" + regDate + '\'' +
                 ", tel='" + tel + '\'' +
                 ", storeId='" + storeId + '\'' +
+                ", img_url='" + img_url + '\'' +
                 '}';
     }
 }
