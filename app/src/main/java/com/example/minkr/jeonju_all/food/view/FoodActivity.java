@@ -190,7 +190,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
 
     @Override
     public void getFoodRiceDatas(List<FoodListData> foodListData) {
-        String[] storeId = {"21037888", "13447430", "11555125", "34827805", "11522746", "11847873", "0", "12012617", "11874167", "11720563"};
+        String[] storeId = {"21037888", "13447430", "11555125", "34827805", "11522746", "11847873", "0", "12012617", "11874167", "11720563","11782597","11707569","11658337"};
         getFoodDatas(storeId, foodListData, riceList, all_riceList);
         rice_adapter.notifyDataSetChanged();
     }
@@ -204,7 +204,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
 
     @Override
     public void getFoodKongbapDatas(List<FoodListData> foodListData) {
-        String[] storeId = {"31498549", "31991353", "38327383", "36601205", "32236577", "33418635", "37106493", "13548405", "17453618", "11623233"};
+        String[] storeId = {"31498549", "31991353", "38327383", "36601205", "32236577", "33418635", "37106493", "13548405", "17453618", "11623233","17077028","21885584","17447792","16809544", "11712007","34454016","20027334", "12991219","437372678", "16786221","11658492","13317872"};
         getFoodDatas(storeId, foodListData, kongbapList, all_kongbapList);
         kongbap_adapter.notifyDataSetChanged();
     }
@@ -218,7 +218,9 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
 
     @Override
     public void getFoodHanokDatas(List<FoodListData> foodListData) {
-        String[] storeId = {"13141208", "36438524", "36601205", "35494447", "36038864", "38275608", "0", "38275894", "16808637", "0"};
+        String[] storeId = {"13141208", "36438524", "36601205", "35494447", "36038864", "38275608", "0", "38275894", "16808637", "0","13525327", "36864799", "0", "35562901", "13045686", "21039411", "0", "33876992", "19918553",
+                "34827805", "19574787", "16808444", "20364561", "16795271", "37027890", "16793271", "11603316", "33276367", "13342931", "13040824", "394986323", "201840183", "13080397", "11874167", "33875242", "16808573", "36383569",
+                "0", "0", "20174409", "11877554", "16809544", "17448890", "11540579", "11782597", "11717479", "16795216"};
         getFoodDatas(storeId, foodListData, hanokList, all_hanokList);
         hanok_adapter.notifyDataSetChanged();
     }

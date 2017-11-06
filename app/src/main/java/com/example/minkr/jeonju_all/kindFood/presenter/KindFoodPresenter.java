@@ -82,7 +82,7 @@ public class KindFoodPresenter implements Presenter<KindFoodVIew> {
         view.getFoodStoreInfo(data);
     }
 
-    public void showDialog() {
-        view.showDialog();
+    public void showDialog(KindFoodListData data) {
+        view.showDialog(data);
     }
 }

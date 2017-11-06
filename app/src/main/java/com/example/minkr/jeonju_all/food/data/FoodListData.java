@@ -16,7 +16,7 @@ public class FoodListData implements Serializable {
 
     @Element(name = "closeTime")
     private String closeTime;
-    @Element(name = "holiday")
+    @Element(name = "holiday", required = false)
     private String holiday;
     @Element(name = "isPaking")
     private int isParking;

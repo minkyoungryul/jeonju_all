@@ -79,7 +79,7 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
             isLike = !isLike;
         });
         holder.ib_share.setOnClickListener(v->{
-            mPresenter.showDialog();
+            mPresenter.showDialog(data);
         });
     }
 

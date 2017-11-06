@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.ImageButton;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.kakao.kakaolink.KakaoLink;
 import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
@@ -31,10 +32,12 @@ public class CustomShareDialog extends Dialog {
 
     Context mContext;
 
+    KindFoodListData data;
 
-    public CustomShareDialog(@NonNull Context context) {
+    public CustomShareDialog(@NonNull Context context, KindFoodListData data) {
         super(context);
         mContext = context;
+        this.data = data;
     }
 
 
@@ -45,6 +48,7 @@ public class CustomShareDialog extends Dialog {
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setContentView(R.layout.dialog_share);
 
+        Logger.log("data ->"+data.toString());
         init();
         setListener();
 
