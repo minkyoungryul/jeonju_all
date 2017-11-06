@@ -69,7 +69,7 @@ public class CustomShareDialog extends Dialog {
     private void setListener() {
         ib_kakao.setOnClickListener(v -> {
             shareKakao();
-//            getKeyHash(mContext);
+            //getKeyHash(mContext);
         });
         ib_facebook.setOnClickListener(v -> {
 
@@ -98,7 +98,7 @@ public class CustomShareDialog extends Dialog {
                         .setWebUrl(url)
                         .setMobileWebUrl(url)
                         .setAndroidExecutionParams("key1=value1")
-                        .setIosExecutionParams("key1=value1")
+                        /*.setIosExecutionParams("key1=value1")*/
                         .build()))
                 .build();
 
