@@ -56,12 +56,6 @@ public class HouseStoreInfoActivity extends AppCompatActivity {
     private void init() {
         mWebView.getSettings().setJavaScriptEnabled(true);
 
-        try {
-            Logger.log("#33 homepage ->"+ URLEncoder.encode(data.getHomepage(), "EUC_KR") + ", "+ data.getHomepage());
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
         if (data.getHomepage() == null || data.getHomepage().equals("")){
             Toast.makeText(this, "해당 홈페이지 정보가 없습니다.", Toast.LENGTH_SHORT);
         }else{

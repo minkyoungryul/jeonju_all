@@ -1,9 +1,14 @@
 package com.example.minkr.jeonju_all.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,9 +23,15 @@ import com.example.minkr.jeonju_all.main.view.MainBookmarkFrag;
 import com.example.minkr.jeonju_all.main.view.MainHomeFrag;
 import com.example.minkr.jeonju_all.main.view.MainSettingFrag;
 import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
+import com.example.minkr.jeonju_all.util.Logger;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.kakao.util.helper.Utility.getPackageInfo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+//        Logger.log("#hashKey ->"+getKeyHash(this));
 //        initSlideMenu();
         init();
         setListener();
@@ -77,6 +89,23 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) view.findViewById(R.id.tab_text);
         textView.setText(text);
         return view;
+    }
+
+    public static String getKeyHash(final Context context) {
+        PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
+        if (packageInfo == null)
+            return null;
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+            } catch (NoSuchAlgorithmException e) {
+                Logger.log("Unable to get MessageDigest. signature=" + signature);
+            }
+        }
+        return null;
     }
 
    /* private void initSlideMenu() {
