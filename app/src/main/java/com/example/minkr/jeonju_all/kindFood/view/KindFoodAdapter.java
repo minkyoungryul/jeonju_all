@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.custom.CustomShareDialog;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
