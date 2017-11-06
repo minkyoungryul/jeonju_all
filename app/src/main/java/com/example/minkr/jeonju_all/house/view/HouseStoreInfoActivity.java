@@ -1,7 +1,8 @@
-package com.example.minkr.jeonju_all.kindFood.view;
+package com.example.minkr.jeonju_all.house.view;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +12,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
+import com.example.minkr.jeonju_all.house.data.HouseListData;
+import com.example.minkr.jeonju_all.util.Logger;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by minkr on 2017-11-01.
  */
 
-public class FoodStoreInfoActivity extends AppCompatActivity {
+public class HouseStoreInfoActivity extends AppCompatActivity {
 
     @BindView(R.id.webView)
     WebView mWebView;
@@ -33,8 +39,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
-    String storeId;
-    int data_map = 0;
+    HouseListData data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,28 +48,31 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        storeId = intent.getStringExtra("storeId");
-        data_map = intent.getIntExtra("datas",0);
+        data = (HouseListData) intent.getSerializableExtra("data");
         init();
         setListener();
-    }
-
-    private void setListener() {
-        ib_back.setOnClickListener(v->finish());
     }
 
     private void init() {
         mWebView.getSettings().setJavaScriptEnabled(true);
 
-        if (data_map == 0){
-            mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+storeId);
-        }else{
-            mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data_map);
+        try {
+            Logger.log("#33 homepage ->"+ URLEncoder.encode(data.getHomepage(), "EUC_KR") + ", "+ data.getHomepage());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        //mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data.getStoreId());
-//        http://map.naver.com/local/siteview.nhn?code=17115770
+
+        if (data.getHomepage() == null || data.getHomepage().equals("")){
+            Toast.makeText(this, "해당 홈페이지 정보가 없습니다.", Toast.LENGTH_SHORT);
+        }else{
+            mWebView.loadUrl(data.getHomepage());
+        }
         mWebView.setWebViewClient(new WebViewClientClass());
         // WebViewClient 지정
+    }
+
+    private void setListener() {
+        ib_back.setOnClickListener(v->finish());
     }
 
     @Override
@@ -92,5 +100,10 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

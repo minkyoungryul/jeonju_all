@@ -9,8 +9,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
+import com.example.minkr.jeonju_all.house.presenter.HousePresenter;
 
 import java.util.List;
 
@@ -22,10 +24,12 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
 
     Context mContext;
     List<HouseListData> datas;
+    HousePresenter presenter;
 
-    public HouseAdapter(Context mContext, List<HouseListData> datas) {
+    public HouseAdapter(Context mContext, List<HouseListData> datas, HousePresenter presenter) {
         this.mContext = mContext;
         this.datas = datas;
+        this.presenter = presenter;
     }
 
     @Override
@@ -38,10 +42,18 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         HouseListData data = datas.get(position);
 
-        holder.iv_house.setImageResource(R.drawable.bg_house);
+        Glide.with(mContext)
+                .load(data.getImg_url())
+                .fitCenter()
+                .into(holder.iv_house);
+
         holder.tv_store_name.setText(data.getStoreName());
         holder.tv_address.setText(data.getAddress());
         holder.tv_content.setText(data.getContent());
+
+        holder.getView().setOnClickListener(v->{
+            presenter.getStoreInfo(data);
+        });
     }
 
     @Override

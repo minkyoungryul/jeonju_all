@@ -87,6 +87,12 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".house.view.HouseStoreInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+
         <!-- kakao_api -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"

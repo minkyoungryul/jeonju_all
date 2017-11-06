@@ -68,4 +68,8 @@ public class HousePresenter implements Presenter<HouseView> {
 
         compositeDisposable.add(disposable);
     }
+
+    public void getStoreInfo(HouseListData data) {
+        view.getStoreInfo(data);
+    }
 }

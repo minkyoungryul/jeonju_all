@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface HouseView extends MvpView{
     void getHouseList(List<HouseListData> houseListData);
+
+    void getStoreInfo(HouseListData data);
 }

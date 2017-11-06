@@ -1,6 +1,7 @@
 package com.example.minkr.jeonju_all.house.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.house.presenter.HousePresenter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +60,7 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     private void init() {
         progressBar.setVisibility(View.VISIBLE);
         mLayoutManager = new LinearLayoutManager(this);
-        adapter = new HouseAdapter(this, datas);
+        adapter = new HouseAdapter(this, datas, presenter);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
     }
@@ -85,15 +87,20 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
 
     @Override
     public void getHouseList(List<HouseListData> houseListData) {
+        String[] img_url = getResources().getStringArray(R.array.house);
         for(int i=0; i<houseListData.size(); i++) {
-            if (houseListData.get(i).getHomepage() == null) {
-                houseListData.get(i).setHomepage("http://store.naver.com/accommodations/detail?id=32800285");
-                break;
-            }
+            houseListData.get(i).setImg_url(img_url[i]);
         }
 
         progressBar.setVisibility(View.GONE);
         datas.addAll(houseListData);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getStoreInfo(HouseListData data) {
+        Intent intent = new Intent(HouseListActivity.this, HouseStoreInfoActivity.class);
+        intent.putExtra("data", data);
+        startActivity(intent);
     }
 }

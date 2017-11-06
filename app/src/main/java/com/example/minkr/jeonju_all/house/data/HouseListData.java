@@ -3,12 +3,14 @@ package com.example.minkr.jeonju_all.house.data;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /**
  * Created by minkr on 2017-11-06.
  */
 
 @Root(name = "list")
-public class HouseListData {
+public class HouseListData implements Serializable{
 
     @Element(name = "addr")
     private String address;
@@ -25,14 +27,14 @@ public class HouseListData {
     @Element(name = "posy")
     private String posY;
 
-    private int img;
+    private String img_url;
 
-    public int getImg() {
-        return img;
+    public String getImg_url() {
+        return img_url;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
     public String getAddress() {
@@ -101,7 +103,7 @@ public class HouseListData {
                 ", introContent='" + introContent + '\'' +
                 ", posX='" + posX + '\'' +
                 ", posY='" + posY + '\'' +
-                ", img=" + img +
+                ", img_url=" + img_url +
                 '}';
     }
 }
