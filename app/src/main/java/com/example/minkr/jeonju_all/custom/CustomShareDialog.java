@@ -11,10 +11,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.util.Logger;
-import com.kakao.kakaolink.KakaoLink;
-import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
+import com.example.minkr.jeonju_all.util.Logger;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
 import com.kakao.kakaolink.v2.model.ButtonObject;
@@ -23,9 +21,6 @@ import com.kakao.kakaolink.v2.model.FeedTemplate;
 import com.kakao.kakaolink.v2.model.LinkObject;
 import com.kakao.network.ErrorResult;
 import com.kakao.network.callback.ResponseCallback;
-import com.kakao.util.helper.log.Logger;
-
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -45,6 +40,7 @@ public class CustomShareDialog extends Dialog {
     Context mContext;
 
     KindFoodListData data;
+    private String url;
 
     public CustomShareDialog(@NonNull Context context, KindFoodListData data) {
         super(context);
@@ -63,6 +59,8 @@ public class CustomShareDialog extends Dialog {
         Logger.log("data ->"+data.toString());
         init();
         setListener();
+
+        url = "https://store.naver.com/restaurants/detail?id="+data.getStoreId();
 
     }
     private void init() {
@@ -85,13 +83,13 @@ public class CustomShareDialog extends Dialog {
     }
 
     public void shareKakao() {
-        String url = "https://www.google.com";
+
         FeedTemplate params = FeedTemplate
-                .newBuilder(ContentObject.newBuilder("디저트 사진",
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU7G0eidKHstS_hibrOzq2I-zPGqp2BaxRnfYbPg-X3cUdUmtQmw",
+                .newBuilder(ContentObject.newBuilder(data.getName(),
+                        "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150727_135%2Fmaxddong00_14379825629150FDh0_PNG%2F%25B8%25B8%25B3%25AA%25BA%25B0%25B9%25CC_%25B5%25B7%25B0%25A1%25BD%25BA_%25BB%25E7%25B6%25FB%25B5%25B5_%25C0%25CC%25B7%25B1_%25BB%25E7%25B6%25FB%25C0%25CC_%25BE%25F8%25B3%25D7%25BF%25E4_%25A4%25BE9.png&type=f420_312&quality=95&autoRotate=true",
                         LinkObject.newBuilder().setWebUrl(url)
                                 .setMobileWebUrl(url).build())
-                        .setDescrption("전주 맛집 정보입니다.")
+                        .setDescrption(data.getAddress())
                         .build())
                 /*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
                         .setSharedCount(30).setViewCount(40).build())*/
@@ -110,7 +108,7 @@ public class CustomShareDialog extends Dialog {
         KakaoLinkService.getInstance().sendDefault(this.getContext(), params, new ResponseCallback<KakaoLinkResponse>() {
             @Override
             public void onFailure(ErrorResult errorResult) {
-                Logger.e(errorResult.toString());
+                Logger.log(errorResult.toString());
             }
 
             @Override
