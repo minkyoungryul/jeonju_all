@@ -117,5 +117,4 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 	};
 
 
-
 }
