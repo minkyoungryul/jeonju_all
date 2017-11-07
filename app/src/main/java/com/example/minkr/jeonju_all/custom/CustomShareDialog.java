@@ -97,10 +97,10 @@ public class CustomShareDialog extends Dialog {
                         .build())
                 /*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
                         .setSharedCount(30).setViewCount(40).build())*/
-                .addButton(new ButtonObject("웹에서 보기", LinkObject.newBuilder()
+                /*.addButton(new ButtonObject("웹에서 보기", LinkObject.newBuilder()
                         .setWebUrl(url)
                         .setMobileWebUrl(url)
-                        .build()))
+                        .build()))*/
                 .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
                         .setWebUrl(url)
                         .setMobileWebUrl(url)
