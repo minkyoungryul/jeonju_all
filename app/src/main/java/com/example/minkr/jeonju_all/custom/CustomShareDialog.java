@@ -82,7 +82,7 @@ public class CustomShareDialog extends Dialog {
             shareFacebookMessenger();
         });
         ib_weblink.setOnClickListener(v -> {
-            copyToClipboard(this.getContext(), "jeonju_all");
+            copyToClipboard(this.getContext(), url);
         });
     }
 
