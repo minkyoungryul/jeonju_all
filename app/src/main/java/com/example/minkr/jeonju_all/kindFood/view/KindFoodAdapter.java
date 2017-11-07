@@ -80,6 +80,9 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
         holder.ib_share.setOnClickListener(v->{
             mPresenter.showDialog(data);
         });
+        holder.tv_address.setOnClickListener(v->{
+            mPresenter.showMap(data);
+        });
     }
 
     @Override

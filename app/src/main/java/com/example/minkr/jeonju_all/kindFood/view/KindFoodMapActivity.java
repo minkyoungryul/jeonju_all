@@ -73,6 +73,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     NMapLocationManager nMapLocationManager;
     NMapMyLocationOverlay nMapMyLocationOverlay;
     NMapCompassManager nMapCompassManager;
+    NMapPOIdata poiData;
 
     @BindView(R.id.mapView)
     NMapView mMapView = null;
@@ -107,6 +108,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
     KindFoodListData data;
 
+    int intentType = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +117,15 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        datas = (List<KindFoodListData>) intent.getSerializableExtra("data");
+        intentType = intent.getIntExtra("type",0);
+
+        if (intentType == 0){
+            datas = (List<KindFoodListData>) intent.getSerializableExtra("data");
+        }else{
+            data = (KindFoodListData) intent.getSerializableExtra("data");
+        }
+
+
 
         Logger.log("#21 datas -> "+datas);
 
@@ -220,16 +231,26 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
         nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
 
-        int markerId = NMapPOIflagType.PIN;
-        NMapPOIdata poiData = new NMapPOIdata(2,nMapViewerResourceProvider);
-        poiData.beginPOIdata(10);
+        if (intentType == 0){
+            int markerId = NMapPOIflagType.PIN;
+            poiData = new NMapPOIdata(datas.size(),nMapViewerResourceProvider);
+            poiData.beginPOIdata(datas.size());
 
-        for (int i = 0; i<datas.size();i++){
-            double x = Double.parseDouble(datas.get(i).getX());
-            double y = Double.parseDouble(datas.get(i).getY());
-            int storeId = Integer.parseInt(datas.get(i).getStoreId());
-            NMapPOIitem item = poiData.addPOIitem(y,x,datas.get(i).getName(),markerId,storeId);
-            //item.setRightAccessory(true,NMapPOIflagType.CLICKABLE_ARROW);
+            for (int i = 0; i<datas.size();i++){
+                double x = Double.parseDouble(datas.get(i).getX());
+                double y = Double.parseDouble(datas.get(i).getY());
+                int storeId = Integer.parseInt(datas.get(i).getStoreId());
+                poiData.addPOIitem(y,x,datas.get(i).getName(),markerId,storeId);
+            }
+        }else{
+            int markerId = NMapPOIflagType.PIN;
+            poiData = new NMapPOIdata(1,nMapViewerResourceProvider);
+            poiData.beginPOIdata(1);
+
+            double x = Double.parseDouble(data.getX());
+            double y = Double.parseDouble(data.getY());
+            int storeId = Integer.parseInt(data.getStoreId());
+            poiData.addPOIitem(y,x,data.getName(),markerId,storeId);
         }
 
         poiData.endPOIdata();
@@ -255,7 +276,12 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+            if (intentType == 0){
+                mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+            }else{
+                mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getY()), Double.parseDouble(data.getX())),12);
+            }
+
         }else{
         }
     }
@@ -305,22 +331,35 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         Double x = 0.0;
         Double y = 0.0;
 
-        for (int i=0;i<datas.size();i++){
-            if (clickStore.equals(datas.get(i).getName())){
-                ceoName = datas.get(i).getCeoName();
-                name = datas.get(i).getName();
-                address = datas.get(i).getAddress();
-                price = datas.get(i).getPrice();
-                foodName = datas.get(i).getFoodName();
-                tel = datas.get(i).getTel();
-                img_url = datas.get(i).getImg_url();
-                x = Double.parseDouble(datas.get(i).getX());
-                y = Double.parseDouble(datas.get(i).getY());
+        if (intentType == 0){
+            for (int i=0;i<datas.size();i++){
+                if (clickStore.equals(datas.get(i).getName())){
+                    ceoName = datas.get(i).getCeoName();
+                    name = datas.get(i).getName();
+                    address = datas.get(i).getAddress();
+                    price = datas.get(i).getPrice();
+                    foodName = datas.get(i).getFoodName();
+                    tel = datas.get(i).getTel();
+                    img_url = datas.get(i).getImg_url();
+                    x = Double.parseDouble(datas.get(i).getX());
+                    y = Double.parseDouble(datas.get(i).getY());
 
-            }else{
+                }else{
 
+                }
             }
+        }else{
+            ceoName = data.getCeoName();
+            name = data.getName();
+            address = data.getAddress();
+            price = data.getPrice();
+            foodName = data.getFoodName();
+            tel = data.getTel();
+            img_url = data.getImg_url();
+            x = Double.parseDouble(data.getX());
+            y = Double.parseDouble(data.getY());
         }
+
 
         Logger.log(ceoName+"/"+name+"/"+address+"/"+price+"/"+foodName+"/"+tel+"/"+img_url);
 
@@ -406,6 +445,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
     }
+
 
 
 
