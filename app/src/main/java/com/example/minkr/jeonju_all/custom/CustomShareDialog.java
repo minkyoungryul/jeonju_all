@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Window;
@@ -12,7 +13,10 @@ import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
+import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
 import com.example.minkr.jeonju_all.util.Logger;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
 import com.kakao.kakaolink.v2.model.ButtonObject;
@@ -75,10 +79,10 @@ public class CustomShareDialog extends Dialog {
             //getKeyHash(mContext);
         });
         ib_facebook.setOnClickListener(v -> {
-
+            shareFacebook();
         });
         ib_weblink.setOnClickListener(v -> {
-            copyToClipboard(this.getContext(), "jeonju_all");
+            copyToClipboard(this.getContext(), url);
         });
     }
 
@@ -101,7 +105,7 @@ public class CustomShareDialog extends Dialog {
                         .setWebUrl(url)
                         .setMobileWebUrl(url)
                         .setAndroidExecutionParams("key1=value1")
-                        /*.setIosExecutionParams("key1=value1")*/
+                        .setIosExecutionParams("key1=value1")
                         .build()))
                 .build();
 
@@ -116,8 +120,21 @@ public class CustomShareDialog extends Dialog {
 
             }
         });
-
     }
+
+    public void shareFacebook(){
+
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentTitle("페이스북 공유 링크입니다.")
+                .setImageUrl(Uri.parse(data.getImg_url()))
+                .setContentUrl(Uri.parse(url))
+                //.setContentDescription(data.getName(),data.getAddress(),data.getPrice(),data.getFoodName())
+                //.setContentDescription("1,2,3,4")
+                .build();
+        ShareDialog shareDialog = new ShareDialog((KindFoodActivity) this.mContext);
+        shareDialog.show(content, ShareDialog.Mode.FEED);
+    }
+
     public void copyToClipboard(Context context , String content){
         int sdk = android.os.Build.VERSION.SDK_INT;
         if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {

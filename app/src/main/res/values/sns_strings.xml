@@ -4,5 +4,6 @@
     <string name="kakao_app_key">914bf536fca40f59300f3944130aca28</string>
     <string name="kakao_scheme">kakao914bf536fca40f59300f3944130aca28</string>
     <string name="kakaolink_host">kakaolink</string>
+    <string name="facebook_app_id">128438531205327</string>
 
 </resources>
