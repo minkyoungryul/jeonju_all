@@ -48,9 +48,14 @@ public class FoodWineAdapter extends RecyclerView.Adapter<FoodWineAdapter.ViewHo
                 .into(holder.iv_food);
 
         holder.tv_store_name.setText(data.getStoreName());
-        holder.tv_address.setText(data.getNewAddr());
         holder.tv_main_menu.setText(data.getMainMenu());
 
+        if(data.getNewAddr() == null || data.getNewAddr().equals("")){
+            holder.iv_map.setVisibility(View.GONE);
+            holder.tv_address.setVisibility(View.GONE);
+        }else{
+            holder.tv_address.setText(data.getNewAddr());
+        }
 
         holder.ib_like.setOnClickListener(v->{
             if(isLike)
@@ -78,6 +83,7 @@ public class FoodWineAdapter extends RecyclerView.Adapter<FoodWineAdapter.ViewHo
         TextView tv_address;
         View itemView;
         ImageButton ib_like;
+        ImageView iv_map;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -86,6 +92,7 @@ public class FoodWineAdapter extends RecyclerView.Adapter<FoodWineAdapter.ViewHo
             tv_main_menu = (TextView) itemView.findViewById(R.id.tv_main_menu);
             tv_address = (TextView) itemView.findViewById(R.id.tv_address);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            iv_map = (ImageView) itemView.findViewById(R.id.iv_map);
             this.itemView = itemView;
         }
 

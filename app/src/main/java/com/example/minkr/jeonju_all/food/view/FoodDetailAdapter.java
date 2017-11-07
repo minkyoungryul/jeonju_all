@@ -1,6 +1,8 @@
 package com.example.minkr.jeonju_all.food.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,12 +52,24 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
                 .into(holder.iv_food);
 
         holder.tv_store_name.setText(data.getStoreName());
-        holder.tv_address.setText(data.getNewAddr());
+
         holder.tv_main_menu.setText(data.getMainMenu());
         holder.tv_time.setText(data.getOpenTime() + " - " + data.getCloseTime());
         holder.tv_parking.setText(data.isParking() == 1 ? "주차가능" : "주차불가");
-        holder.tv_tel.setText(data.getTel());
 
+        if(data.getNewAddr() == null || data.getNewAddr().equals(" ")){
+            holder.iv_map.setVisibility(View.GONE);
+            holder.tv_address.setVisibility(View.GONE);
+        }else{
+            holder.tv_address.setText(data.getNewAddr());
+        }
+
+        if(data.getTel() == null || data.getTel().equals("--")){
+            holder.tv_tel.setVisibility(View.GONE);
+            holder.iv_call.setVisibility(View.GONE);
+        }else{
+            holder.tv_tel.setText(data.getTel());
+        }
 
         holder.ib_like.setOnClickListener(v->{
             if(isLike)
@@ -68,6 +82,12 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
 
         holder.getView().setOnClickListener(v->{
             presenter.getStoreInfo(data);
+        });
+
+        holder.tv_tel.setOnClickListener(v->{
+            Intent call = new Intent(Intent.ACTION_DIAL);
+            call.setData(Uri.parse("tel:"+data.getTel()));
+            mContext.startActivity(call);
         });
     }
 
@@ -86,6 +106,8 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
         TextView tv_tel;
         TextView tv_parking;
         TextView tv_time;
+        ImageView iv_map;
+        ImageView iv_call;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -97,6 +119,8 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
             tv_tel = (TextView) itemView.findViewById(R.id.tv_tel);
             tv_parking = (TextView) itemView.findViewById(R.id.tv_parking);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
+            iv_map = (ImageView) itemView.findViewById(R.id.iv_map);
+            iv_call = (ImageView) itemView.findViewById(R.id.iv_call);
             this.itemView = itemView;
         }
 

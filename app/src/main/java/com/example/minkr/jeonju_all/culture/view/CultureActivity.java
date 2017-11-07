@@ -1,4 +1,4 @@
-package com.example.minkr.jeonju_all.house.view;
+package com.example.minkr.jeonju_all.culture.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,10 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.house.data.HouseListData;
-import com.example.minkr.jeonju_all.house.presenter.HousePresenter;
+import com.example.minkr.jeonju_all.culture.data.CultureListData;
+import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
+import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +23,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by minkr on 2017-11-06.
+ * Created by minkr on 2017-11-07.
  */
 
-public class HouseListActivity extends AppCompatActivity implements HouseView{
+public class CultureActivity extends AppCompatActivity implements CultureView{
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -34,33 +34,34 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+    @BindView(R.id.progress_bar)
+    ProgressBar progress_bar;
 
-    HouseAdapter adapter;
     LinearLayoutManager mLayoutManager;
-    List<HouseListData> datas = new ArrayList<>();
+    CultureAdapter adapter;
+    List<CultureListData> datas= new ArrayList<>();
 
-    HousePresenter presenter;
+    CulturePresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_house_list);
+        setContentView(R.layout.activity_culture);
         ButterKnife.bind(this);
 
-        presenter = new HousePresenter();
+        progress_bar.setVisibility(View.VISIBLE);
+        presenter = new CulturePresenter();
         presenter.attachView(this);
-        presenter.getHouseList();
+        presenter.getCultureList();
 
         init();
         setListener();
     }
 
     private void init() {
-        progressBar.setVisibility(View.VISIBLE);
         mLayoutManager = new LinearLayoutManager(this);
-        adapter = new HouseAdapter(this, datas, presenter);
+        adapter = new CultureAdapter(this, datas, presenter);
+
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
     }
@@ -86,21 +87,22 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     }
 
     @Override
-    public void getHouseList(List<HouseListData> houseListData) {
-        String[] img_url = getResources().getStringArray(R.array.house);
-        for(int i=0; i<houseListData.size(); i++) {
-            houseListData.get(i).setImg_url(img_url[i]);
+    public void getCultureList(List<CultureListData> cultureListData) {
+
+        String[] img_url = getResources().getStringArray(R.array.culture);
+        for(int i=0; i<cultureListData.size(); i++){
+            cultureListData.get(i).setImg_url(img_url[i]);
         }
 
-        progressBar.setVisibility(View.GONE);
-        datas.addAll(houseListData);
+        datas.addAll(cultureListData);
         adapter.notifyDataSetChanged();
+        progress_bar.setVisibility(View.GONE);
     }
 
     @Override
-    public void getStoreInfo(HouseListData data) {
-        Intent intent = new Intent(HouseListActivity.this, HouseStoreInfoActivity.class);
-        intent.putExtra("data", data.getHomepage());
+    public void showInfo(CultureListData data) {
+        Intent intent = new Intent(CultureActivity.this, HouseStoreInfoActivity.class);
+        intent.putExtra("data", data.getUserHomepage());
         startActivity(intent);
     }
 }
