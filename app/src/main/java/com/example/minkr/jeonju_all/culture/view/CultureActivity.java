@@ -1,6 +1,7 @@
 package com.example.minkr.jeonju_all.culture.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
+import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +60,7 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
 
     private void init() {
         mLayoutManager = new LinearLayoutManager(this);
-        adapter = new CultureAdapter(this, datas);
+        adapter = new CultureAdapter(this, datas, presenter);
 
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -95,5 +97,12 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
         datas.addAll(cultureListData);
         adapter.notifyDataSetChanged();
         progress_bar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showInfo(CultureListData data) {
+        Intent intent = new Intent(CultureActivity.this, HouseStoreInfoActivity.class);
+        intent.putExtra("data", data.getUserHomepage());
+        startActivity(intent);
     }
 }

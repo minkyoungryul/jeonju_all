@@ -65,4 +65,8 @@ public class CulturePresenter implements Presenter<CultureView> {
                 });
         compositeDisposable.add(disposable);
     }
+
+    public void showInfo(CultureListData data) {
+        view.showInfo(data);
+    }
 }

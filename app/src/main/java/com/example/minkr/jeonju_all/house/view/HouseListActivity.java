@@ -100,7 +100,7 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     @Override
     public void getStoreInfo(HouseListData data) {
         Intent intent = new Intent(HouseListActivity.this, HouseStoreInfoActivity.class);
-        intent.putExtra("data", data);
+        intent.putExtra("data", data.getHomepage());
         startActivity(intent);
     }
 }

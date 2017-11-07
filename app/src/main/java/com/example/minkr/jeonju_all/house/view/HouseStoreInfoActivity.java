@@ -39,7 +39,7 @@ public class HouseStoreInfoActivity extends AppCompatActivity {
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
-    HouseListData data;
+    String url;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class HouseStoreInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        data = (HouseListData) intent.getSerializableExtra("data");
+        url = intent.getStringExtra("data");
         init();
         setListener();
     }
@@ -56,10 +56,10 @@ public class HouseStoreInfoActivity extends AppCompatActivity {
     private void init() {
         mWebView.getSettings().setJavaScriptEnabled(true);
 
-        if (data.getHomepage() == null || data.getHomepage().equals("")){
+        if (url == null || url.equals("")){
             Toast.makeText(this, "해당 홈페이지 정보가 없습니다.", Toast.LENGTH_SHORT);
         }else{
-            mWebView.loadUrl(data.getHomepage());
+            mWebView.loadUrl(url);
         }
         mWebView.setWebViewClient(new WebViewClientClass());
         // WebViewClient 지정

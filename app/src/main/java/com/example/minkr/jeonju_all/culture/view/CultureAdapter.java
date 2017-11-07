@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
+import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
 import com.example.minkr.jeonju_all.util.Logger;
 
 import java.util.List;
@@ -25,10 +26,12 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
 
     Context mContext;
     List<CultureListData> datas;
+    CulturePresenter presenter;
 
-    public CultureAdapter(Context mContext, List<CultureListData> datas) {
+    public CultureAdapter(Context mContext, List<CultureListData> datas, CulturePresenter presenter) {
         this.mContext = mContext;
         this.datas = datas;
+        this.presenter = presenter;
     }
 
     @Override
@@ -68,6 +71,10 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
             Intent call = new Intent(Intent.ACTION_DIAL);
             call.setData(Uri.parse("tel:"+data.getTel()));
             mContext.startActivity(call);
+        });
+
+        holder.getView().setOnClickListener(v->{
+            presenter.showInfo(data);
         });
     }
 

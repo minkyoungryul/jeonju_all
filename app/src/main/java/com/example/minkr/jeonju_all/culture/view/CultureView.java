@@ -11,4 +11,5 @@ import java.util.List;
 
 public interface CultureView extends MvpView {
     void getCultureList(List<CultureListData> cultureListData);
+    void showInfo(CultureListData data);
 }
