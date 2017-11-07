@@ -110,6 +110,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
     int intentType = 0;
 
+    boolean isGPS = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +134,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         init();
         setListener();
 
-        startMyLocation();
+        //startMyLocation();
 
     }
 
@@ -152,22 +154,30 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         imgbtLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (locationType == 0){
-                    layoutProgressbar.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    imgbtLocation.setImageResource(R.drawable.jeonjulocation);
-                    imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
-                    txtLocation.setText("전주위치");
-                    stopMyLocation();
-                    startMyLocation();
-                    locationType = 1;
-                }else {
-                    imgbtLocation.setImageResource(R.drawable.mylocation);
-                    imgbtLocation.setBackgroundResource(R.drawable.mylocation);
-                    txtLocation.setText("현재위치");
-                    stopMyLocation();
-                    mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
-                    locationType = 0;
+
+                boolean isMyLocationEnabled = nMapLocationManager.enableMyLocation(true);
+                if (!isMyLocationEnabled) {
+                    Toast.makeText(KindFoodMapActivity.this, "GPS를 활성화 해주세요.",
+                            Toast.LENGTH_LONG).show();
+
+                }else{
+                    if (locationType == 0){
+                        layoutProgressbar.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.VISIBLE);
+                        imgbtLocation.setImageResource(R.drawable.jeonjulocation);
+                        imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
+                        txtLocation.setText("전주위치");
+                        stopMyLocation();
+                        startMyLocation();
+                        locationType = 1;
+                    }else {
+                        imgbtLocation.setImageResource(R.drawable.mylocation);
+                        imgbtLocation.setBackgroundResource(R.drawable.mylocation);
+                        txtLocation.setText("현재위치");
+                        stopMyLocation();
+                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+                        locationType = 0;
+                    }
                 }
 
             }
@@ -360,9 +370,6 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
             y = Double.parseDouble(data.getY());
         }
 
-
-        Logger.log(ceoName+"/"+name+"/"+address+"/"+price+"/"+foodName+"/"+tel+"/"+img_url);
-
         return new NMapCalloutCustomOverlayView(KindFoodMapActivity.this, nMapOverlay, nMapOverlayItem, rect, ceoName, name, address, price, foodName, tel, img_url, x, y);
     }
 
@@ -427,7 +434,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     }
 
 
-    public void setRoad(Double x, Double y, String name){
+    public void setRoad(String name){
 
         String uri ="http://maps.google.com/maps?saddr="+myLocationX+","+myLocationY+"&daddr="+name+"&hl=ko";
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,

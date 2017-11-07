@@ -86,7 +86,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 			@Override
 			public void onClick(View v) {
 				Logger.log("#35 kind -> "+kind.datas);
-				kind.setRoad(x,y,name);
+				kind.setRoad(name);
 
 			}
 		});
