@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -55,6 +56,11 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
         }else{
             holder.tv_content.setText(data.getDataContent());
         }
+
+        Glide.with(mContext)
+                .load(data.getImg_url())
+                .fitCenter()
+                .into(holder.iv_house);
     }
 
     @Override

@@ -86,6 +86,12 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
 
     @Override
     public void getCultureList(List<CultureListData> cultureListData) {
+
+        String[] img_url = getResources().getStringArray(R.array.culture);
+        for(int i=0; i<cultureListData.size(); i++){
+            cultureListData.get(i).setImg_url(img_url[i]);
+        }
+
         datas.addAll(cultureListData);
         adapter.notifyDataSetChanged();
         progress_bar.setVisibility(View.GONE);
