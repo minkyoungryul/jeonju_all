@@ -49,22 +49,47 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/tv_address"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="전라북도 전주시 완산구 거마평로 122"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_map_small"
+                    android:layout_marginTop="5dp"
+                    android:paddingRight="3dp"
+                    />
 
-            <TextView
-                android:id="@+id/tv_tel"
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전라북도 전주시 완산구 거마평로 122"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="063-224-9529"
-                android:textColor="@color/white"
-                android:textSize="15dp"/>
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_call_small"
+                    android:layout_marginTop="5dp"
+                    android:paddingRight="3dp"/>
+
+                <TextView
+                    android:id="@+id/tv_tel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="063-224-9529"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

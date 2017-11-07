@@ -1,6 +1,8 @@
 package com.example.minkr.jeonju_all.culture.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +63,12 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
                 .load(data.getImg_url())
                 .fitCenter()
                 .into(holder.iv_house);
+
+        holder.tv_tel.setOnClickListener(v->{
+            Intent call = new Intent(Intent.ACTION_DIAL);
+            call.setData(Uri.parse("tel:"+data.getTel()));
+            mContext.startActivity(call);
+        });
     }
 
     @Override
