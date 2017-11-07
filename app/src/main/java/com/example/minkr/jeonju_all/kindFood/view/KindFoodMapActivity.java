@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -46,6 +48,7 @@ import com.nhn.android.mapviewer.overlay.NMapCalloutOverlay;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
+import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +61,7 @@ import butterknife.ButterKnife;
  */
 
 public class KindFoodMapActivity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
-        NMapOverlayManager.OnCalloutOverlayListener,NMapPOIdataOverlay.OnStateChangeListener{
+        NMapOverlayManager.OnCalloutOverlayViewListener,NMapPOIdataOverlay.OnStateChangeListener{
 
     private final String API_KEY = "5lvyL1UwyDdfnK1Xxig6";
     NMapController mMapController = null;
@@ -87,6 +90,11 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     LinearLayout layoutProgressbar;
 
     int locationType = 0;
+    int initLocation = 0;
+    double myLocationX = 0.0;
+    double myLocationY = 0.0;
+
+    //List<KindFoodListData> datas = new ArrayList<>();
 
 
     //위치정보 허가
@@ -97,6 +105,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
     List<KindFoodListData> datas;
 
+    KindFoodListData data;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,8 +116,12 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         Intent intent = getIntent();
         datas = (List<KindFoodListData>) intent.getSerializableExtra("data");
 
+        Logger.log("#21 datas -> "+datas);
+
         init();
         setListener();
+
+        startMyLocation();
 
     }
 
@@ -209,16 +223,14 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         int markerId = NMapPOIflagType.PIN;
         NMapPOIdata poiData = new NMapPOIdata(2,nMapViewerResourceProvider);
         poiData.beginPOIdata(10);
-        poiData.addPOIitem(127.1170040,35.8032230,"만나별미",markerId,16953705);
-        poiData.addPOIitem(127.1485280,35.8176730,"이래면옥",markerId,16784799);
-        poiData.addPOIitem(127.0779630,35.8658280,"제일크리너스샵",markerId,17115770);
-        poiData.addPOIitem(127.1395400,35.8260960,"중본이쟁반짜장",markerId,34005058);
-        poiData.addPOIitem(127.1464460,35.8265030,"기린로가정식백반",markerId,16986870);
-        poiData.addPOIitem(127.1529240,35.8094110,"맛자랑 팥고향",markerId,11710472);
-        poiData.addPOIitem(127.1462140,35.8243480,"옛살비",markerId,19555701);
-        poiData.addPOIitem(127.1465560,35.8242210,"청라회관",markerId,16985833);
-        poiData.addPOIitem(127.1240430,35.7969410,"1500짜장집",markerId,36004947);
-        poiData.addPOIitem(127.1471710,35.8125550,"동래분식",markerId,36004175);
+
+        for (int i = 0; i<datas.size();i++){
+            double x = Double.parseDouble(datas.get(i).getX());
+            double y = Double.parseDouble(datas.get(i).getY());
+            int storeId = Integer.parseInt(datas.get(i).getStoreId());
+            NMapPOIitem item = poiData.addPOIitem(y,x,datas.get(i).getName(),markerId,storeId);
+            //item.setRightAccessory(true,NMapPOIflagType.CLICKABLE_ARROW);
+        }
 
         poiData.endPOIdata();
         NMapPOIdataOverlay poiDataOverlay = nMapOverlayManager.createPOIdataOverlay(poiData,null);
@@ -226,10 +238,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         poiDataOverlay.showAllPOIdata(0);
         poiDataOverlay.setOnStateChangeListener((NMapPOIdataOverlay.OnStateChangeListener)this);
 
-        nMapOverlayManager.setOnCalloutOverlayListener((NMapOverlayManager.OnCalloutOverlayListener)this);
-
-
-
+        nMapOverlayManager.setOnCalloutOverlayViewListener((NMapOverlayManager.OnCalloutOverlayViewListener)this);
 
         nMapLocationManager = new NMapLocationManager(this);
         nMapLocationManager.setOnLocationChangeListener(onMyLocationChangeListener);
@@ -247,10 +256,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
             mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
-            //startMyLocation();//\\\\\\\\\\ 현재위치 에뮬에서는 안댐
         }else{
-            //35.8241930
-            //127.1480000
         }
     }
 
@@ -285,8 +291,40 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     public void onSingleTapUp(NMapView nMapView, MotionEvent motionEvent) {}
 
     @Override
-    public NMapCalloutOverlay onCreateCalloutOverlay(NMapOverlay nMapOverlay, NMapOverlayItem nMapOverlayItem, Rect rect) {
-        return new NMapCalloutBasicOverlay(nMapOverlay,nMapOverlayItem,rect);
+    public View onCreateCalloutOverlayView(NMapOverlay nMapOverlay, NMapOverlayItem nMapOverlayItem, Rect rect) {
+
+        String clickStore = nMapOverlayItem.getTitle();
+
+        String ceoName = "";
+        String name = "";
+        String address = "";
+        String price = "";
+        String foodName = "";
+        String tel = "";
+        String img_url = "";
+        Double x = 0.0;
+        Double y = 0.0;
+
+        for (int i=0;i<datas.size();i++){
+            if (clickStore.equals(datas.get(i).getName())){
+                ceoName = datas.get(i).getCeoName();
+                name = datas.get(i).getName();
+                address = datas.get(i).getAddress();
+                price = datas.get(i).getPrice();
+                foodName = datas.get(i).getFoodName();
+                tel = datas.get(i).getTel();
+                img_url = datas.get(i).getImg_url();
+                x = Double.parseDouble(datas.get(i).getX());
+                y = Double.parseDouble(datas.get(i).getY());
+
+            }else{
+
+            }
+        }
+
+        Logger.log(ceoName+"/"+name+"/"+address+"/"+price+"/"+foodName+"/"+tel+"/"+img_url);
+
+        return new NMapCalloutCustomOverlayView(KindFoodMapActivity.this, nMapOverlay, nMapOverlayItem, rect, ceoName, name, address, price, foodName, tel, img_url, x, y);
     }
 
     @Override
@@ -304,7 +342,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
 
     //현재위치 찾기
-    private void startMyLocation() {
+    public void startMyLocation() {
 
         if (nMapMyLocationOverlay != null) {
             if (!nMapOverlayManager.hasOverlay(nMapMyLocationOverlay)) {
@@ -336,7 +374,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         }
     }
 
-    private void stopMyLocation() {
+    public void stopMyLocation() {
         if (nMapMyLocationOverlay != null) {
             nMapLocationManager.disableMyLocation();
 
@@ -350,6 +388,27 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     }
 
 
+    public void setRoad(Double x, Double y, String name){
+
+        String uri ="http://maps.google.com/maps?saddr="+myLocationX+","+myLocationY+"&daddr="+name+"&hl=ko";
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse(uri));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER );
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        startActivity(intent);
+
+    }
+
+    public void getStreetView(double x, double y){
+        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
+    }
+
+
+
     /* MyLocation Listener */
     private final NMapLocationManager.OnLocationChangeListener onMyLocationChangeListener = new NMapLocationManager.OnLocationChangeListener() {
 
@@ -358,11 +417,18 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
 
             if (mMapController != null) {
-                mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()),12);
+                if (initLocation == 0){
+                    myLocationX = myLocation.getLatitude();
+                    myLocationY = myLocation.getLongitude();
+                    initLocation = 1;
+                }else {
+                    mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()), 12);
+                    mMapController.animateTo(myLocation);
+                    progressBar.setVisibility(View.GONE);
+                    layoutProgressbar.setVisibility(View.INVISIBLE);
+                }
+                Logger.log("#50 mylocation changerd -> "+myLocationX);
 
-                mMapController.animateTo(myLocation);
-                progressBar.setVisibility(View.GONE);
-                layoutProgressbar.setVisibility(View.INVISIBLE);
             }
 
             //findPlacemarkAtLocation(myLocation.getLongitude(), myLocation.getLatitude());
@@ -383,5 +449,6 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         }
 
     };
+
 
 }

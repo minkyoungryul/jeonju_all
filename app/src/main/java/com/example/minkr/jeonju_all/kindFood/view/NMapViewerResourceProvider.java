@@ -35,11 +35,11 @@ import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
 
 /**
  * Wrapper class to provider resources on map view.
- * 
+ *
  * @author kyjkim
  */
 public class NMapViewerResourceProvider extends NMapResourceProvider implements
-	NMapCalloutCustomOldOverlay.ResourceProvider {
+		NMapCalloutCustomOldOverlay.ResourceProvider {
 	private static final String LOG_TAG = "NMapViewerResourceProvider";
 	private static final boolean DEBUG = false;
 
@@ -68,7 +68,7 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 
 	/**
 	 * Get drawable for markerId at focused state
-	 * 
+	 *
 	 * @param markerId unique id for POI or Number icons.
 	 * @param focused true for focused state, false otherwise.
 	 * @return
@@ -176,23 +176,23 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 
 	// Resource Ids for single icons
 	private final ResourceIdsOnMap mResourceIdsForMarkerOnMap[] = {
-		// Spot, Pin icons
-		new ResourceIdsOnMap(NMapPOIflagType.PIN, R.drawable.pin,R.drawable.pin),
-		new ResourceIdsOnMap(NMapPOIflagType.SPOT, R.drawable.pin, R.drawable.pin),
+			// Spot, Pin icons
+			new ResourceIdsOnMap(NMapPOIflagType.PIN, R.drawable.pin,R.drawable.pin),
+			new ResourceIdsOnMap(NMapPOIflagType.SPOT, R.drawable.pin, R.drawable.pin),
 
-		// Direction POI icons: From, To
-		new ResourceIdsOnMap(NMapPOIflagType.FROM, R.drawable.ic_map_start, R.drawable.ic_map_start_over),
-		new ResourceIdsOnMap(NMapPOIflagType.TO, R.drawable.ic_map_arrive, R.drawable.ic_map_arrive_over),
+			// Direction POI icons: From, To
+			new ResourceIdsOnMap(NMapPOIflagType.FROM, R.drawable.ic_map_start, R.drawable.ic_map_start_over),
+			new ResourceIdsOnMap(NMapPOIflagType.TO, R.drawable.ic_map_arrive, R.drawable.ic_map_arrive_over),
 	};
 
 	/**
 	 * Find resource id corresponding to the markerId.
-	 * 
+	 *
 	 * @param markerId marker id for a NMapPOIitem.
 	 * @param focused flag to indicated focused or normal state of this marker.
-	 * 	
+	 *
 	 * @return resource id for the given markerId.
-	 * 
+	 *
 	 * @see NMapPOIflagType
 	 */
 	@Override
@@ -221,7 +221,7 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 
 	/**
 	 * 	Set bounds for this marker depending on its shape.  
-	 * 
+	 *
 	 */
 	@Override
 	protected void setBounds(Drawable marker, int markerId, NMapOverlayItem item) {
@@ -441,7 +441,7 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 
 	/**
 	 * 말풍선의 텍스트 색상을 customize한다.
-	 *  
+	 *
 	 * @param item
 	 * @return
 	 * @see com.nhn.android.mapviewer.overlay.NMapCalloutCustomOverlay.ResourceProvider#getCalloutTextColors(com.nhn.android.maps.NMapOverlayItem)
