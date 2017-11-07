@@ -17,7 +17,7 @@ package com.example.minkr.jeonju_all.kindFood.view;
 
 /**
  * Wrapper class representing POI flag types on map view.
- * 
+ *
  * @author kyjkim
  */
 public class NMapPOIflagType {

@@ -30,8 +30,8 @@ import com.nhn.android.mapviewer.overlay.NMapCalloutOverlay;
 
 /**
  * Basic callout overlay
- * 
- * @author kyjkim 
+ *
+ * @author kyjkim
  */
 public class NMapCalloutBasicOverlay extends NMapCalloutOverlay {
 
@@ -153,7 +153,7 @@ public class NMapCalloutBasicOverlay extends NMapCalloutOverlay {
 
 	@Override
 	protected Drawable getDrawable(int rank, int itemState) {
-		
+
 		return null;
 	}
 }

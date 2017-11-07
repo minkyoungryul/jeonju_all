@@ -32,8 +32,8 @@ import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
 
 /**
  * Customized callout overlay.
- * 
- * @author kyjkim 
+ *
+ * @author kyjkim
  */
 public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 	private static final String LOG_TAG = "NMapCalloutCustomOverlay";
@@ -84,7 +84,7 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 	private final String mTailText;
 	private float mTailTextWidth;
 
-	/** 
+	/**
 	 * Resource provider should implement this interface
 	 */
 	public static interface ResourceProvider {
@@ -99,7 +99,7 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 	}
 
 	public NMapCalloutCustomOldOverlay(NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds,
-                                       NMapCalloutCustomOldOverlay.ResourceProvider resourceProvider) {
+									   NMapCalloutCustomOldOverlay.ResourceProvider resourceProvider) {
 
 		super(itemOverlay, item, itemBounds);
 
@@ -129,7 +129,7 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 
 		if (resourceProvider == null) {
 			throw new IllegalArgumentException(
-				"NMapCalloutCustomOverlay.ResourceProvider should be provided on creation of NMapCalloutCustomOverlay.");
+					"NMapCalloutCustomOverlay.ResourceProvider should be provided on creation of NMapCalloutCustomOverlay.");
 		}
 
 		mBackgroundDrawable = resourceProvider.getCalloutBackground(item);
@@ -249,7 +249,7 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 
 				left = mRightButtonRect.left + (mCalloutRightButtonWidth - mTempRect.width()) / 2;
 				top = mRightButtonRect.top + (mCalloutRightButtonHeight - mTempRect.height()) / 2 + mTempRect.height()
-					+ mTitleOffsetY;
+						+ mTitleOffsetY;
 				canvas.drawText(mRightButtonText, left, top, mTextPaint);
 			}
 		}
@@ -307,7 +307,7 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 			}
 
 			final String title = TextUtils.ellipsize(mOverlayItem.getTitle(), mTextPaint, maxWidth,
-				TextUtils.TruncateAt.END).toString();
+					TextUtils.TruncateAt.END).toString();
 
 			mTitleTruncated = title;
 
@@ -347,7 +347,7 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 		// set position
 		float left = mTempPoint.x - (int)(mTempRectF.width() * mOverlayItem.getAnchorXRatio());
 		float top = mTempPoint.y - (int)(mItemBounds.height() * mOverlayItem.getAnchorYRatio()) - mItemGapY
-			- mTotalHeight;
+				- mTotalHeight;
 		mTempRectF.set(left, top, left + mTempRectF.width(), top + mTempRectF.height());
 
 	}
