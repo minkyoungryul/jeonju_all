@@ -22,4 +22,5 @@ public class Variable {
     public static final String _FOOD_WINE_LIST_SERVER_REQUEST_URL = "jeonjufood/getKoreaWineList?pageSize=100";
     public static final String _FOOD_HANOK_LIST_SERVER_REQUEST_URL = "jeonjufood/getHanOkFoodList?pageSize=100";
     public static final String _HOUSE_LIST_SERVER_REQUEST_URL = "hanokhouse/getHanokHouseList?pageSize=34";
+    public static final String _CULTURE_LIST_SERVER_REQUEST_URL = "culture/getCultureList?pageSize=72";
 }

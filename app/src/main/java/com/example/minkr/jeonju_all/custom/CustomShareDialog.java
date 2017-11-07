@@ -79,7 +79,7 @@ public class CustomShareDialog extends Dialog {
             //getKeyHash(mContext);
         });
         ib_facebook.setOnClickListener(v -> {
-            shareFacebookMessenger();
+            shareFacebook();
         });
         ib_weblink.setOnClickListener(v -> {
             copyToClipboard(this.getContext(), url);
@@ -105,7 +105,7 @@ public class CustomShareDialog extends Dialog {
                         .setWebUrl(url)
                         .setMobileWebUrl(url)
                         .setAndroidExecutionParams("key1=value1")
-                        /*.setIosExecutionParams("key1=value1")*/
+                        .setIosExecutionParams("key1=value1")
                         .build()))
                 .build();
 
@@ -120,9 +120,9 @@ public class CustomShareDialog extends Dialog {
 
             }
         });
-
     }
-    public void shareFacebookMessenger(){
+
+    public void shareFacebook(){
 
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentTitle("페이스북 공유 링크입니다.")
@@ -134,6 +134,7 @@ public class CustomShareDialog extends Dialog {
         ShareDialog shareDialog = new ShareDialog((KindFoodActivity) this.mContext);
         shareDialog.show(content, ShareDialog.Mode.FEED);
     }
+
     public void copyToClipboard(Context context , String content){
         int sdk = android.os.Build.VERSION.SDK_INT;
         if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
