@@ -8,7 +8,9 @@
 
     <RelativeLayout
         android:layout_width="170dp"
-        android:layout_height="170dp">
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        android:gravity="center">
         <ImageView
             android:id="@+id/iv_house"
             android:layout_width="match_parent"
@@ -44,23 +46,22 @@
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            android:layout_marginTop="5dp">
-
+            android:orientation="horizontal">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_map_small"
-                android:layout_marginTop="5dp"
                 android:paddingRight="5dp"
-                />
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/tv_address"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="전라북도 전주시 완산구 은행로 86-2 (교동)"
@@ -68,16 +69,46 @@
                 android:textColor="@color/black"/>
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:id="@+id/iv_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_call_small"
+                android:paddingRight="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_tel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="063-123-1234"
+                android:textSize="15dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
+
+
+
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:lines="3"
+            android:lines="2"
             android:text="객실요금 주중 및 비수기------>6만원 주말 및 성수기------>8만원 자세한 내용은 은행로86.2 블로그를 참고하세요 사이트주소 :  http://blog.naver.com/white6507"/>
 
 
         <TextView
+            android:id="@+id/tv_dot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="···"/>
