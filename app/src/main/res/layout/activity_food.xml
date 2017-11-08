@@ -94,16 +94,23 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="210dp">
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rice_recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-
                     </android.support.v7.widget.RecyclerView>
-                </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar_rice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:indeterminateTint="@color/brown"/>
+                </FrameLayout>
             </LinearLayout>
 
             <!--전주비빔밥-->
@@ -153,7 +160,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="210dp">
                     <android.support.v7.widget.RecyclerView
@@ -162,7 +169,15 @@
                         android:layout_height="match_parent">
 
                     </android.support.v7.widget.RecyclerView>
-                </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar_bibimbap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:indeterminateTint="@color/brown"/>
+                </FrameLayout>
             </LinearLayout>
 
             <!--콩나물국밥-->
@@ -212,7 +227,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="210dp">
                     <android.support.v7.widget.RecyclerView
@@ -221,7 +236,15 @@
                         android:layout_height="match_parent">
 
                     </android.support.v7.widget.RecyclerView>
-                </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar_kongbap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:indeterminateTint="@color/brown"/>
+                </FrameLayout>
             </LinearLayout>
 
             <!--막걸리집-->
@@ -271,7 +294,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="210dp">
                     <android.support.v7.widget.RecyclerView
@@ -280,7 +303,15 @@
                         android:layout_height="match_parent">
 
                     </android.support.v7.widget.RecyclerView>
-                </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar_wine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:indeterminateTint="@color/brown"/>
+                </FrameLayout>
             </LinearLayout>
 
             <!--한옥마을맛집-->
@@ -330,7 +361,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="210dp">
                     <android.support.v7.widget.RecyclerView
@@ -339,7 +370,15 @@
                         android:layout_height="match_parent">
 
                     </android.support.v7.widget.RecyclerView>
-                </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar_hanok"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:indeterminateTint="@color/brown"/>
+                </FrameLayout>
             </LinearLayout>
 
         </LinearLayout>
