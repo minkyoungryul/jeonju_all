@@ -36,7 +36,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 
 	private View mCalloutView;
 	private TextView mCalloutText;
-	private TextView txtAddress,txtTel,txtCeo,txtMenu,txtPrice,txtRoad,txtStreet;
+	private TextView txtAddress,txtTel,txtCeo,txtMenu,txtPrice,txtRoad,txtStreet,txtNavi;
 	private ImageView imgStore,imgLike;
 	private View mRightArrow;
 	KindFoodMapActivity kind;
@@ -62,6 +62,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtPrice = (TextView)mCalloutView.findViewById(R.id.store_price);
 		txtRoad = (TextView)mCalloutView.findViewById(R.id.bt_map_search);
 		txtStreet = (TextView)mCalloutView.findViewById(R.id.bt_map_street);
+		//txtNavi = (TextView)mCalloutView.findViewById(R.id.bt_map_navi);
 
 		imgLike = (ImageView)mCalloutView.findViewById(R.id.img_map_like);
 		imgStore = (ImageView)mCalloutView.findViewById(R.id.img_store);
@@ -85,7 +86,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 			@Override
 			public void onClick(View v) {
 				Logger.log("#35 kind -> "+kind.datas);
-				kind.setRoad(x,y,name);
+				kind.setRoad(name);
 
 			}
 		});
@@ -114,7 +115,6 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 			}
 		}
 	};
-
 
 
 }

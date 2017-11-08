@@ -1,6 +1,7 @@
 package com.example.minkr.jeonju_all.kindFood.presenter;
 
 import android.content.Context;
+import android.view.View;
 
 import com.example.minkr.jeonju_all.common.presenter.Presenter;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodDatas;
@@ -85,4 +86,6 @@ public class KindFoodPresenter implements Presenter<KindFoodVIew> {
     public void showDialog(KindFoodListData data) {
         view.showDialog(data);
     }
+
+    public void showMap(KindFoodListData data){view.showMap(data);}
 }

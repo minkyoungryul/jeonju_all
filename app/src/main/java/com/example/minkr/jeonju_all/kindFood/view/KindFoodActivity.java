@@ -2,6 +2,7 @@ package com.example.minkr.jeonju_all.kindFood.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,8 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
     List<KindFoodListData> kindFoodList = new ArrayList<>();
 
+    //KindFoodMapActivity kindFoodMapActivity;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +74,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         ib_map.setOnClickListener(v->{
             Intent intent = new Intent(KindFoodActivity.this, KindFoodMapActivity.class);
             intent.putExtra("data", (Serializable) kindFoodList);
+            intent.putExtra("type",0);
             startActivity(intent);
         });
     }
@@ -81,6 +85,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         adapter = new KindFoodAdapter(this,kindFoodList,presenter);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
+        //kindFoodMapActivity = (KindFoodMapActivity)getContext();
     }
 
     @Override
@@ -138,5 +143,13 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
     public void showDialog(KindFoodListData data) {
         shareDialog = new CustomShareDialog(this,data);
         shareDialog.show();
+    }
+
+    @Override
+    public void showMap(KindFoodListData data){
+        Intent intent = new Intent(KindFoodActivity.this, KindFoodMapActivity.class);
+        intent.putExtra("data", data);
+        intent.putExtra("type",1);
+        startActivity(intent);
     }
 }
