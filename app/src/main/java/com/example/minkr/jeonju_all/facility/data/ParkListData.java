@@ -1,4 +1,4 @@
-package com.example.minkr.jeonju_all.parking.data;
+package com.example.minkr.jeonju_all.facility.data;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -8,25 +8,25 @@ import org.simpleframework.xml.Root;
  */
 
 @Root(name = "list")
-public class ParkingListData {
+public class ParkListData {
+
+    @Element(name = "dataSid")
+    private int id;
 
     @Element(name = "dataTitle")
     private String title;
 
-    @Element(name = "parkingFee", required = false)
-    private String parkingFee;
-
-    @Element(name = "parkingAddr", required = false)
-    private String address;
-
-    @Element(name = "parkingGubun", required = false)
+    @Element(name = "parkGubun")
     private String type;
 
-    @Element(name = "parkingTel", required = false)
-    private String tel;
+    @Element(name = "parkLoadAddr")
+    private String address;
 
-    @Element(name = "parkingMemo", required = false)
-    private String memo;
+    @Element(name = "parkArea", required = false)
+    private double area;
+
+    @Element(name = "parkTel", required = false)
+    private String tel;
 
     @Element(name = "posx")
     private String posX;
@@ -34,28 +34,20 @@ public class ParkingListData {
     @Element(name = "posy")
     private String posY;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getParkingFee() {
-        return parkingFee;
-    }
-
-    public void setParkingFee(String parkingFee) {
-        this.parkingFee = parkingFee;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getType() {
@@ -66,20 +58,28 @@ public class ParkingListData {
         this.type = type;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+    }
+
     public String getTel() {
         return tel;
     }
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    public String getMemo() {
-        return memo;
-    }
-
-    public void setMemo(String memo) {
-        this.memo = memo;
     }
 
     public String getPosX() {
@@ -100,13 +100,13 @@ public class ParkingListData {
 
     @Override
     public String toString() {
-        return "ParkingListData{" +
-                "title='" + title + '\'' +
-                ", parkingFee='" + parkingFee + '\'' +
-                ", address='" + address + '\'' +
+        return "ParkListData{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", type='" + type + '\'' +
+                ", address='" + address + '\'' +
+                ", area=" + area +
                 ", tel='" + tel + '\'' +
-                ", memo='" + memo + '\'' +
                 ", posX='" + posX + '\'' +
                 ", posY='" + posY + '\'' +
                 '}';

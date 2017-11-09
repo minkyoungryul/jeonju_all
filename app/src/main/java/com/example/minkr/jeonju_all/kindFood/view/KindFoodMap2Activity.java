@@ -1,38 +1,27 @@
 package com.example.minkr.jeonju_all.kindFood.view;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
-import android.graphics.YuvImage;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
-import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapCompassManager;
 import com.nhn.android.maps.NMapController;
@@ -40,29 +29,28 @@ import com.nhn.android.maps.NMapLocationManager;
 import com.nhn.android.maps.NMapOverlay;
 import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.NMapView;
+import com.nhn.android.maps.NMapView.OnMapStateChangeListener;
 import com.nhn.android.maps.NMapView.OnMapViewTouchEventListener;
-import com.nhn.android.maps.NMapView.OnMapStateChangeListener;;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.nmapmodel.NMapError;
 import com.nhn.android.maps.overlay.NMapPOIdata;
 import com.nhn.android.maps.overlay.NMapPOIitem;
-import com.nhn.android.mapviewer.overlay.NMapCalloutOverlay;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
-import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+;
+
 /**
  * Created by minkr on 2017-10-26.
  */
 
-public class KindFoodMapActivity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
+public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
         NMapOverlayManager.OnCalloutOverlayViewListener,NMapPOIdataOverlay.OnStateChangeListener{
 
     private final String API_KEY = "5lvyL1UwyDdfnK1Xxig6";
@@ -94,7 +82,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     double myLocationX = 0.0;
     double myLocationY = 0.0;
 
-    List<KindFoodListData> datas;
+    KindFoodListData data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,9 +91,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        datas = (List<KindFoodListData>) intent.getSerializableExtra("data");
-
-        Logger.log("#21 datas -> "+datas);
+        data = (KindFoodListData) intent.getSerializableExtra("data");
 
         init();
         setListener();
@@ -113,8 +99,9 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     }
 
     public void init(){
+        //stopMyLocation();
         doLocationThing();
-
+        //startMyLocation();
     }
 
     public void setListener(){
@@ -125,16 +112,26 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                     if (locationType == 0){
                         stopMyLocation();
                         startMyLocation();
+                        /*
+                        layoutProgressbar.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.VISIBLE);
+                        imgbtLocation.setImageResource(R.drawable.jeonjulocation);
+                        imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
+                        txtLocation.setText("가게위치");
+                        stopMyLocation();
+                        Toast.makeText(KindFoodMap2Activity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
+                        locationType = 1;
+                        startMyLocation();
+                        */
                     }else {
                         imgbtLocation.setImageResource(R.drawable.mylocation);
                         imgbtLocation.setBackgroundResource(R.drawable.mylocation);
                         txtLocation.setText("현재위치");
                         stopMyLocation();
                         locationType = 0;
-                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 12);
+                        mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getY()), Double.parseDouble(data.getX())), 12);
                     }
-                }
-
+            }
         });
 
         layoutProgressbar.setOnTouchListener(new View.OnTouchListener() {
@@ -166,17 +163,14 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
         nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
 
-
         int markerId = NMapPOIflagType.PIN;
-        poiData = new NMapPOIdata(datas.size(),nMapViewerResourceProvider);
-        poiData.beginPOIdata(datas.size());
+        poiData = new NMapPOIdata(1,nMapViewerResourceProvider);
+        poiData.beginPOIdata(1);
 
-        for (int i = 0; i<datas.size();i++){
-            double x = Double.parseDouble(datas.get(i).getX());
-            double y = Double.parseDouble(datas.get(i).getY());
-            int storeId = Integer.parseInt(datas.get(i).getStoreId());
-            poiData.addPOIitem(y,x,datas.get(i).getName(),markerId,storeId);
-        }
+        double x = Double.parseDouble(data.getX());
+        double y = Double.parseDouble(data.getY());
+        int storeId = Integer.parseInt(data.getStoreId());
+        poiData.addPOIitem(y,x,data.getName(),markerId,storeId);
 
         poiData.endPOIdata();
         NMapPOIdataOverlay poiDataOverlay = nMapOverlayManager.createPOIdataOverlay(poiData,null);
@@ -201,7 +195,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+            mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getY()), Double.parseDouble(data.getX())),12);
         }else{
         }
     }
@@ -239,37 +233,17 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public View onCreateCalloutOverlayView(NMapOverlay nMapOverlay, NMapOverlayItem nMapOverlayItem, Rect rect) {
 
-        String clickStore = nMapOverlayItem.getTitle();
+        String ceoName = data.getCeoName();
+        String name = data.getName();
+        String address = data.getAddress();
+        String price = data.getPrice();
+        String foodName = data.getFoodName();
+        String tel = data.getTel();
+        String img_url = data.getImg_url();
+        Double x = Double.parseDouble(data.getX());
+        Double y = Double.parseDouble(data.getY());
 
-        String ceoName = "";
-        String name = "";
-        String address = "";
-        String price = "";
-        String foodName = "";
-        String tel = "";
-        String img_url = "";
-        Double x = 0.0;
-        Double y = 0.0;
-
-        for (int i=0;i<datas.size();i++){
-            if (clickStore.equals(datas.get(i).getName())){
-                ceoName = datas.get(i).getCeoName();
-                name = datas.get(i).getName();
-                address = datas.get(i).getAddress();
-                price = datas.get(i).getPrice();
-                foodName = datas.get(i).getFoodName();
-                tel = datas.get(i).getTel();
-                img_url = datas.get(i).getImg_url();
-                x = Double.parseDouble(datas.get(i).getX());
-                y = Double.parseDouble(datas.get(i).getY());
-
-            }else{
-
-            }
-        }
-
-
-        return new NMapCalloutCustomOverlayView(KindFoodMapActivity.this, nMapOverlay, nMapOverlayItem, rect, ceoName, name, address, price, foodName, tel, img_url, x, y, 0);
+        return new NMapCalloutCustomOverlayView(KindFoodMap2Activity.this, nMapOverlay, nMapOverlayItem, rect, ceoName, name, address, price, foodName, tel, img_url, x, y, 1);
     }
 
     @Override
@@ -279,15 +253,14 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
 
-        Intent intent = new Intent(KindFoodMapActivity.this, FoodStoreInfoActivity.class);
+        Intent intent = new Intent(KindFoodMap2Activity.this, FoodStoreInfoActivity.class);
         intent.putExtra("datas", nMapPOIitem.getId());
         startActivity(intent);
 
     }
 
 
-    //현재위치 찾기
-    public void startMyLocation() {
+    private void startMyLocation() {
 
         if (nMapMyLocationOverlay != null) {
             if (!nMapOverlayManager.hasOverlay(nMapMyLocationOverlay)) {
@@ -319,13 +292,14 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                     progressBar.setVisibility(View.VISIBLE);
                     imgbtLocation.setImageResource(R.drawable.jeonjulocation);
                     imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
-                    txtLocation.setText("전주위치");
-                    Toast.makeText(KindFoodMapActivity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
+                    txtLocation.setText("가게위치");
+                    Toast.makeText(KindFoodMap2Activity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
                     locationType = 1;
                 }
             }
         }
     }
+
 
     public void stopMyLocation() {
         if (nMapMyLocationOverlay != null) {
@@ -339,6 +313,50 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
             }
         }
     }
+
+
+    /* MyLocation Listener */
+    private final NMapLocationManager.OnLocationChangeListener onMyLocationChangeListener = new NMapLocationManager.OnLocationChangeListener() {
+
+        @Override
+        public boolean onLocationChanged(NMapLocationManager locationManager, NGeoPoint myLocation) {
+
+            if (mMapController != null) {
+
+                    Logger.log("#50 mylocation -> "+myLocation.getLatitude());
+                    myLocationX = myLocation.getLatitude();
+                    myLocationY = myLocation.getLongitude();
+                    Logger.log("#50 mylocation2 ->" +myLocation.getLatitude());
+
+                    Logger.log("#50 else");
+                    if(locationType == 1) {
+                        mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()), 12);
+                        mMapController.animateTo(myLocation);
+                        progressBar.setVisibility(View.GONE);
+                        layoutProgressbar.setVisibility(View.INVISIBLE);
+                    }
+
+                Logger.log("#50 mylocation changerd -> "+myLocationX);
+            }
+
+            //findPlacemarkAtLocation(myLocation.getLongitude(), myLocation.getLatitude());
+
+            return true;
+        }
+
+        @Override
+        public void onLocationUpdateTimeout(NMapLocationManager locationManager) {
+            //stopMyLocation();
+            //Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onLocationUnavailableArea(NMapLocationManager locationManager, NGeoPoint myLocation) {
+            //Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
+            //stopMyLocation();
+        }
+
+    };
 
 
     public void setRoad(String name){
@@ -394,63 +412,15 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     }
 
     public void setRoadLocation(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("길안내 사용방법");
-        builder.setMessage("길안내기능은 현재위치를 받아와야 합니다.\n\n1. 화면우측상단 현재위치 클릭\n2. 다시 화면우측상단 가게위치 클릭\n3. 해당가게의 길안내 다시 클릭");
-        builder.setPositiveButton("확인",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-        builder.show();
-    }
-
-
-
-
-    /* MyLocation Listener */
-    private final NMapLocationManager.OnLocationChangeListener onMyLocationChangeListener = new NMapLocationManager.OnLocationChangeListener() {
-
-        @Override
-        public boolean onLocationChanged(NMapLocationManager locationManager, NGeoPoint myLocation) {
-
-
-            if (mMapController != null) {
-
-                Logger.log("#50 mylocation -> "+myLocation.getLatitude());
-                myLocationX = myLocation.getLatitude();
-                myLocationY = myLocation.getLongitude();
-                Logger.log("#50 mylocation2 ->" +myLocation.getLatitude());
-
-                Logger.log("#50 else");
-                if(locationType == 1) {
-                    mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()), 12);
-                    mMapController.animateTo(myLocation);
-                    progressBar.setVisibility(View.GONE);
-                    layoutProgressbar.setVisibility(View.INVISIBLE);
-                }
-
-                Logger.log("#50 mylocation changerd -> "+myLocationX);
-            }
-
-            //findPlacemarkAtLocation(myLocation.getLongitude(), myLocation.getLatitude());
-
-            return true;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("길안내 사용방법");
+            builder.setMessage("길안내기능은 현재위치를 받아와야 합니다.\n\n1. 화면우측상단 현재위치 클릭\n2. 다시 화면우측상단 가게위치 클릭\n3. 해당가게의 길안내 다시 클릭");
+            builder.setPositiveButton("확인",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            builder.show();
         }
-
-        @Override
-        public void onLocationUpdateTimeout(NMapLocationManager locationManager) {
-            //stopMyLocation();
-            //Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onLocationUnavailableArea(NMapLocationManager locationManager, NGeoPoint myLocation) {
-            //Toast.makeText(KindFoodMapActivity.this, "현재지역은 사용할 수 없는 지역입니다.", Toast.LENGTH_LONG).show();
-            //stopMyLocation();
-        }
-
-    };
-
 
 }

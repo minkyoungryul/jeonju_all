@@ -1,6 +1,4 @@
-package com.example.minkr.jeonju_all.parking.data;
-
-import com.example.minkr.jeonju_all.facility.data.ParkListData;
+package com.example.minkr.jeonju_all.facility.data;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -12,23 +10,23 @@ import java.util.List;
  */
 
 @Root(name = "data")
-public class ParkingDatas {
+public class HospitalDatas {
 
     @ElementList(inline = true)
-    private List<ParkingListData> list;
+    private List<HospitalListData> list;
 
 
-    public List<ParkingListData> getList() {
+    public List<HospitalListData> getList() {
         return list;
     }
 
-    public void setList(List<ParkingListData> list) {
+    public void setList(List<HospitalListData> list) {
         this.list = list;
     }
 
     @Override
     public String toString() {
-        return "ParkingDatas{" +
+        return "HospitalDatas{" +
                 "list=" + list +
                 '}';
     }

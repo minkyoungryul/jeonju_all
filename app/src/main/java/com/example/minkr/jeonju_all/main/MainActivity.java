@@ -1,11 +1,16 @@
 package com.example.minkr.jeonju_all.main;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -16,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
@@ -24,6 +30,7 @@ import com.example.minkr.jeonju_all.main.view.MainHomeFrag;
 import com.example.minkr.jeonju_all.main.view.MainSettingFrag;
 import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
 import com.example.minkr.jeonju_all.util.Logger;
+import com.nhn.android.maps.NMapLocationManager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -40,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
 //    MenuFragment menuFragment;
 
     FragmentTabHost mTabHost;
+    //위치정보 허가
+    private static final String[] LOCATION_PERMS={
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+    private static final int LOCATION_REQUEST=3;
+
+    NMapLocationManager nMapLocationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
 //        initSlideMenu();
         init();
         setListener();
+
+        nMapLocationManager = new NMapLocationManager(this);
+
+        setCheckLocation();
+
     }
 
     private void init() {
@@ -106,6 +126,62 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    public void setCheckLocation(){
+        if (canAccessLocation()) {
+            //setCheckMap();
+        }
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(LOCATION_PERMS, LOCATION_REQUEST);
+            }
+        }
+
+    }
+    /*
+
+    public void setCheckMap(){
+        boolean isMyLocationEnabled = nMapLocationManager.enableMyLocation(true);
+        if (!isMyLocationEnabled) {
+
+            setAlertDialogShow();
+
+            Toast.makeText(MainActivity.this, "위치 정보를 받기위해 On 해주세요.",
+                    Toast.LENGTH_LONG).show();
+
+            return;
+        }
+    }
+    */
+
+    //위치정보 동의 퍼미션 받기(앱 첫 시작후 지도 들어갈 시)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        switch(requestCode) {
+            case LOCATION_REQUEST:
+                if (canAccessLocation()) {//동의시
+                    //setCheckMap();
+                }
+                else {//비동의시
+                    Toast.makeText(this, "위치정보를 동의해주세요.", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+                break;
+        }
+    }
+
+    private boolean canAccessLocation() {
+        return(hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+    }
+
+    private boolean hasPermission(String perm) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return(PackageManager.PERMISSION_GRANTED==checkSelfPermission(perm));
+        }else{
+            return false;
+        }
     }
 
    /* private void initSlideMenu() {

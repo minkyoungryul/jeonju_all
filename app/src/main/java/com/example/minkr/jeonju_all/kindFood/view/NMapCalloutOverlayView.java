@@ -48,7 +48,7 @@ public abstract class NMapCalloutOverlayView extends FrameLayout implements
 	protected final Point mTempPoint = new Point();
 	protected final Rect mTempRect = new Rect();
 
-	public NMapCalloutOverlayView(Context context, NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds, String ceoName, String name, String address, String price, String menu, String tel, String url, Double x, Double y) {
+	public NMapCalloutOverlayView(Context context, NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds, String ceoName, String name, String address, String price, String menu, String tel, String url, Double x, Double y, int type) {
 		super(context);
 
 		mOverlayItem = item;

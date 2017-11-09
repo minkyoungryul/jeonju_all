@@ -74,7 +74,6 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         ib_map.setOnClickListener(v->{
             Intent intent = new Intent(KindFoodActivity.this, KindFoodMapActivity.class);
             intent.putExtra("data", (Serializable) kindFoodList);
-            intent.putExtra("type",0);
             startActivity(intent);
         });
     }
@@ -147,9 +146,8 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
     @Override
     public void showMap(KindFoodListData data){
-        Intent intent = new Intent(KindFoodActivity.this, KindFoodMapActivity.class);
+        Intent intent = new Intent(KindFoodActivity.this, KindFoodMap2Activity.class);
         intent.putExtra("data", data);
-        intent.putExtra("type",1);
         startActivity(intent);
     }
 }
