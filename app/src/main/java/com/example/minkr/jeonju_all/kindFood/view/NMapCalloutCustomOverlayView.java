@@ -38,15 +38,19 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 	private TextView mCalloutText;
 	private TextView txtAddress,txtTel,txtCeo,txtMenu,txtPrice,txtRoad,txtStreet,txtNavi;
 	private ImageView imgStore,imgLike;
-	private View mRightArrow;
 	KindFoodMapActivity kind;
+	KindFoodMap2Activity kind2;
 
 	public NMapCalloutCustomOverlayView(Context context, NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds, String ceoName,
-										String name, String address, String price, String menu, String tel, String url, Double x, Double y) {
-		super(context, itemOverlay, item, itemBounds, ceoName, name, address, price, menu, tel, url, x, y);
+										String name, String address, String price, String menu, String tel, String url, Double x, Double y, int type) {
+		super(context, itemOverlay, item, itemBounds, ceoName, name, address, price, menu, tel, url, x, y, type);
 
 		//Logger.log("#30 datas ->" +datas);
-		kind = (KindFoodMapActivity)getContext();
+		if (type == 0){
+			kind = (KindFoodMapActivity)getContext();
+		}else{
+			kind2 = (KindFoodMap2Activity)getContext();
+		}
 
 		String infService = Context.LAYOUT_INFLATER_SERVICE;
 		LayoutInflater li = (LayoutInflater)getContext().getSystemService(infService);
@@ -85,8 +89,12 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtRoad.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Logger.log("#35 kind -> "+kind.datas);
-				kind.setRoad(name);
+				//Logger.log("#35 kind -> "+kind.datas);
+				if (type == 0) {
+					kind.setRoad(name);
+				}else{
+					kind2.setRoad(name);
+				}
 
 			}
 		});
@@ -94,7 +102,12 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtStreet.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				kind.getStreetView(x,y);
+				if (type == 0){
+					kind.getStreetView(x,y);
+				}else{
+					kind2.getStreetView(x,y);
+				}
+
 			}
 		});
 
