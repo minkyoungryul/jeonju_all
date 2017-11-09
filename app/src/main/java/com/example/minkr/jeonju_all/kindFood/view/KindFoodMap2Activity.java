@@ -1,6 +1,7 @@
 package com.example.minkr.jeonju_all.kindFood.view;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -77,7 +79,6 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
     LinearLayout layoutProgressbar;
 
     int locationType = 0;
-    int initLocation = 0;
     double myLocationX = 0.0;
     double myLocationY = 0.0;
 
@@ -101,12 +102,11 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
         init();
         setListener();
 
-        //startMyLocation();
-
     }
 
     public void init(){
-        stopMyLocation();
+        //stopMyLocation();
+        startMyLocation();
         doLocationThing();
     }
 
@@ -116,6 +116,9 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
             public void onClick(View v) {
 
                     if (locationType == 0){
+                        stopMyLocation();
+                        startMyLocation();
+                        /*
                         layoutProgressbar.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.VISIBLE);
                         imgbtLocation.setImageResource(R.drawable.jeonjulocation);
@@ -125,6 +128,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
                         Toast.makeText(KindFoodMap2Activity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
                         locationType = 1;
                         startMyLocation();
+                        */
                     }else {
                         imgbtLocation.setImageResource(R.drawable.mylocation);
                         imgbtLocation.setBackgroundResource(R.drawable.mylocation);
@@ -285,13 +289,18 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
             } else {
                 boolean isMyLocationEnabled = nMapLocationManager.enableMyLocation(true);
                 if (!isMyLocationEnabled) {
-                    Toast.makeText(KindFoodMap2Activity.this, "위치 정보를 받기위해 On 해주세요.",
-                            Toast.LENGTH_LONG).show();
 
-                    Intent goToSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(goToSettings);
+                    setAlertDialogShow();
 
                     return;
+                }else{
+                    layoutProgressbar.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    imgbtLocation.setImageResource(R.drawable.jeonjulocation);
+                    imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
+                    txtLocation.setText("가게위치");
+                    Toast.makeText(KindFoodMap2Activity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
+                    locationType = 1;
                 }
             }
         }
@@ -318,9 +327,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
         @Override
         public boolean onLocationChanged(NMapLocationManager locationManager, NGeoPoint myLocation) {
 
-
             if (mMapController != null) {
-
 
                     Logger.log("#50 mylocation -> "+myLocation.getLatitude());
                     myLocationX = myLocation.getLatitude();
@@ -335,9 +342,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
                         layoutProgressbar.setVisibility(View.INVISIBLE);
                     }
 
-
                 Logger.log("#50 mylocation changerd -> "+myLocationX);
-
             }
 
             //findPlacemarkAtLocation(myLocation.getLongitude(), myLocation.getLatitude());
@@ -385,6 +390,27 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
+    }
+
+    public void setAlertDialogShow(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("현재위치 활용 동의");
+        builder.setMessage("현재위치를 활용해서 길찾기등의 서비스를 위하여 현재위치를 On 시키겠습니까?\n(다른목적으로는 사용하지 않습니다.)");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent goToSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(goToSettings);
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"위치를 On 하셔야 앱을 사용할 수 있습니다.",Toast.LENGTH_LONG).show();
+                        //finish();
+                    }
+                });
+        builder.show();
     }
 
 

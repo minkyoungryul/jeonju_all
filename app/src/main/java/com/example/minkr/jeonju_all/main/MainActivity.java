@@ -2,6 +2,7 @@ package com.example.minkr.jeonju_all.main;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -9,6 +10,7 @@ import android.content.pm.Signature;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -128,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setCheckLocation(){
         if (canAccessLocation()) {
-            setCheckMap();
+            //setCheckMap();
         }
         else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -137,19 +139,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    /*
 
     public void setCheckMap(){
         boolean isMyLocationEnabled = nMapLocationManager.enableMyLocation(true);
         if (!isMyLocationEnabled) {
+
+            setAlertDialogShow();
+
             Toast.makeText(MainActivity.this, "위치 정보를 받기위해 On 해주세요.",
                     Toast.LENGTH_LONG).show();
-
-            Intent goToSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(goToSettings);
 
             return;
         }
     }
+    */
 
     //위치정보 동의 퍼미션 받기(앱 첫 시작후 지도 들어갈 시)
     @Override
@@ -158,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         switch(requestCode) {
             case LOCATION_REQUEST:
                 if (canAccessLocation()) {//동의시
-                    setCheckMap();
+                    //setCheckMap();
                 }
                 else {//비동의시
                     Toast.makeText(this, "위치정보를 동의해주세요.", Toast.LENGTH_LONG).show();
