@@ -23,4 +23,26 @@ public class Variable {
     public static final String _FOOD_HANOK_LIST_SERVER_REQUEST_URL = "jeonjufood/getHanOkFoodList?pageSize=100";
     public static final String _HOUSE_LIST_SERVER_REQUEST_URL = "hanokhouse/getHanokHouseList?pageSize=34";
     public static final String _CULTURE_LIST_SERVER_REQUEST_URL = "culture/getCultureList?pageSize=72";
+    public static final String _POLIICE_LIST_SERVER_REQUEST_URL = "patroldiv/getPatrolDivList?pageSize=46";
+
+    //병원
+    public static final String _HOSPITAL_ALL_LIST_SERVER_REQUEST_URL = "medicalnew/getMedicalList?pageSize=980&mediCdb=100"; //병원
+    //종합병원, 일반병원, 요양병원, 아동병원, 치과병원, 한방병원
+
+    //의원
+    public static final String _HOSPITAL_INTERNAL_LIST_SERVER_REQUEST_URL = "medicalnew/getMedicalList?pageSize=980&mediCdb=200"; //내과
+    //내과, 소아청소년과, 이비인후과, 가정의학과, 일반의원, 산부인과, 피부과, 정형외과, 외과, 안과, 재활의학과, 정신건강의학과, 치과, 신경외과
+
+    //한의원
+    public static final String _HOSPITAL_KOREA_LIST_SERVER_REQUEST_URL = "medicalnew/getMedicalList?pageSize=980&mediCdb=300"; //한의원
+
+    //산후조리원
+    public static final String _HOSPITAL_POSTPARTUM_LIST_SERVER_REQUEST_URL = "medicalnew/getMedicalList?pageSize=980&mediCdb=500"; //산후조리원
+
+    //치과의원
+    public static final String _HOSPITAL_DENTIST_LIST_SERVER_REQUEST_URL = "medicalnew/getMedicalList?pageSize=980&mediCdb=600"; //치과의원
+
+    //약국
+    public static final String _MEDICINE_LIST_SERVER_REQUEST_URL = "medicalnew/getMedicalList?pageSize=350&mediCdb=400"; //약국
+
 }

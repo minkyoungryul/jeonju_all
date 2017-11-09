@@ -56,5 +56,10 @@ public class FacilityActivity extends AppCompatActivity {
             Intent intent = new Intent(FacilityActivity.this, PoliceActivity.class);
             startActivity(intent);
         });
+
+        rl_hospital.setOnClickListener(v->{
+            Intent intent = new Intent(FacilityActivity.this, HospitalActivity.class);
+            startActivity(intent);
+        });
     }
 }

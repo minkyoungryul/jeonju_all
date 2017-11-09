@@ -6,9 +6,9 @@ import android.support.annotation.Nullable;
 import android.widget.ImageButton;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.facility.data.FacilityListData;
+import com.example.minkr.jeonju_all.facility.data.HospitalListData;
+import com.example.minkr.jeonju_all.facility.presenter.HospitalPresenter;
 import com.example.minkr.jeonju_all.facility.presenter.PolicePresenter;
-import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapActivity;
 
 import java.util.ArrayList;
@@ -21,13 +21,13 @@ import butterknife.ButterKnife;
  * Created by minkr on 2017-11-07.
  */
 
-public class PoliceActivity extends NMapActivity implements PoliceView {
+public class HospitalActivity extends NMapActivity implements HospitalView {
 
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
-    PolicePresenter presenter;
-    List<FacilityListData> datas = new ArrayList<>();
+    HospitalPresenter presenter;
+    List<HospitalListData> all_datas = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class PoliceActivity extends NMapActivity implements PoliceView {
         setContentView(R.layout.activity_police);
         ButterKnife.bind(this);
 
-        presenter = new PolicePresenter();
+        presenter = new HospitalPresenter();
         presenter.attachView(this);
-        presenter.getPoliceList();
+        presenter.getHospitalTotalList();
 
         init();
         setListener();
@@ -67,8 +67,7 @@ public class PoliceActivity extends NMapActivity implements PoliceView {
     }
 
     @Override
-    public void getPoliceList(List<FacilityListData> facilityListData) {
-        Logger.log("#22 data->"+facilityListData.toString());
-        datas.addAll(facilityListData);
+    public void getHospitalTotalList(List<HospitalListData> hospitalListData) {
+        all_datas.addAll(hospitalListData);
     }
 }
