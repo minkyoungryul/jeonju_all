@@ -49,7 +49,7 @@ public class HospitalPresenter implements Presenter<HospitalView> {
         view.notConnectNetworking();
     }
 
-    public void getHospitalTotalList() {
+    public void getHospitalList() {
         Disposable disposable = model.getHospitalAllList()
                 .map(new Function<HospitalTotalData, List<HospitalListData>>() {
                     @Override
@@ -62,11 +62,89 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                 .subscribe(new Consumer<List<HospitalListData>>() {
                     @Override
                     public void accept(List<HospitalListData> hospitalListData) throws Exception {
-                        Logger.log("#23 data->"+hospitalListData.toString());
-                        view.getHospitalTotalList(hospitalListData);
+                        Logger.log("#23 병원 data->"+hospitalListData.toString());
+                        view.getHospitalList(hospitalListData);
                     }
                 });
 
         compositeDisposable.add(disposable);
+    }
+
+    public void getClinicList() {
+        Disposable disposable = model.getClinicList()
+                .map(new Function<HospitalTotalData, List<HospitalListData>>() {
+                    @Override
+                    public List<HospitalListData> apply(HospitalTotalData hospitalTotalData) throws Exception {
+                        return hospitalTotalData.getBody().getData().getList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<HospitalListData>>() {
+                    @Override
+                    public void accept(List<HospitalListData> hospitalListData) throws Exception {
+                        Logger.log("#24 의원 data->"+hospitalListData.toString());
+                        view.getClinicList(hospitalListData);
+                    }
+                });
+
+        compositeDisposable.add(disposable);
+    }
+
+    public void getOriginalList() { //한의원
+        Disposable disposable = model.getHospitalKoreaList()
+                .map(new Function<HospitalTotalData, List<HospitalListData>>() {
+                    @Override
+                    public List<HospitalListData> apply(HospitalTotalData hospitalTotalData) throws Exception {
+                        return hospitalTotalData.getBody().getData().getList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<HospitalListData>>() {
+                    @Override
+                    public void accept(List<HospitalListData> hospitalListData) throws Exception {
+                        Logger.log("#25 한의원 data->"+hospitalListData.toString());
+                        view.getOriginalList(hospitalListData);
+                    }
+                });
+    }
+
+    public void getPostpartumList() {//산후조리원
+        Disposable disposable = model.getHospitalPostList()
+                .map(new Function<HospitalTotalData, List<HospitalListData>>() {
+                    @Override
+                    public List<HospitalListData> apply(HospitalTotalData hospitalTotalData) throws Exception {
+                        return hospitalTotalData.getBody().getData().getList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<HospitalListData>>() {
+                    @Override
+                    public void accept(List<HospitalListData> hospitalListData) throws Exception {
+                        Logger.log("#26 산후조리원 data->"+hospitalListData.toString());
+                        view.getPostpartumList(hospitalListData);
+                    }
+                });
+    }
+
+    public void getDentistList() {
+        Disposable disposable = model.getHospitalDentistList()
+                .map(new Function<HospitalTotalData, List<HospitalListData>>() {
+                    @Override
+                    public List<HospitalListData> apply(HospitalTotalData hospitalTotalData) throws Exception {
+                        return hospitalTotalData.getBody().getData().getList();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<HospitalListData>>() {
+                    @Override
+                    public void accept(List<HospitalListData> hospitalListData) throws Exception {
+                        Logger.log("#27 치과의원 data->"+hospitalListData.toString());
+                        view.getDentistList(hospitalListData);
+                    }
+                });
     }
 }

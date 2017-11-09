@@ -1,8 +1,6 @@
 package com.example.minkr.jeonju_all.kindFood.model;
 
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodTotalData;
-import com.example.minkr.jeonju_all.parking.data.ParkingTotalData;
-import com.example.minkr.jeonju_all.parking.model.ParkingListApiService;
 import com.example.minkr.jeonju_all.util.RetrofitFactory;
 import com.example.minkr.jeonju_all.util.Variable;
 

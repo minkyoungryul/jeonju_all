@@ -1,6 +1,4 @@
-package com.example.minkr.jeonju_all.parking.data;
-
-import com.example.minkr.jeonju_all.facility.data.ParkBodyData;
+package com.example.minkr.jeonju_all.facility.data;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -10,22 +8,22 @@ import org.simpleframework.xml.Root;
  */
 
 @Root(name = "rfcOpenApi")
-public class ParkingTotalData {
+public class ParkTotalData {
 
     @Element(name = "body")
-    private ParkingBodyData body;
+    private ParkBodyData body;
 
-    public ParkingBodyData getBody() {
+    public ParkBodyData getBody() {
         return body;
     }
 
-    public void setBody(ParkingBodyData body) {
+    public void setBody(ParkBodyData body) {
         this.body = body;
     }
 
     @Override
     public String toString() {
-        return "ParkingTotalData{" +
+        return "ParkTotalData{" +
                 "body=" + body +
                 '}';
     }

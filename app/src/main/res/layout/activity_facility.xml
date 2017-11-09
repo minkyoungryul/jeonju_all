@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:src="@drawable/ic_map"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <View

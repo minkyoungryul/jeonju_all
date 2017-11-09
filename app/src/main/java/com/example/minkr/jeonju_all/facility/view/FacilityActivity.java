@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +60,26 @@ public class FacilityActivity extends AppCompatActivity {
 
         rl_hospital.setOnClickListener(v->{
             Intent intent = new Intent(FacilityActivity.this, HospitalActivity.class);
+            startActivity(intent);
+        });
+
+        rl_medichine.setOnClickListener(v->{
+            Intent intent = new Intent(FacilityActivity.this, MedicineActivity.class);
+            startActivity(intent);
+        });
+
+        rl_park.setOnClickListener(v->{
+            Intent intent = new Intent(FacilityActivity.this, ParkActivity.class);
+            startActivity(intent);
+        });
+
+        rl_parking.setOnClickListener(v->{
+            Intent intent = new Intent(FacilityActivity.this, ParkingActivity.class);
+            startActivity(intent);
+        });
+
+        rl_health.setOnClickListener(v->{
+            Intent intent = new Intent(FacilityActivity.this, HealthActivity.class);
             startActivity(intent);
         });
     }

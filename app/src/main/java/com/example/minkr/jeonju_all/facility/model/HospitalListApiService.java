@@ -1,6 +1,5 @@
 package com.example.minkr.jeonju_all.facility.model;
 
-import com.example.minkr.jeonju_all.facility.data.FacilityTotalData;
 import com.example.minkr.jeonju_all.facility.data.HospitalTotalData;
 import com.example.minkr.jeonju_all.util.RetrofitFactory;
 import com.example.minkr.jeonju_all.util.Variable;

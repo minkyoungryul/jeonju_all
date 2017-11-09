@@ -10,5 +10,13 @@ import java.util.List;
  */
 
 public interface HospitalView extends MvpView{
-    void getHospitalTotalList(List<HospitalListData> hospitalListData);
+    void getHospitalList(List<HospitalListData> hospitalListData);
+
+    void getClinicList(List<HospitalListData> hospitalListData);
+
+    void getOriginalList(List<HospitalListData> hospitalListData);
+
+    void getDentistList(List<HospitalListData> hospitalListData);
+
+    void getPostpartumList(List<HospitalListData> hospitalListData);
 }
