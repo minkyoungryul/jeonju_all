@@ -2,6 +2,7 @@ package com.example.minkr.jeonju_all.kindFood.view;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -89,15 +91,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     LinearLayout layoutProgressbar;
 
     int locationType = 0;
-    int initLocation = 0;
     double myLocationX = 0.0;
     double myLocationY = 0.0;
-
-    //위치정보 허가
-    private static final String[] LOCATION_PERMS={
-            Manifest.permission.ACCESS_FINE_LOCATION
-    };
-    private static final int LOCATION_REQUEST=3;
 
     List<KindFoodListData> datas;
 
@@ -108,7 +103,6 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        //intentType = intent.getIntExtra("type",0);
         datas = (List<KindFoodListData>) intent.getSerializableExtra("data");
 
         Logger.log("#21 datas -> "+datas);
@@ -116,20 +110,11 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         init();
         setListener();
 
-        //startMyLocation();
-
     }
 
     public void init(){
-        if (canAccessLocation()) {
-            doLocationThing();
-            //Logger.log("#16 datas-> "+datas);
-        }
-        else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(LOCATION_PERMS, LOCATION_REQUEST);
-            }
-        }
+        doLocationThing();
+
     }
 
     public void setListener(){
@@ -137,23 +122,9 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
             @Override
             public void onClick(View v) {
 
-                boolean isMyLocationEnabled = nMapLocationManager.enableMyLocation(true);
-                if (!isMyLocationEnabled) {
-                    Toast.makeText(KindFoodMapActivity.this, "GPS를 활성화 해주세요.",
-                            Toast.LENGTH_LONG).show();
-
-                    return;
-                }else{
                     if (locationType == 0){
-                        layoutProgressbar.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.VISIBLE);
-                        imgbtLocation.setImageResource(R.drawable.jeonjulocation);
-                        imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
-                        txtLocation.setText("전주위치");
                         stopMyLocation();
-                        Toast.makeText(KindFoodMapActivity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
                         startMyLocation();
-                        locationType = 1;
                     }else {
                         imgbtLocation.setImageResource(R.drawable.mylocation);
                         imgbtLocation.setBackgroundResource(R.drawable.mylocation);
@@ -164,7 +135,6 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                     }
                 }
 
-            }
         });
 
         layoutProgressbar.setOnTouchListener(new View.OnTouchListener() {
@@ -174,35 +144,6 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
             }
         });
 
-    }
-
-
-    //위치정보 동의 퍼미션 받기(앱 첫 시작후 지도 들어갈 시)
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
-        switch(requestCode) {
-            case LOCATION_REQUEST:
-                if (canAccessLocation()) {//동의시
-                    doLocationThing();
-                }
-                else {//비동의시
-                    Toast.makeText(this, "위치 정보를 받아올 수 없습니다.", Toast.LENGTH_LONG).show();
-                }
-                break;
-        }
-    }
-
-    private boolean canAccessLocation() {
-        return(hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
-    }
-
-    private boolean hasPermission(String perm) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return(PackageManager.PERMISSION_GRANTED==checkSelfPermission(perm));
-        }else{
-            return false;
-        }
     }
 
     private void doLocationThing() {
@@ -359,8 +300,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
                     nMapMyLocationOverlay.setCompassHeadingVisible(true);
 
                     nMapCompassManager.enableCompass();
-                    mMapView.setAutoRotateEnabled(true, false);
 
+                    mMapView.setAutoRotateEnabled(true, false);
                 } else {
                     stopMyLocation();
                 }
@@ -369,9 +310,18 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
             } else {
                 boolean isMyLocationEnabled = nMapLocationManager.enableMyLocation(true);
                 if (!isMyLocationEnabled) {
-                    //Toast.makeText(KindFoodMapActivity.this, "GPS를 활성화 해주세요.", Toast.LENGTH_LONG).show();
+
+                    setAlertDialogShow();
 
                     return;
+                }else{
+                    layoutProgressbar.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    imgbtLocation.setImageResource(R.drawable.jeonjulocation);
+                    imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
+                    txtLocation.setText("전주위치");
+                    Toast.makeText(KindFoodMapActivity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
+                    locationType = 1;
                 }
             }
         }
@@ -393,13 +343,25 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
     public void setRoad(String name){
 
-        String uri ="http://maps.google.com/maps?saddr="+myLocationX+","+myLocationY+"&daddr="+name+"&hl=ko";
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse(uri));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER );
-        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-        startActivity(intent);
+        boolean isMyLocationEnabled = nMapLocationManager.enableMyLocation(true);
+        if (!isMyLocationEnabled) {
+            setAlertDialogShow();
+
+            return;
+        }else{
+
+            if (myLocationX == 0 || myLocationY == 0){
+                setRoadLocation();
+            }else{
+                Logger.log("#50 mylocation3 -> "+ myLocationX);
+                String uri ="http://maps.google.com/maps?saddr="+myLocationX+","+myLocationY+"&daddr="+name+"&hl=ko";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER );
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
+            }
+        }
 
     }
 
@@ -408,6 +370,39 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
+    }
+
+    public void setAlertDialogShow(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("현재위치 활용 동의");
+        builder.setMessage("현재위치를 활용해서 길찾기등의 서비스를 위하여 현재위치를 On 시키겠습니까?\n(다른목적으로는 사용하지 않습니다.)");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent goToSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(goToSettings);
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"위치를 On 하셔야 현재위치 서비스를 사용할 수 있습니다.",Toast.LENGTH_LONG).show();
+                        //finish();
+                    }
+                });
+        builder.show();
+    }
+
+    public void setRoadLocation(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("길안내 사용방법");
+        builder.setMessage("길안내기능은 현재위치를 받아와야 합니다.\n\n1. 화면우측상단 현재위치 클릭\n2. 다시 화면우측상단 가게위치 클릭\n3. 해당가게의 길안내 다시 클릭");
+        builder.setPositiveButton("확인",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.show();
     }
 
 
@@ -421,20 +416,21 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
 
             if (mMapController != null) {
-                if (initLocation == 0){
-                    Logger.log("#50 if");
-                    myLocationX = myLocation.getLatitude();
-                    myLocationY = myLocation.getLongitude();
-                    initLocation = 1;
-                }else {
-                    Logger.log("#50 else");
+
+                Logger.log("#50 mylocation -> "+myLocation.getLatitude());
+                myLocationX = myLocation.getLatitude();
+                myLocationY = myLocation.getLongitude();
+                Logger.log("#50 mylocation2 ->" +myLocation.getLatitude());
+
+                Logger.log("#50 else");
+                if(locationType == 1) {
                     mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()), 12);
                     mMapController.animateTo(myLocation);
                     progressBar.setVisibility(View.GONE);
                     layoutProgressbar.setVisibility(View.INVISIBLE);
                 }
-                Logger.log("#50 mylocation changerd -> "+myLocationX);
 
+                Logger.log("#50 mylocation changerd -> "+myLocationX);
             }
 
             //findPlacemarkAtLocation(myLocation.getLongitude(), myLocation.getLatitude());

@@ -79,15 +79,8 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
     LinearLayout layoutProgressbar;
 
     int locationType = 0;
-    int locationInt = 0;
     double myLocationX = 0.0;
     double myLocationY = 0.0;
-
-    //위치정보 허가
-    private static final String[] LOCATION_PERMS={
-            Manifest.permission.ACCESS_FINE_LOCATION
-    };
-    private static final int LOCATION_REQUEST=3;
 
     KindFoodListData data;
 
