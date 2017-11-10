@@ -1,6 +1,4 @@
-package com.example.minkr.jeonju_all.parking.data;
-
-import com.example.minkr.jeonju_all.facility.data.ParkDatas;
+package com.example.minkr.jeonju_all.facility.data;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -10,22 +8,22 @@ import org.simpleframework.xml.Root;
  */
 
 @Root(name = "body")
-public class ParkingBodyData {
+public class HealthBodyData {
 
     @Element(name = "data")
-    private ParkingDatas data;
+    private HealthDatas data;
 
-    public ParkingDatas getData() {
+    public HealthDatas getData() {
         return data;
     }
 
-    public void setData(ParkingDatas data) {
+    public void setData(HealthDatas data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return "ParkingBodyData{" +
+        return "HealthBodyData{" +
                 "data=" + data +
                 '}';
     }

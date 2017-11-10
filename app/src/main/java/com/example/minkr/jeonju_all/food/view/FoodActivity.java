@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
@@ -65,6 +67,21 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
     @BindView(R.id.ib_map)
     ImageButton ib_map;
 
+    @BindView(R.id.progress_bar_kongbap)
+    ProgressBar progress_bar_kongbap;
+
+    @BindView(R.id.progress_bar_bibimbap)
+    ProgressBar progress_bar_bibimbap;
+
+    @BindView(R.id.progress_bar_hanok)
+    ProgressBar progress_bar_hanok;
+
+    @BindView(R.id.progress_bar_rice)
+    ProgressBar progress_bar_rice;
+
+    @BindView(R.id.progress_bar_wine)
+    ProgressBar progress_bar_wine;
+
     LinearLayoutManager mLayoutManager;
     LinearLayoutManager mLayoutManager2;
     LinearLayoutManager mLayoutManager3;
@@ -95,6 +112,12 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
         ButterKnife.bind(this);
+
+        progress_bar_kongbap.setVisibility(View.VISIBLE);
+        progress_bar_bibimbap.setVisibility(View.VISIBLE);
+        progress_bar_hanok.setVisibility(View.VISIBLE);
+        progress_bar_rice.setVisibility(View.VISIBLE);
+        progress_bar_wine.setVisibility(View.VISIBLE);
 
         presenter = new FoodPresenter();
         presenter.attachView(this);
@@ -206,6 +229,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         String[] storeId = {"21037888", "13447430", "11555125", "34827805", "11522746", "11847873", "0", "12012617", "11874167", "11720563","11782597","11707569","11658337"};
         getFoodDatas(storeId, foodListData, riceList, all_riceList);
         rice_adapter.notifyDataSetChanged();
+        progress_bar_rice.setVisibility(View.GONE);
     }
 
     @Override
@@ -213,6 +237,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         String[] storeId = {"35749244", "11707231", "36410653", "11710588", "11627365", "11728244", "16795216"};
         getFoodDatas(storeId, foodListData, bibimbapList, all_bibimbapList);
         bibimbap_adapter.notifyDataSetChanged();
+        progress_bar_bibimbap.setVisibility(View.GONE);
     }
 
     @Override
@@ -220,6 +245,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         String[] storeId = {"31498549", "31991353", "38327383", "36601205", "32236577", "33418635", "37106493", "13548405", "17453618", "11623233","17077028","21885584","17447792","16809544", "11712007","34454016","20027334", "12991219","437372678", "16786221","11658492","13317872"};
         getFoodDatas(storeId, foodListData, kongbapList, all_kongbapList);
         kongbap_adapter.notifyDataSetChanged();
+        progress_bar_kongbap.setVisibility(View.GONE);
     }
 
     @Override
@@ -227,6 +253,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         String[] storeId = {"37589832", "38337667", "11886663", "16881956", "21007374"};
         getFoodDatas(storeId,foodListData, wineList, all_wineList);
         wine_adapter.notifyDataSetChanged();
+        progress_bar_wine.setVisibility(View.GONE);
     }
 
     @Override
@@ -236,6 +263,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
                 "0", "0", "20174409", "11877554", "16809544", "17448890", "11540579", "11782597", "11717479", "16795216"};
         getFoodDatas(storeId, foodListData, hanokList, all_hanokList);
         hanok_adapter.notifyDataSetChanged();
+        progress_bar_hanok.setVisibility(View.GONE);
     }
 
     @Override

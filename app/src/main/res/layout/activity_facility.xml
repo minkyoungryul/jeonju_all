@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:src="@drawable/ic_map"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <View
@@ -95,7 +96,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center"
-                        android:text="전주의 모든 경찰서"
+                        android:text="전주의 모든 지구대"
                         android:textColor="@color/black"
                         android:textSize="18dp" />
 
@@ -106,11 +107,10 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center"
-                        android:text="경찰서, 지구대 위치 정보"
+                        android:text="자율방범대, 지구대 위치 정보"
                         android:textColor="@color/light_gray"
                         android:textSize="15dp" />
                 </LinearLayout>
-
             </FrameLayout>
 
             <!--병원-->

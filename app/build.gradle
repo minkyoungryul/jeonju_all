@@ -7,14 +7,14 @@ buildscript {
 
     dependencies {
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
-        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
+//        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
     }
 }
 
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'me.tatarka.retrolambda' // ----- add
+//apply plugin: 'me.tatarka.retrolambda' // ----- add
 
 android {
     compileSdkVersion 25
