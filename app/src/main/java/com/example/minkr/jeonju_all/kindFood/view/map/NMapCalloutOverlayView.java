@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.minkr.jeonju_all.kindFood.view;
+package com.example.minkr.jeonju_all.kindFood.view.map;
 
 import android.content.Context;
 import android.graphics.Point;

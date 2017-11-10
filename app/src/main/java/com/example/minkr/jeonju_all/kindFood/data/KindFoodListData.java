@@ -34,6 +34,15 @@ public class KindFoodListData implements Serializable{
 
     private String storeId;
     private String img_url;
+    private boolean isLike = false;
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
 
     public String getImg_url() {
         return img_url;
@@ -146,6 +155,7 @@ public class KindFoodListData implements Serializable{
                 ", tel='" + tel + '\'' +
                 ", storeId='" + storeId + '\'' +
                 ", img_url='" + img_url + '\'' +
+                ", isLike=" + isLike +
                 '}';
     }
 }

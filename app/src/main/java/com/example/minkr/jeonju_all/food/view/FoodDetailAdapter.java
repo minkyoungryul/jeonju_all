@@ -16,6 +16,8 @@ import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodDetailPresenter;
 import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
+import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
+import com.example.minkr.jeonju_all.kindFood.view.KindFoodMap2Activity;
 
 import java.util.List;
 
@@ -88,6 +90,10 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
             Intent call = new Intent(Intent.ACTION_DIAL);
             call.setData(Uri.parse("tel:"+data.getTel()));
             mContext.startActivity(call);
+        });
+
+        holder.tv_address.setOnClickListener(v -> {
+            presenter.getAddressClick(data);
         });
     }
 

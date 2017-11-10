@@ -64,6 +64,9 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
+    @BindView(R.id.ib_map)
+    ImageButton ib_map;
+
     @BindView(R.id.progress_bar_kongbap)
     ProgressBar progress_bar_kongbap;
 
@@ -179,6 +182,16 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         });
 
         ib_back.setOnClickListener(v->finish());
+
+        ib_map.setOnClickListener(v -> {
+            Intent intent = new Intent(FoodActivity.this, FoodMapActivity.class);
+            intent.putExtra("data1", (Serializable) all_riceList);
+            intent.putExtra("data2", (Serializable) all_bibimbapList);
+            intent.putExtra("data3", (Serializable) all_hanokList);
+            intent.putExtra("data4", (Serializable) all_kongbapList);
+            intent.putExtra("data5", (Serializable) all_wineList);
+            startActivity(intent);
+        });
     }
 
     public void nextActivity(List<FoodListData> datas){
