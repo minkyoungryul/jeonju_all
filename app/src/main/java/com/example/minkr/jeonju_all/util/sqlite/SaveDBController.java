@@ -20,7 +20,10 @@ public class SaveDBController {
             +"title VARCHAR, "
             +"address VARCHAR default null, "
             +"tel VARCHAR default null, "
-            +"img_url VARCHAR default null"
+            +"img_url VARCHAR default null, "
+            +"homepage_url VARCHAR default null, "
+            +"posX VARCHAR default null, "
+            +"posY VARCHAR default null"
             +")";
 
     public SaveDBController(CompositeDisposable compositeDisposable, DBHelper dbHelper) {
