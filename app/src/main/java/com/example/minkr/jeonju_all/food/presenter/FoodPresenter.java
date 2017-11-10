@@ -313,4 +313,8 @@ public class FoodPresenter implements Presenter<FoodView> {
 
         compositeDisposable.add(disposable);
     }
+
+    public void getAddressClick(FoodListData data) {
+        view.getAddressClick(data);
+    }
 }

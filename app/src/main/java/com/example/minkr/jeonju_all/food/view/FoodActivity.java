@@ -281,6 +281,13 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         }
     }
 
+    @Override
+    public void getAddressClick(FoodListData data) {
+        Intent intent = new Intent(FoodActivity.this, FoodMap3Activity.class);
+        intent.putExtra("data", data);
+        startActivity(intent);
+    }
+
     public void changeFoodListData(List<FoodListData> all_datas, List<FoodListData> datas, List<BookmarkList> bookmarkLists){
         for(int i=0; i<all_datas.size(); i++){
             for(int j=0; j<bookmarkLists.size(); j++){

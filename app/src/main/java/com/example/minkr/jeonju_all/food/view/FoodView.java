@@ -26,4 +26,6 @@ public interface FoodView extends MvpView{
     void getFoodDBData(List<BookmarkList> bookmarkLists);
 
     void isLikeChangeData(FoodListData foodListData);
+
+    void getAddressClick(FoodListData data);
 }
