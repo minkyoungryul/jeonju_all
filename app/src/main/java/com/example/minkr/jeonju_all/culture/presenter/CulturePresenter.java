@@ -69,4 +69,8 @@ public class CulturePresenter implements Presenter<CultureView> {
     public void showInfo(CultureListData data) {
         view.showInfo(data);
     }
+
+    public void getAddressClick(CultureListData data){
+        view.getAddressClick(data);
+    }
 }

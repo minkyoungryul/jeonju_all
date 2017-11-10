@@ -3,6 +3,7 @@ package com.example.minkr.jeonju_all.culture.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
 import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,9 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
 
     @BindView(R.id.progress_bar)
     ProgressBar progress_bar;
+
+    @BindView(R.id.ib_map)
+    ImageButton ib_map;
 
     LinearLayoutManager mLayoutManager;
     CultureAdapter adapter;
@@ -68,6 +73,12 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
 
     private void setListener() {
         ib_back.setOnClickListener(v->finish());
+
+        ib_map.setOnClickListener(v -> {
+            Intent intent = new Intent(CultureActivity.this, CultureMapActivity.class);
+            intent.putExtra("data", (Serializable) datas);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -103,6 +114,13 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
     public void showInfo(CultureListData data) {
         Intent intent = new Intent(CultureActivity.this, HouseStoreInfoActivity.class);
         intent.putExtra("data", data.getUserHomepage());
+        startActivity(intent);
+    }
+
+    @Override
+    public void getAddressClick(CultureListData data) {
+        Intent intent = new Intent(CultureActivity.this, CultureMap2Activity.class);
+        intent.putExtra("data", data);
         startActivity(intent);
     }
 }

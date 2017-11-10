@@ -130,6 +130,18 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".culture.view.CultureMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".culture.view.CultureMap2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".facility.view.FacilityActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
