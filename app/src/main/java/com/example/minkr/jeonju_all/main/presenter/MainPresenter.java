@@ -6,9 +6,12 @@ import com.example.minkr.jeonju_all.common.presenter.Presenter;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodDatas;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodTotalData;
 import com.example.minkr.jeonju_all.kindFood.model.KindFoodModel;
+import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.main.view.MainView;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
+
+import java.util.List;
 
 import io.reactivex.Maybe;
 import io.reactivex.MaybeSource;
@@ -51,6 +54,44 @@ public class MainPresenter implements Presenter<MainView> {
     @Override
     public void notConnectNetworking() {
         view.notConnectNetworking();
+    }
+
+    public void getBookmarkList() {
+        Disposable disposable = dbHelper.saveDBController.getAllBookMarkList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<BookmarkList>>() {
+                    @Override
+                    public void accept(List<BookmarkList> bookmarkLists) throws Exception {
+                        view.getBookmarkList(bookmarkLists);
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
+
+    public void showStoreInfo(BookmarkList data) {
+        view.showStoreInfo(data);
+    }
+
+    public void allDeleteData() {
+        int empty = 0;
+        Disposable disposable = Maybe.just(empty)
+                .map(new Function<Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer empty) throws Exception {
+                        dbHelper.saveDBController.deleteAllData();
+                        return empty;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        view.allDeleteData();
+                    }
+                });
+
     }
 
 //    public void getKindFoodList(){

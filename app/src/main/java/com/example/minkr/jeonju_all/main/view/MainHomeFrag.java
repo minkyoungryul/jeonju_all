@@ -15,8 +15,11 @@ import com.example.minkr.jeonju_all.facility.view.FacilityActivity;
 import com.example.minkr.jeonju_all.food.view.FoodActivity;
 import com.example.minkr.jeonju_all.house.view.HouseListActivity;
 import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
+import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -104,6 +107,21 @@ public class MainHomeFrag extends Fragment implements MainView{
 
     @Override
     public void notConnectNetworking() {
+
+    }
+
+    @Override
+    public void getBookmarkList(List<BookmarkList> bookmarkLists) {
+
+    }
+
+    @Override
+    public void showStoreInfo(BookmarkList data) {
+
+    }
+
+    @Override
+    public void allDeleteData() {
 
     }
 }
