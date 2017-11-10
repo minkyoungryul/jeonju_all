@@ -13,10 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
 import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -80,20 +78,19 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     private void setListener() {
         btn_all_delete.setOnClickListener(v->{
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-            alertDialogBuilder.setTitle("전체 삭제");
             alertDialogBuilder
                     .setMessage("모두 삭제하시겠습니까?")
                     .setCancelable(false)
-                    .setPositiveButton("네",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    presenter.allDeleteData();
-                                }
-                            })
-                    .setNegativeButton("아니오",
+                    .setPositiveButton("아니오",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.cancel();
+                                }
+                            })
+                    .setNegativeButton("네",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    presenter.allDeleteData();
                                 }
                             });
 
@@ -138,5 +135,38 @@ public class MainBookmarkFrag extends Fragment implements MainView {
         adapter.notifyDataSetChanged();
         btn_all_delete.setVisibility(View.GONE);
         ll_empty.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showDeleteDialog(BookmarkList data) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder
+                .setMessage("삭제하시겠습니까?")
+                .setCancelable(false)
+                .setPositiveButton("아니오",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        })
+                .setNegativeButton("네",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                presenter.deleteData(data);
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    @Override
+    public void deleteData(BookmarkList bookmarkList) {
+        datas.remove(bookmarkList);
+        adapter.notifyDataSetChanged();
+        if(datas.size() == 0) {
+            btn_all_delete.setVisibility(View.GONE);
+            ll_empty.setVisibility(View.VISIBLE);
+        }
     }
 }

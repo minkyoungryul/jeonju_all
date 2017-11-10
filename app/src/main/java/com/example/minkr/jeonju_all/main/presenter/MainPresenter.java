@@ -94,6 +94,31 @@ public class MainPresenter implements Presenter<MainView> {
 
     }
 
+    public void showDeleteDialog(BookmarkList data) {
+        view.showDeleteDialog(data);
+    }
+
+    public void deleteData(BookmarkList data) {
+        Disposable disposable = Maybe.just(data)
+                .map(new Function<BookmarkList, BookmarkList>() {
+                    @Override
+                    public BookmarkList apply(BookmarkList bookmarkList) throws Exception {
+                        dbHelper.saveDBController.deleteBookmarkData(bookmarkList);
+                        return bookmarkList;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<BookmarkList>() {
+                    @Override
+                    public void accept(BookmarkList bookmarkList) throws Exception {
+                        view.deleteData(bookmarkList);
+                    }
+                });
+
+        compositeDisposable.add(disposable);
+    }
+
 //    public void getKindFoodList(){
 //        Disposable disposable = kindFoodModel.getKindFoodList()
 //                .flatMap(new Function<KindFoodTotalData, MaybeSource<KindFoodDatas>>() {

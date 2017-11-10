@@ -17,7 +17,6 @@ import com.example.minkr.jeonju_all.house.view.HouseListActivity;
 import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
 import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
-import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
 
 import java.util.List;
 
@@ -122,6 +121,16 @@ public class MainHomeFrag extends Fragment implements MainView{
 
     @Override
     public void allDeleteData() {
+
+    }
+
+    @Override
+    public void showDeleteDialog(BookmarkList data) {
+
+    }
+
+    @Override
+    public void deleteData(BookmarkList bookmarkList) {
 
     }
 }

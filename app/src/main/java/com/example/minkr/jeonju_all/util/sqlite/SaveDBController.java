@@ -140,4 +140,9 @@ public class SaveDBController {
         String query = "DELETE FROM " + _SAVE_LIST_TABLE_NAME;
         db.execSQL(query);
     }
+
+    public void deleteBookmarkData(BookmarkList bookmarkList) {
+        String query= "DELETE FROM " + _SAVE_LIST_TABLE_NAME + " WHERE title = ?";
+        db.execSQL(query, new String[]{bookmarkList.getTitle()});
+    }
 }
