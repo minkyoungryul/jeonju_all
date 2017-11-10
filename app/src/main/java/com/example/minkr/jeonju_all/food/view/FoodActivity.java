@@ -276,4 +276,11 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
             startActivity(intent);
         }
     }
+
+    @Override
+    public void getAddressClick(FoodListData data) {
+        Intent intent = new Intent(FoodActivity.this, FoodMap3Activity.class);
+        intent.putExtra("data", data);
+        startActivity(intent);
+    }
 }

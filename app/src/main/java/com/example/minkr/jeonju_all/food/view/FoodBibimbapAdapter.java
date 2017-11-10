@@ -69,6 +69,10 @@ public class FoodBibimbapAdapter extends RecyclerView.Adapter<FoodBibimbapAdapte
         holder.getView().setOnClickListener(v->{
             presenter.getStoreInfo(data);
         });
+
+        holder.tv_address.setOnClickListener(v -> {
+            presenter.getAddressClick(data);
+        });
     }
 
     @Override

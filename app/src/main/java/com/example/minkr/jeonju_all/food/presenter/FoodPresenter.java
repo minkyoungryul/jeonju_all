@@ -247,4 +247,8 @@ public class FoodPresenter implements Presenter<FoodView> {
     public void getStoreInfo(FoodListData data) {
         view.getStoreInfo(data);
     }
+
+    public void getAddressClick(FoodListData data) {
+        view.getAddressClick(data);
+    }
 }

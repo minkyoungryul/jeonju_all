@@ -69,6 +69,10 @@ public class FoodWineAdapter extends RecyclerView.Adapter<FoodWineAdapter.ViewHo
         holder.getView().setOnClickListener(v->{
             presenter.getStoreInfo(data);
         });
+
+        holder.tv_address.setOnClickListener(v -> {
+            presenter.getAddressClick(data);
+        });
     }
 
     @Override
