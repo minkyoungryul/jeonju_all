@@ -76,6 +76,10 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
         holder.getView().setOnClickListener(v->{
             presenter.showInfo(data);
         });
+
+        holder.tv_address.setOnClickListener(v -> {
+            presenter.getAddressClick(data);
+        });
     }
 
     @Override

@@ -161,7 +161,9 @@
 						android:textColor="@color/black"
 						android:textSize="12dp"
 						android:layout_marginLeft="2dp"
-						android:text="돈가스"/>
+						android:text="돈가스"
+						android:ellipsize="end"
+						android:maxLines="7"/>
 
 					<TextView
 						android:id="@+id/store_price"
