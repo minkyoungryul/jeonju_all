@@ -56,6 +56,10 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         holder.getView().setOnClickListener(v->{
             presenter.getStoreInfo(data);
         });
+
+        holder.tv_address.setOnClickListener(v -> {
+            presenter.getAddressClick(data);
+        });
     }
 
     @Override
