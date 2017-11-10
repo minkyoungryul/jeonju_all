@@ -25,26 +25,26 @@ import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
+import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 import com.example.minkr.jeonju_all.main.view.MainBookmarkFrag;
 import com.example.minkr.jeonju_all.main.view.MainHomeFrag;
 import com.example.minkr.jeonju_all.main.view.MainSettingFrag;
+import com.example.minkr.jeonju_all.main.view.MainView;
 import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapLocationManager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
-
-//    SlidingMenu slidingMenu;
-//    MenuFragment menuFragment;
 
     FragmentTabHost mTabHost;
     //위치정보 허가
@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOCATION_REQUEST=3;
 
     NMapLocationManager nMapLocationManager;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-//        Logger.log("#hashKey ->"+getKeyHash(this));
-//        initSlideMenu();
         init();
         setListener();
 
@@ -184,27 +180,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-   /* private void initSlideMenu() {
-        slidingMenu = new SlidingMenu(this);
-        slidingMenu.setMode(SlidingMenu.LEFT);
-        slidingMenu.setSlidingEnabled(false);
-        slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-        slidingMenu.setShadowDrawable(R.drawable.shadow);
-        slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-        slidingMenu.setFadeDegree(0.35f);
-        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        slidingMenu.setMenu(R.layout.menu_frame);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.menu_frame, menuFragment = MenuFragment.newInstance())
-                .commitAllowingStateLoss();
-    }*/
 
    private void setListener() {
-
-//        ib_menu.setOnClickListener(v->{
-//            slidingMenu.showMenu();
-//        });
     }
+
 }

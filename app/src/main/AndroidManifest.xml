@@ -177,6 +177,12 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".main.view.BookmarkDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+
         <!-- kakao_api -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
