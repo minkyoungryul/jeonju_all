@@ -37,6 +37,9 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    @BindView(R.id.ib_map)
+    ImageButton ib_map;
+
     HouseAdapter adapter;
     LinearLayoutManager mLayoutManager;
     List<HouseListData> datas = new ArrayList<>();
@@ -67,6 +70,12 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
 
     private void setListener() {
         ib_back.setOnClickListener(v->finish());
+
+        ib_map.setOnClickListener(v -> {
+            Intent intent = new Intent(HouseListActivity.this, HouseMapActivity.class);
+            intent.putExtra("data", (Serializable) datas);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -101,6 +110,13 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     public void getStoreInfo(HouseListData data) {
         Intent intent = new Intent(HouseListActivity.this, HouseStoreInfoActivity.class);
         intent.putExtra("data", data.getHomepage());
+        startActivity(intent);
+    }
+
+    @Override
+    public void getAddressClick(HouseListData data) {
+        Intent intent = new Intent(HouseListActivity.this, HouseMap2Activity.class);
+        intent.putExtra("data", data);
         startActivity(intent);
     }
 }
