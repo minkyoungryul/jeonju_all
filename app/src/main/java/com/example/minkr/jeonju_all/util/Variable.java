@@ -47,4 +47,6 @@ public class Variable {
 
     public static final String _PARK_LIST_SERVER_REQUEST_URL = "park/getParkList?pageSize=250"; //공원
     public static final String _HEALTH_LIST_SERVER_REQUEST_URL = "health/getHealthList?pageSize=50"; // 체유시설
+
+    public static final String _NAVER_STORE_INFO_URL = "https://store.naver.com/restaurants/detail?id=";
 }

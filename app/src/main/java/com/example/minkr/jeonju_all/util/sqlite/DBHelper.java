@@ -1,11 +1,13 @@
 package com.example.minkr.jeonju_all.util.sqlite;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
 import com.example.minkr.jeonju_all.util.Logger;
+import com.google.zxing.common.StringUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
 import rx.subscriptions.CompositeSubscription;
@@ -129,7 +131,6 @@ public class DBHelper extends SQLiteOpenHelper {
         if (db != null) {
             return db.isOpen();
         }
-
         return false;
     }
 }

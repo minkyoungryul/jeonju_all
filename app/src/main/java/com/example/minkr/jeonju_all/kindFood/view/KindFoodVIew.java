@@ -3,6 +3,7 @@ package com.example.minkr.jeonju_all.kindFood.view;
 import com.example.minkr.jeonju_all.common.view.MvpView;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodDatas;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
+import com.example.minkr.jeonju_all.main.BookmarkList;
 
 import java.util.List;
 
@@ -18,4 +19,8 @@ public interface KindFoodVIew extends MvpView {
     void showDialog(KindFoodListData data);
 
     void showMap(KindFoodListData data);
+
+    void getKindDBData(List<BookmarkList> bookmarkLists);
+
+    void isLikeChangeData(KindFoodListData kindFoodListData);
 }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
+import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 
 import java.util.List;
@@ -27,7 +28,6 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     Context mContext;
     List<KindFoodListData> datas;
     KindFoodPresenter mPresenter;
-    boolean isLike = false;
 
     int[] menu_images = {R.drawable.img_fork, R.drawable.img_rib_soup, R.drawable.img_laundry, R.drawable.img_black_nodle, R.drawable.img_korean_food,
             R.drawable.img_nodle, R.drawable.img_siraegi, R.drawable.img_bibimbap, R.drawable.img_black_nodle, R.drawable.img_nodle};
@@ -49,8 +49,14 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         KindFoodListData data = datas.get(position);
-//        data.setStoreId(store_ids[position]+"");
-        //Logger.log("#16 data -> "+datas);
+        Logger.log("#15 kindFoodListData->" + data.toString());
+
+        if(data.isLike()){
+            holder.ib_like.setImageResource(R.drawable.ic_like_p);
+        }else{
+            holder.ib_like.setImageResource(R.drawable.ic_like_n);
+        }
+
         holder.iv_food.setBackgroundResource(menu_images[data.getId()-1]);
         holder.tv_shop_name.setText(data.getName());
         holder.tv_address.setText(data.getAddress());
@@ -69,19 +75,19 @@ public class KindFoodAdapter extends RecyclerView.Adapter<KindFoodAdapter.ViewHo
             mPresenter.getFoodStoreInfo(data);
         });
 
-        holder.ib_like.setOnClickListener(v->{
-            if(isLike)
-                holder.ib_like.setImageResource(R.drawable.ic_like_n);
-            else
-                holder.ib_like.setImageResource(R.drawable.ic_like_p);
-
-            isLike = !isLike;
-        });
         holder.ib_share.setOnClickListener(v->{
             mPresenter.showDialog(data);
         });
         holder.tv_address.setOnClickListener(v->{
             mPresenter.showMap(data);
+        });
+
+        holder.ib_like.setOnClickListener(v->{
+            if(data.isLike()){
+                mPresenter.deleteDB(data);
+            }else{
+                mPresenter.insertDB(data);
+            }
         });
     }
 
