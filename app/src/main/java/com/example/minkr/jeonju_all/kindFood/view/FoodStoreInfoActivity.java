@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
+import com.example.minkr.jeonju_all.util.Variable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,9 +58,9 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
         mWebView.getSettings().setJavaScriptEnabled(true);
 
         if (data_map == 0){
-            mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+storeId);
+            mWebView.loadUrl(Variable._NAVER_STORE_INFO_URL+storeId);
         }else{
-            mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data_map);
+            mWebView.loadUrl(Variable._NAVER_STORE_INFO_URL+data_map);
         }
         //mWebView.loadUrl("https://store.naver.com/restaurants/detail?id="+data.getStoreId());
 //        http://map.naver.com/local/siteview.nhn?code=17115770

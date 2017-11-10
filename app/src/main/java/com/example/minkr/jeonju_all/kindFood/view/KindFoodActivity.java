@@ -16,6 +16,7 @@ import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.custom.CustomShareDialog;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
+import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 
 import java.io.Serializable;
@@ -48,6 +49,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
     KindFoodPresenter presenter;
 
     List<KindFoodListData> kindFoodList = new ArrayList<>();
+    List<BookmarkList> bookmarkLists = new ArrayList<>();
 
     //KindFoodMapActivity kindFoodMapActivity;
 
@@ -127,6 +129,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         Logger.log("#6 kindFoodList ->"+ kindFoodList.toString());
         adapter.notifyDataSetChanged();
         progressBar.setVisibility(View.GONE);
+        presenter.getKindDBData();
     }
 
     @Override
@@ -149,5 +152,30 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         Intent intent = new Intent(KindFoodActivity.this, KindFoodMap2Activity.class);
         intent.putExtra("data", data);
         startActivity(intent);
+    }
+
+    @Override
+    public void getKindDBData(List<BookmarkList> bookmarkLists) {
+        Logger.log("#16 bookmarkLists->"+bookmarkLists.toString() + ", kindFoodList->" + kindFoodList.toString());
+        for (int i=0; i<kindFoodList.size(); i++){
+            for(int j=0; j<bookmarkLists.size(); j++){
+                if(bookmarkLists.get(j).getTitle().equals(kindFoodList.get(i).getName())){
+                    Logger.log("#17 data->"+kindFoodList.toString());
+                    kindFoodList.get(i).setLike(true);
+                }
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void isLikeChangeData(KindFoodListData kindFoodListData) {
+        for(int i=0; i<kindFoodList.size(); i++){
+            if(kindFoodList.get(i).getName().equals(kindFoodListData.getName())){
+                kindFoodList.get(i).setLike(kindFoodListData.isLike());
+                Logger.log("#19 change kindFoodList->"+kindFoodList.toString());
+            }
+        }
+        adapter.notifyDataSetChanged();
     }
 }

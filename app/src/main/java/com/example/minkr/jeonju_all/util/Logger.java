@@ -2,6 +2,8 @@ package com.example.minkr.jeonju_all.util;
 
 import android.util.Log;
 
+import com.google.zxing.common.StringUtils;
+
 import java.util.Arrays;
 
 /**
