@@ -8,6 +8,7 @@ import com.example.minkr.jeonju_all.kindFood.data.KindFoodTotalData;
 import com.example.minkr.jeonju_all.kindFood.model.KindFoodModel;
 import com.example.minkr.jeonju_all.main.view.MainView;
 import com.example.minkr.jeonju_all.util.Logger;
+import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
 
 import io.reactivex.Maybe;
 import io.reactivex.MaybeSource;
@@ -28,6 +29,7 @@ public class MainPresenter implements Presenter<MainView> {
     KindFoodModel kindFoodModel;
     Context mContext;
     CompositeDisposable compositeDisposable;
+    DBHelper dbHelper;
 
     @Override
     public void attachView(MainView view) {
@@ -35,12 +37,15 @@ public class MainPresenter implements Presenter<MainView> {
         mContext = view.getContext();
         kindFoodModel = new KindFoodModel(mContext);
         compositeDisposable = new CompositeDisposable();
+        dbHelper = DBHelper.getInstance(mContext);
+        dbHelper.openDB();
     }
 
     @Override
     public void detachView() {
         view = null;
         compositeDisposable.clear();
+        dbHelper.closeDB();
     }
 
     @Override

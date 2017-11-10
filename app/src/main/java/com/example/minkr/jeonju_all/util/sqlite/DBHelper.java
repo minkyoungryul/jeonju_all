@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.minkr.jeonju_all.util.Logger;
 
+import io.reactivex.disposables.CompositeDisposable;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -20,11 +21,12 @@ public class DBHelper extends SQLiteOpenHelper {
     private Context context;
     SQLiteDatabase db;
     private static DBHelper instance;
-    CompositeSubscription compositeSubscription;
+    CompositeDisposable compositeDisposable;
 
 //    public MessageDBController messageDBController;
 //    public BestFriendDBController bestFriendDBController;
 //    public MyRoomDBController myRoomDBController;
+    public SaveDBController saveDBController;
 
     public static synchronized DBHelper getInstance(Context context) {
         if (instance == null)
@@ -36,10 +38,11 @@ public class DBHelper extends SQLiteOpenHelper {
     private DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-        compositeSubscription = new CompositeSubscription();
+        compositeDisposable = new CompositeDisposable();
 //        messageDBController = new MessageDBController(compositeSubscription, this);
 //        bestFriendDBController = new BestFriendDBController(compositeSubscription, this);
 //        myRoomDBController = new MyRoomDBController(compositeSubscription, this);
+        saveDBController = new SaveDBController(compositeDisposable, this);
 
     }
 
@@ -67,6 +70,7 @@ public class DBHelper extends SQLiteOpenHelper {
         try {
 //            db.execSQL(CRETE_TABLE1);
 //            db.execSQL(MessageDBController.CREATE_MESSAGE_TABLE);
+            db.execSQL(saveDBController.CREATE_SAVE_LIST_TABLE);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,6 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //        query = "DROP TABLE IF EXISTS " + BestFriendDBController._FRIEND_IN_BEST_LIST_TABLE_NAME;
 //        db.execSQL(query);
 
+
         onCreate(db);
     }
 
@@ -107,6 +112,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //            messageDBController.open(db);
 //            bestFriendDBController.open(db);
 //            myRoomDBController.open(db);
+            saveDBController.open(db);
         }
     }
 
@@ -114,7 +120,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (db != null && db.isOpen()) {
             db.close();
             db = null;
-            compositeSubscription.clear();
+            compositeDisposable.clear();
             Logger.log("#1500 close db done");
         }
     }

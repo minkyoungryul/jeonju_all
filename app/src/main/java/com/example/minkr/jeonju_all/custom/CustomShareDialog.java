@@ -148,6 +148,4 @@ public class CustomShareDialog extends Dialog {
 
         Toast.makeText(context , "클립보드에 복사되었습니다." , Toast.LENGTH_SHORT).show();
     }
-
-
 }
