@@ -7,13 +7,16 @@ import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.data.FoodTotalData;
 import com.example.minkr.jeonju_all.food.model.FoodModel;
 import com.example.minkr.jeonju_all.food.view.FoodView;
+import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
+import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
 
 import org.reactivestreams.Publisher;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -32,6 +35,7 @@ public class FoodPresenter implements Presenter<FoodView> {
     Context mContext;
     CompositeDisposable compositeDisposable;
     FoodModel model;
+    DBHelper dbHelper;
 
     @Override
     public void attachView(FoodView view) {
@@ -39,6 +43,7 @@ public class FoodPresenter implements Presenter<FoodView> {
         mContext = view.getContext();
         compositeDisposable = new CompositeDisposable();
         model = new FoodModel(mContext);
+        dbHelper = DBHelper.getInstance(mContext);
     }
 
     @Override
@@ -246,5 +251,70 @@ public class FoodPresenter implements Presenter<FoodView> {
 
     public void getStoreInfo(FoodListData data) {
         view.getStoreInfo(data);
+    }
+
+    public void getFoodDBData() {
+        Disposable disposable = dbHelper.saveDBController.getDBData("음식")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<BookmarkList>>() {
+                    @Override
+                    public void accept(List<BookmarkList> bookmarkLists) throws Exception {
+                        Logger.log("#40 bookmarkLists ->"+bookmarkLists.toString());
+                        view.getFoodDBData(bookmarkLists);
+                    }
+                });
+
+        compositeDisposable.add(disposable);
+    }
+
+    public void insertDBData(FoodListData data) {
+        Disposable disposable = Maybe.just(data)
+                .map(new Function<FoodListData, FoodListData>() {
+                    @Override
+                    public FoodListData apply(FoodListData foodListData) throws Exception {
+                        dbHelper.saveDBController.addFood(foodListData);
+                        foodListData.setLike(true);
+                        return foodListData;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<FoodListData>() {
+                    @Override
+                    public void accept(FoodListData foodListData) throws Exception {
+                        Logger.log("#41 foodListData DB추가 ->"+foodListData.toString());
+                        view.isLikeChangeData(foodListData);
+                    }
+                });
+
+        compositeDisposable.add(disposable);
+    }
+
+    public void deleteDBData(FoodListData data) {
+        Disposable disposable = Maybe.just(data)
+                .map(new Function<FoodListData, FoodListData>() {
+                    @Override
+                    public FoodListData apply(FoodListData foodListData) throws Exception {
+                        dbHelper.saveDBController.deleteFood("음식",foodListData);
+                        foodListData.setLike(false);
+                        return foodListData;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<FoodListData>() {
+                    @Override
+                    public void accept(FoodListData foodListData) throws Exception {
+                        Logger.log("#41 foodListData DB삭제 ->"+foodListData.toString());
+                        view.isLikeChangeData(foodListData);
+                    }
+                });
+
+        compositeDisposable.add(disposable);
+    }
+
+    public void getAddressClick(FoodListData data) {
+        view.getAddressClick(data);
     }
 }

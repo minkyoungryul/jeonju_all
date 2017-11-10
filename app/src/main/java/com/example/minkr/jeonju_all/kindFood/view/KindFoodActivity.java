@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.custom.CustomShareDialog;
@@ -177,5 +178,10 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
             }
         }
         adapter.notifyDataSetChanged();
+
+        if(kindFoodListData.isLike())
+            Toast.makeText(getContext(), "즐겨찾기 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }

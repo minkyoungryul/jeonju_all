@@ -24,7 +24,6 @@ public class FoodWineAdapter extends RecyclerView.Adapter<FoodWineAdapter.ViewHo
 
     Context mContext;
     List<FoodListData> datas;
-    boolean isLike = false;
     FoodPresenter presenter;
 
     public FoodWineAdapter(Context mContext, List<FoodListData> datas, FoodPresenter presenter) {
@@ -47,6 +46,12 @@ public class FoodWineAdapter extends RecyclerView.Adapter<FoodWineAdapter.ViewHo
                 .fitCenter()
                 .into(holder.iv_food);
 
+        if(data.isLike()){
+            holder.ib_like.setImageResource(R.drawable.ic_like_p);
+        }else{
+            holder.ib_like.setImageResource(R.drawable.ic_like_n);
+        }
+
         holder.tv_store_name.setText(data.getStoreName());
         holder.tv_main_menu.setText(data.getMainMenu());
 
@@ -58,16 +63,19 @@ public class FoodWineAdapter extends RecyclerView.Adapter<FoodWineAdapter.ViewHo
         }
 
         holder.ib_like.setOnClickListener(v->{
-            if(isLike)
-                holder.ib_like.setImageResource(R.drawable.ic_like_n);
-            else
-                holder.ib_like.setImageResource(R.drawable.ic_like_p);
-
-            isLike = !isLike;
+            if(data.isLike()){
+                presenter.deleteDBData(data);
+            }else{
+                presenter.insertDBData(data);
+            }
         });
 
         holder.getView().setOnClickListener(v->{
             presenter.getStoreInfo(data);
+        });
+
+        holder.tv_address.setOnClickListener(v -> {
+            presenter.getAddressClick(data);
         });
     }
 

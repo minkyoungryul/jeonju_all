@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.util.Variable;
@@ -89,9 +90,9 @@ public class SaveDBController {
         return bookmarkList;
     }
 
-    public Maybe<List<BookmarkList>> getKindDBData() {
+    public Maybe<List<BookmarkList>> getDBData(String type) {
         String query = "SELECT * FROM "+_SAVE_LIST_TABLE_NAME+" WHERE type = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{"모범업소"});
+        Cursor cursor = db.rawQuery(query, new String[]{type});
 
         List<BookmarkList> datas = new ArrayList<>();
         while(cursor.moveToNext()){
@@ -101,5 +102,24 @@ public class SaveDBController {
 
         cursor.close();
         return Maybe.just(datas);
+    }
+
+    public void addFood(FoodListData data) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("type" , "음식");
+        contentValues.put("title" , data.getStoreName());
+        contentValues.put("address" , data.getNewAddr());
+        contentValues.put("tel" , data.getTel());
+        contentValues.put("img_url" ,data.getMainImg());
+        contentValues.put("homepage_url" , Variable._NAVER_STORE_INFO_URL+data.getStoreId());
+        contentValues.put("posX", data.getPosX());
+        contentValues.put("posY", data.getPosY());
+
+        db.insert(_SAVE_LIST_TABLE_NAME, null, contentValues);
+    }
+
+    public void deleteFood(String type, FoodListData data) {
+        String query = "DELETE FROM "+_SAVE_LIST_TABLE_NAME+" WHERE type = ? and title = ?";
+        db.execSQL(query, new String[]{type, data.getStoreName()});
     }
 }

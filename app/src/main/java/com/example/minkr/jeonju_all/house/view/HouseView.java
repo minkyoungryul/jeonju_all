@@ -13,4 +13,6 @@ public interface HouseView extends MvpView{
     void getHouseList(List<HouseListData> houseListData);
 
     void getStoreInfo(HouseListData data);
+
+    void getAddressClick(HouseListData data);
 }

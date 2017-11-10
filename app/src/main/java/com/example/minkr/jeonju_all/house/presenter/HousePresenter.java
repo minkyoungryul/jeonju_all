@@ -72,4 +72,8 @@ public class HousePresenter implements Presenter<HouseView> {
     public void getStoreInfo(HouseListData data) {
         view.getStoreInfo(data);
     }
+
+    public void getAddressClick(HouseListData data) {
+        view.getAddressClick(data);
+    }
 }

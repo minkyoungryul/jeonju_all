@@ -47,6 +47,39 @@ public class FoodListData implements Serializable {
 
     private String type;
     private String storeId;
+    private boolean isLike = false;
+
+    @Override
+    public String toString() {
+        return "FoodListData{" +
+                "closeTime='" + closeTime + '\'' +
+                ", holiday='" + holiday + '\'' +
+                ", isParking=" + isParking +
+                ", isReserve=" + isReserve +
+                ", mainImg='" + mainImg + '\'' +
+                ", mainMenu='" + mainMenu + '\'' +
+                ", newAddr='" + newAddr + '\'' +
+                ", openTime='" + openTime + '\'' +
+                ", parkingDetail='" + parkingDetail + '\'' +
+                ", posX='" + posX + '\'' +
+                ", posY='" + posY + '\'' +
+                ", seatCnt=" + seatCnt +
+                ", StoreName='" + StoreName + '\'' +
+                ", tableCnt=" + tableCnt +
+                ", tel='" + tel + '\'' +
+                ", type='" + type + '\'' +
+                ", storeId='" + storeId + '\'' +
+                ", isLike=" + isLike +
+                '}';
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
 
     public String getType() {
         return type;
@@ -208,26 +241,4 @@ public class FoodListData implements Serializable {
         this.tel = tel;
     }
 
-    @Override
-    public String toString() {
-        return "FoodListData{" +
-                "closeTime='" + closeTime + '\'' +
-                ", holiday='" + holiday + '\'' +
-                ", isParking=" + isParking +
-                ", isReserve=" + isReserve +
-                ", mainImg='" + mainImg + '\'' +
-                ", mainMenu='" + mainMenu + '\'' +
-                ", newAddr='" + newAddr + '\'' +
-                ", openTime='" + openTime + '\'' +
-                ", parkingDetail='" + parkingDetail + '\'' +
-                ", posX='" + posX + '\'' +
-                ", posY='" + posY + '\'' +
-                ", seatCnt=" + seatCnt +
-                ", StoreName='" + StoreName + '\'' +
-                ", tableCnt=" + tableCnt +
-                ", tel='" + tel + '\'' +
-                ", type='" + type + '\'' +
-                ", storeId='" + storeId + '\'' +
-                '}';
-    }
 }

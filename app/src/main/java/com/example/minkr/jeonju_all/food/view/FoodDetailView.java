@@ -10,4 +10,6 @@ import com.example.minkr.jeonju_all.food.data.FoodListData;
 public interface FoodDetailView extends MvpView {
     void getStoreInfo(FoodListData data);
     void getAddressClick(FoodListData data);
+
+    void isLikeChangeData(FoodListData foodListData);
 }
