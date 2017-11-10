@@ -67,7 +67,22 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
     }
 
     private void setListener() {
-        ib_back.setOnClickListener(v->finish());
+        ib_back.setOnClickListener(v->{
+            Intent intent = new Intent();
+            intent.putExtra("datas", (Serializable) datas);
+            if(datas.get(0).getType().equals("한정식")){
+                setResult(100, intent);
+            }else if(datas.get(0).getType().equals("전주 비빔밥")){
+                setResult(200, intent);
+            }else if(datas.get(0).getType().equals("콩나물국밥")){
+                setResult(300, intent);
+            }else if(datas.get(0).getType().equals("막걸리")){
+                setResult(400, intent);
+            }else if(datas.get(0).getType().equals("한옥마을 맛집")){
+                setResult(500, intent);
+            }
+            finish();
+        });
 
         ib_map.setOnClickListener(v -> {
             Intent intent = new Intent(FoodDetailActivity.this, FoodMap2Activity.class);
@@ -108,5 +123,39 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
     @Override
     public void notConnectNetworking() {
 
+    }
+
+    @Override
+    public void isLikeChangeData(FoodListData foodListData) {
+        for(int i=0; i<datas.size(); i++){
+            if(datas.get(i).getStoreName().equals(foodListData.getStoreName())){
+                datas.get(i).setLike(foodListData.isLike());
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+
+        if(foodListData.isLike())
+            Toast.makeText(getContext(), "즐겨찾기 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("datas", (Serializable) datas);
+        if(datas.get(0).getType().equals("한정식")){
+            setResult(100, intent);
+        }else if(datas.get(0).getType().equals("전주 비빔밥")){
+            setResult(200, intent);
+        }else if(datas.get(0).getType().equals("콩나물국밥")){
+            setResult(300, intent);
+        }else if(datas.get(0).getType().equals("막걸리")){
+            setResult(400, intent);
+        }else if(datas.get(0).getType().equals("한옥마을 맛집")){
+            setResult(500, intent);
+        }
+        finish();
     }
 }

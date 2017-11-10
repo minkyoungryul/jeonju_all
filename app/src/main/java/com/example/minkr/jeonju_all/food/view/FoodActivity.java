@@ -17,6 +17,8 @@ import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
 import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
+import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.util.Logger;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -197,7 +199,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
     public void nextActivity(List<FoodListData> datas){
         Intent intent = new Intent(FoodActivity.this, FoodDetailActivity.class);
         intent.putExtra("data", (Serializable) datas);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 
     @Override
@@ -264,6 +266,8 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         getFoodDatas(storeId, foodListData, hanokList, all_hanokList);
         hanok_adapter.notifyDataSetChanged();
         progress_bar_hanok.setVisibility(View.GONE);
+
+        presenter.getFoodDBData();
     }
 
     @Override
@@ -274,6 +278,106 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
             Intent intent = new Intent(FoodActivity.this, FoodStoreInfoActivity.class);
             intent.putExtra("storeId", data.getStoreId());
             startActivity(intent);
+        }
+    }
+
+    public void changeFoodListData(List<FoodListData> all_datas, List<FoodListData> datas, List<BookmarkList> bookmarkLists){
+        for(int i=0; i<all_datas.size(); i++){
+            for(int j=0; j<bookmarkLists.size(); j++){
+                if(all_datas.get(i).getStoreName().equals(bookmarkLists.get(j).getTitle())){
+                    all_datas.get(i).setLike(true);
+                    if(i<5){
+                        datas.get(i).setLike(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void getFoodDBData(List<BookmarkList> bookmarkLists) {
+        changeFoodListData(all_riceList,riceList,bookmarkLists);
+        changeFoodListData(all_bibimbapList,bibimbapList, bookmarkLists);
+        changeFoodListData(all_hanokList,hanokList, bookmarkLists);
+        changeFoodListData(all_wineList, wineList, bookmarkLists);
+        changeFoodListData(all_kongbapList, kongbapList, bookmarkLists);
+
+        rice_adapter.notifyDataSetChanged();
+        bibimbap_adapter.notifyDataSetChanged();
+        kongbap_adapter.notifyDataSetChanged();
+        wine_adapter.notifyDataSetChanged();
+        hanok_adapter.notifyDataSetChanged();
+    }
+
+    public void isLikeChangeFoodData(List<FoodListData> all_datas, List<FoodListData> datas, FoodListData foodListData){
+        for(int i=0; i<all_datas.size(); i++){
+            if(all_datas.get(i).getStoreName().equals(foodListData.getStoreName())){
+                all_datas.get(i).setLike(foodListData.isLike());
+                if(i<5){
+                    datas.get(i).setLike(foodListData.isLike());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void isLikeChangeData(FoodListData foodListData) {
+        isLikeChangeFoodData(all_riceList,riceList,foodListData);
+        isLikeChangeFoodData(all_bibimbapList,bibimbapList, foodListData);
+        isLikeChangeFoodData(all_hanokList,hanokList, foodListData);
+        isLikeChangeFoodData(all_wineList, wineList, foodListData);
+        isLikeChangeFoodData(all_kongbapList, kongbapList, foodListData);
+
+        rice_adapter.notifyDataSetChanged();
+        bibimbap_adapter.notifyDataSetChanged();
+        kongbap_adapter.notifyDataSetChanged();
+        wine_adapter.notifyDataSetChanged();
+        hanok_adapter.notifyDataSetChanged();
+
+        if(foodListData.isLike())
+            Toast.makeText(getContext(), "즐겨찾기 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setChangeList(List<FoodListData> all_datas, List<FoodListData> datas){
+        datas.clear();
+        for(int i=0; i<5; i++){
+            datas.add(all_datas.get(i));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            case 100:
+                all_riceList = (List<FoodListData>) data.getSerializableExtra("datas");
+                setChangeList(all_riceList, riceList);
+                rice_adapter.notifyDataSetChanged();
+                Logger.log("#45 riceList->"+riceList.toString());
+                break;
+            case 200:
+                all_bibimbapList = (List<FoodListData>) data.getSerializableExtra("datas");
+                setChangeList(all_bibimbapList, bibimbapList);
+                bibimbap_adapter.notifyDataSetChanged();
+                break;
+            case 300:
+                all_kongbapList = (List<FoodListData>) data.getSerializableExtra("datas");
+                setChangeList(all_kongbapList,kongbapList);
+                kongbap_adapter.notifyDataSetChanged();
+                break;
+
+            case 400:
+                all_wineList = (List<FoodListData>) data.getSerializableExtra("datas");
+                setChangeList(all_wineList,wineList);
+                wine_adapter.notifyDataSetChanged();
+                break;
+            case 500:
+                all_hanokList = (List<FoodListData>) data.getSerializableExtra("datas");
+                setChangeList(all_hanokList, hanokList);
+                hanok_adapter.notifyDataSetChanged();
+                break;
         }
     }
 }

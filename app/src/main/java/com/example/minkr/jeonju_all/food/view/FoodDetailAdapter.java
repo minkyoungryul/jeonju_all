@@ -29,7 +29,6 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
 
     Context mContext;
     List<FoodListData> datas;
-    boolean isLike = false;
     FoodDetailPresenter presenter;
 
 
@@ -53,6 +52,12 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
                 .fitCenter()
                 .into(holder.iv_food);
 
+        if(data.isLike()){
+            holder.ib_like.setImageResource(R.drawable.ic_like_p);
+        }else{
+            holder.ib_like.setImageResource(R.drawable.ic_like_n);
+        }
+
         holder.tv_store_name.setText(data.getStoreName());
 
         holder.tv_main_menu.setText(data.getMainMenu());
@@ -74,12 +79,11 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
         }
 
         holder.ib_like.setOnClickListener(v->{
-            if(isLike)
-                holder.ib_like.setImageResource(R.drawable.ic_like_n);
-            else
-                holder.ib_like.setImageResource(R.drawable.ic_like_p);
-
-            isLike = !isLike;
+            if(data.isLike()){
+                presenter.deleteDBData(data);
+            }else{
+                presenter.insertDBData(data);
+            }
         });
 
         holder.getView().setOnClickListener(v->{

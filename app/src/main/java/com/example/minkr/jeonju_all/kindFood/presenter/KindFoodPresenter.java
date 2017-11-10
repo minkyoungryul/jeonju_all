@@ -142,7 +142,7 @@ public class KindFoodPresenter implements Presenter<KindFoodVIew> {
     }
 
     public void getKindDBData() {
-        Disposable disposable = dbHelper.saveDBController.getKindDBData()
+        Disposable disposable = dbHelper.saveDBController.getDBData("모범업소")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<BookmarkList>>() {
