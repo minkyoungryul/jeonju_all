@@ -76,7 +76,7 @@ public class SaveDBController {
         db.execSQL(query, new String[]{type, data.getName()});
     }
 
-    public BookmarkList getBookMarList(Cursor cursor) {
+    public BookmarkList getBookMarkList(Cursor cursor) {
         BookmarkList bookmarkList = new BookmarkList();
         bookmarkList.setType(cursor.getString(cursor.getColumnIndex("type")));
         bookmarkList.setTitle(cursor.getString(cursor.getColumnIndex("title")));
@@ -96,7 +96,7 @@ public class SaveDBController {
 
         List<BookmarkList> datas = new ArrayList<>();
         while(cursor.moveToNext()){
-            BookmarkList bookmarkList = getBookMarList(cursor);
+            BookmarkList bookmarkList = getBookMarkList(cursor);
             datas.add(bookmarkList);
         }
 
@@ -121,5 +121,23 @@ public class SaveDBController {
     public void deleteFood(String type, FoodListData data) {
         String query = "DELETE FROM "+_SAVE_LIST_TABLE_NAME+" WHERE type = ? and title = ?";
         db.execSQL(query, new String[]{type, data.getStoreName()});
+    }
+
+    public Maybe<List<BookmarkList>> getAllBookMarkList() {
+        String query = "SELECT * FROM " + _SAVE_LIST_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        List<BookmarkList> datas = new ArrayList<>();
+        while (cursor.moveToNext()){
+            BookmarkList bookmarkList = getBookMarkList(cursor);
+            datas.add(bookmarkList);
+        }
+
+        return Maybe.just(datas);
+    }
+
+    public void deleteAllData() {
+        String query = "DELETE FROM " + _SAVE_LIST_TABLE_NAME;
+        db.execSQL(query);
     }
 }

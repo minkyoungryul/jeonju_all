@@ -326,7 +326,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
             }
         }
     }
-    
+
 
     @Override
     public void isLikeChangeData(FoodListData foodListData) {
