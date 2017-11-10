@@ -16,6 +16,7 @@ import com.example.minkr.jeonju_all.food.presenter.FoodDetailPresenter;
 import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,6 +33,9 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
 
     @BindView(R.id.ib_back)
     ImageButton ib_back;
+
+    @BindView(R.id.ib_map)
+    ImageButton ib_map;
 
     List<FoodListData> datas;
     LinearLayoutManager mLayoutManager;
@@ -64,6 +68,12 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
 
     private void setListener() {
         ib_back.setOnClickListener(v->finish());
+
+        ib_map.setOnClickListener(v -> {
+            Intent intent = new Intent(FoodDetailActivity.this, FoodMap2Activity.class);
+            intent.putExtra("data", (Serializable) datas);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -75,6 +85,13 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
             intent.putExtra("storeId", data.getStoreId());
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void getAddressClick(FoodListData data){
+        Intent intent = new Intent(FoodDetailActivity.this, FoodMap3Activity.class);
+        intent.putExtra("data", data);
+        startActivity(intent);
     }
 
     @Override

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.minkr.jeonju_all.kindFood.view;
+package com.example.minkr.jeonju_all.food.view.map;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -24,62 +24,64 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
-import com.example.minkr.jeonju_all.util.Logger;
+import com.example.minkr.jeonju_all.food.view.FoodMap2Activity;
+import com.example.minkr.jeonju_all.food.view.FoodMap3Activity;
+import com.example.minkr.jeonju_all.food.view.FoodMapActivity;
 import com.nhn.android.maps.NMapOverlay;
 import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.overlay.NMapPOIitem;
-
-import java.util.List;
 
 public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 
 	private View mCalloutView;
 	private TextView mCalloutText;
-	private TextView txtAddress,txtTel,txtCeo,txtMenu,txtPrice,txtRoad,txtStreet,txtNavi;
+	private TextView txtAddress,txtTel,txtHoliday,txtClose,txtMenu,txtRoad,txtStreet;
 	private ImageView imgStore,imgLike;
-	KindFoodMapActivity kind;
-	KindFoodMap2Activity kind2;
+	FoodMapActivity kind;
+	FoodMap2Activity kind2;
+	FoodMap3Activity kind3;
 
-	public NMapCalloutCustomOverlayView(Context context, NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds, String ceoName,
-										String name, String address, String price, String menu, String tel, String url, Double x, Double y, int type) {
-		super(context, itemOverlay, item, itemBounds, ceoName, name, address, price, menu, tel, url, x, y, type);
+	public NMapCalloutCustomOverlayView(Context context, NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds, String name,
+                                        String address, String tel, String holiday, String close, String menu, String url, Double x, Double y, int type) {
+		super(context, itemOverlay, item, itemBounds, name, address, tel, holiday, close, menu, url, x, y, type);
 
 		//Logger.log("#30 datas ->" +datas);
+
 		if (type == 0){
-			kind = (KindFoodMapActivity)getContext();
+			kind = (FoodMapActivity)getContext();
+		}else if (type == 1){
+			kind2 = (FoodMap2Activity)getContext();
 		}else{
-			kind2 = (KindFoodMap2Activity)getContext();
+			kind3 = (FoodMap3Activity)getContext();
 		}
+
 
 		String infService = Context.LAYOUT_INFLATER_SERVICE;
 		LayoutInflater li = (LayoutInflater)getContext().getSystemService(infService);
-		li.inflate(R.layout.callout_overlay_view, this, true);
+		li.inflate(R.layout.callout_overlay_food_view, this, true);
 
 		mCalloutView = findViewById(R.id.callout_overlay);
 		mCalloutText = (TextView)mCalloutView.findViewById(R.id.callout_text);
 
 		txtAddress = (TextView)mCalloutView.findViewById(R.id.store_address);
 		txtTel = (TextView)mCalloutView.findViewById(R.id.store_tel);
-		txtCeo = (TextView)mCalloutView.findViewById(R.id.store_ceo);
+		txtHoliday = (TextView)mCalloutView.findViewById(R.id.txtHoliday);
+		txtClose = (TextView)mCalloutView.findViewById(R.id.txtClose);
 		txtMenu = (TextView)mCalloutView.findViewById(R.id.store_menu);
-		txtPrice = (TextView)mCalloutView.findViewById(R.id.store_price);
 		txtRoad = (TextView)mCalloutView.findViewById(R.id.bt_map_search);
 		txtStreet = (TextView)mCalloutView.findViewById(R.id.bt_map_street);
-		//txtNavi = (TextView)mCalloutView.findViewById(R.id.bt_map_navi);
 
 		imgLike = (ImageView)mCalloutView.findViewById(R.id.img_map_like);
 		imgStore = (ImageView)mCalloutView.findViewById(R.id.img_store);
-		//mRightArrow = findViewById(R.id.callout_rightArrow);
 
 		mCalloutView.setOnClickListener(callOutClickListener);
 
 		mCalloutText.setText(name);
 		txtAddress.setText(address);
 		txtTel.setText(tel);
-		txtCeo.setText(ceoName);
+		txtHoliday.setText(holiday);
+		txtClose.setText(close);
 		txtMenu.setText(menu);
-		txtPrice.setText(price);
 		Glide.with(getContext())
 				.load(url)
 				.fitCenter()
@@ -90,10 +92,13 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 			@Override
 			public void onClick(View v) {
 				//Logger.log("#35 kind -> "+kind.datas);
+
 				if (type == 0) {
 					kind.setRoad(name);
-				}else{
+				}else if (type == 1){
 					kind2.setRoad(name);
+				}else{
+					kind3.setRoad(name);
 				}
 
 			}
@@ -102,10 +107,13 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtStreet.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
 				if (type == 0){
 					kind.getStreetView(x,y);
-				}else{
+				}else if (type == 1){
 					kind2.getStreetView(x,y);
+				}else{
+					kind3.getStreetView(x,y);
 				}
 
 			}
@@ -119,7 +127,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		}
 	}
 
-	private final View.OnClickListener callOutClickListener = new View.OnClickListener() {
+	private final OnClickListener callOutClickListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View view) {

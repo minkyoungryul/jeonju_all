@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.minkr.jeonju_all.kindFood.view;
+package com.example.minkr.jeonju_all.kindFood.view.map;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -22,7 +22,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.nhn.android.maps.NMapOverlay;
 import com.nhn.android.maps.NMapOverlayItem;

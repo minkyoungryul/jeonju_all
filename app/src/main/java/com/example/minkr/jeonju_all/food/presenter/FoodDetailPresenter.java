@@ -34,4 +34,9 @@ public class FoodDetailPresenter implements Presenter<FoodDetailView> {
     public void getStoreInfo(FoodListData data) {
         view.getStoreInfo(data);
     }
+
+    public void getAddressClick(FoodListData data) {
+        view.getAddressClick(data);
+    }
+
 }

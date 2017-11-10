@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.minkr.jeonju_all.kindFood.view;
+package com.example.minkr.jeonju_all.kindFood.view.map;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,11 +24,12 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.kindFood.view.map.NMapCalloutCustomOldOverlay;
+import com.example.minkr.jeonju_all.kindFood.view.map.NMapPOIflagType;
 import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapResourceProvider;

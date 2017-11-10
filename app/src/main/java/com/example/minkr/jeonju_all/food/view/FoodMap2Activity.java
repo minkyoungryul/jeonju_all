@@ -1,4 +1,4 @@
-package com.example.minkr.jeonju_all.kindFood.view;
+package com.example.minkr.jeonju_all.food.view;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,10 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
-import com.example.minkr.jeonju_all.kindFood.view.map.NMapCalloutCustomOverlayView;
-import com.example.minkr.jeonju_all.kindFood.view.map.NMapPOIflagType;
-import com.example.minkr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
+import com.example.minkr.jeonju_all.food.data.FoodListData;
+import com.example.minkr.jeonju_all.food.view.map.NMapCalloutCustomOverlayView;
+import com.example.minkr.jeonju_all.food.view.map.NMapPOIflagType;
+import com.example.minkr.jeonju_all.food.view.map.NMapViewerResourceProvider;
+import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapCompassManager;
@@ -39,6 +40,8 @@ import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -48,7 +51,7 @@ import butterknife.ButterKnife;
  * Created by minkr on 2017-10-26.
  */
 
-public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
+public class FoodMap2Activity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
         NMapOverlayManager.OnCalloutOverlayViewListener,NMapPOIdataOverlay.OnStateChangeListener{
 
     private final String API_KEY = "5lvyL1UwyDdfnK1Xxig6";
@@ -80,7 +83,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
     double myLocationX = 0.0;
     double myLocationY = 0.0;
 
-    KindFoodListData data;
+    List<FoodListData> data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,7 +92,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        data = (KindFoodListData) intent.getSerializableExtra("data");
+        data = (List<FoodListData>) intent.getSerializableExtra("data");
 
         init();
         setListener();
@@ -127,7 +130,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
                         txtLocation.setText("현재위치");
                         stopMyLocation();
                         locationType = 0;
-                        mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getY()), Double.parseDouble(data.getX())), 12);
+                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 12);
                     }
             }
         });
@@ -162,13 +165,15 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
         nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
 
         int markerId = NMapPOIflagType.PIN;
-        poiData = new NMapPOIdata(1,nMapViewerResourceProvider);
-        poiData.beginPOIdata(1);
+        poiData = new NMapPOIdata(0,nMapViewerResourceProvider);
+        poiData.beginPOIdata(0);
 
-        double x = Double.parseDouble(data.getX());
-        double y = Double.parseDouble(data.getY());
-        int storeId = Integer.parseInt(data.getStoreId());
-        poiData.addPOIitem(y,x,data.getName(),markerId,storeId);
+        for (int i = 0; i<data.size();i++){
+            double x = Double.parseDouble(data.get(i).getPosY());
+            double y = Double.parseDouble(data.get(i).getPosX());
+            int storeId = Integer.parseInt(data.get(i).getStoreId());
+            poiData.addPOIitem(y,x,data.get(i).getStoreName(),markerId,storeId);
+        }
 
         poiData.endPOIdata();
         NMapPOIdataOverlay poiDataOverlay = nMapOverlayManager.createPOIdataOverlay(poiData,null);
@@ -193,7 +198,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getY()), Double.parseDouble(data.getX())),12);
+            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
         }else{
         }
     }
@@ -231,17 +236,35 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
     @Override
     public View onCreateCalloutOverlayView(NMapOverlay nMapOverlay, NMapOverlayItem nMapOverlayItem, Rect rect) {
 
-        String ceoName = data.getCeoName();
-        String name = data.getName();
-        String address = data.getAddress();
-        String price = data.getPrice();
-        String foodName = data.getFoodName();
-        String tel = data.getTel();
-        String img_url = data.getImg_url();
-        Double x = Double.parseDouble(data.getX());
-        Double y = Double.parseDouble(data.getY());
+        String clickStore = nMapOverlayItem.getTitle();
 
-        return new NMapCalloutCustomOverlayView(KindFoodMap2Activity.this, nMapOverlay, nMapOverlayItem, rect, ceoName, name, address, price, foodName, tel, img_url, x, y, 1);
+        String name = "";
+        String address = "";
+        String tel = "";
+        String holiday = "";
+        String closetime = "";
+        String mainmenu = "";
+        String img_url = "";
+
+        Double x = 0.0;
+        Double y = 0.0;
+
+        //한정식 체크
+        for (int i=0;i<data.size();i++){
+            if (clickStore.equals(data.get(i).getStoreName())){
+                name = data.get(i).getStoreName();
+                address = data.get(i).getNewAddr();
+                tel = data.get(i).getTel();
+                holiday = data.get(i).getHoliday();
+                closetime = data.get(i).getCloseTime();
+                mainmenu = data.get(i).getMainMenu();
+                img_url = data.get(i).getMainImg();
+                x = Double.parseDouble(data.get(i).getPosY());
+                y = Double.parseDouble(data.get(i).getPosX());
+            }else{}
+        }
+
+        return new NMapCalloutCustomOverlayView(FoodMap2Activity.this, nMapOverlay, nMapOverlayItem, rect, name, address, tel, holiday, closetime, mainmenu, img_url, x, y, 1);
     }
 
     @Override
@@ -251,7 +274,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
     @Override
     public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
 
-        Intent intent = new Intent(KindFoodMap2Activity.this, FoodStoreInfoActivity.class);
+        Intent intent = new Intent(FoodMap2Activity.this, FoodStoreInfoActivity.class);
         intent.putExtra("datas", nMapPOIitem.getId());
         startActivity(intent);
 
@@ -291,7 +314,7 @@ public class KindFoodMap2Activity extends NMapActivity implements OnMapStateChan
                     imgbtLocation.setImageResource(R.drawable.jeonjulocation);
                     imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
                     txtLocation.setText("가게위치");
-                    Toast.makeText(KindFoodMap2Activity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(FoodMap2Activity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
                     locationType = 1;
                 }
             }
