@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.main.BookmarkList;
@@ -40,6 +41,9 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     @BindView(R.id.ll_empty)
     LinearLayout ll_empty;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
     LinearLayoutManager mLayoutManager;
     MainPresenter presenter;
     MainBookmarkAdapter adapter;
@@ -61,6 +65,7 @@ public class MainBookmarkFrag extends Fragment implements MainView {
         presenter = new MainPresenter();
         presenter.attachView(this);
 
+        progressBar.setVisibility(View.VISIBLE);
         presenter.getBookmarkList();
 
         init();
@@ -120,6 +125,8 @@ public class MainBookmarkFrag extends Fragment implements MainView {
             ll_empty.setVisibility(View.VISIBLE);
             btn_all_delete.setVisibility(View.GONE);
         }
+
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
