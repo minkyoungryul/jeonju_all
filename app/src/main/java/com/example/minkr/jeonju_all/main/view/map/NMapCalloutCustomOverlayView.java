@@ -24,8 +24,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.kindFood.view.KindFoodMapActivity;
-import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.main.view.BookmarkMapActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapOverlay;

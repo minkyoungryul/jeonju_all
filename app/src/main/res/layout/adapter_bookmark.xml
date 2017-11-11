@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:text="BookMark"
             android:textSize="20dp"
-            android:textStyle="bold"
             android:textColor="@color/black"/>
 
         <LinearLayout

@@ -20,6 +20,7 @@ import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
 import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -394,5 +395,10 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
     public void showDialog(FoodListData data) {
         shareDialog = new FoodShareDialog(this, data);
         shareDialog.show();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

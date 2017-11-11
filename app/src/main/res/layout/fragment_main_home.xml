@@ -48,8 +48,7 @@
                 android:layout_marginTop="20dp"
                 android:text="모범업소"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textSize="15dp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -112,8 +111,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="음식"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textSize="15dp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -176,8 +174,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="숙박"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textSize="15dp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -238,8 +235,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="문화"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textSize="15dp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -300,8 +296,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="편의 시설"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textSize="15dp" />
 
             <FrameLayout
                 android:layout_width="match_parent"

@@ -18,11 +18,14 @@
             android:src="@drawable/ic_back"
             android:padding="10dp"/>
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/img_title_kind_food" />
+            android:text="음식"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
 
         <ImageButton
             android:id="@+id/ib_map"
@@ -37,7 +40,6 @@
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -68,7 +70,6 @@
                         android:gravity="left"
                         android:textColor="@color/black"
                         android:textSize="24dp"
-                        android:textStyle="bold"
                         android:layout_gravity="center"/>
 
                     <LinearLayout
@@ -134,7 +135,6 @@
                         android:gravity="left"
                         android:textColor="@color/black"
                         android:textSize="24dp"
-                        android:textStyle="bold"
                         android:layout_gravity="center"/>
 
                     <LinearLayout
@@ -201,7 +201,6 @@
                         android:gravity="left"
                         android:textColor="@color/black"
                         android:textSize="24dp"
-                        android:textStyle="bold"
                         android:layout_gravity="center"/>
 
                     <LinearLayout
@@ -268,7 +267,6 @@
                         android:gravity="left"
                         android:textColor="@color/black"
                         android:textSize="24dp"
-                        android:textStyle="bold"
                         android:layout_gravity="center"/>
 
                     <LinearLayout
@@ -335,7 +333,6 @@
                         android:gravity="left"
                         android:textColor="@color/black"
                         android:textSize="24dp"
-                        android:textStyle="bold"
                         android:layout_gravity="center"/>
 
                     <LinearLayout

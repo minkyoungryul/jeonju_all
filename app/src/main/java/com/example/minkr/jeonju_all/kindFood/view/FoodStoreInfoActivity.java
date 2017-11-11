@@ -1,5 +1,6 @@
 package com.example.minkr.jeonju_all.kindFood.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -11,10 +12,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.util.Variable;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +36,9 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
 
     @BindView(R.id.ib_back)
     ImageButton ib_back;
+
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     String storeId;
     int data_map = 0;
@@ -55,6 +61,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
     }
 
     private void init() {
+
         mWebView.getSettings().setJavaScriptEnabled(true);
 
         if (data_map == 0){
@@ -93,5 +100,10 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

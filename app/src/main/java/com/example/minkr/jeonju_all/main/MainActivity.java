@@ -33,6 +33,7 @@ import com.example.minkr.jeonju_all.main.view.MainView;
 import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapLocationManager;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -199,5 +200,10 @@ public class MainActivity extends AppCompatActivity{
             finish();
             toast.cancel();
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

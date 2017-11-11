@@ -156,8 +156,7 @@
                 android:layout_height="wrap_content"
                 android:text="카카오톡 챗봇으로 이용하기"
                 android:textSize="18dp"
-                android:textColor="#3C1E1E"
-                android:textStyle="bold"/>
+                android:textColor="#3C1E1E"/>
 
         </LinearLayout>
 
