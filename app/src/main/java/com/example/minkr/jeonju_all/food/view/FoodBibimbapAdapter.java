@@ -52,7 +52,7 @@ public class FoodBibimbapAdapter extends RecyclerView.Adapter<FoodBibimbapAdapte
             holder.ib_like.setImageResource(R.drawable.ic_like_n);
         }
         holder.ib_share.setOnClickListener(v -> {
-
+            presenter.showDialog(data);
         });
         holder.tv_store_name.setText(data.getStoreName());
         holder.tv_main_menu.setText(data.getMainMenu());

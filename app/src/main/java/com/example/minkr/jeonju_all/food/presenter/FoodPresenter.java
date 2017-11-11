@@ -11,8 +11,6 @@ import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
 
-import org.reactivestreams.Publisher;
-
 import java.util.List;
 
 import io.reactivex.Flowable;
@@ -317,4 +315,9 @@ public class FoodPresenter implements Presenter<FoodView> {
     public void getAddressClick(FoodListData data) {
         view.getAddressClick(data);
     }
+
+    public void showDialog(FoodListData data) {
+        view.showDialog(data);
+    }
+
 }

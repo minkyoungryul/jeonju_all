@@ -32,7 +32,7 @@ import butterknife.BindView;
  * Created by Jun on 2017. 11. 3..
  */
 
-public class FoodShareDialog extends Dialog {
+public class CultureShareDialog extends Dialog {
 
     @BindView(R.id.ib_kakao)
     ImageButton ib_kakao;
@@ -46,7 +46,7 @@ public class FoodShareDialog extends Dialog {
     FoodListData data;
     private String url;
 
-    public FoodShareDialog(@NonNull Context context, FoodListData data) {
+    public CultureShareDialog(@NonNull Context context, FoodListData data) {
         super(context);
         mContext = context;
         this.data = data;
