@@ -19,9 +19,8 @@ import android.widget.Toast;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.house.view.map.NMapCalloutCustomOverlayView;
-import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
-import com.example.minkr.jeonju_all.kindFood.view.map.NMapPOIflagType;
-import com.example.minkr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
+import com.example.minkr.jeonju_all.house.view.map.NMapPOIflagType;
+import com.example.minkr.jeonju_all.house.view.map.NMapViewerResourceProvider;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapCompassManager;
@@ -353,7 +352,8 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
     }
 
     public void getStreetView(double x, double y){
-        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
+        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
+        Logger.log("#90 house streetView -> x : "+y+" y : "+x);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);

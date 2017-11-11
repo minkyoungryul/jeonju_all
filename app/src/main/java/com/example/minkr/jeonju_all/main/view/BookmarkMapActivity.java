@@ -17,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.food.view.map.NMapPOIflagType;
-import com.example.minkr.jeonju_all.food.view.map.NMapViewerResourceProvider;
+import com.example.minkr.jeonju_all.kindFood.view.map.NMapPOIflagType;
+import com.example.minkr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
 import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.main.view.map.NMapCalloutCustomOverlayView;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -121,7 +121,7 @@ public class BookmarkMapActivity extends NMapActivity implements OnMapStateChang
                         txtLocation.setText("현재위치");
                         stopMyLocation();
                         locationType = 0;
-                        if (data.getType().equals("모범업소")){
+                        if (data.getType().toString().equals("모범업소")){
                             mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosY()), Double.parseDouble(data.getPosX())), 12);
                         }else{
                             mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosX()), Double.parseDouble(data.getPosY())), 12);
@@ -165,14 +165,16 @@ public class BookmarkMapActivity extends NMapActivity implements OnMapStateChang
             poiData.beginPOIdata(1);
 
 
-            if (data.getType().equals("모범음식")){
+            if (data.getType().toString().equals("모범업소")){
+                Logger.log("#80 모범 : "+data.getPosY()+" / "+data.getPosX());
                 double x = Double.parseDouble(data.getPosY());
                 double y = Double.parseDouble(data.getPosX());
-                poiData.addPOIitem(y,x,data.getTitle(),markerId,1);
+                poiData.addPOIitem(x,y,data.getTitle(),markerId,1);
             }else {
+                Logger.log("#80 음식 : "+data.getPosX()+" / "+data.getPosY());
                 double x = Double.parseDouble(data.getPosX());
                 double y = Double.parseDouble(data.getPosY());
-                poiData.addPOIitem(y,x,data.getTitle(),markerId,1);
+                poiData.addPOIitem(x,y,data.getTitle(),markerId,1);
             }
 
             poiData.endPOIdata();
@@ -200,7 +202,7 @@ public class BookmarkMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            if (data.getType().equals("모범업소")){
+            if (data.getType().toString().equals("모범업소")){
                 mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosY()), Double.parseDouble(data.getPosX())), 12);
             }else{
                 mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosX()), Double.parseDouble(data.getPosY())), 12);
@@ -247,7 +249,7 @@ public class BookmarkMapActivity extends NMapActivity implements OnMapStateChang
         String tel = data.getTel();
         String homepage = data.getHomepage_url();
         String img_url = data.getImg_url();
-        if (data.getType().equals("모범업소")){
+        if (data.getType().toString().equals("모범업소")){
             x = Double.parseDouble(data.getPosY());
             y = Double.parseDouble(data.getPosX());
         }else{
@@ -356,7 +358,7 @@ public class BookmarkMapActivity extends NMapActivity implements OnMapStateChang
     }
 
     public void getStreetView(double x, double y){
-        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
+        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);

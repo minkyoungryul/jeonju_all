@@ -333,7 +333,7 @@ public class CultureMap2Activity extends NMapActivity implements OnMapStateChang
     }
 
     public void getStreetView(double x, double y){
-        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
+        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);

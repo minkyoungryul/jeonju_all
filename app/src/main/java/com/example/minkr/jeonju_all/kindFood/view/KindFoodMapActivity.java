@@ -352,6 +352,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     }
 
     public void getStreetView(double x, double y){
+        Logger.log("#90 kind streetView -> x : "+x+" y : "+y);
         Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");

@@ -447,6 +447,7 @@ public class FoodMapActivity extends NMapActivity implements OnMapStateChangeLis
     }
 
     public void getStreetView(double x, double y){
+        Logger.log("#90 food streetView -> x : "+x+" y : "+y);
         Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
