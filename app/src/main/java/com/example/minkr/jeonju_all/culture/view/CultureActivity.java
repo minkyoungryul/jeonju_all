@@ -3,7 +3,6 @@ package com.example.minkr.jeonju_all.culture.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +16,7 @@ import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
 import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 
 import java.io.Serializable;
 import java.util.ArrayList;

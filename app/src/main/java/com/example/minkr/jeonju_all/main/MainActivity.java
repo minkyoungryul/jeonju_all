@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity{
         spec.setContent(tag -> {
             return findViewById(android.R.id.tabcontent);
         });
-        spec.setIndicator(createTabView(R.drawable.selector_setting, "설정"));
+        spec.setIndicator(createTabView(R.drawable.selector_setting, "더보기"));
         mTabHost.addTab(spec, MainSettingFrag.class, null);
     }
 

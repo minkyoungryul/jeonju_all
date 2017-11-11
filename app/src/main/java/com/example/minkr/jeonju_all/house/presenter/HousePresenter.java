@@ -7,7 +7,7 @@ import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.house.data.HouseTotalData;
 import com.example.minkr.jeonju_all.house.model.HouseModel;
 import com.example.minkr.jeonju_all.house.view.HouseView;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
 

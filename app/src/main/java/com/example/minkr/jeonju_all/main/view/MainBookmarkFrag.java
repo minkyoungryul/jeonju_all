@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
 

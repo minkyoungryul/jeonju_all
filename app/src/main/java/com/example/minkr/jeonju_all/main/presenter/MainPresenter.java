@@ -3,24 +3,19 @@ package com.example.minkr.jeonju_all.main.presenter;
 import android.content.Context;
 
 import com.example.minkr.jeonju_all.common.presenter.Presenter;
-import com.example.minkr.jeonju_all.kindFood.data.KindFoodDatas;
-import com.example.minkr.jeonju_all.kindFood.data.KindFoodTotalData;
 import com.example.minkr.jeonju_all.kindFood.model.KindFoodModel;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.main.view.MainView;
-import com.example.minkr.jeonju_all.util.Logger;
 import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
 
 import java.util.List;
 
 import io.reactivex.Maybe;
-import io.reactivex.MaybeSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 /**

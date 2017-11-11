@@ -18,7 +18,7 @@ import com.example.minkr.jeonju_all.custom.FoodShareDialog;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
 import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 
 import java.io.Serializable;

@@ -7,7 +7,7 @@ import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.culture.data.CultureTotalData;
 import com.example.minkr.jeonju_all.culture.model.CultureModel;
 import com.example.minkr.jeonju_all.culture.view.CultureView;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
 

@@ -2,7 +2,6 @@ package com.example.minkr.jeonju_all.kindFood.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +16,7 @@ import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.custom.CustomShareDialog;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.kindFood.presenter.KindFoodPresenter;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 
 import java.io.Serializable;

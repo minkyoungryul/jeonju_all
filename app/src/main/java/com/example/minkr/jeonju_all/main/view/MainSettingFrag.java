@@ -1,14 +1,18 @@
 package com.example.minkr.jeonju_all.main.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.minkr.jeonju_all.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -16,6 +20,9 @@ import butterknife.ButterKnife;
  */
 
 public class MainSettingFrag extends Fragment {
+
+    @BindView(R.id.rl_kakao_chatbot)
+    RelativeLayout rl_kakao_chatbot;
 
     @Nullable
     @Override
@@ -38,6 +45,14 @@ public class MainSettingFrag extends Fragment {
     }
 
     private void setListener() {
+        rl_kakao_chatbot.setOnClickListener(v->{
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri uri = Uri.parse("https://pf.kakao.com/_DVxgDu");
+            intent.setData(uri);
+            startActivity(intent);
 
+//            Intent launchIntent = getContext().getPackageManager().getLaunchIntentForPackage("com.kakao.kakaotalk.v2");
+//            startActivity(launchIntent);
+        });
     }
 }

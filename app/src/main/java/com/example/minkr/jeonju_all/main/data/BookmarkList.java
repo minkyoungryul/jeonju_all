@@ -1,4 +1,4 @@
-package com.example.minkr.jeonju_all.main;
+package com.example.minkr.jeonju_all.main.data;
 
 /**
  * Created by minkr on 2017-11-10.
