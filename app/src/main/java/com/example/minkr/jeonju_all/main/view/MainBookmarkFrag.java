@@ -182,4 +182,11 @@ public class MainBookmarkFrag extends Fragment implements MainView {
             ll_empty.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    public void getAddressClick(BookmarkList data) {
+        Intent intent = new Intent(getContext(), BookmarkMapActivity.class);
+        intent.putExtra("data", data);
+        startActivity(intent);
+    }
 }

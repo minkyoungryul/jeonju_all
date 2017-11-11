@@ -1,10 +1,12 @@
 package com.example.minkr.jeonju_all.main.data;
 
+import java.io.Serializable;
+
 /**
  * Created by minkr on 2017-11-10.
  */
 
-public class BookmarkList {
+public class BookmarkList implements Serializable{
     private int id;
     private String type;
     private String title;

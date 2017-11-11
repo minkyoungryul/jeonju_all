@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.house.view.map.NMapCalloutCustomOverlayView;
-import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.example.minkr.jeonju_all.util.Variable;
 import com.nhn.android.maps.NMapActivity;
@@ -391,7 +390,7 @@ public class HouseMap2Activity extends NMapActivity implements OnMapStateChangeL
     }
 
     public void getStreetView(double x, double y){
-        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
+        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);

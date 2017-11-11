@@ -1,4 +1,4 @@
-package com.example.minkr.jeonju_all.culture.view;
+package com.example.minkr.jeonju_all.main.view;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,11 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.culture.data.CultureListData;
-import com.example.minkr.jeonju_all.culture.view.map.NMapCalloutCustomOverlayView;
-import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
 import com.example.minkr.jeonju_all.kindFood.view.map.NMapPOIflagType;
 import com.example.minkr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
+import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.view.map.NMapCalloutCustomOverlayView;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapCompassManager;
@@ -40,8 +39,6 @@ import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -51,13 +48,14 @@ import butterknife.ButterKnife;
  * Created by minkr on 2017-10-26.
  */
 
-public class CultureMapActivity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
+public class BookmarkMapActivity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
         NMapOverlayManager.OnCalloutOverlayViewListener,NMapPOIdataOverlay.OnStateChangeListener{
 
     private final String API_KEY = "5lvyL1UwyDdfnK1Xxig6";
     NMapController mMapController = null;
 
     NMapViewerResourceProvider nMapViewerResourceProvider = null;
+    com.example.minkr.jeonju_all.food.view.map.NMapViewerResourceProvider nMapViewerResourceProvider2 = null;
     NMapOverlayManager nMapOverlayManager;
     NMapLocationManager nMapLocationManager;
     NMapMyLocationOverlay nMapMyLocationOverlay;
@@ -83,7 +81,10 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
     double myLocationX = 0.0;
     double myLocationY = 0.0;
 
-    List<CultureListData> datas;
+    Double x = 0.0;
+    Double y = 0.0;
+
+    BookmarkList data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,9 +93,9 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        datas = (List<CultureListData>) intent.getSerializableExtra("data");
+        data = (BookmarkList) intent.getSerializableExtra("data");
 
-        Logger.log("#27 datas -> "+datas);
+        Logger.log("#80 datas -> "+data);
 
         init();
         setListener();
@@ -120,7 +121,11 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
                         txtLocation.setText("현재위치");
                         stopMyLocation();
                         locationType = 0;
-                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 12);
+                        if (data.getType().toString().equals("모범업소")){
+                            mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosY()), Double.parseDouble(data.getPosX())), 12);
+                        }else{
+                            mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosX()), Double.parseDouble(data.getPosY())), 12);
+                        }
                     }
                 }
 
@@ -138,53 +143,58 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
     private void doLocationThing() {
         //Toast.makeText(this, "위치정보 활용에 동의하셨습니다.", Toast.LENGTH_SHORT).show();
 
-        mMapController = mMapView.getMapController();
+            mMapController = mMapView.getMapController();
 
-        mMapView.setApiKey(API_KEY); // 클라이언트 아이디 값 설정
+            mMapView.setApiKey(API_KEY); // 클라이언트 아이디 값 설정
 
-        mMapView.setScalingFactor(2.0f);
+            mMapView.setScalingFactor(2.0f);
 
-        mMapView.setClickable(true);
+            mMapView.setClickable(true);
 
-        mMapView.setBuiltInZoomControls(true, null);
+            mMapView.setBuiltInZoomControls(true, null);
 
-        mMapView.setOnMapStateChangeListener(this);
-
-
-        nMapViewerResourceProvider = new NMapViewerResourceProvider(this);
-
-        nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
+            mMapView.setOnMapStateChangeListener(this);
 
 
-        int markerId = NMapPOIflagType.PIN;
-        poiData = new NMapPOIdata(datas.size(),nMapViewerResourceProvider);
-        poiData.beginPOIdata(datas.size());
+            nMapViewerResourceProvider = new NMapViewerResourceProvider(this);
+
+            nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
+
+            int markerId = NMapPOIflagType.PIN;
+            poiData = new NMapPOIdata(1,nMapViewerResourceProvider);
+            poiData.beginPOIdata(1);
 
 
-        for (int i = 0; i<datas.size();i++){
-            double x = Double.parseDouble(datas.get(i).getPosX());
-            double y = Double.parseDouble(datas.get(i).getPosY());
-            String homepage = datas.get(i).getUserHomepage();
-            poiData.addPOIitem(x,y,datas.get(i).getTitle(),markerId,i);
-        }
+            if (data.getType().toString().equals("모범업소")){
+                Logger.log("#80 모범 : "+data.getPosY()+" / "+data.getPosX());
+                double x = Double.parseDouble(data.getPosY());
+                double y = Double.parseDouble(data.getPosX());
+                poiData.addPOIitem(x,y,data.getTitle(),markerId,1);
+            }else {
+                Logger.log("#80 음식 : "+data.getPosX()+" / "+data.getPosY());
+                double x = Double.parseDouble(data.getPosX());
+                double y = Double.parseDouble(data.getPosY());
+                poiData.addPOIitem(x,y,data.getTitle(),markerId,1);
+            }
+
+            poiData.endPOIdata();
+            NMapPOIdataOverlay poiDataOverlay = nMapOverlayManager.createPOIdataOverlay(poiData,null);
+
+            poiDataOverlay.showAllPOIdata(0);
+            poiDataOverlay.setOnStateChangeListener((NMapPOIdataOverlay.OnStateChangeListener)this);
+
+            nMapOverlayManager.setOnCalloutOverlayViewListener((NMapOverlayManager.OnCalloutOverlayViewListener)this);
+
+            nMapLocationManager = new NMapLocationManager(this);
+            nMapLocationManager.setOnLocationChangeListener(onMyLocationChangeListener);
+
+            // compass manager
+            nMapCompassManager = new NMapCompassManager(this);
+
+            // create my location overlay
+            nMapMyLocationOverlay = nMapOverlayManager.createMyLocationOverlay(nMapLocationManager, nMapCompassManager);
 
 
-        poiData.endPOIdata();
-        NMapPOIdataOverlay poiDataOverlay = nMapOverlayManager.createPOIdataOverlay(poiData,null);
-
-        poiDataOverlay.showAllPOIdata(0);
-        poiDataOverlay.setOnStateChangeListener((NMapPOIdataOverlay.OnStateChangeListener)this);
-
-        nMapOverlayManager.setOnCalloutOverlayViewListener((NMapOverlayManager.OnCalloutOverlayViewListener)this);
-
-        nMapLocationManager = new NMapLocationManager(this);
-        nMapLocationManager.setOnLocationChangeListener(onMyLocationChangeListener);
-
-        // compass manager
-        nMapCompassManager = new NMapCompassManager(this);
-
-        // create my location overlay
-        nMapMyLocationOverlay = nMapOverlayManager.createMyLocationOverlay(nMapLocationManager, nMapCompassManager);
 
     }
 
@@ -192,7 +202,11 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+            if (data.getType().toString().equals("모범업소")){
+                mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosY()), Double.parseDouble(data.getPosX())), 12);
+            }else{
+                mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosX()), Double.parseDouble(data.getPosY())), 12);
+            }
         }else{
         }
     }
@@ -230,33 +244,22 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
     @Override
     public View onCreateCalloutOverlayView(NMapOverlay nMapOverlay, NMapOverlayItem nMapOverlayItem, Rect rect) {
 
-        String clickStore = nMapOverlayItem.getTitle();
-
-        String name = "";
-        String address = "";
-        String tel = "";
-        String info = "";
-        String img_url = "";
-        Double x = 0.0;
-        Double y = 0.0;
-
-
-        for (int i=0;i<datas.size();i++){
-            if (clickStore.equals(datas.get(i).getTitle())){
-                name = datas.get(i).getTitle();
-                address = datas.get(i).getAddr()+datas.get(i).getAddrDtl();
-                tel = datas.get(i).getTel();
-                info = datas.get(i).getDataContent();
-                img_url = datas.get(i).getImg_url();
-                x = Double.parseDouble(datas.get(i).getPosX());
-                y = Double.parseDouble(datas.get(i).getPosY());
-
-            }else{
-
-            }
+        String name = data.getTitle();
+        String address = data.getAddress();
+        String tel = data.getTel();
+        String homepage = data.getHomepage_url();
+        String img_url = data.getImg_url();
+        if (data.getType().toString().equals("모범업소")){
+            x = Double.parseDouble(data.getPosY());
+            y = Double.parseDouble(data.getPosX());
+        }else{
+            x = Double.parseDouble(data.getPosX());
+            y = Double.parseDouble(data.getPosY());
         }
 
-        return new NMapCalloutCustomOverlayView(CultureMapActivity.this, nMapOverlay, nMapOverlayItem, rect, name, address, tel, info, img_url, x, y, 0);
+
+        return new NMapCalloutCustomOverlayView(BookmarkMapActivity.this, nMapOverlay, nMapOverlayItem, rect, name, address, tel, homepage, img_url, x, y, 1);
+
     }
 
     @Override
@@ -268,8 +271,8 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
 
         Logger.log("#66 poiitem -> "+nMapPOIitem.getId());
 
-        Intent intent = new Intent(CultureMapActivity.this, HouseStoreInfoActivity.class);
-        intent.putExtra("data", datas.get(nMapPOIitem.getId()).getUserHomepage());
+        Intent intent = new Intent(BookmarkMapActivity.this, BookmarkDetailActivity.class);
+        intent.putExtra("data", data.getHomepage_url());
         startActivity(intent);
 
     }
@@ -309,7 +312,7 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
                     imgbtLocation.setImageResource(R.drawable.jeonjulocation);
                     imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
                     txtLocation.setText("전주위치");
-                    Toast.makeText(CultureMapActivity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(BookmarkMapActivity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
                     locationType = 1;
                 }
             }
@@ -355,7 +358,6 @@ public class CultureMapActivity extends NMapActivity implements OnMapStateChange
     }
 
     public void getStreetView(double x, double y){
-        Logger.log("#90 culture streetView -> x : "+y+" y : "+x);
         Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");

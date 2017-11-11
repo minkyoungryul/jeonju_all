@@ -75,6 +75,10 @@ public class MainBookmarkAdapter extends RecyclerView.Adapter<MainBookmarkAdapte
                 return true;
             }
         });
+
+        holder.tv_address.setOnClickListener(v -> {
+            presenter.getAddressClick(data);
+        });
     }
 
     @Override

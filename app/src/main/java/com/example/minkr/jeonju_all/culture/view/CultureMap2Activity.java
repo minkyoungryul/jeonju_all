@@ -120,7 +120,7 @@ public class CultureMap2Activity extends NMapActivity implements OnMapStateChang
                         txtLocation.setText("현재위치");
                         stopMyLocation();
                         locationType = 0;
-                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 12);
+                        mMapController.setMapCenter(new NGeoPoint(Double.parseDouble(data.getPosX()), Double.parseDouble(data.getPosY())), 12);
                     }
                 }
 
@@ -333,7 +333,7 @@ public class CultureMap2Activity extends NMapActivity implements OnMapStateChang
     }
 
     public void getStreetView(double x, double y){
-        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
+        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
