@@ -44,6 +44,12 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         HouseListData data = datas.get(position);
 
+        if(data.isLike()){
+            holder.ib_like.setImageResource(R.drawable.ic_like_p);
+        }else{
+            holder.ib_like.setImageResource(R.drawable.ic_like_n);
+        }
+
         Glide.with(mContext)
                 .load(data.getImg_url())
                 .fitCenter()
@@ -60,6 +66,14 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         holder.tv_address.setOnClickListener(v -> {
             presenter.getAddressClick(data);
         });
+
+        holder.ib_like.setOnClickListener(v->{
+            if(data.isLike()){
+                presenter.deleteDBData(data);
+            }else{
+                presenter.insertDBData(data);
+            }
+        });
     }
 
     @Override
@@ -73,6 +87,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         TextView tv_store_name;
         TextView tv_address;
         TextView tv_content;
+        ImageButton ib_like;
         View view;
 
         public ViewHolder(View itemView) {
@@ -81,6 +96,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
             tv_store_name = (TextView) itemView.findViewById(R.id.tv_store_name);
             tv_address = (TextView) itemView.findViewById(R.id.tv_address);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             this.view = itemView;
         }
 

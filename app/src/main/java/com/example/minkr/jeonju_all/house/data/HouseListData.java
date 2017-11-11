@@ -29,6 +29,18 @@ public class HouseListData implements Serializable{
 
     private String img_url;
 
+
+
+    private boolean isLike = false;
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
+
     public String getImg_url() {
         return img_url;
     }
@@ -92,7 +104,6 @@ public class HouseListData implements Serializable{
     public void setPosY(String posY) {
         this.posY = posY;
     }
-
     @Override
     public String toString() {
         return "HouseListData{" +
@@ -103,7 +114,8 @@ public class HouseListData implements Serializable{
                 ", introContent='" + introContent + '\'' +
                 ", posX='" + posX + '\'' +
                 ", posY='" + posY + '\'' +
-                ", img_url=" + img_url +
+                ", img_url='" + img_url + '\'' +
+                ", isLike=" + isLike +
                 '}';
     }
 }

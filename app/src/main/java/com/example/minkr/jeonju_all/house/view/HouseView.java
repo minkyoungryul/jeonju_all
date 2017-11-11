@@ -2,6 +2,7 @@ package com.example.minkr.jeonju_all.house.view;
 
 import com.example.minkr.jeonju_all.common.view.MvpView;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
+import com.example.minkr.jeonju_all.main.BookmarkList;
 
 import java.util.List;
 
@@ -15,4 +16,8 @@ public interface HouseView extends MvpView{
     void getStoreInfo(HouseListData data);
 
     void getAddressClick(HouseListData data);
+
+    void getHouseDBData(List<BookmarkList> bookmarkLists);
+
+    void isLikeChangeData(HouseListData houseListData);
 }
