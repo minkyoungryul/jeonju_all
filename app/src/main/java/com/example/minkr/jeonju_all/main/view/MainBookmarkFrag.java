@@ -112,6 +112,12 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        datas.clear();
+    }
+
+    @Override
     public void notConnectNetworking() {
 
     }
