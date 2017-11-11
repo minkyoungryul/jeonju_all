@@ -163,7 +163,7 @@
 						android:layout_marginLeft="2dp"
 						android:text="돈가스"
 						android:ellipsize="end"
-						android:maxLines="7"/>
+						android:maxLines="5"/>
 
 					<TextView
 						android:id="@+id/store_price"

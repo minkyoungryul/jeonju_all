@@ -133,4 +133,9 @@ public class MainHomeFrag extends Fragment implements MainView{
     public void deleteData(BookmarkList bookmarkList) {
 
     }
+
+    @Override
+    public void getAddressClick(BookmarkList data) {
+
+    }
 }

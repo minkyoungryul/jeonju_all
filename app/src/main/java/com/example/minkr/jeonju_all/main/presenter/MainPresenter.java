@@ -98,6 +98,10 @@ public class MainPresenter implements Presenter<MainView> {
         view.showDeleteDialog(data);
     }
 
+    public void getAddressClick(BookmarkList data){
+        view.getAddressClick(data);
+    }
+
     public void deleteData(BookmarkList data) {
         Disposable disposable = Maybe.just(data)
                 .map(new Function<BookmarkList, BookmarkList>() {
