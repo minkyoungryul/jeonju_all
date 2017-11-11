@@ -51,7 +51,9 @@ public class FoodBibimbapAdapter extends RecyclerView.Adapter<FoodBibimbapAdapte
         }else{
             holder.ib_like.setImageResource(R.drawable.ic_like_n);
         }
-
+        holder.ib_share.setOnClickListener(v -> {
+            presenter.showDialog(data);
+        });
         holder.tv_store_name.setText(data.getStoreName());
         holder.tv_main_menu.setText(data.getMainMenu());
 
@@ -92,6 +94,7 @@ public class FoodBibimbapAdapter extends RecyclerView.Adapter<FoodBibimbapAdapte
         View itemView;
         ImageButton ib_like;
         ImageView iv_map;
+        ImageButton ib_share;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -101,6 +104,7 @@ public class FoodBibimbapAdapter extends RecyclerView.Adapter<FoodBibimbapAdapte
             tv_address = (TextView) itemView.findViewById(R.id.tv_address);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             iv_map = (ImageView) itemView.findViewById(R.id.iv_map);
+            ib_share = (ImageButton) itemView.findViewById(R.id.ib_share);
             this.itemView = itemView;
         }
 

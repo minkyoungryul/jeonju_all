@@ -11,8 +11,6 @@ import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
 
-import org.reactivestreams.Publisher;
-
 import java.util.List;
 
 import io.reactivex.Flowable;
@@ -84,7 +82,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -118,7 +116,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -152,7 +150,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -186,7 +184,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -220,7 +218,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -317,4 +315,9 @@ public class FoodPresenter implements Presenter<FoodView> {
     public void getAddressClick(FoodListData data) {
         view.getAddressClick(data);
     }
+
+    public void showDialog(FoodListData data) {
+        view.showDialog(data);
+    }
+
 }

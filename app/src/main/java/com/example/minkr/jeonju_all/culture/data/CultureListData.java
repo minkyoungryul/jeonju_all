@@ -32,6 +32,15 @@ public class CultureListData implements Serializable{
     private String userHomepage;
 
     private String img_url;
+    private boolean isLike = false;
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
 
     public String getAddr() {
         return addr;
@@ -126,6 +135,7 @@ public class CultureListData implements Serializable{
                 ", typeCode='" + typeCode + '\'' +
                 ", userHomepage='" + userHomepage + '\'' +
                 ", img_url='" + img_url + '\'' +
+                ", isLike=" + isLike +
                 '}';
     }
 }

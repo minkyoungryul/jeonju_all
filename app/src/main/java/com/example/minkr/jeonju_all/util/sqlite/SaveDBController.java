@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
+import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
 import com.example.minkr.jeonju_all.main.BookmarkList;
 import com.example.minkr.jeonju_all.util.Variable;
@@ -144,5 +146,43 @@ public class SaveDBController {
     public void deleteBookmarkData(BookmarkList bookmarkList) {
         String query= "DELETE FROM " + _SAVE_LIST_TABLE_NAME + " WHERE title = ?";
         db.execSQL(query, new String[]{bookmarkList.getTitle()});
+    }
+
+    public void addHouse(HouseListData data) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("type" , "숙박");
+        contentValues.put("title" , data.getStoreName());
+        contentValues.put("address" , data.getAddress());
+        contentValues.put("tel" , "");
+        contentValues.put("img_url" ,data.getImg_url());
+        contentValues.put("homepage_url" , data.getHomepage());
+        contentValues.put("posX", data.getPosX());
+        contentValues.put("posY", data.getPosY());
+
+        db.insert(_SAVE_LIST_TABLE_NAME, null, contentValues);
+    }
+
+    public void deleteHouse(String type, HouseListData data) {
+        String query = "DELETE FROM "+_SAVE_LIST_TABLE_NAME+" WHERE type = ? and title = ?";
+        db.execSQL(query, new String[]{type, data.getStoreName()});
+    }
+
+    public void addCulture(CultureListData data) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("type" , "문화");
+        contentValues.put("title" , data.getTitle());
+        contentValues.put("address" , data.getAddr()+ " " +data.getAddrDtl());
+        contentValues.put("tel" , data.getTel());
+        contentValues.put("img_url" ,data.getImg_url());
+        contentValues.put("homepage_url" , data.getUserHomepage());
+        contentValues.put("posX", data.getPosX());
+        contentValues.put("posY", data.getPosY());
+
+        db.insert(_SAVE_LIST_TABLE_NAME, null, contentValues);
+    }
+
+    public void deleteCulture(String type, CultureListData data) {
+        String query = "DELETE FROM "+_SAVE_LIST_TABLE_NAME+" WHERE type = ? and title = ?";
+        db.execSQL(query, new String[]{type, data.getTitle()});
     }
 }

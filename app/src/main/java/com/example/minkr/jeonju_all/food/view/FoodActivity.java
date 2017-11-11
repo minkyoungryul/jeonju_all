@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.custom.FoodShareDialog;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
 import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
@@ -387,5 +388,11 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
                 hanok_adapter.notifyDataSetChanged();
                 break;
         }
+    }
+    FoodShareDialog shareDialog;
+    @Override
+    public void showDialog(FoodListData data) {
+        shareDialog = new FoodShareDialog(this, data);
+        shareDialog.show();
     }
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +46,12 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
         CultureListData data = datas.get(position);
         Logger.log("#20 data->"+data.toString());
 
+        if(data.isLike()){
+            holder.ib_like.setImageResource(R.drawable.ic_like_p);
+        }else{
+            holder.ib_like.setImageResource(R.drawable.ic_like_n);
+        }
+
         if(data.getTel() == null || data.getTel().equals(" ")){
             holder.tv_tel.setVisibility(View.GONE);
             holder.iv_call.setVisibility(View.GONE);
@@ -80,6 +87,14 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
         holder.tv_address.setOnClickListener(v -> {
             presenter.getAddressClick(data);
         });
+
+        holder.ib_like.setOnClickListener(v->{
+            if(data.isLike()){
+                presenter.deleteDBData(data);
+            }else{
+                presenter.insertDBData(data);
+            }
+        });
     }
 
     @Override
@@ -96,6 +111,7 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
         TextView tv_tel;
         TextView tv_dot;
         ImageView iv_call;
+        ImageButton ib_like;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -106,6 +122,7 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
             tv_tel = (TextView) itemView.findViewById(R.id.tv_tel);
             tv_dot = (TextView) itemView.findViewById(R.id.tv_dot);
             iv_call = (ImageView) itemView.findViewById(R.id.iv_call);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             this.view = itemView;
         }
 

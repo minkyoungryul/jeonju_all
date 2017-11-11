@@ -10,10 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.house.presenter.HousePresenter;
+import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.util.Logger;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -104,6 +107,7 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
         progressBar.setVisibility(View.GONE);
         datas.addAll(houseListData);
         adapter.notifyDataSetChanged();
+        presenter.getHouseDBData();
     }
 
     @Override
@@ -118,5 +122,35 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
         Intent intent = new Intent(HouseListActivity.this, HouseMap2Activity.class);
         intent.putExtra("data", data);
         startActivity(intent);
+    }
+
+    @Override
+    public void getHouseDBData(List<BookmarkList> bookmarkLists) {
+        Logger.log("#45 bookmarkList ->"+bookmarkLists.toString());
+        for(int i=0; i<datas.size(); i++){
+            for(int j=0; j<bookmarkLists.size(); j++){
+                if(bookmarkLists.get(j).getTitle().equals(datas.get(i).getStoreName())){
+                    datas.get(i).setLike(true);
+                }
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void isLikeChangeData(HouseListData houseListData) {
+        for(int i=0; i<datas.size(); i++){
+            if(datas.get(i).getStoreName().equals(houseListData.getStoreName())){
+                datas.get(i).setLike(houseListData.isLike());
+                Logger.log("#19 change kindFoodList->"+houseListData.toString());
+            }
+        }
+        adapter.notifyDataSetChanged();
+
+        if(houseListData.isLike())
+            Toast.makeText(getContext(), "즐겨찾기 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }

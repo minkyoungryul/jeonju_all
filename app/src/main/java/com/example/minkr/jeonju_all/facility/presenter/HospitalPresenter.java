@@ -108,6 +108,8 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                         view.getOriginalList(hospitalListData);
                     }
                 });
+
+        compositeDisposable.add(disposable);
     }
 
     public void getPostpartumList() {//산후조리원
@@ -127,6 +129,8 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                         view.getPostpartumList(hospitalListData);
                     }
                 });
+
+        compositeDisposable.add(disposable);
     }
 
     public void getDentistList() {
@@ -146,5 +150,6 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                         view.getDentistList(hospitalListData);
                     }
                 });
+        compositeDisposable.add(disposable);
     }
 }
