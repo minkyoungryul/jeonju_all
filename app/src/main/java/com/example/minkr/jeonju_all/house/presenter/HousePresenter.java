@@ -101,6 +101,7 @@ public class HousePresenter implements Presenter<HouseView> {
                     @Override
                     public HouseListData apply(HouseListData houseListData) throws Exception {
                         dbHelper.saveDBController.deleteHouse("숙박",houseListData);
+                        houseListData.setLike(false);
                         return houseListData;
                     }
                 })
@@ -123,6 +124,7 @@ public class HousePresenter implements Presenter<HouseView> {
                     @Override
                     public HouseListData apply(HouseListData houseListData) throws Exception {
                         dbHelper.saveDBController.addHouse(houseListData);
+                        houseListData.setLike(true);
                         return houseListData;
                     }
                 })

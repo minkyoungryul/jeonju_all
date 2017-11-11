@@ -82,7 +82,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -116,7 +116,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -150,7 +150,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -184,7 +184,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()
@@ -218,7 +218,7 @@ public class FoodPresenter implements Presenter<FoodView> {
                 .filter(new Predicate<FoodTotalData>() {
                     @Override
                     public boolean test(FoodTotalData foodTotalData) throws Exception {
-                        return foodTotalData == null ? false : true;
+                        return foodTotalData.getBody().getData() == null ? false : true;
                     }
                 })
                 .toFlowable()

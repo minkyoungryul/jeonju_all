@@ -11,11 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
 import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
+import com.example.minkr.jeonju_all.main.BookmarkList;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -108,6 +110,8 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
         datas.addAll(cultureListData);
         adapter.notifyDataSetChanged();
         progress_bar.setVisibility(View.GONE);
+
+        presenter.getCultureDB();
     }
 
     @Override
@@ -122,5 +126,33 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
         Intent intent = new Intent(CultureActivity.this, CultureMap2Activity.class);
         intent.putExtra("data", data);
         startActivity(intent);
+    }
+
+    @Override
+    public void getCultureDBData(List<BookmarkList> bookmarkLists) {
+        for(int i=0; i<datas.size(); i++){
+            for(int j=0; j<bookmarkLists.size(); j++){
+                if(datas.get(i).getTitle().equals(bookmarkLists.get(j).getTitle())){
+                    datas.get(i).setLike(true);
+                }
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void isLikeChangeData(CultureListData cultureListData) {
+        for(int i=0; i<datas.size(); i++){
+            if(datas.get(i).equals(cultureListData.getTitle())){
+                datas.get(i).setLike(cultureListData.isLike());
+            }
+        }
+        adapter.notifyDataSetChanged();
+
+        if(cultureListData.isLike())
+            Toast.makeText(getContext(), "즐겨찾기 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }
