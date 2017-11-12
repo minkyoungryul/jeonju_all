@@ -117,6 +117,7 @@ public class MainBookmarkFrag extends Fragment implements MainView {
 //        super.onPause();
 //        datas.clear();
 //    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -186,6 +187,7 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     public void deleteData(BookmarkList bookmarkList, int position) {
         Logger.log("#47 delete position ->"+position+",datas size->"+datas.size()+", datas->"+datas.toString());
         datas.remove(bookmarkList);
+//        adapter.notifyItemRemoved(position);
         adapter.notifyDataSetChanged();
         if(datas.size() == 0) {
             btn_all_delete.setVisibility(View.GONE);

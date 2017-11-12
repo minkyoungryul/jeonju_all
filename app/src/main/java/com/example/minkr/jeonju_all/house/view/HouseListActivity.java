@@ -161,6 +161,7 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
+
     HouseShareDialog shareDialog;
     @Override
     public void showDialog(HouseListData data) {
