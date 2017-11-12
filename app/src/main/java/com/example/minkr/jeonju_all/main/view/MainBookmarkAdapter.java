@@ -71,7 +71,7 @@ public class MainBookmarkAdapter extends RecyclerView.Adapter<MainBookmarkAdapte
         holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                presenter.showDeleteDialog(data);
+                presenter.showDeleteDialog(data,position);
                 return true;
             }
         });

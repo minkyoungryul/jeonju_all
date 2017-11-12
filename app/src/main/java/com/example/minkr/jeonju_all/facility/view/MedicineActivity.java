@@ -3,11 +3,13 @@ package com.example.minkr.jeonju_all.facility.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.facility.data.HospitalListData;
 import com.example.minkr.jeonju_all.facility.presenter.MedicinePresenter;
 import com.nhn.android.maps.NMapActivity;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,9 @@ public class MedicineActivity extends NMapActivity implements MedicineView {
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -42,7 +47,7 @@ public class MedicineActivity extends NMapActivity implements MedicineView {
     }
 
     private void init() {
-
+        tv_title.setText("약국");
     }
     private void setListener() {
         ib_back.setOnClickListener(v->finish());
@@ -67,5 +72,10 @@ public class MedicineActivity extends NMapActivity implements MedicineView {
     @Override
     public void getMedicineList(List<HospitalListData> hospitalListData) {
         medicine_datas.addAll(hospitalListData);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

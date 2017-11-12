@@ -16,9 +16,9 @@ public interface MainView extends MvpView{
 
     void allDeleteData();
 
-    void showDeleteDialog(BookmarkList data);
+    void showDeleteDialog(BookmarkList data, int position);
 
-    void deleteData(BookmarkList bookmarkList);
+    void deleteData(BookmarkList bookmarkList, int position);
 
     void getAddressClick(BookmarkList data);
 }

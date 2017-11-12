@@ -4,12 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.facility.data.FacilityListData;
 import com.example.minkr.jeonju_all.facility.presenter.PolicePresenter;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapActivity;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,9 @@ public class PoliceActivity extends NMapActivity implements PoliceView {
 
     @BindView(R.id.ib_back)
     ImageButton ib_back;
+
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     PolicePresenter presenter;
     List<FacilityListData> datas = new ArrayList<>();
@@ -44,7 +49,7 @@ public class PoliceActivity extends NMapActivity implements PoliceView {
     }
 
     private void init() {
-
+        tv_title.setText("지구대");
     }
 
     private void setListener() {
@@ -70,5 +75,10 @@ public class PoliceActivity extends NMapActivity implements PoliceView {
     public void getPoliceList(List<FacilityListData> facilityListData) {
         Logger.log("#22 data->"+facilityListData.toString());
         datas.addAll(facilityListData);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

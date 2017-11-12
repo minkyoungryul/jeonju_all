@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
@@ -34,7 +35,11 @@ public class BookmarkDetailActivity extends AppCompatActivity {
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+
     String url;
+    String type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,11 +49,14 @@ public class BookmarkDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         url = intent.getStringExtra("data");
+        type = intent.getStringExtra("type");
         init();
         setListener();
     }
 
     private void init() {
+        tv_title.setText(type);
+
         mWebView.getSettings().setJavaScriptEnabled(true);
 
         if (url == null || url.equals("")){

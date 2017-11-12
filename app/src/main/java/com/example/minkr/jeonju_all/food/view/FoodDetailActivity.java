@@ -105,6 +105,7 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
         }else {
             Intent intent = new Intent(FoodDetailActivity.this, FoodStoreInfoActivity.class);
             intent.putExtra("storeId", data.getStoreId());
+            intent.putExtra("type", data.getType());
             startActivity(intent);
         }
     }

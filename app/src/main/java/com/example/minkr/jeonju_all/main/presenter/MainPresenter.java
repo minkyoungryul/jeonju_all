@@ -89,15 +89,15 @@ public class MainPresenter implements Presenter<MainView> {
 
     }
 
-    public void showDeleteDialog(BookmarkList data) {
-        view.showDeleteDialog(data);
+    public void showDeleteDialog(BookmarkList data, int position) {
+        view.showDeleteDialog(data, position);
     }
 
     public void getAddressClick(BookmarkList data){
         view.getAddressClick(data);
     }
 
-    public void deleteData(BookmarkList data) {
+    public void deleteData(BookmarkList data, int position) {
         Disposable disposable = Maybe.just(data)
                 .map(new Function<BookmarkList, BookmarkList>() {
                     @Override
@@ -111,7 +111,7 @@ public class MainPresenter implements Presenter<MainView> {
                 .subscribe(new Consumer<BookmarkList>() {
                     @Override
                     public void accept(BookmarkList bookmarkList) throws Exception {
-                        view.deleteData(bookmarkList);
+                        view.deleteData(bookmarkList,position);
                     }
                 });
 

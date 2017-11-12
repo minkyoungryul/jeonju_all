@@ -4,12 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.facility.data.HospitalListData;
 import com.example.minkr.jeonju_all.facility.presenter.HospitalPresenter;
 import com.example.minkr.jeonju_all.facility.presenter.PolicePresenter;
 import com.nhn.android.maps.NMapActivity;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,9 @@ public class HospitalActivity extends NMapActivity implements HospitalView {
 
     @BindView(R.id.ib_back)
     ImageButton ib_back;
+
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     HospitalPresenter presenter;
 
@@ -84,7 +89,7 @@ public class HospitalActivity extends NMapActivity implements HospitalView {
     }
 
     private void init() {
-
+        tv_title.setText("병원");
     }
 
     private void setListener() {
@@ -176,5 +181,10 @@ public class HospitalActivity extends NMapActivity implements HospitalView {
     @Override
     public void getDentistList(List<HospitalListData> hospitalListData) {
         dentist_datas.addAll(hospitalListData);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

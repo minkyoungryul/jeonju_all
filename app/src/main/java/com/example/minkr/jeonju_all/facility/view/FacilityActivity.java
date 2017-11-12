@@ -1,5 +1,6 @@
 package com.example.minkr.jeonju_all.facility.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,5 +84,10 @@ public class FacilityActivity extends AppCompatActivity {
             Intent intent = new Intent(FacilityActivity.this, HealthActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

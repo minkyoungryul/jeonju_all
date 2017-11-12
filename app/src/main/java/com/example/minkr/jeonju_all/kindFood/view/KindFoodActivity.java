@@ -138,6 +138,7 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
         Intent intent = new Intent(KindFoodActivity.this, FoodStoreInfoActivity.class);
         intent.putExtra("storeId", data.getStoreId());
         intent.putExtra("datas",0);
+        intent.putExtra("type", "모범 업소");
         startActivity(intent);
     }
 

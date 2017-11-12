@@ -42,6 +42,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
 
     String storeId;
     int data_map = 0;
+    String type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         storeId = intent.getStringExtra("storeId");
         data_map = intent.getIntExtra("datas",0);
+        type = intent.getStringExtra("type");
         init();
         setListener();
     }
@@ -61,6 +63,7 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
     }
 
     private void init() {
+        tv_title.setText(type);
 
         mWebView.getSettings().setJavaScriptEnabled(true);
 
