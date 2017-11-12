@@ -24,8 +24,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.facility.view.MedicineMapActivity;
+import com.example.minkr.jeonju_all.facility.view.ParkMapActivity;
+import com.example.minkr.jeonju_all.facility.view.PoliceMapActivity;
 import com.example.minkr.jeonju_all.house.view.HouseMap2Activity;
 import com.example.minkr.jeonju_all.house.view.HouseMapActivity;
+import com.example.minkr.jeonju_all.parking.view.ParkingMapActivity;
 import com.nhn.android.maps.NMapOverlay;
 import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.overlay.NMapPOIitem;
@@ -34,11 +38,15 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 
 	private View mCalloutView;
 	private TextView mCalloutText;
-	private TextView txtAddress,txtTel,txtinfo,txtRoad,txtStreet,txtceo,txtceoo;
+	private TextView txtAddress,txtTel,txtinfo,txtRoad,txtStreet,txtceo,txtceoo,txtStorePrice;
 	private ImageView imgStore,imgLike,imgRecommand;
 
 	HouseMapActivity house;
 	HouseMap2Activity house2;
+	PoliceMapActivity police;
+	MedicineMapActivity medicine;
+	ParkMapActivity park;
+	ParkingMapActivity parking;
 
 	public NMapCalloutCustomOverlayView(Context context, NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds, String name,
                                         String address, String tel, String info, String url, Double x, Double y, int type) {
@@ -48,8 +56,16 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 
 		if (type == 0){
 			house = (HouseMapActivity) getContext();
-		}else{
+		}else if (type == 1){
 			house2 = (HouseMap2Activity) getContext();
+		}else if (type == 10){
+			police = (PoliceMapActivity)getContext();
+		}else if (type == 20){
+			medicine = (MedicineMapActivity)getContext();
+		}else if (type == 30){
+			park = (ParkMapActivity)getContext();
+		}else{
+			parking = (ParkingMapActivity)getContext();
 		}
 
 
@@ -71,6 +87,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtinfo = (TextView)mCalloutView.findViewById(R.id.store_menu);
 		txtRoad = (TextView)mCalloutView.findViewById(R.id.bt_map_search);
 		txtStreet = (TextView)mCalloutView.findViewById(R.id.bt_map_street);
+		txtStorePrice = (TextView)mCalloutView.findViewById(R.id.store_price);
 
 		imgLike = (ImageView)mCalloutView.findViewById(R.id.img_map_like);
 		imgStore = (ImageView)mCalloutView.findViewById(R.id.img_store);
@@ -86,11 +103,16 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtAddress.setText(address);
 		txtTel.setText(tel);
 		txtinfo.setText(info);
-		Glide.with(getContext())
-				.load(url)
-				.fitCenter()
-				.into(imgStore);
 
+		if (type == 10 || type == 20 || type == 30 || type == 40){
+			imgStore.setVisibility(GONE);
+			txtStorePrice.setVisibility(GONE);
+		}else {
+			Glide.with(getContext())
+					.load(url)
+					.fitCenter()
+					.into(imgStore);
+		}
 
 		txtRoad.setOnClickListener(new OnClickListener() {
 			@Override
@@ -99,8 +121,16 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 
 				if (type == 0) {
 					house.setRoad(name);
-				}else{
+				}else if (type == 1){
 					house2.setRoad(name);
+				}else if (type == 10){
+					police.setRoad(name);
+				}else if (type == 20){
+					medicine.setRoad(name);
+				}else if (type == 30){
+					park.setRoad(name);
+				}else{
+					parking.setRoad(name);
 				}
 
 
@@ -113,8 +143,16 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 
 				if (type == 0){
 					house.getStreetView(x,y);
-				}else{
+				}else if (type == 0){
 					house2.getStreetView(x,y);
+				}else if (type == 10){
+					police.getStreetView(y,x);
+				}else if (type == 20){
+					medicine.getStreetView(y,x);
+				}else if (type == 30){
+					park.getStreetView(x,y);
+				}else{
+					parking.getStreetView(y,x);
 				}
 
 			}

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-        android:gravity="center"
-        >
+        android:gravity="center">
 
         <ImageButton
             android:id="@+id/ib_back"
@@ -34,13 +39,67 @@
             android:visibility="invisible"/>
     </LinearLayout>
 
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.nhn.android.maps.NMapView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/mapView"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp">
+
+                <ImageButton
+                    android:id="@+id/imgbt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mylocation"
+                    android:background="@drawable/mylocation"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/txtLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="현재위치" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="invisible"
+                android:background="#50000000"></LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBarMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminateTint="@color/brown"
+                />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
 
-    <com.nhn.android.maps.NMapView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.nhn.android.maps.NMapView>
-</LinearLayout>
+
+
+</FrameLayout>
