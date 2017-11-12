@@ -12,4 +12,6 @@ public interface FoodDetailView extends MvpView {
     void getAddressClick(FoodListData data);
 
     void isLikeChangeData(FoodListData foodListData);
+
+    void showDialog(FoodListData data);
 }

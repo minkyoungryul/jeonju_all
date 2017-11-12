@@ -15,9 +15,6 @@ import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodDetailPresenter;
-import com.example.minkr.jeonju_all.food.presenter.FoodPresenter;
-import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
-import com.example.minkr.jeonju_all.kindFood.view.KindFoodMap2Activity;
 
 import java.util.List;
 
@@ -57,7 +54,9 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
         }else{
             holder.ib_like.setImageResource(R.drawable.ic_like_n);
         }
-
+        holder.ib_share.setOnClickListener(v -> {
+            presenter.showDialog(data);
+        });
         holder.tv_store_name.setText(data.getStoreName());
 
         holder.tv_main_menu.setText(data.getMainMenu());
@@ -118,6 +117,7 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
         TextView tv_time;
         ImageView iv_map;
         ImageView iv_call;
+        ImageButton ib_share;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -131,6 +131,7 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             iv_map = (ImageView) itemView.findViewById(R.id.iv_map);
             iv_call = (ImageView) itemView.findViewById(R.id.iv_call);
+            ib_share = (ImageButton) itemView.findViewById(R.id.ib_share);
             this.itemView = itemView;
         }
 

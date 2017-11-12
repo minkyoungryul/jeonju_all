@@ -99,4 +99,7 @@ public class FoodDetailPresenter implements Presenter<FoodDetailView> {
 
         compositeDisposable.add(disposable);
     }
+    public void showDialog(FoodListData data) {
+        view.showDialog(data);
+    }
 }

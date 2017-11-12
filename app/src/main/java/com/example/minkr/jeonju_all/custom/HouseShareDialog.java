@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.food.data.FoodListData;
+import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.facebook.share.model.ShareLinkContent;
@@ -43,10 +43,10 @@ public class HouseShareDialog extends Dialog {
 
     Context mContext;
 
-    FoodListData data;
+    HouseListData data;
     private String url;
 
-    public HouseShareDialog(@NonNull Context context, FoodListData data) {
+    public HouseShareDialog(@NonNull Context context, HouseListData data) {
         super(context);
         mContext = context;
         this.data = data;
@@ -63,8 +63,6 @@ public class HouseShareDialog extends Dialog {
         Logger.log("data ->"+data.toString());
         init();
         setListener();
-
-        url = "https://store.naver.com/restaurants/detail?id="+data.getStoreId();
 
     }
     private void init() {
@@ -90,10 +88,10 @@ public class HouseShareDialog extends Dialog {
 
         FeedTemplate params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder(data.getStoreName(),
-                        data.getMainImg(),
+                        data.getImg_url(),
                         LinkObject.newBuilder().setWebUrl(url)
                                 .setMobileWebUrl(url).build())
-                        .setDescrption(data.getNewAddr())
+                        .setDescrption(data.getAddress())
                         .build())
                 /*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
                         .setSharedCount(30).setViewCount(40).build())*/
@@ -126,7 +124,7 @@ public class HouseShareDialog extends Dialog {
 
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentTitle("페이스북 공유 링크입니다.")
-                .setImageUrl(Uri.parse(data.getMainImg()))
+                .setImageUrl(Uri.parse(data.getImg_url()))
                 .setContentUrl(Uri.parse(url))
                 //.setContentDescription(data.getName(),data.getAddress(),data.getPrice(),data.getFoodName())
                 //.setContentDescription("1,2,3,4")

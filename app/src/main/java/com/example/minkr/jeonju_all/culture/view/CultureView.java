@@ -18,4 +18,6 @@ public interface CultureView extends MvpView {
     void getCultureDBData(List<BookmarkList> bookmarkLists);
 
     void isLikeChangeData(CultureListData cultureListData);
+
+    void showDialog(CultureListData data);
 }

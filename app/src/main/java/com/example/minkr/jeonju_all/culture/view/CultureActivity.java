@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
+import com.example.minkr.jeonju_all.custom.CultureShareDialog;
 import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
 
@@ -153,5 +154,12 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
             Toast.makeText(getContext(), "즐겨찾기 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    CultureShareDialog shareDialog;
+    @Override
+    public void showDialog(CultureListData data) {
+        shareDialog = new CultureShareDialog(this, data);
+        shareDialog.show();
     }
 }
