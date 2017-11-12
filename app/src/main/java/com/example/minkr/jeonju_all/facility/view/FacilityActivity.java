@@ -11,14 +11,15 @@ import android.widget.RelativeLayout;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.facility.data.FacilityListData;
+import com.example.minkr.jeonju_all.facility.data.HealthListData;
 import com.example.minkr.jeonju_all.facility.data.HospitalListData;
 import com.example.minkr.jeonju_all.facility.data.ParkListData;
+import com.example.minkr.jeonju_all.facility.presenter.HealthPresenter;
 import com.example.minkr.jeonju_all.facility.presenter.MedicinePresenter;
 import com.example.minkr.jeonju_all.facility.presenter.ParkPresenter;
 import com.example.minkr.jeonju_all.facility.presenter.PolicePresenter;
 import com.example.minkr.jeonju_all.parking.data.ParkingListData;
 import com.example.minkr.jeonju_all.parking.presenter.ParkingPresenter;
-import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
 import com.example.minkr.jeonju_all.parking.view.ParkingMapActivity;
 import com.example.minkr.jeonju_all.parking.view.ParkingVIew;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -34,7 +35,7 @@ import butterknife.ButterKnife;
  * Created by minkr on 2017-11-07.
  */
 
-public class FacilityActivity extends AppCompatActivity implements PoliceView, MedicineView, ParkView, ParkingVIew{
+public class FacilityActivity extends AppCompatActivity implements PoliceView, MedicineView, ParkView, ParkingVIew, HealthView{
 
     @BindView(R.id.rl_health)
     RelativeLayout rl_health;
@@ -69,6 +70,9 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     ParkingPresenter parkingPresenter;
     List<ParkingListData> parking_datas = new ArrayList<>();
 
+    HealthPresenter healthPresenter;
+    List<HealthListData> health_datas = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +94,10 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         parkingPresenter = new ParkingPresenter();
         parkingPresenter.attachView(this);
         parkingPresenter.getParkingList();
+
+        healthPresenter = new HealthPresenter();
+        healthPresenter.attachView(this);
+        healthPresenter.getHealthList();
 
         setListener();
     }
@@ -127,7 +135,8 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         });
 
         rl_health.setOnClickListener(v->{
-            Intent intent = new Intent(FacilityActivity.this, HealthActivity.class);
+            Intent intent = new Intent(FacilityActivity.this, HealthMapActivity.class);
+            intent.putExtra("data", (Serializable) health_datas);
             startActivity(intent);
         });
     }
@@ -148,6 +157,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         medicinePresenter.detachView();
         parkPresenter.detachView();
         parkingPresenter.detachView();
+        healthPresenter.detachView();
         super.onDestroy();
     }
 
@@ -173,5 +183,11 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     public void getParkingList(List<ParkingListData> parkingListData) {
         parking_datas.addAll(parkingListData);
         Logger.log("#25 data -> "+parking_datas);
+    }
+
+    @Override
+    public void getHealthList(List<HealthListData> healthListData) {
+        health_datas.addAll(healthListData);
+        Logger.log("#26 data -> "+health_datas);
     }
 }
