@@ -25,7 +25,6 @@ import com.example.minkr.jeonju_all.facility.presenter.ParkPresenter;
 import com.example.minkr.jeonju_all.facility.presenter.PolicePresenter;
 import com.example.minkr.jeonju_all.parking.data.ParkingListData;
 import com.example.minkr.jeonju_all.parking.presenter.ParkingPresenter;
-import com.example.minkr.jeonju_all.parking.view.ParkingActivity;
 import com.tsengvn.typekit.TypekitContextWrapper;
 import com.example.minkr.jeonju_all.parking.view.ParkingMapActivity;
 import com.example.minkr.jeonju_all.parking.view.ParkingVIew;
@@ -185,7 +184,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         });
 
         rl_hospital.setOnClickListener(v->{
-            Intent intent = new Intent(FacilityActivity.this, HospitalActivity.class);
+            Intent intent = new Intent(FacilityActivity.this, HospitalMapActivity.class);
             intent.putExtra("type","병원");
             startActivity(intent);
         });
@@ -321,7 +320,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
             }else if(hospitalListData.get(i).getMediCdmStr().equals("안과")){
                 clinic_eye_datas.addAll(hospitalListData);
             }else if(hospitalListData.get(i).getMediCdmStr().equals("재활의학과")){
-                clinic_neuro_datas.addAll(hospitalListData);
+                clinic_rehabit_datas.addAll(hospitalListData);
             }else if(hospitalListData.get(i).getMediCdmStr().equals("정신건강의학과")){
                 clinic_psy_datas.addAll(hospitalListData);
             }else if(hospitalListData.get(i).getMediCdmStr().equals("치과")){

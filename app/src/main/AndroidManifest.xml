@@ -155,7 +155,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".facility.view.HospitalActivity"
+            android:name=".facility.view.HospitalMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
