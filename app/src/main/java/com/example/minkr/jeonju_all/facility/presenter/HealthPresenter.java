@@ -59,7 +59,7 @@ public class HealthPresenter implements Presenter<HealthView> {
                         return healthTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<HealthListData>>() {
                     @Override

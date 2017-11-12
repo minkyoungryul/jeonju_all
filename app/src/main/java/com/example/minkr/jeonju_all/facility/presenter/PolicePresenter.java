@@ -55,7 +55,7 @@ public class PolicePresenter implements Presenter<PoliceView> {
                         return facilityTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<FacilityListData>>() {
                     @Override

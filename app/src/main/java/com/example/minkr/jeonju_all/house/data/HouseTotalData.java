@@ -9,7 +9,7 @@ import org.simpleframework.xml.Root;
 @Root(name = "rfcOpenApi")
 public class HouseTotalData {
 
-    @Element(name = "body")
+    @Element(name = "body", required = false)
     private HouseBodyData body;
 
     public HouseBodyData getBody() {

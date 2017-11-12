@@ -57,7 +57,7 @@ public class MedicinePresenter implements Presenter<MedicineView> {
                         return hospitalTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<HospitalListData>>() {
                     @Override

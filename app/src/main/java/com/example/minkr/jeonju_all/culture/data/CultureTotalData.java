@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 @Root(name = "rfcOpenApi")
 public class CultureTotalData {
 
-    @Element(name = "body")
+    @Element(name = "body", required = false)
     private CultureBodyData body;
 
     public CultureBodyData getBody() {

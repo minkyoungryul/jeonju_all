@@ -13,7 +13,7 @@ import java.util.List;
 @Root(name = "data")
 public class KindFoodDatas {
 
-    @ElementList(inline = true)
+    @ElementList(inline = true, required = false)
     private List<KindFoodListData> list;
 
     public List<KindFoodListData> getList() {
