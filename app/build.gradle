@@ -17,8 +17,10 @@ apply plugin: 'com.jakewharton.butterknife'
 //apply plugin: 'me.tatarka.retrolambda' // ----- add
 
 android {
+
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
+
     defaultConfig {
         applicationId "com.example.minkr.jeonju_all"
         minSdkVersion 16
@@ -28,6 +30,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+//    C:\Users\minkr\AndroidStudioProjects\Jeonju_all\keystore\jeonju_all.jks
+//    keyAlias : command
+//    password : 01072245741
+
+
     buildTypes {
         release {
             zipAlignEnabled true  // apk 최적화
