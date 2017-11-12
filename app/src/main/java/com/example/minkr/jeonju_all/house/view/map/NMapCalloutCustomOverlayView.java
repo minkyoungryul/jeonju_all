@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.facility.view.HealthMapActivity;
+import com.example.minkr.jeonju_all.facility.view.HospitalMapActivity;
 import com.example.minkr.jeonju_all.facility.view.MedicineMapActivity;
 import com.example.minkr.jeonju_all.facility.view.ParkMapActivity;
 import com.example.minkr.jeonju_all.facility.view.PoliceMapActivity;
@@ -49,6 +50,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 	ParkMapActivity park;
 	ParkingMapActivity parking;
 	HealthMapActivity health;
+	HospitalMapActivity hospital;
 
 	public NMapCalloutCustomOverlayView(Context context, NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds, String name,
                                         String address, String tel, String info, String url, Double x, Double y, int type) {
@@ -68,8 +70,10 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 			park = (ParkMapActivity)getContext();
 		}else if (type == 40){
 			parking = (ParkingMapActivity)getContext();
-		}else{
+		}else if (type == 50){
 			health = (HealthMapActivity)getContext();
+		}else{
+			hospital = (HospitalMapActivity)getContext();
 		}
 
 
@@ -93,7 +97,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtStreet = (TextView)mCalloutView.findViewById(R.id.bt_map_street);
 		txtStorePrice = (TextView)mCalloutView.findViewById(R.id.store_price);
 
-		imgLike = (ImageView)mCalloutView.findViewById(R.id.img_map_like);
+		//imgLike = (ImageView)mCalloutView.findViewById(R.id.img_map_like);
 		imgStore = (ImageView)mCalloutView.findViewById(R.id.img_store);
 		imgRecommand = (ImageView)mCalloutView.findViewById(R.id.img_recommand);
 
@@ -108,7 +112,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtTel.setText(tel);
 		txtinfo.setText(info);
 
-		if (type == 10 || type == 20 || type == 30 || type == 40 || type == 50){
+		if (type == 10 || type == 20 || type == 30 || type == 40 || type == 50 || type == 60){
 			imgStore.setVisibility(GONE);
 			txtStorePrice.setVisibility(GONE);
 		}else {
@@ -135,8 +139,10 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 					park.setRoad(name);
 				}else if (type == 40){
 					parking.setRoad(name);
-				}else{
+				}else if (type == 50){
 					health.setRoad(name);
+				}else{
+					hospital.setRoad(name);
 				}
 
 
@@ -159,8 +165,10 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 					park.getStreetView(x,y);
 				}else if (type == 40){
 					parking.getStreetView(y,x);
-				}else{
+				}else if (type == 50){
 					health.getStreetView(y,x);
+				}else{
+					hospital.getStreetView(y,x);
 				}
 
 			}

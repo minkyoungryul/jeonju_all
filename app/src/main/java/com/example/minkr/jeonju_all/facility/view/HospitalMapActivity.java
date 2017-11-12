@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.facility.data.HealthListData;
+import com.example.minkr.jeonju_all.facility.data.HospitalListData;
 import com.example.minkr.jeonju_all.house.view.map.NMapCalloutCustomOverlayView;
 import com.example.minkr.jeonju_all.kindFood.view.map.NMapPOIflagType;
 import com.example.minkr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
@@ -102,8 +103,19 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     double myLocationX = 0.0;
     double myLocationY = 0.0;
 
+    int listPosition = 0;
 
-    List<HealthListData> datas;
+    ArrayList<String> list1 = new ArrayList<>();
+    ArrayList<String> list2 = new ArrayList<>();
+    ArrayList<String> list3 = new ArrayList<>();
+    ArrayList<String> list4 = new ArrayList<>();
+
+    ArrayAdapter spinnerAdapter;
+    ArrayAdapter hospitalAdapter;
+
+
+    List<HospitalListData> datas,hospital_all_datas,hospital_total_datas,hospital_nomarl_datas,hospital_grand_datas,hospital_child_datas,
+            hospital_dentist_datas,hospital_korea_datas;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,11 +124,18 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        datas = (List<HealthListData>) intent.getSerializableExtra("data");
+        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");
+        hospital_total_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_total_datas");
+        hospital_nomarl_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_nomarl_datas");
+        hospital_grand_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_grand_datas");
+        hospital_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_child_datas");
+        hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
+        hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
 
         tv_title.setText("병원");
 
-        Logger.log("#22 onCreate datas -> "+datas);
+        Logger.log("#22 onCreate datas -> "+hospital_all_datas);
+        Logger.log("#22 onCreate datas -> "+hospital_total_datas);
 
         setSpinnerItem();
         init();
@@ -124,20 +143,18 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     }
 
     public void init(){
-        //doLocationThing();
+        doLocationThing();
     }
 
     public void setSpinnerItem(){
-        ArrayList<String> list1 = new ArrayList<>();
-        list1.add("선택");
+
         list1.add("병원");
         list1.add("클리릭");
         list1.add("한의원");
         list1.add("산후조리원");
         list1.add("치과의원");
 
-        ArrayList<String> list2 = new ArrayList<>();
-        list2.add("선택");
+        list2.add("전체");
         list2.add("종합병원");
         list2.add("일반병원");
         list2.add("요양병원");
@@ -145,12 +162,28 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         list2.add("치과병원");
         list2.add("한방병원");
 
-        ArrayAdapter spinnerAdapter;
+        list3.add("전체");
+        list3.add("내과");
+        list3.add("소아청소년과");
+        list3.add("이비인후과");
+        list3.add("가정의학과");
+        list3.add("일반의원");
+        list3.add("산부인과");
+        list3.add("피부과");
+        list3.add("정형외과");
+        list3.add("외과");
+        list3.add("안과");
+        list3.add("재활의학과");
+        list3.add("정신의학과");
+        list3.add("치과");
+        list3.add("신경외과");
+
+        list4.add("-");
+
         spinnerAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,list1);
         spinner1.setAdapter(spinnerAdapter);
 
-        ArrayAdapter hospitalAdapter;
-        hospitalAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,list2);
+        hospitalAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,list4);
         spinner2.setAdapter(hospitalAdapter);
     }
 
@@ -186,8 +219,78 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
+
+                if (position == 0){
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list2);
+                    listPosition = 0;
+                }else if (position == 1){
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list3);
+                    listPosition = 1;
+                }else if (position == 2){
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list4);
+                    listPosition = 2;
+                }else if (position == 3){
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list4);
+                    listPosition = 3;
+                }else if (position == 4){
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list4);
+                    listPosition = 4;
+                }else{
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list4);
+                    listPosition = 5;
+                }
+
+                spinner2.setAdapter(hospitalAdapter);
+
+                //Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
                 Logger.log("#90 item "+position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                poiData.removeAllPOIdata();
+                nMapOverlayManager.clearOverlays();
+
+                if (listPosition == 0){//병원
+                    if (position == 0){//전체
+                        datas = hospital_all_datas;
+                    }else if (position == 1){//종합병원
+                        datas = hospital_total_datas;
+                    }else if (position == 2){//일반병원
+                        datas = hospital_nomarl_datas;
+                    }else if (position == 3){//요양병원
+                        datas = hospital_grand_datas;
+                    }else if (position == 4){//아동병원
+                        datas = hospital_child_datas;
+                    }else if (position == 5){//치과병원
+                        datas = hospital_dentist_datas;
+                    }else{//한방병원
+                        datas = hospital_korea_datas;
+                    }
+                }else if (listPosition == 1){
+
+                }else if (listPosition == 2){
+
+                }else if (listPosition == 3){
+
+                }else if (listPosition == 4){
+
+                }else{
+
+                }
+
+                Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
+
+                doLocationThing();
+
             }
 
             @Override
@@ -231,7 +334,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
             }else{
                 double x = Double.parseDouble(datas.get(i).getPosX());
                 double y = Double.parseDouble(datas.get(i).getPosY());
-                poiData.addPOIitem(x,y,datas.get(i).getTitle(),markerId,0);
+                poiData.addPOIitem(x,y,datas.get(i).getMediName(),markerId,0);
             }
         }
 
@@ -311,11 +414,11 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
 
         for (int i=0;i<datas.size();i++){
-            if (clickStore.equals(datas.get(i).getTitle())){
-                name = datas.get(i).getTitle();
+            if (clickStore.equals(datas.get(i).getMediName())){
+                name = datas.get(i).getMediName();
                 address = datas.get(i).getAddress();
-                tel = datas.get(i).getTel()+" / "+datas.get(i).getTime();
-                type = datas.get(i).getFee();
+                tel = datas.get(i).getMediTel()+"(063)";
+                type = datas.get(i).getMediConDate()+"("+datas.get(i).getMediStime()+" ~ "+datas.get(i).getMediEtime()+")";
                 x = Double.parseDouble(datas.get(i).getPosX());
                 y = Double.parseDouble(datas.get(i).getPosY());
             }else{
@@ -323,7 +426,8 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
             }
         }
 
-        return new NMapCalloutCustomOverlayView(HospitalMapActivity.this, nMapOverlay, nMapOverlayItem, rect, name, address, tel, type, ceoName, x, y, 50);
+
+        return new NMapCalloutCustomOverlayView(HospitalMapActivity.this, nMapOverlay, nMapOverlayItem, rect, name, address, tel, type, ceoName, x, y, 60);
     }
 
     @Override

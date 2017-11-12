@@ -66,7 +66,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtStreet = (TextView)mCalloutView.findViewById(R.id.bt_map_street);
 		//txtNavi = (TextView)mCalloutView.findViewById(R.id.bt_map_navi);
 
-		imgLike = (ImageView)mCalloutView.findViewById(R.id.img_map_like);
+		//imgLike = (ImageView)mCalloutView.findViewById(R.id.img_map_like);
 		imgStore = (ImageView)mCalloutView.findViewById(R.id.img_store);
 		//mRightArrow = findViewById(R.id.callout_rightArrow);
 
