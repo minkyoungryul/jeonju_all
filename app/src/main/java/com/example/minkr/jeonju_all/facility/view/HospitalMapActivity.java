@@ -149,7 +149,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     public void setSpinnerItem(){
 
         list1.add("병원");
-        list1.add("클리릭");
+        list1.add("클리닉");
         list1.add("한의원");
         list1.add("산후조리원");
         list1.add("치과의원");
@@ -180,10 +180,12 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
         list4.add("-");
 
-        spinnerAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,list1);
+        spinnerAdapter = new ArrayAdapter(this,R.layout.spinner_center,list1);
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_center);
         spinner1.setAdapter(spinnerAdapter);
 
-        hospitalAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,list4);
+        hospitalAdapter = new ArrayAdapter(this,R.layout.spinner_center,list4);
+        hospitalAdapter.setDropDownViewResource(R.layout.spinner_center);
         spinner2.setAdapter(hospitalAdapter);
     }
 
@@ -221,25 +223,26 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0){
-                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list2);
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list2);
                     listPosition = 0;
                 }else if (position == 1){
-                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list3);
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list3);
                     listPosition = 1;
                 }else if (position == 2){
-                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list4);
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 2;
                 }else if (position == 3){
-                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list4);
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 3;
                 }else if (position == 4){
-                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list4);
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 4;
                 }else{
-                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.support_simple_spinner_dropdown_item,list4);
+                    hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 5;
                 }
 
+                hospitalAdapter.setDropDownViewResource(R.layout.spinner_center);
                 spinner2.setAdapter(hospitalAdapter);
 
                 //Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
@@ -287,7 +290,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
                 }
 
-                Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
+                //Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
 
                 doLocationThing();
 
