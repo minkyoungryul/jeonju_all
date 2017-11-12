@@ -8,13 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.custom.FoodDetailDialog;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodDetailPresenter;
 import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
 import com.example.minkr.jeonju_all.util.Logger;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.Serializable;
 import java.util.List;
@@ -36,6 +39,9 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
 
     @BindView(R.id.ib_map)
     ImageButton ib_map;
+
+    @BindView(R.id.tv_food_detail)
+    TextView tv_food_detail;
 
     List<FoodListData> datas;
     LinearLayoutManager mLayoutManager;
@@ -60,6 +66,8 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
     }
 
     private void init() {
+        tv_food_detail.setText(datas.get(0).getType());
+
         mLayoutManager = new LinearLayoutManager(this);
         adapter = new FoodDetailAdapter(this, datas, presenter);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -141,6 +149,13 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
             Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
+    FoodDetailDialog shareDialog;
+    @Override
+    public void showDialog(FoodListData data) {
+        shareDialog = new FoodDetailDialog(this, data);
+        shareDialog.show();
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
@@ -157,5 +172,10 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
             setResult(500, intent);
         }
         finish();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

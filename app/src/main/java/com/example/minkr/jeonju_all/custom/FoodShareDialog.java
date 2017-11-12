@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
-import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -131,7 +130,7 @@ public class FoodShareDialog extends Dialog {
                 //.setContentDescription(data.getName(),data.getAddress(),data.getPrice(),data.getFoodName())
                 //.setContentDescription("1,2,3,4")
                 .build();
-        ShareDialog shareDialog = new ShareDialog((KindFoodActivity) this.mContext);
+        ShareDialog shareDialog = new ShareDialog(this.getOwnerActivity());
         shareDialog.show(content, ShareDialog.Mode.FEED);
     }
 

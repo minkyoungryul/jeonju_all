@@ -2,7 +2,7 @@ package com.example.minkr.jeonju_all.food.view;
 
 import com.example.minkr.jeonju_all.common.view.MvpView;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 
 import java.util.List;
 

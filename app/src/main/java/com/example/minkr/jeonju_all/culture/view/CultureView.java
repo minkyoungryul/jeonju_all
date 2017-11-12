@@ -2,7 +2,7 @@ package com.example.minkr.jeonju_all.culture.view;
 
 import com.example.minkr.jeonju_all.common.view.MvpView;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 
 import java.util.List;
 
@@ -18,4 +18,6 @@ public interface CultureView extends MvpView {
     void getCultureDBData(List<BookmarkList> bookmarkLists);
 
     void isLikeChangeData(CultureListData cultureListData);
+
+    void showDialog(CultureListData data);
 }

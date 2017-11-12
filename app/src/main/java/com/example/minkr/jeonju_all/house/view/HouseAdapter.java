@@ -1,8 +1,6 @@
 package com.example.minkr.jeonju_all.house.view;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +47,6 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         }else{
             holder.ib_like.setImageResource(R.drawable.ic_like_n);
         }
-
         Glide.with(mContext)
                 .load(data.getImg_url())
                 .fitCenter()
@@ -65,6 +62,10 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
 
         holder.tv_address.setOnClickListener(v -> {
             presenter.getAddressClick(data);
+        });
+
+        holder.ib_share.setOnClickListener(v -> {
+            presenter.showDialog(data);
         });
 
         holder.ib_like.setOnClickListener(v->{
@@ -88,6 +89,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         TextView tv_address;
         TextView tv_content;
         ImageButton ib_like;
+        ImageButton ib_share;
         View view;
 
         public ViewHolder(View itemView) {
@@ -97,6 +99,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
             tv_address = (TextView) itemView.findViewById(R.id.tv_address);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            ib_share = (ImageButton) itemView.findViewById(R.id.ib_share);
             this.view = itemView;
         }
 

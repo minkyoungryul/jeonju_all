@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.kindFood.view.map.NMapPOIflagType;
 import com.example.minkr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.main.view.map.NMapCalloutCustomOverlayView;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapActivity;

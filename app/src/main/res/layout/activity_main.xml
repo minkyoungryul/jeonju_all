@@ -10,12 +10,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
-        <ImageView
+        android:layout_marginTop="5dp">
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/img_font_big"-->
+            <!--android:layout_centerHorizontal="true"/>-->
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_font_big"
+            android:text="전주의 모든 것"
+            android:textSize="25dp"
+            android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 

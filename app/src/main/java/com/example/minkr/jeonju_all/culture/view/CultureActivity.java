@@ -3,7 +3,6 @@ package com.example.minkr.jeonju_all.culture.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,8 +15,9 @@ import android.widget.Toast;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
+import com.example.minkr.jeonju_all.custom.CultureShareDialog;
 import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -154,5 +154,12 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
             Toast.makeText(getContext(), "즐겨찾기 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    CultureShareDialog shareDialog;
+    @Override
+    public void showDialog(CultureListData data) {
+        shareDialog = new CultureShareDialog(this, data);
+        shareDialog.show();
     }
 }

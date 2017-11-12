@@ -1,4 +1,4 @@
-package com.example.minkr.jeonju_all.main;
+package com.example.minkr.jeonju_all.main.data;
 
 import java.io.Serializable;
 

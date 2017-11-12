@@ -15,7 +15,7 @@ import com.example.minkr.jeonju_all.facility.view.FacilityActivity;
 import com.example.minkr.jeonju_all.food.view.FoodActivity;
 import com.example.minkr.jeonju_all.house.view.HouseListActivity;
 import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 
 import java.util.List;

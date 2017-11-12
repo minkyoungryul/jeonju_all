@@ -8,7 +8,7 @@ import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.kindFood.data.KindFoodListData;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Variable;
 
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ import java.util.List;
 
 import io.reactivex.Maybe;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by minkr on 2017-11-09.

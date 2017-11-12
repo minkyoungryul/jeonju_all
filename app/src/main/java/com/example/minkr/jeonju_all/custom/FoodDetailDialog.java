@@ -12,8 +12,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.house.data.HouseListData;
-import com.example.minkr.jeonju_all.house.view.HouseListActivity;
+import com.example.minkr.jeonju_all.food.data.FoodListData;
+import com.example.minkr.jeonju_all.food.view.FoodDetailActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -32,7 +32,7 @@ import butterknife.BindView;
  * Created by Jun on 2017. 11. 3..
  */
 
-public class HouseShareDialog extends Dialog {
+public class FoodDetailDialog extends Dialog {
 
     @BindView(R.id.ib_kakao)
     ImageButton ib_kakao;
@@ -43,10 +43,10 @@ public class HouseShareDialog extends Dialog {
 
     Context mContext;
 
-    HouseListData data;
+    FoodListData data;
     private String url;
 
-    public HouseShareDialog(@NonNull Context context, HouseListData data) {
+    public FoodDetailDialog(@NonNull Context context, FoodListData data) {
         super(context);
         mContext = context;
         this.data = data;
@@ -64,7 +64,7 @@ public class HouseShareDialog extends Dialog {
         init();
         setListener();
 
-        url = data.getHomepage();
+        url = "https://store.naver.com/restaurants/detail?id="+data.getStoreId();
 
     }
     private void init() {
@@ -90,10 +90,10 @@ public class HouseShareDialog extends Dialog {
 
         FeedTemplate params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder(data.getStoreName(),
-                        data.getImg_url(),
+                        data.getMainImg(),
                         LinkObject.newBuilder().setWebUrl(url)
                                 .setMobileWebUrl(url).build())
-                        .setDescrption(data.getAddress())
+                        .setDescrption(data.getNewAddr())
                         .build())
                 /*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
                         .setSharedCount(30).setViewCount(40).build())*/
@@ -126,12 +126,12 @@ public class HouseShareDialog extends Dialog {
 
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentTitle("페이스북 공유 링크입니다.")
-                .setImageUrl(Uri.parse(data.getImg_url()))
+                .setImageUrl(Uri.parse(data.getMainImg()))
                 .setContentUrl(Uri.parse(url))
                 //.setContentDescription(data.getName(),data.getAddress(),data.getPrice(),data.getFoodName())
                 //.setContentDescription("1,2,3,4")
                 .build();
-        ShareDialog shareDialog = new ShareDialog((HouseListActivity) this.mContext);
+        ShareDialog shareDialog = new ShareDialog((FoodDetailActivity)this.mContext);
         shareDialog.show(content, ShareDialog.Mode.FEED);
     }
 

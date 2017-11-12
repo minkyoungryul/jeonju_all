@@ -7,7 +7,7 @@ import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.data.FoodTotalData;
 import com.example.minkr.jeonju_all.food.model.FoodModel;
 import com.example.minkr.jeonju_all.food.view.FoodView;
-import com.example.minkr.jeonju_all.main.BookmarkList;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.example.minkr.jeonju_all.util.sqlite.DBHelper;
 
