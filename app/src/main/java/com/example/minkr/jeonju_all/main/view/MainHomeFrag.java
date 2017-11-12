@@ -138,4 +138,9 @@ public class MainHomeFrag extends Fragment implements MainView{
     public void getAddressClick(BookmarkList data) {
 
     }
+
+    @Override
+    public void showDialog(BookmarkList data) {
+
+    }
 }

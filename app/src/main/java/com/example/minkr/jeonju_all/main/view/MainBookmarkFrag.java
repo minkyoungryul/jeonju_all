@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.custom.BookmarkShareDialog;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -112,8 +113,9 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroyView() {
+        super.onDestroyView();
+        Logger.log("#223 onDestroyView");
         datas.clear();
     }
 
@@ -188,5 +190,11 @@ public class MainBookmarkFrag extends Fragment implements MainView {
         Intent intent = new Intent(getContext(), BookmarkMapActivity.class);
         intent.putExtra("data", data);
         startActivity(intent);
+    }
+    BookmarkShareDialog shareDialog;
+    @Override
+    public void showDialog(BookmarkList data) {
+        shareDialog = new BookmarkShareDialog(this.getContext(), data);
+        shareDialog.show();
     }
 }

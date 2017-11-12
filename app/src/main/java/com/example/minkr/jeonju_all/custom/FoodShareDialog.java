@@ -1,5 +1,6 @@
 package com.example.minkr.jeonju_all.custom;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -130,7 +131,8 @@ public class FoodShareDialog extends Dialog {
                 //.setContentDescription(data.getName(),data.getAddress(),data.getPrice(),data.getFoodName())
                 //.setContentDescription("1,2,3,4")
                 .build();
-        ShareDialog shareDialog = new ShareDialog(this.getOwnerActivity());
+        //ShareDialog shareDialog = new ShareDialog(this.getOwnerActivity());?
+        ShareDialog shareDialog = new ShareDialog((Activity) mContext);
         shareDialog.show(content, ShareDialog.Mode.FEED);
     }
 

@@ -118,6 +118,10 @@ public class MainPresenter implements Presenter<MainView> {
         compositeDisposable.add(disposable);
     }
 
+    public void showDialog(BookmarkList data) {
+        view.showDialog(data);
+    }
+
 //    public void getKindFoodList(){
 //        Disposable disposable = kindFoodModel.getKindFoodList()
 //                .flatMap(new Function<KindFoodTotalData, MaybeSource<KindFoodDatas>>() {

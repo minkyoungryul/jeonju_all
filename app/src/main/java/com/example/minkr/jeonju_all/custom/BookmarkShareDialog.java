@@ -1,5 +1,6 @@
 package com.example.minkr.jeonju_all.custom;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -12,8 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.food.data.FoodListData;
-import com.example.minkr.jeonju_all.food.view.FoodDetailActivity;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -32,7 +32,7 @@ import butterknife.BindView;
  * Created by Jun on 2017. 11. 3..
  */
 
-public class FoodDetailDialog extends Dialog {
+public class BookmarkShareDialog extends Dialog {
 
     @BindView(R.id.ib_kakao)
     ImageButton ib_kakao;
@@ -43,10 +43,10 @@ public class FoodDetailDialog extends Dialog {
 
     Context mContext;
 
-    FoodListData data;
+    BookmarkList data;
     private String url;
 
-    public FoodDetailDialog(@NonNull Context context, FoodListData data) {
+    public BookmarkShareDialog(@NonNull Context context, BookmarkList data) {
         super(context);
         mContext = context;
         this.data = data;
@@ -64,7 +64,7 @@ public class FoodDetailDialog extends Dialog {
         init();
         setListener();
 
-        url = "https://store.naver.com/restaurants/detail?id="+data.getStoreId();
+        url = data.getHomepage_url();
 
     }
     private void init() {
@@ -89,11 +89,11 @@ public class FoodDetailDialog extends Dialog {
     public void shareKakao() {
 
         FeedTemplate params = FeedTemplate
-                .newBuilder(ContentObject.newBuilder(data.getStoreName(),
-                        data.getMainImg(),
+                .newBuilder(ContentObject.newBuilder(data.getTitle(),
+                        data.getImg_url(),
                         LinkObject.newBuilder().setWebUrl(url)
                                 .setMobileWebUrl(url).build())
-                        .setDescrption(data.getNewAddr())
+                        .setDescrption(data.getAddress())
                         .build())
                 /*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
                         .setSharedCount(30).setViewCount(40).build())*/
@@ -126,12 +126,12 @@ public class FoodDetailDialog extends Dialog {
 
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentTitle("페이스북 공유 링크입니다.")
-                .setImageUrl(Uri.parse(data.getMainImg()))
+                .setImageUrl(Uri.parse(data.getImg_url()))
                 .setContentUrl(Uri.parse(url))
                 //.setContentDescription(data.getName(),data.getAddress(),data.getPrice(),data.getFoodName())
                 //.setContentDescription("1,2,3,4")
                 .build();
-        ShareDialog shareDialog = new ShareDialog((FoodDetailActivity)this.mContext);
+        ShareDialog shareDialog = new ShareDialog((Activity) mContext);
         shareDialog.show(content, ShareDialog.Mode.FEED);
     }
 
