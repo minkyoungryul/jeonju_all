@@ -98,10 +98,6 @@ public class MainHomeFrag extends Fragment implements MainView{
             Intent intent = new Intent(getContext(), FacilityActivity.class);
             startActivity(intent);
         });
-//        rl_parking.setOnClickListener(v -> {
-//            Intent intent = new Intent(getContext(), ParkingActivity.class);
-//            startActivity(intent);
-//        });
     }
 
     @Override
