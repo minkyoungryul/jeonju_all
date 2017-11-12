@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.custom.HouseShareDialog;
 import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.house.presenter.HousePresenter;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
@@ -159,5 +160,11 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+    HouseShareDialog shareDialog;
+    @Override
+    public void showDialog(HouseListData data) {
+        shareDialog = new HouseShareDialog(this, data);
+        shareDialog.show();
     }
 }

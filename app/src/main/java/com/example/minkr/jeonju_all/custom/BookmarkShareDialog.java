@@ -1,5 +1,6 @@
 package com.example.minkr.jeonju_all.custom;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -12,8 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.house.data.HouseListData;
-import com.example.minkr.jeonju_all.house.view.HouseListActivity;
+import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -32,7 +32,7 @@ import butterknife.BindView;
  * Created by Jun on 2017. 11. 3..
  */
 
-public class HouseShareDialog extends Dialog {
+public class BookmarkShareDialog extends Dialog {
 
     @BindView(R.id.ib_kakao)
     ImageButton ib_kakao;
@@ -43,10 +43,10 @@ public class HouseShareDialog extends Dialog {
 
     Context mContext;
 
-    HouseListData data;
+    BookmarkList data;
     private String url;
 
-    public HouseShareDialog(@NonNull Context context, HouseListData data) {
+    public BookmarkShareDialog(@NonNull Context context, BookmarkList data) {
         super(context);
         mContext = context;
         this.data = data;
@@ -64,7 +64,7 @@ public class HouseShareDialog extends Dialog {
         init();
         setListener();
 
-        url = data.getHomepage();
+        url = data.getHomepage_url();
 
     }
     private void init() {
@@ -89,7 +89,7 @@ public class HouseShareDialog extends Dialog {
     public void shareKakao() {
 
         FeedTemplate params = FeedTemplate
-                .newBuilder(ContentObject.newBuilder(data.getStoreName(),
+                .newBuilder(ContentObject.newBuilder(data.getTitle(),
                         data.getImg_url(),
                         LinkObject.newBuilder().setWebUrl(url)
                                 .setMobileWebUrl(url).build())
@@ -131,7 +131,7 @@ public class HouseShareDialog extends Dialog {
                 //.setContentDescription(data.getName(),data.getAddress(),data.getPrice(),data.getFoodName())
                 //.setContentDescription("1,2,3,4")
                 .build();
-        ShareDialog shareDialog = new ShareDialog((HouseListActivity) this.mContext);
+        ShareDialog shareDialog = new ShareDialog((Activity) mContext);
         shareDialog.show(content, ShareDialog.Mode.FEED);
     }
 

@@ -80,6 +80,10 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
             mContext.startActivity(call);
         });
 
+        holder.ib_share.setOnClickListener(v -> {
+            presenter.showDialog(data);
+        });
+
         holder.getView().setOnClickListener(v->{
             presenter.showInfo(data);
         });
@@ -112,6 +116,7 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
         TextView tv_dot;
         ImageView iv_call;
         ImageButton ib_like;
+        ImageButton ib_share;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -123,6 +128,7 @@ public class CultureAdapter extends RecyclerView.Adapter<CultureAdapter.ViewHold
             tv_dot = (TextView) itemView.findViewById(R.id.tv_dot);
             iv_call = (ImageView) itemView.findViewById(R.id.iv_call);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            ib_share = (ImageButton) itemView.findViewById(R.id.ib_share);
             this.view = itemView;
         }
 

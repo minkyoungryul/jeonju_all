@@ -20,4 +20,6 @@ public interface HouseView extends MvpView{
     void getHouseDBData(List<BookmarkList> bookmarkLists);
 
     void isLikeChangeData(HouseListData houseListData);
+
+    void showDialog(HouseListData data);
 }

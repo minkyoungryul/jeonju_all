@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
 import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
+import com.example.minkr.jeonju_all.custom.CultureShareDialog;
 import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.tsengvn.typekit.TypekitContextWrapper;
@@ -160,5 +161,12 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+    CultureShareDialog shareDialog;
+    @Override
+    public void showDialog(CultureListData data) {
+        shareDialog = new CultureShareDialog(this, data);
+        shareDialog.show();
     }
 }

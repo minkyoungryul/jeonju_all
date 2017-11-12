@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.custom.BookmarkShareDialog;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -116,6 +117,12 @@ public class MainBookmarkFrag extends Fragment implements MainView {
 //        super.onPause();
 //        datas.clear();
 //    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Logger.log("#223 onDestroyView");
+        datas.clear();
+    }
 
     @Override
     public void notConnectNetworking() {
@@ -179,8 +186,7 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     public void deleteData(BookmarkList bookmarkList, int position) {
         Logger.log("#47 delete position ->"+position+",datas size->"+datas.size()+", datas->"+datas.toString());
         datas.remove(bookmarkList);
-        adapter.notifyItemRemoved(position);
-
+        adapter.notifyDataSetChanged();
         if(datas.size() == 0) {
             btn_all_delete.setVisibility(View.GONE);
             ll_empty.setVisibility(View.VISIBLE);
@@ -192,5 +198,11 @@ public class MainBookmarkFrag extends Fragment implements MainView {
         Intent intent = new Intent(getContext(), BookmarkMapActivity.class);
         intent.putExtra("data", data);
         startActivity(intent);
+    }
+    BookmarkShareDialog shareDialog;
+    @Override
+    public void showDialog(BookmarkList data) {
+        shareDialog = new BookmarkShareDialog(this.getContext(), data);
+        shareDialog.show();
     }
 }

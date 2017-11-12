@@ -64,6 +64,10 @@ public class MainBookmarkAdapter extends RecyclerView.Adapter<MainBookmarkAdapte
             holder.tv_tel.setText(data.getTel());
         }
 
+        holder.ib_share.setOnClickListener(v -> {
+            presenter.showDialog(data);
+        });
+
         holder.getView().setOnClickListener(v->{
             presenter.showStoreInfo(data);
         });
@@ -95,6 +99,7 @@ public class MainBookmarkAdapter extends RecyclerView.Adapter<MainBookmarkAdapte
         TextView tv_tel;
         ImageView iv_map;
         ImageView iv_call;
+        ImageButton ib_share;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -105,6 +110,7 @@ public class MainBookmarkAdapter extends RecyclerView.Adapter<MainBookmarkAdapte
             tv_tel = (TextView) itemView.findViewById(R.id.tv_tel);
             iv_map = (ImageView) itemView.findViewById(R.id.iv_map);
             iv_call = (ImageView) itemView.findViewById(R.id.iv_call);
+            ib_share = (ImageButton) itemView.findViewById(R.id.ib_share);
             this.itemView = itemView;
         }
 

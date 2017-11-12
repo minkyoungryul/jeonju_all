@@ -140,4 +140,7 @@ public class HousePresenter implements Presenter<HouseView> {
 
         compositeDisposable.add(disposable);
     }
+    public void showDialog(HouseListData data) {
+        view.showDialog(data);
+    }
 }

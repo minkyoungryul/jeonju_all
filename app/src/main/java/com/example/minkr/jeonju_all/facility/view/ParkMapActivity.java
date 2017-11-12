@@ -1,8 +1,7 @@
-package com.example.minkr.jeonju_all.house.view;
+package com.example.minkr.jeonju_all.facility.view;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,10 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.house.data.HouseListData;
+import com.example.minkr.jeonju_all.facility.data.FacilityListData;
+import com.example.minkr.jeonju_all.facility.data.ParkListData;
 import com.example.minkr.jeonju_all.house.view.map.NMapCalloutCustomOverlayView;
-import com.example.minkr.jeonju_all.house.view.map.NMapPOIflagType;
-import com.example.minkr.jeonju_all.house.view.map.NMapViewerResourceProvider;
+import com.example.minkr.jeonju_all.kindFood.view.map.NMapPOIflagType;
+import com.example.minkr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapCompassManager;
@@ -51,7 +51,7 @@ import butterknife.ButterKnife;
  * Created by minkr on 2017-10-26.
  */
 
-public class HouseMapActivity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
+public class ParkMapActivity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
         NMapOverlayManager.OnCalloutOverlayViewListener,NMapPOIdataOverlay.OnStateChangeListener{
 
     private final String API_KEY = "5lvyL1UwyDdfnK1Xxig6";
@@ -79,31 +79,36 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
     @BindView(R.id.layout_progressbar)
     LinearLayout layoutProgressbar;
 
+    @BindView(R.id.ib_back)
+    ImageButton ib_back;
+
+    //List<FacilityListData> datas = new ArrayList<>();
+
     int locationType = 0;
     double myLocationX = 0.0;
     double myLocationY = 0.0;
 
-    List<HouseListData> datas;
+
+    List<ParkListData> datas;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kind_food_map);
+        setContentView(R.layout.activity_police);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        datas = (List<HouseListData>) intent.getSerializableExtra("data");
+        datas = (List<ParkListData>) intent.getSerializableExtra("data");
 
-        Logger.log("#21 datas -> "+datas);
+        Logger.log("#22 onCreate datas -> "+datas);
 
         init();
         setListener();
-
     }
 
     public void init(){
         doLocationThing();
-
+        Logger.log("#22 init datas -> "+datas);
     }
 
     public void setListener(){
@@ -120,7 +125,7 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
                         txtLocation.setText("현재위치");
                         stopMyLocation();
                         locationType = 0;
-                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 12);
+                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 10);
                     }
                 }
 
@@ -133,10 +138,14 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
             }
         });
 
+        ib_back.setOnClickListener(v->finish());
+
     }
 
     private void doLocationThing() {
         //Toast.makeText(this, "위치정보 활용에 동의하셨습니다.", Toast.LENGTH_SHORT).show();
+
+        Logger.log("#22 dolocation start");
 
         mMapController = mMapView.getMapController();
 
@@ -160,12 +169,10 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
         poiData = new NMapPOIdata(datas.size(),nMapViewerResourceProvider);
         poiData.beginPOIdata(datas.size());
 
-
         for (int i = 0; i<datas.size();i++){
-            double x = Double.parseDouble(datas.get(i).getPosX());
-            double y = Double.parseDouble(datas.get(i).getPosY());
-            String homepage = datas.get(i).getHomepage();
-            poiData.addPOIitem(x,y,datas.get(i).getStoreName(),markerId,i);
+            double x = Double.parseDouble(datas.get(i).getPosY());
+            double y = Double.parseDouble(datas.get(i).getPosX());
+            poiData.addPOIitem(x,y,datas.get(i).getTitle(),markerId,0);
         }
 
         poiData.endPOIdata();
@@ -185,13 +192,15 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
         // create my location overlay
         nMapMyLocationOverlay = nMapOverlayManager.createMyLocationOverlay(nMapLocationManager, nMapCompassManager);
 
+        Logger.log("#22 dolocation end");
+
     }
 
 
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
         }else{
         }
     }
@@ -231,30 +240,30 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
 
         String clickStore = nMapOverlayItem.getTitle();
 
-        String name = "";
+        String ceoName = "";
+
+        String type = "";
         String address = "";
-        String homepage = "";
-        String info = "";
-        String img_url = "";
+        String tel = "";
+        String name = "";
         Double x = 0.0;
         Double y = 0.0;
 
+
         for (int i=0;i<datas.size();i++){
-            if (clickStore.equals(datas.get(i).getStoreName())){
-                name = datas.get(i).getStoreName();
+            if (clickStore.equals(datas.get(i).getTitle())){
+                name = datas.get(i).getTitle();
                 address = datas.get(i).getAddress();
-                homepage = datas.get(i).getHomepage();
-                info = datas.get(i).getIntroContent();
-                img_url = datas.get(i).getImg_url();
+                tel = datas.get(i).getTel();
+                type = "공원종류 : "+datas.get(i).getType();
                 x = Double.parseDouble(datas.get(i).getPosX());
                 y = Double.parseDouble(datas.get(i).getPosY());
-
             }else{
 
             }
         }
 
-        return new NMapCalloutCustomOverlayView(HouseMapActivity.this, nMapOverlay, nMapOverlayItem, rect, name, address, homepage, info, img_url, x, y, 0);
+        return new NMapCalloutCustomOverlayView(ParkMapActivity.this, nMapOverlay, nMapOverlayItem, rect, name, address, tel, type, ceoName, x, y, 30);
     }
 
     @Override
@@ -262,15 +271,7 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
 
     //마커 풍선말 클릭시 넘어가는 메소드
     @Override
-    public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
-
-        Logger.log("#66 poiitem -> "+nMapPOIitem.getId());
-
-        Intent intent = new Intent(HouseMapActivity.this, HouseStoreInfoActivity.class);
-        intent.putExtra("data", datas.get(nMapPOIitem.getId()).getHomepage());
-        startActivity(intent);
-
-    }
+    public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {}
 
 
     //현재위치 찾기
@@ -307,7 +308,7 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
                     imgbtLocation.setImageResource(R.drawable.jeonjulocation);
                     imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
                     txtLocation.setText("전주위치");
-                    Toast.makeText(HouseMapActivity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ParkMapActivity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
                     locationType = 1;
                 }
             }
@@ -353,13 +354,11 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
     }
 
     public void getStreetView(double x, double y){
-
-        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
-        Logger.log("#90 house streetView -> x : "+y+" y : "+x);
+        Logger.log("#90 kind streetView -> x : "+x+" y : "+y);
+        Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+x+","+y);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
-
     }
 
     public void setAlertDialogShow(){
@@ -414,7 +413,7 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
 
                 Logger.log("#50 else");
                 if(locationType == 1) {
-                    mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()), 12);
+                    mMapController.setMapCenter(new NGeoPoint(myLocation.getLongitude(), myLocation.getLatitude()), 10);
                     mMapController.animateTo(myLocation);
                     progressBar.setVisibility(View.GONE);
                     layoutProgressbar.setVisibility(View.INVISIBLE);
@@ -441,6 +440,5 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
         }
 
     };
-
 
 }
