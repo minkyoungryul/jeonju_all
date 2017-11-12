@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 @Root(name = "rfcOpenApi")
 public class FacilityTotalData {
 
-    @Element(name = "body")
+    @Element(name = "body", required = false)
     private FacilityBodyData body;
 
     public FacilityBodyData getBody() {

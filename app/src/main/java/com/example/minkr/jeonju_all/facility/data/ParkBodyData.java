@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 @Root(name = "body")
 public class ParkBodyData {
 
-    @Element(name = "data")
+    @Element(name = "data", required = false)
     private ParkDatas data;
 
     public ParkDatas getData() {

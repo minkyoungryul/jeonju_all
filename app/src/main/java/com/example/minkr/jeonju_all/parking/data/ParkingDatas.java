@@ -14,7 +14,7 @@ import java.util.List;
 @Root(name = "data")
 public class ParkingDatas {
 
-    @ElementList(inline = true)
+    @ElementList(inline = true, required = false)
     private List<ParkingListData> list;
 
 

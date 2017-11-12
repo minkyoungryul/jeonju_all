@@ -12,7 +12,7 @@ import org.simpleframework.xml.Root;
 @Root(name = "body")
 public class ParkingBodyData {
 
-    @Element(name = "data")
+    @Element(name = "data", required = false)
     private ParkingDatas data;
 
     public ParkingDatas getData() {

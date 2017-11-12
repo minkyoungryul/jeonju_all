@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 @Root(name = "body")
 public class CultureBodyData {
 
-    @Element(name = "data")
+    @Element(name = "data", required = false)
     private CultureDatas data;
 
     public CultureDatas getData() {
