@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.culture.data.CultureListData;
-import com.example.minkr.jeonju_all.kindFood.view.KindFoodActivity;
+import com.example.minkr.jeonju_all.culture.view.CultureActivity;
 import com.example.minkr.jeonju_all.util.Logger;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -63,6 +63,8 @@ public class CultureShareDialog extends Dialog {
         Logger.log("data ->"+data.toString());
         init();
         setListener();
+
+        url = data.getUserHomepage();
 
     }
     private void init() {
@@ -129,7 +131,7 @@ public class CultureShareDialog extends Dialog {
                 //.setContentDescription(data.getName(),data.getAddress(),data.getPrice(),data.getFoodName())
                 //.setContentDescription("1,2,3,4")
                 .build();
-        ShareDialog shareDialog = new ShareDialog((KindFoodActivity) this.mContext);
+        ShareDialog shareDialog = new ShareDialog((CultureActivity) this.mContext);
         shareDialog.show(content, ShareDialog.Mode.FEED);
     }
 
