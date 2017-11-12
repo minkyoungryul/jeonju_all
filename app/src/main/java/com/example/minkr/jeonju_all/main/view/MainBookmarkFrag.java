@@ -112,12 +112,6 @@ public class MainBookmarkFrag extends Fragment implements MainView {
         Logger.log("#223 onDestroy");
     }
 
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        datas.clear();
-//    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

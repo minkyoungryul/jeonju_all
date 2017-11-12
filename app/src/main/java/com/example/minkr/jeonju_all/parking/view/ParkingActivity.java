@@ -27,7 +27,6 @@ public class ParkingActivity extends NMapActivity implements ParkingVIew{
     ParkingPresenter presenter;
     List<ParkingListData> datas = new ArrayList<>();
 
-
     @BindView(R.id.tv_title)
     TextView tv_title;
 

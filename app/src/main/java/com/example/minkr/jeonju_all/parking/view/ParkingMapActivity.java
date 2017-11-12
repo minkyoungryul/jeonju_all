@@ -1,5 +1,6 @@
 package com.example.minkr.jeonju_all.parking.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -39,6 +40,7 @@ import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.List;
 
@@ -82,11 +84,16 @@ public class ParkingMapActivity extends NMapActivity implements OnMapStateChange
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+
     //List<FacilityListData> datas = new ArrayList<>();
 
     int locationType = 0;
     double myLocationX = 0.0;
     double myLocationY = 0.0;
+
+    String type;
 
 
     List<ParkingListData> datas;
@@ -99,6 +106,7 @@ public class ParkingMapActivity extends NMapActivity implements OnMapStateChange
 
         Intent intent = getIntent();
         datas = (List<ParkingListData>) intent.getSerializableExtra("data");
+        type = intent.getStringExtra("type");
 
         Logger.log("#22 onCreate datas -> "+datas);
 
@@ -107,6 +115,7 @@ public class ParkingMapActivity extends NMapActivity implements OnMapStateChange
     }
 
     public void init(){
+        tv_title.setText(type);
         doLocationThing();
         Logger.log("#22 init datas -> "+datas);
     }
@@ -443,5 +452,10 @@ public class ParkingMapActivity extends NMapActivity implements OnMapStateChange
         }
 
     };
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 
 }

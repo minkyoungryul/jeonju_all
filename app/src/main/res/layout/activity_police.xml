@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -10,64 +10,68 @@
         android:orientation="vertical">
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/ib_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:src="@drawable/ic_back"
-            android:padding="10dp"/>
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:padding="10dp"
+                android:src="@drawable/ic_back" />
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:text="시설"
-            android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="시설"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
 
-        <ImageButton
-            android:id="@+id/ib_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:src="@drawable/ic_map"
-            android:padding="10dp"
-            android:visibility="invisible"/>
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/ib_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:padding="10dp"
+                android:src="@drawable/ic_map"
+                android:visibility="invisible" />
+        </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="#bdbdbd"/>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <com.nhn.android.maps.NMapView
+                android:id="@+id/mapView"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/mapView"/>
+                android:layout_height="fill_parent" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_gravity="right|top"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp">
+                android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/imgbt1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/mylocation"
                     android:background="@drawable/mylocation"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mylocation" />
 
                 <TextView
                     android:id="@+id/txtLocation"
@@ -81,18 +85,17 @@
                 android:id="@+id/layout_progressbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#50000000"
                 android:orientation="vertical"
-                android:visibility="invisible"
-                android:background="#50000000"></LinearLayout>
+                android:visibility="invisible"></LinearLayout>
 
             <ProgressBar
                 android:id="@+id/progressBarMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="gone"
                 android:indeterminateTint="@color/brown"
-                />
+                android:visibility="gone" />
 
         </FrameLayout>
 
@@ -102,8 +105,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
-        android:background="#bdbdbd"/>
-
+        android:background="#bdbdbd" />
 
 
 </FrameLayout>

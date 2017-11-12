@@ -1,5 +1,6 @@
 package com.example.minkr.jeonju_all.house.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,6 +40,7 @@ import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.List;
 
@@ -268,6 +270,7 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
 
         Intent intent = new Intent(HouseMapActivity.this, HouseStoreInfoActivity.class);
         intent.putExtra("data", datas.get(nMapPOIitem.getId()).getHomepage());
+        intent.putExtra("type","숙박");
         startActivity(intent);
 
     }
@@ -443,4 +446,8 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
     };
 
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }
