@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.facility.view.HealthMapActivity;
 import com.example.minkr.jeonju_all.facility.view.MedicineMapActivity;
 import com.example.minkr.jeonju_all.facility.view.ParkMapActivity;
 import com.example.minkr.jeonju_all.facility.view.PoliceMapActivity;
@@ -47,6 +48,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 	MedicineMapActivity medicine;
 	ParkMapActivity park;
 	ParkingMapActivity parking;
+	HealthMapActivity health;
 
 	public NMapCalloutCustomOverlayView(Context context, NMapOverlay itemOverlay, NMapOverlayItem item, Rect itemBounds, String name,
                                         String address, String tel, String info, String url, Double x, Double y, int type) {
@@ -64,8 +66,10 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 			medicine = (MedicineMapActivity)getContext();
 		}else if (type == 30){
 			park = (ParkMapActivity)getContext();
-		}else{
+		}else if (type == 40){
 			parking = (ParkingMapActivity)getContext();
+		}else{
+			health = (HealthMapActivity)getContext();
 		}
 
 
@@ -104,7 +108,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 		txtTel.setText(tel);
 		txtinfo.setText(info);
 
-		if (type == 10 || type == 20 || type == 30 || type == 40){
+		if (type == 10 || type == 20 || type == 30 || type == 40 || type == 50){
 			imgStore.setVisibility(GONE);
 			txtStorePrice.setVisibility(GONE);
 		}else {
@@ -129,8 +133,10 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 					medicine.setRoad(name);
 				}else if (type == 30){
 					park.setRoad(name);
-				}else{
+				}else if (type == 40){
 					parking.setRoad(name);
+				}else{
+					health.setRoad(name);
 				}
 
 
@@ -151,8 +157,10 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 					medicine.getStreetView(y,x);
 				}else if (type == 30){
 					park.getStreetView(x,y);
-				}else{
+				}else if (type == 40){
 					parking.getStreetView(y,x);
+				}else{
+					health.getStreetView(y,x);
 				}
 
 			}
