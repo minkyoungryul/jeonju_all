@@ -19,11 +19,15 @@
             android:padding="10dp"
             android:src="@drawable/ic_back" />
 
-        <ImageView
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/img_title_kind_food" />
+            android:text="상세보기"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
 
         <ImageButton
             android:id="@+id/ib_map"

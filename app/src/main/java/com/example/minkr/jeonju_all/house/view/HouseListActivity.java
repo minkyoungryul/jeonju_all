@@ -18,6 +18,7 @@ import com.example.minkr.jeonju_all.house.data.HouseListData;
 import com.example.minkr.jeonju_all.house.presenter.HousePresenter;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.util.Logger;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -115,6 +116,7 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
     public void getStoreInfo(HouseListData data) {
         Intent intent = new Intent(HouseListActivity.this, HouseStoreInfoActivity.class);
         intent.putExtra("data", data.getHomepage());
+        intent.putExtra("type","숙박");
         startActivity(intent);
     }
 
@@ -154,6 +156,12 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
         else
             Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
     HouseShareDialog shareDialog;
     @Override
     public void showDialog(HouseListData data) {

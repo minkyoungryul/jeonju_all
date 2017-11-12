@@ -18,6 +18,7 @@ import com.example.minkr.jeonju_all.culture.presenter.CulturePresenter;
 import com.example.minkr.jeonju_all.custom.CultureShareDialog;
 import com.example.minkr.jeonju_all.house.view.HouseStoreInfoActivity;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -118,6 +119,7 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
     public void showInfo(CultureListData data) {
         Intent intent = new Intent(CultureActivity.this, HouseStoreInfoActivity.class);
         intent.putExtra("data", data.getUserHomepage());
+        intent.putExtra("type","문화");
         startActivity(intent);
     }
 
@@ -154,6 +156,11 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
             Toast.makeText(getContext(), "즐겨찾기 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 
     CultureShareDialog shareDialog;

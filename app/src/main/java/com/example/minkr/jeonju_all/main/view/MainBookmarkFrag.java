@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.custom.BookmarkShareDialog;
 import com.example.minkr.jeonju_all.main.data.BookmarkList;
 import com.example.minkr.jeonju_all.main.presenter.MainPresenter;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -112,8 +113,9 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroyView() {
+        super.onDestroyView();
+        Logger.log("#223 onDestroyView");
         datas.clear();
     }
 
@@ -124,6 +126,7 @@ public class MainBookmarkFrag extends Fragment implements MainView {
 
     @Override
     public void getBookmarkList(List<BookmarkList> bookmarkLists) {
+        datas.clear();
         datas.addAll(bookmarkLists);
         adapter.notifyDataSetChanged();
 
@@ -139,19 +142,20 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     public void showStoreInfo(BookmarkList data) {
         Intent intent = new Intent(getContext(), BookmarkDetailActivity.class);
         intent.putExtra("data",data.getHomepage_url());
+        intent.putExtra("type", data.getType());
         startActivity(intent);
     }
 
     @Override
     public void allDeleteData() {
         datas.clear();
-        adapter.notifyDataSetChanged();
+        adapter.notifyItemRangeRemoved(0,adapter.getItemCount());
         btn_all_delete.setVisibility(View.GONE);
         ll_empty.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showDeleteDialog(BookmarkList data) {
+    public void showDeleteDialog(BookmarkList data, int position) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder
                 .setMessage("삭제하시겠습니까?")
@@ -165,7 +169,7 @@ public class MainBookmarkFrag extends Fragment implements MainView {
                 .setNegativeButton("네",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                presenter.deleteData(data);
+                                presenter.deleteData(data,position);
                             }
                         });
 
@@ -174,8 +178,10 @@ public class MainBookmarkFrag extends Fragment implements MainView {
     }
 
     @Override
-    public void deleteData(BookmarkList bookmarkList) {
+    public void deleteData(BookmarkList bookmarkList, int position) {
+        Logger.log("#47 delete position ->"+position+",datas size->"+datas.size()+", datas->"+datas.toString());
         datas.remove(bookmarkList);
+//        adapter.notifyItemRemoved(position);
         adapter.notifyDataSetChanged();
         if(datas.size() == 0) {
             btn_all_delete.setVisibility(View.GONE);
@@ -188,5 +194,11 @@ public class MainBookmarkFrag extends Fragment implements MainView {
         Intent intent = new Intent(getContext(), BookmarkMapActivity.class);
         intent.putExtra("data", data);
         startActivity(intent);
+    }
+    BookmarkShareDialog shareDialog;
+    @Override
+    public void showDialog(BookmarkList data) {
+        shareDialog = new BookmarkShareDialog(this.getContext(), data);
+        shareDialog.show();
     }
 }

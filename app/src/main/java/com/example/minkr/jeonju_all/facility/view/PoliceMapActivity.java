@@ -40,6 +40,7 @@ import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +85,9 @@ public class PoliceMapActivity extends NMapActivity implements OnMapStateChangeL
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+
     //List<FacilityListData> datas = new ArrayList<>();
 
     int locationType = 0;
@@ -93,6 +97,7 @@ public class PoliceMapActivity extends NMapActivity implements OnMapStateChangeL
 
     List<FacilityListData> datas;
 
+    String type;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +106,7 @@ public class PoliceMapActivity extends NMapActivity implements OnMapStateChangeL
 
         Intent intent = getIntent();
         datas = (List<FacilityListData>) intent.getSerializableExtra("data");
-
+        type = intent.getStringExtra("type");
         Logger.log("#22 onCreate datas -> "+datas);
 
         init();
@@ -109,6 +114,7 @@ public class PoliceMapActivity extends NMapActivity implements OnMapStateChangeL
     }
 
     public void init(){
+        tv_title.setText(type);
         doLocationThing();
         Logger.log("#22 init datas -> "+datas);
     }
@@ -443,4 +449,8 @@ public class PoliceMapActivity extends NMapActivity implements OnMapStateChangeL
 
     };
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

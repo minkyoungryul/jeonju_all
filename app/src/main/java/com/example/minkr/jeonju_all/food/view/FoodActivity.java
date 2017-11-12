@@ -3,6 +3,7 @@ package com.example.minkr.jeonju_all.food.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -126,11 +127,18 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         presenter = new FoodPresenter();
         presenter.attachView(this);
 
-        presenter.getFoodRiceList();
-        presenter.getFoodBibimbapList();
-        presenter.getFoodKongbapList();
-        presenter.getFoodWineList();
-        presenter.getFoodHanokList();
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                presenter.getFoodRiceList();
+                presenter.getFoodBibimbapList();
+                presenter.getFoodKongbapList();
+                presenter.getFoodWineList();
+                presenter.getFoodHanokList();
+            }
+        },500);
+
 
         init();
         setListener();
@@ -279,6 +287,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         }else {
             Intent intent = new Intent(FoodActivity.this, FoodStoreInfoActivity.class);
             intent.putExtra("storeId", data.getStoreId());
+            intent.putExtra("type", data.getType());
             startActivity(intent);
         }
     }

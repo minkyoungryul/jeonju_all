@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minkr.jeonju_all.R;
-import com.example.minkr.jeonju_all.custom.FoodDetailDialog;
+import com.example.minkr.jeonju_all.custom.FoodShareDialog;
 import com.example.minkr.jeonju_all.food.data.FoodListData;
 import com.example.minkr.jeonju_all.food.presenter.FoodDetailPresenter;
 import com.example.minkr.jeonju_all.kindFood.view.FoodStoreInfoActivity;
@@ -106,6 +106,7 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
         }else {
             Intent intent = new Intent(FoodDetailActivity.this, FoodStoreInfoActivity.class);
             intent.putExtra("storeId", data.getStoreId());
+            intent.putExtra("type", data.getType());
             startActivity(intent);
         }
     }
@@ -149,10 +150,10 @@ public class FoodDetailActivity extends AppCompatActivity implements FoodDetailV
             Toast.makeText(getContext(), "즐겨찾기 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
-    FoodDetailDialog shareDialog;
+    FoodShareDialog shareDialog;
     @Override
     public void showDialog(FoodListData data) {
-        shareDialog = new FoodDetailDialog(this, data);
+        shareDialog = new FoodShareDialog(this, data);
         shareDialog.show();
     }
 

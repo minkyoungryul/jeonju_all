@@ -12,7 +12,7 @@ import java.util.List;
 @Root(name = "data")
 public class FoodDatas {
 
-    @ElementList(inline = true)
+    @ElementList(inline = true, required = false)
     private List<FoodListData> list;
 
     public List<FoodListData> getList() {

@@ -121,17 +121,22 @@ public class MainHomeFrag extends Fragment implements MainView{
     }
 
     @Override
-    public void showDeleteDialog(BookmarkList data) {
+    public void showDeleteDialog(BookmarkList data, int position) {
 
     }
 
     @Override
-    public void deleteData(BookmarkList bookmarkList) {
+    public void deleteData(BookmarkList bookmarkList, int position) {
 
     }
 
     @Override
     public void getAddressClick(BookmarkList data) {
+
+    }
+
+    @Override
+    public void showDialog(BookmarkList data) {
 
     }
 }

@@ -1,5 +1,6 @@
 package com.example.minkr.jeonju_all.kindFood.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -38,6 +39,7 @@ import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.List;
 
@@ -267,6 +269,7 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
 
         Intent intent = new Intent(KindFoodMapActivity.this, FoodStoreInfoActivity.class);
         intent.putExtra("datas", nMapPOIitem.getId());
+        intent.putExtra("type", "모범 업소");
         startActivity(intent);
 
     }
@@ -440,4 +443,8 @@ public class KindFoodMapActivity extends NMapActivity implements OnMapStateChang
     };
 
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }
