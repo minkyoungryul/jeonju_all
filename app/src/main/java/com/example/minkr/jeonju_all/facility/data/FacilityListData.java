@@ -3,12 +3,14 @@ package com.example.minkr.jeonju_all.facility.data;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /**
  * Created by minkr on 2017-11-08.
  */
 
 @Root(name = "list")
-public class FacilityListData {
+public class FacilityListData implements Serializable{
 
     @Element(name = "activeCnt")
     private String activeCnt;

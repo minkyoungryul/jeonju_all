@@ -52,7 +52,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".parking.view.ParkingActivity"
+            android:name=".parking.view.ParkingMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
@@ -149,7 +149,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".facility.view.PoliceActivity"
+            android:name=".facility.view.PoliceMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
@@ -161,13 +161,13 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".facility.view.MedicineActivity"
+            android:name=".facility.view.MedicineMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".facility.view.ParkActivity"
+            android:name=".facility.view.ParkMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
