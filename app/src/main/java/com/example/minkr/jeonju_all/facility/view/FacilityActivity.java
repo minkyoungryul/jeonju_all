@@ -192,6 +192,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
             intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);
             intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);
             intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);
+            /*
             //클리닉
             intent.putExtra("clinic_all_datas", (Serializable) clinic_all_datas);//전체
             intent.putExtra("clinic_internal_datas", (Serializable) clinic_internal_datas);//내과
@@ -208,7 +209,8 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
             intent.putExtra("clinic_psy_datas", (Serializable) clinic_psy_datas);//정신의학과
             intent.putExtra("clinic_dentist_datas", (Serializable) clinic_dentist_datas);//치과
             intent.putExtra("clinic_neuro_datas", (Serializable) clinic_neuro_datas);//신경의학과
-            
+            */
+
             intent.putExtra("type","병원");
             startActivity(intent);
         });
