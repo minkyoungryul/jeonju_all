@@ -42,8 +42,6 @@ public class MainSettingFrag extends Fragment {
     @BindView(R.id.ll_shareFriend)
     LinearLayout ll_shareFriend;
 
-    private String url = "http://www.google.com/";
-
     @BindView(R.id.tv_version)
     TextView tv_version;
 
@@ -53,11 +51,13 @@ public class MainSettingFrag extends Fragment {
     @BindView(R.id.ll_send_email)
     LinearLayout ll_send_email;
 
+    private String download_url = "http://www.google.com/";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_setting, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -72,8 +72,9 @@ public class MainSettingFrag extends Fragment {
     private void init() {
         try {
             PackageInfo i = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
-            tv_version.setText("v "+i.versionName+".0");
-        } catch(PackageManager.NameNotFoundException e) { }
+            tv_version.setText("v " + i.versionName + ".0");
+        } catch (PackageManager.NameNotFoundException e) {
+        }
 
     }
 
@@ -81,7 +82,7 @@ public class MainSettingFrag extends Fragment {
         ll_shareFriend.setOnClickListener(v -> {
             shareKakao();
         });
-        rl_kakao_chatbot.setOnClickListener(v->{
+        rl_kakao_chatbot.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             Uri uri = Uri.parse("https://pf.kakao.com/_DVxgDu");
             intent.setData(uri);
@@ -91,8 +92,8 @@ public class MainSettingFrag extends Fragment {
 //            startActivity(launchIntent);
         });
 
-        ll_open_source.setOnClickListener(v->{
-            Colors colors = new Colors(getContext().getResources().getColor(R.color.brown),getContext().getResources().getColor(R.color.brown));
+        ll_open_source.setOnClickListener(v -> {
+            Colors colors = new Colors(getContext().getResources().getColor(R.color.brown), getContext().getResources().getColor(R.color.brown));
 
             new LibsBuilder()
                     .withSortEnabled(false)
@@ -106,14 +107,14 @@ public class MainSettingFrag extends Fragment {
         });
 
 
-        ll_send_email.setOnClickListener(v->{
+        ll_send_email.setOnClickListener(v -> {
             Intent email = new Intent(Intent.ACTION_SEND);
             email.setType("plain/text");
             // email setting 배열로 해놔서 복수 발송 가능
-            String[] address = {"minkr3321@naver.com","rladudrb1200@naver.com","blackbull8810@gmail.com"};
+            String[] address = {"minkr3321@naver.com", "rladudrb1200@naver.com", "blackbull8810@gmail.com"};
             email.putExtra(Intent.EXTRA_EMAIL, address);
-            email.putExtra(Intent.EXTRA_SUBJECT,"전주의 모든 것 문의사항 입니다.");
-            email.putExtra(Intent.EXTRA_TEXT,"내용을 입력해주세요.\n");
+            email.putExtra(Intent.EXTRA_SUBJECT, "전주의 모든 것 문의사항 입니다.");
+            email.putExtra(Intent.EXTRA_TEXT, "내용을 입력해주세요.\n");
             startActivity(email);
         });
     }
@@ -123,13 +124,13 @@ public class MainSettingFrag extends Fragment {
         FeedTemplate params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder("전주의 모든 것",
                         "http://tour.jeonju.go.kr/images/munhwa/sub/06img05.jpg",
-                        LinkObject.newBuilder().setWebUrl(url)
-                                .setMobileWebUrl(url).build())
+                        LinkObject.newBuilder().setWebUrl(download_url)
+                                .setMobileWebUrl(download_url).build())
                         .setDescrption("전주의 모든 것을 경험해보세요.")
                         .build())
                 .addButton(new ButtonObject("앱 다운로드", LinkObject.newBuilder()
-                        .setWebUrl(url)
-                        .setMobileWebUrl(url)
+                        .setWebUrl(download_url)
+                        .setMobileWebUrl(download_url)
                         .setAndroidExecutionParams("key1=value1")
                         .setIosExecutionParams("key1=value1")
                         .build()))
