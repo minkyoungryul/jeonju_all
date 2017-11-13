@@ -86,6 +86,7 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
+        android:id="@+id/ll_shareFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp">

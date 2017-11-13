@@ -8,9 +8,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.minkr.jeonju_all.R;
+import com.example.minkr.jeonju_all.util.Logger;
+import com.kakao.kakaolink.v2.KakaoLinkResponse;
+import com.kakao.kakaolink.v2.KakaoLinkService;
+import com.kakao.kakaolink.v2.model.ButtonObject;
+import com.kakao.kakaolink.v2.model.ContentObject;
+import com.kakao.kakaolink.v2.model.FeedTemplate;
+import com.kakao.kakaolink.v2.model.LinkObject;
+import com.kakao.network.ErrorResult;
+import com.kakao.network.callback.ResponseCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +33,10 @@ public class MainSettingFrag extends Fragment {
 
     @BindView(R.id.rl_kakao_chatbot)
     RelativeLayout rl_kakao_chatbot;
+    @BindView(R.id.ll_shareFriend)
+    LinearLayout ll_shareFriend;
+
+    private String url = "http://www.google.com/";
 
     @Nullable
     @Override
@@ -45,6 +59,9 @@ public class MainSettingFrag extends Fragment {
     }
 
     private void setListener() {
+        ll_shareFriend.setOnClickListener(v -> {
+            shareKakao();
+        });
         rl_kakao_chatbot.setOnClickListener(v->{
             Intent intent = new Intent(Intent.ACTION_VIEW);
             Uri uri = Uri.parse("https://pf.kakao.com/_DVxgDu");
@@ -55,4 +72,35 @@ public class MainSettingFrag extends Fragment {
 //            startActivity(launchIntent);
         });
     }
+
+    public void shareKakao() {
+
+        FeedTemplate params = FeedTemplate
+                .newBuilder(ContentObject.newBuilder("전주의 모든 것",
+                        "http://tour.jeonju.go.kr/images/munhwa/sub/06img05.jpg",
+                        LinkObject.newBuilder().setWebUrl(url)
+                                .setMobileWebUrl(url).build())
+                        .setDescrption("전주의 모든 것을 경험해보세요.")
+                        .build())
+                .addButton(new ButtonObject("앱 다운로드", LinkObject.newBuilder()
+                        .setWebUrl(url)
+                        .setMobileWebUrl(url)
+                        .setAndroidExecutionParams("key1=value1")
+                        .setIosExecutionParams("key1=value1")
+                        .build()))
+                .build();
+
+        KakaoLinkService.getInstance().sendDefault(this.getContext(), params, new ResponseCallback<KakaoLinkResponse>() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Logger.log(errorResult.toString());
+            }
+
+            @Override
+            public void onSuccess(KakaoLinkResponse result) {
+
+            }
+        });
+    }
+
 }
