@@ -157,7 +157,7 @@ public class HospitalActivity extends NMapActivity implements HospitalView {
             }else if(hospitalListData.get(i).getMediCdmStr().equals("안과")){
                 clinic_eye_datas.addAll(hospitalListData);
             }else if(hospitalListData.get(i).getMediCdmStr().equals("재활의학과")){
-                clinic_neuro_datas.addAll(hospitalListData);
+                clinic_rehabit_datas.addAll(hospitalListData);
             }else if(hospitalListData.get(i).getMediCdmStr().equals("정신건강의학과")){
                 clinic_psy_datas.addAll(hospitalListData);
             }else if(hospitalListData.get(i).getMediCdmStr().equals("치과")){

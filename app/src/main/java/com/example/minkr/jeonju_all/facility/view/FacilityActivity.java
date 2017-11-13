@@ -192,6 +192,23 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
             intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);
             intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);
             intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);
+            //클리닉
+            intent.putExtra("clinic_all_datas", (Serializable) clinic_all_datas);//전체
+            intent.putExtra("clinic_internal_datas", (Serializable) clinic_internal_datas);//내과
+            intent.putExtra("clinic_child_datas", (Serializable) clinic_child_datas);//소아청소년과
+            intent.putExtra("clinic_ear_datas", (Serializable) clinic_ear_datas);//이비인후과
+            intent.putExtra("clinic_family_datas", (Serializable) clinic_family_datas);//가정의학과
+            intent.putExtra("clinic_normal_datas", (Serializable) clinic_normal_datas);//일반의원
+            intent.putExtra("clinic_baby_datas", (Serializable) clinic_baby_datas);//산부의과
+            intent.putExtra("clinic_skin_datas", (Serializable) clinic_skin_datas);//피부
+            intent.putExtra("clinic_born_datas", (Serializable) clinic_born_datas);//정형외과
+            intent.putExtra("clinic_surgery_datas", (Serializable) clinic_surgery_datas);//외과
+            intent.putExtra("clinic_eye_datas", (Serializable) clinic_eye_datas);//안과
+            intent.putExtra("clinic_rehabit_datas", (Serializable) clinic_rehabit_datas);//재활읭학과
+            intent.putExtra("clinic_psy_datas", (Serializable) clinic_psy_datas);//정신의학과
+            intent.putExtra("clinic_dentist_datas", (Serializable) clinic_dentist_datas);//치과
+            intent.putExtra("clinic_neuro_datas", (Serializable) clinic_neuro_datas);//신경의학과
+            
             intent.putExtra("type","병원");
             startActivity(intent);
         });
