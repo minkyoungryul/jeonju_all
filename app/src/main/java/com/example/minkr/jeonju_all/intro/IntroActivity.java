@@ -30,7 +30,7 @@ public class IntroActivity extends AppCompatActivity{
 
 
         videoView = (VideoView) findViewById(R.id.introvideo);
-        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.intro));
+        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.intro2));
         videoView.requestFocus();
         videoView.start();
 
