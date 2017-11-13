@@ -114,11 +114,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     ArrayAdapter hospitalAdapter;
 
 
-    List<HospitalListData> datas,hospital_all_datas,hospital_total_datas,hospital_nomarl_datas,hospital_grand_datas,hospital_child_datas,
-            hospital_dentist_datas,hospital_korea_datas;
-    List<HospitalListData> clinic_all_datas,clinic_internal_datas,clinic_child_datas,clinic_ear_datas,clinic_family_datas,clinic_normal_datas,
-            clinic_baby_datas,clinic_skin_datas,clinic_born_datas,clinic_surgery_datas,clinic_eye_datas,clinic_rehabit_datas,
-            clinic_psy_datas,clinic_dentist_datas,clinic_neuro_datas;
+    List<HospitalListData> datas,hospital_all_datas,clinic_all_datas,original_datas,postpartum_datas,dentist_datas;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -127,35 +123,21 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");
-        hospital_total_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_total_datas");
-        hospital_nomarl_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_nomarl_datas");
-        hospital_grand_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_grand_datas");
-        hospital_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_child_datas");
-        hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
-        hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        //클리낙
+        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");//병원전체
         /*
-        clinic_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_internal_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_ear_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_family_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_normal_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_baby_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_skin_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_born_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_surgery_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_eye_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_rehabit_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_psy_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
-        clinic_neuro_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
+        clinic_all_datas = (List<HospitalListData>) intent.getSerializableExtra("clinic_all_datas");//클리닉전체
+        original_datas = (List<HospitalListData>) intent.getSerializableExtra("original_datas");//한의원
+        postpartum_datas = (List<HospitalListData>) intent.getSerializableExtra("postpartum_datas");//산후조리원
+        dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("dentist_datas");//치과의원
         */
-        tv_title.setText("병원");
 
-        Logger.log("#22 onCreate datas -> "+clinic_baby_datas);
-        Logger.log("#22 onCreate datas -> "+clinic_psy_datas);
+        Logger.log("#95 hos -> "+hospital_all_datas);
+        Logger.log("#95 cli -> "+clinic_all_datas);
+        Logger.log("#95 ori -> "+original_datas);
+        Logger.log("#95 pos -> "+postpartum_datas);
+        Logger.log("#95 den -> "+dentist_datas);
+
+        tv_title.setText("병원");
 
         setSpinnerItem();
         init();
@@ -169,7 +151,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     public void setSpinnerItem(){
 
         list1.add("병원");
-        list1.add("클리");
+        list1.add("클리닉");
         list1.add("한의원");
         list1.add("산후조리원");
         list1.add("치과의원");
@@ -245,18 +227,23 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                 if (position == 0){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list2);
                     listPosition = 0;
+                    datas = hospital_all_datas;
                 }else if (position == 1){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list3);
                     listPosition = 1;
+                    datas = clinic_all_datas;
                 }else if (position == 2){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 2;
+                    datas = original_datas;
                 }else if (position == 3){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 3;
+                    datas = postpartum_datas;
                 }else if (position == 4){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 4;
+                    datas = dentist_datas;
                 }else{
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 5;
@@ -265,7 +252,9 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                 hospitalAdapter.setDropDownViewResource(R.layout.spinner_center);
                 spinner2.setAdapter(hospitalAdapter);
 
-                //Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
+                //doLocationThing();
+
+                Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
                 Logger.log("#90 item "+position);
             }
 
@@ -286,58 +275,58 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                     if (position == 0){//전체
                         datas = hospital_all_datas;
                     }else if (position == 1){//종합병원
-                        datas = hospital_total_datas;
+                        //datas = hospital_total_datas;
                     }else if (position == 2){//일반병원
-                        datas = hospital_nomarl_datas;
+                        //datas = hospital_nomarl_datas;
                     }else if (position == 3){//요양병원
-                        datas = hospital_grand_datas;
+                        //datas = hospital_grand_datas;
                     }else if (position == 4){//아동병원
-                        datas = hospital_child_datas;
+                        //datas = hospital_child_datas;
                     }else if (position == 5){//치과병원
-                        datas = hospital_dentist_datas;
+                        //datas = hospital_dentist_datas;
                     }else{//한방병원
-                        datas = hospital_korea_datas;
+                        //datas = hospital_korea_datas;
                     }
                 }else if (listPosition == 1){//클리닉
-                    /*
+
                     if (position == 0){//전체
                         datas = clinic_all_datas;
                     }else if (position == 1){//내과
-                        datas = clinic_internal_datas;
+                        //datas = clinic_internal_datas;
                     }else if (position == 2){//소아청소년
-                        datas = clinic_child_datas;
+                        //datas = clinic_child_datas;
                     }else if (position == 3){//이비인후과
-                        datas = clinic_ear_datas;
+                        //datas = clinic_ear_datas;
                     }else if (position == 4){//가정의학과
-                        datas = clinic_family_datas;
+                        //datas = clinic_family_datas;
                     }else if (position == 5){//일반의원
-                        datas = clinic_normal_datas;
+                        //datas = clinic_normal_datas;
                     }else if (position == 6){//산부인과
-                        datas = clinic_baby_datas;
+                        //datas = clinic_baby_datas;
                     }else if (position == 7){//피부과
-                        datas = clinic_skin_datas;
+                        //datas = clinic_skin_datas;
                     }else if(position == 8){//정형외과
-                        datas = clinic_born_datas;
+                        //datas = clinic_born_datas;
                     }else if(position == 9){//외과
-                        datas = clinic_surgery_datas;
+                        //datas = clinic_surgery_datas;
                     }else if (position == 10){//안과
-                        datas = clinic_eye_datas;
+                        //datas = clinic_eye_datas;
                     }else if (position == 11){//재활의학과
-                        datas = clinic_rehabit_datas;
+                        //datas = clinic_rehabit_datas;
                     }else if (position == 12){//정신의학과
-                        datas = clinic_psy_datas;
+                        //datas = clinic_psy_datas;
                     }else if (position == 13){//치과
-                        datas = clinic_dentist_datas;
+                        //datas = clinic_dentist_datas;
                     }else{//신경외과
-                        datas = clinic_neuro_datas;
+                        //datas = clinic_neuro_datas;
                     }
-                    */
+
                 }else if (listPosition == 2){
-
+                        datas = original_datas;
                 }else if (listPosition == 3){
-
+                        datas = postpartum_datas;
                 }else if (listPosition == 4){
-
+                        datas = dentist_datas;
                 }else{
 
                 }
