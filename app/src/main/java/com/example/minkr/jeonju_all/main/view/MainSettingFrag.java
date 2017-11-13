@@ -1,6 +1,8 @@
 package com.example.minkr.jeonju_all.main.view;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.minkr.jeonju_all.R;
 import com.example.minkr.jeonju_all.util.Logger;
@@ -21,6 +24,9 @@ import com.kakao.kakaolink.v2.model.FeedTemplate;
 import com.kakao.kakaolink.v2.model.LinkObject;
 import com.kakao.network.ErrorResult;
 import com.kakao.network.callback.ResponseCallback;
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.aboutlibraries.util.Colors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +43,15 @@ public class MainSettingFrag extends Fragment {
     LinearLayout ll_shareFriend;
 
     private String url = "http://www.google.com/";
+
+    @BindView(R.id.tv_version)
+    TextView tv_version;
+
+    @BindView(R.id.ll_open_source)
+    LinearLayout ll_open_source;
+
+    @BindView(R.id.ll_send_email)
+    LinearLayout ll_send_email;
 
     @Nullable
     @Override
@@ -55,6 +70,10 @@ public class MainSettingFrag extends Fragment {
     }
 
     private void init() {
+        try {
+            PackageInfo i = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
+            tv_version.setText("v "+i.versionName+".0");
+        } catch(PackageManager.NameNotFoundException e) { }
 
     }
 
@@ -70,6 +89,32 @@ public class MainSettingFrag extends Fragment {
 
 //            Intent launchIntent = getContext().getPackageManager().getLaunchIntentForPackage("com.kakao.kakaotalk.v2");
 //            startActivity(launchIntent);
+        });
+
+        ll_open_source.setOnClickListener(v->{
+            Colors colors = new Colors(getContext().getResources().getColor(R.color.brown),getContext().getResources().getColor(R.color.brown));
+
+            new LibsBuilder()
+                    .withSortEnabled(false)
+                    .withAutoDetect(true)
+                    .withActivityStyle(Libs.ActivityStyle.LIGHT)
+                    .withActivityColor(colors)
+                    .withAboutIconShown(true)
+                    .withAboutVersionShown(true)
+                    .withActivityTitle("오픈소스 라이브러리")
+                    .start(getContext());
+        });
+
+
+        ll_send_email.setOnClickListener(v->{
+            Intent email = new Intent(Intent.ACTION_SEND);
+            email.setType("plain/text");
+            // email setting 배열로 해놔서 복수 발송 가능
+            String[] address = {"minkr3321@naver.com","rladudrb1200@naver.com","blackbull8810@gmail.com"};
+            email.putExtra(Intent.EXTRA_EMAIL, address);
+            email.putExtra(Intent.EXTRA_SUBJECT,"전주의 모든 것 문의사항 입니다.");
+            email.putExtra(Intent.EXTRA_TEXT,"내용을 입력해주세요.\n");
+            startActivity(email);
         });
     }
 
