@@ -149,6 +149,9 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         hospitalPresenter = new HospitalPresenter();
         hospitalPresenter.attachView(this);
 
+        healthPresenter = new HealthPresenter();
+        healthPresenter.attachView(this);
+
         policePresenter.getPoliceList();
 //        medicinePresenter.getMedicineList();
 //        parkPresenter.getParkList();
@@ -158,11 +161,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
 //        hospitalPresenter.getOriginalList();
 //        hospitalPresenter.getPostpartumList();
 //        hospitalPresenter.getDentistList();
-
-
-        healthPresenter = new HealthPresenter();
-        healthPresenter.attachView(this);
-        healthPresenter.getHealthList();
+//        healthPresenter.getHealthList();
 
         setListener();
     }
