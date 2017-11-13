@@ -21,8 +21,8 @@ import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
 import com.kakao.kakaolink.v2.model.ButtonObject;
 import com.kakao.kakaolink.v2.model.ContentObject;
-import com.kakao.kakaolink.v2.model.FeedTemplate;
 import com.kakao.kakaolink.v2.model.LinkObject;
+import com.kakao.kakaolink.v2.model.LocationTemplate;
 import com.kakao.network.ErrorResult;
 import com.kakao.network.callback.ResponseCallback;
 
@@ -88,19 +88,19 @@ public class CustomShareDialog extends Dialog {
 
     public void shareKakao() {
 
-        FeedTemplate params = FeedTemplate
+        /*FeedTemplate params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder(data.getName(),
                         data.getImg_url(),
                         LinkObject.newBuilder().setWebUrl(url)
                                 .setMobileWebUrl(url).build())
                         .setDescrption(data.getAddress())
                         .build())
-                /*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
-                        .setSharedCount(30).setViewCount(40).build())*/
-                /*.addButton(new ButtonObject("웹에서 보기", LinkObject.newBuilder()
+                *//*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
+                        .setSharedCount(30).setViewCount(40).build())*//*
+                *//*.addButton(new ButtonObject("웹에서 보기", LinkObject.newBuilder()
                         .setWebUrl(url)
                         .setMobileWebUrl(url)
-                        .build()))*/
+                        .build()))*//*
                 .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
                         .setWebUrl(url)
                         .setMobileWebUrl(url)
@@ -119,6 +119,31 @@ public class CustomShareDialog extends Dialog {
             public void onSuccess(KakaoLinkResponse result) {
 
             }
+        });*/
+        LocationTemplate params = LocationTemplate.newBuilder(data.getAddress(),
+                ContentObject.newBuilder(data.getName(), data.getImg_url(),
+                        LinkObject.newBuilder()
+                                .setWebUrl(url)
+                                .setMobileWebUrl(url)
+                                .build())
+                        .setDescrption(data.getAddress())
+                        .build())
+                .setAddressTitle(data.getName())
+                .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
+                        .setWebUrl(url)
+                        .setMobileWebUrl(url)
+                        .setAndroidExecutionParams("key1=value1")
+                        .setIosExecutionParams("key1=value1")
+                        .build()))
+                .build();
+
+        KakaoLinkService.getInstance().sendDefault(this.getContext(), params, new ResponseCallback<KakaoLinkResponse>() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Logger.log(errorResult.toString());
+            }
+            @Override
+            public void onSuccess(KakaoLinkResponse result) { }
         });
     }
 
