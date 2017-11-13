@@ -124,18 +124,15 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");
-        hospital_total_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_total_datas");
-        hospital_nomarl_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_nomarl_datas");
-        hospital_grand_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_grand_datas");
-        hospital_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_child_datas");
-        hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
-        hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
+//        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");
+//        hospital_total_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_total_datas");
+//        hospital_nomarl_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_nomarl_datas");
+//        hospital_grand_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_grand_datas");
+//        hospital_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_child_datas");
+//        hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
+//        hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
 
         tv_title.setText("병원");
-
-        Logger.log("#22 onCreate datas -> "+hospital_all_datas);
-        Logger.log("#22 onCreate datas -> "+hospital_total_datas);
 
         setSpinnerItem();
         init();

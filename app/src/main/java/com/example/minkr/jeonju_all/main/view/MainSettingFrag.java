@@ -51,6 +51,9 @@ public class MainSettingFrag extends Fragment {
     @BindView(R.id.ll_send_email)
     LinearLayout ll_send_email;
 
+    @BindView(R.id.ll_intro)
+    LinearLayout ll_intro;
+
     private String download_url = "http://www.google.com/";
 
     @Nullable
@@ -79,6 +82,11 @@ public class MainSettingFrag extends Fragment {
     }
 
     private void setListener() {
+        ll_intro.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), IntroduceActivity.class);
+            startActivity(intent);
+        });
+
         ll_shareFriend.setOnClickListener(v -> {
             shareKakao();
         });
