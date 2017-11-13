@@ -127,18 +127,7 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         presenter = new FoodPresenter();
         presenter.attachView(this);
 
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                presenter.getFoodRiceList();
-                presenter.getFoodBibimbapList();
-                presenter.getFoodKongbapList();
-                presenter.getFoodWineList();
-                presenter.getFoodHanokList();
-            }
-        },500);
-
+        presenter.getFoodRiceList();
 
         init();
         setListener();
@@ -242,6 +231,8 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         getFoodDatas(storeId, foodListData, riceList, all_riceList);
         rice_adapter.notifyDataSetChanged();
         progress_bar_rice.setVisibility(View.GONE);
+
+        presenter.getFoodBibimbapList();
     }
 
     @Override
@@ -250,6 +241,8 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         getFoodDatas(storeId, foodListData, bibimbapList, all_bibimbapList);
         bibimbap_adapter.notifyDataSetChanged();
         progress_bar_bibimbap.setVisibility(View.GONE);
+
+        presenter.getFoodKongbapList();
     }
 
     @Override
@@ -258,6 +251,8 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         getFoodDatas(storeId, foodListData, kongbapList, all_kongbapList);
         kongbap_adapter.notifyDataSetChanged();
         progress_bar_kongbap.setVisibility(View.GONE);
+
+        presenter.getFoodWineList();
     }
 
     @Override
@@ -266,6 +261,8 @@ public class FoodActivity extends AppCompatActivity implements FoodView{
         getFoodDatas(storeId,foodListData, wineList, all_wineList);
         wine_adapter.notifyDataSetChanged();
         progress_bar_wine.setVisibility(View.GONE);
+
+        presenter.getFoodHanokList();
     }
 
     @Override
