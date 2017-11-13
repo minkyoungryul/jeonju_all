@@ -37,6 +37,9 @@ public class MainSettingFrag extends Fragment {
     @BindView(R.id.ll_open_source)
     LinearLayout ll_open_source;
 
+    @BindView(R.id.ll_info)
+    LinearLayout ll_info;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,6 +87,11 @@ public class MainSettingFrag extends Fragment {
                     .withAboutVersionShown(true)
                     .withActivityTitle("오픈소스 라이브러리")
                     .start(getContext());
+        });
+
+        ll_info.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),SettingInfo.class);
+            startActivity(intent);
         });
     }
 }
