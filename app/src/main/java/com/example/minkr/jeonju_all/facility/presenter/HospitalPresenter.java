@@ -57,7 +57,7 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                         return hospitalTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<HospitalListData>>() {
                     @Override
@@ -78,7 +78,7 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                         return hospitalTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<HospitalListData>>() {
                     @Override
@@ -99,7 +99,7 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                         return hospitalTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<HospitalListData>>() {
                     @Override
@@ -120,7 +120,7 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                         return hospitalTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<HospitalListData>>() {
                     @Override
@@ -141,7 +141,7 @@ public class HospitalPresenter implements Presenter<HospitalView> {
                         return hospitalTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<HospitalListData>>() {
                     @Override

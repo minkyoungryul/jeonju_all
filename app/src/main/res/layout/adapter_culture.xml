@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_map_small"
                 android:paddingRight="5dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/tv_address"
@@ -88,8 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_call_small"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp"
+                android:src="@drawable/ic_call_small" />
 
             <TextView
                 android:id="@+id/tv_tel"
@@ -118,6 +118,7 @@
             android:id="@+id/tv_dot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="···"/>
+            android:text="···"
+            android:textStyle="bold"/>
     </LinearLayout>
 </LinearLayout>

@@ -32,9 +32,12 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,9 +55,12 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,15 +74,19 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/ll_open_source"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:text="오픈 라이브러리"
+            android:text="오픈소스 라이브러리"
             android:textColor="@color/black"
             android:textSize="15dp" />
     </LinearLayout>
@@ -86,9 +96,12 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -114,16 +127,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="앱 버전"
+            android:text="버전"
             android:textColor="@color/black"
             android:textSize="15dp"
             android:paddingLeft="10dp"
             android:layout_weight="1"/>
         <TextView
+            android:id="@+id/tv_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="v 1.0.0"/>

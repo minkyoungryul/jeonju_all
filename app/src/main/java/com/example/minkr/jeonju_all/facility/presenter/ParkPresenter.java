@@ -59,7 +59,7 @@ public class ParkPresenter implements Presenter<ParkView> {
                         return parkTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<ParkListData>>() {
                     @Override
