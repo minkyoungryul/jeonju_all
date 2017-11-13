@@ -149,21 +149,15 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         hospitalPresenter = new HospitalPresenter();
         hospitalPresenter.attachView(this);
 
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                policePresenter.getPoliceList();
-                medicinePresenter.getMedicineList();
-                parkPresenter.getParkList();
-                parkingPresenter.getParkingList();
-                hospitalPresenter.getHospitalList();
-                hospitalPresenter.getClinicList();
-                hospitalPresenter.getOriginalList();
-                hospitalPresenter.getPostpartumList();
-                hospitalPresenter.getDentistList();
-            }
-        },500);
+        policePresenter.getPoliceList();
+//        medicinePresenter.getMedicineList();
+//        parkPresenter.getParkList();
+//        parkingPresenter.getParkingList();
+//        hospitalPresenter.getHospitalList();
+//        hospitalPresenter.getClinicList();
+//        hospitalPresenter.getOriginalList();
+//        hospitalPresenter.getPostpartumList();
+//        hospitalPresenter.getDentistList();
 
 
         healthPresenter = new HealthPresenter();
@@ -255,30 +249,41 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     public void getPoliceList(List<FacilityListData> facilityListData) {
         police_datas.addAll(facilityListData);
         Logger.log("#22 data -> "+police_datas);
+
+        hospitalPresenter.getHospitalList();
     }
 
     @Override
     public void getMedicineList(List<HospitalListData> hospitalListData) {
         medicine_datas.addAll(hospitalListData);
         Logger.log("#23 data -> "+medicine_datas);
+
+        parkPresenter.getParkList();
     }
 
     @Override
     public void getParkList(List<ParkListData> parkListData) {
         park_datas.addAll(parkListData);
         Logger.log("#24 data -> "+park_datas);
+
+        parkingPresenter.getParkingList();
     }
 
     @Override
     public void getParkingList(List<ParkingListData> parkingListData) {
         parking_datas.addAll(parkingListData);
         Logger.log("#25 data -> "+parking_datas);
+
+        healthPresenter.getHealthList();
     }
 
     @Override
     public void getHealthList(List<HealthListData> healthListData) {
         health_datas.addAll(healthListData);
         Logger.log("#26 data -> "+health_datas);
+
+        ll_all.setVisibility(View.VISIBLE);
+        progress_bar.setVisibility(View.GONE);
     }
 
     @Override
@@ -299,6 +304,9 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
                 hospital_korea_datas.add(hospitalListData.get(i));
             }
         }
+
+
+        hospitalPresenter.getClinicList();
     }
 
 
@@ -337,22 +345,28 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
             }
         }
 
-        ll_all.setVisibility(View.VISIBLE);
-        progress_bar.setVisibility(View.GONE);
+        hospitalPresenter.getOriginalList();
+
     }
 
     @Override
     public void getOriginalList(List<HospitalListData> hospitalListData) {
         original_datas.addAll(hospitalListData);
+
+        hospitalPresenter.getPostpartumList();
     }
 
     @Override
     public void getPostpartumList(List<HospitalListData> hospitalListData) {
         postpartum_datas.addAll(hospitalListData);
+
+        hospitalPresenter.getDentistList();
     }
 
     @Override
     public void getDentistList(List<HospitalListData> hospitalListData) {
         dentist_datas.addAll(hospitalListData);
+
+        medicinePresenter.getMedicineList();
     }
 }
