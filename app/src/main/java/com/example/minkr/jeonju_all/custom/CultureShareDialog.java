@@ -21,8 +21,8 @@ import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
 import com.kakao.kakaolink.v2.model.ButtonObject;
 import com.kakao.kakaolink.v2.model.ContentObject;
-import com.kakao.kakaolink.v2.model.FeedTemplate;
 import com.kakao.kakaolink.v2.model.LinkObject;
+import com.kakao.kakaolink.v2.model.LocationTemplate;
 import com.kakao.network.ErrorResult;
 import com.kakao.network.callback.ResponseCallback;
 
@@ -88,19 +88,15 @@ public class CultureShareDialog extends Dialog {
 
     public void shareKakao() {
 
-        FeedTemplate params = FeedTemplate
-                .newBuilder(ContentObject.newBuilder(data.getTitle(),
-                        data.getImg_url(),
-                        LinkObject.newBuilder().setWebUrl(url)
-                                .setMobileWebUrl(url).build())
+        LocationTemplate params = LocationTemplate.newBuilder(data.getAddr(),
+                ContentObject.newBuilder(data.getTitle(), data.getImg_url(),
+                        LinkObject.newBuilder()
+                                .setWebUrl(url)
+                                .setMobileWebUrl(url)
+                                .build())
                         .setDescrption(data.getAddr())
                         .build())
-                /*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
-                        .setSharedCount(30).setViewCount(40).build())*/
-                /*.addButton(new ButtonObject("웹에서 보기", LinkObject.newBuilder()
-                        .setWebUrl(url)
-                        .setMobileWebUrl(url)
-                        .build()))*/
+                .setAddressTitle(data.getAddr())
                 .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
                         .setWebUrl(url)
                         .setMobileWebUrl(url)
@@ -114,11 +110,8 @@ public class CultureShareDialog extends Dialog {
             public void onFailure(ErrorResult errorResult) {
                 Logger.log(errorResult.toString());
             }
-
             @Override
-            public void onSuccess(KakaoLinkResponse result) {
-
-            }
+            public void onSuccess(KakaoLinkResponse result) { }
         });
     }
 
