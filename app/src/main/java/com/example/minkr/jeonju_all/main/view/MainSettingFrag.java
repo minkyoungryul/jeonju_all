@@ -131,7 +131,7 @@ public class MainSettingFrag extends Fragment {
 
         FeedTemplate params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder("전주의 모든 것",
-                        "http://tour.jeonju.go.kr/images/munhwa/sub/06img05.jpg",
+                        "https://k.kakaocdn.net/14/dn/btqip6WEWBr/XVp6Cq68vGqp1VlKckkWQ0/o.jpg",
                         LinkObject.newBuilder().setWebUrl(download_url)
                                 .setMobileWebUrl(download_url).build())
                         .setDescrption("전주의 모든 것을 경험해보세요.")
