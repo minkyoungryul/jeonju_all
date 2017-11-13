@@ -37,6 +37,9 @@ public class MainSettingFrag extends Fragment {
     @BindView(R.id.ll_open_source)
     LinearLayout ll_open_source;
 
+    @BindView(R.id.ll_send_email)
+    LinearLayout ll_send_email;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,6 +87,18 @@ public class MainSettingFrag extends Fragment {
                     .withAboutVersionShown(true)
                     .withActivityTitle("오픈소스 라이브러리")
                     .start(getContext());
+        });
+
+
+        ll_send_email.setOnClickListener(v->{
+            Intent email = new Intent(Intent.ACTION_SEND);
+            email.setType("plain/text");
+            // email setting 배열로 해놔서 복수 발송 가능
+            String[] address = {"minkr3321@naver.com","rladudrb1200@naver.com","blackbull8810@gmail.com"};
+            email.putExtra(Intent.EXTRA_EMAIL, address);
+            email.putExtra(Intent.EXTRA_SUBJECT,"전주의 모든 것 문의사항 입니다.");
+            email.putExtra(Intent.EXTRA_TEXT,"내용을 입력해주세요.\n");
+            startActivity(email);
         });
     }
 }

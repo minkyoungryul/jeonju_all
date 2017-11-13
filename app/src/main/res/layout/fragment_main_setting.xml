@@ -55,6 +55,7 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
+        android:id="@+id/ll_send_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
