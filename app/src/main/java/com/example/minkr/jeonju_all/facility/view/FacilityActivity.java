@@ -89,14 +89,12 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
 
     //    병원
     List<HospitalListData> hospital_all_datas = new ArrayList<>();
-    /*
     List<HospitalListData> hospital_total_datas = new ArrayList<>(); // 종합병원
     List<HospitalListData> hospital_nomarl_datas = new ArrayList<>(); // 일반병원
     List<HospitalListData> hospital_grand_datas = new ArrayList<>(); //요양병원
     List<HospitalListData> hospital_child_datas = new ArrayList<>(); //아동병원
     List<HospitalListData> hospital_dentist_datas = new ArrayList<>(); //치과병원
     List<HospitalListData> hospital_korea_datas = new ArrayList<>(); //한방병원
-    */
 
     //    클리닉
     List<HospitalListData> clinic_all_datas = new ArrayList<>();
@@ -153,6 +151,9 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         hospitalPresenter = new HospitalPresenter();
         hospitalPresenter.attachView(this);
 
+        healthPresenter = new HealthPresenter();
+        healthPresenter.attachView(this);
+
         policePresenter.getPoliceList();
 //        medicinePresenter.getMedicineList();
 //        parkPresenter.getParkList();
@@ -164,9 +165,8 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
 //        hospitalPresenter.getDentistList();
 
 
-        healthPresenter = new HealthPresenter();
-        healthPresenter.attachView(this);
-        healthPresenter.getHealthList();
+
+//        healthPresenter.getHealthList();
 
         setListener();
     }
@@ -187,12 +187,16 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
 
             Intent intent = new Intent(FacilityActivity.this, HospitalMapActivity.class);
             intent.putExtra("hospital_all_datas", (Serializable) hospital_all_datas);//병원
-            /*
-            intent.putExtra("clinic_all_datas", (Serializable) clinic_all_datas);//클리닉
+            intent.putExtra("hospital_total_datas", (Serializable) hospital_total_datas);//종합
+            intent.putExtra("hospital_nomarl_datas", (Serializable) hospital_nomarl_datas);//일반
+            intent.putExtra("hospital_grand_datas", (Serializable) hospital_grand_datas);//요양
+            intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);//아동
+            intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);//치과
+            intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);//한방
+
             intent.putExtra("original_datas", (Serializable) original_datas);//한의원
-            intent.putExtra("postpartum_datas", (Serializable) postpartum_datas);//산후조리원
-            intent.putExtra("dentist_datas", (Serializable) dentist_datas);//치과의원
-            */
+            //intent.putExtra("postpartum_datas", (Serializable) postpartum_datas);//산후조리원
+            //intent.putExtra("dentist_datas", (Serializable) dentist_datas);//치과의원
             //intent.putExtra("type","병원");
             startActivity(intent);
         });
@@ -297,7 +301,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     public void getHospitalList(List<HospitalListData> hospitalListData) {
         hospital_all_datas.addAll(hospitalListData);
         Logger.log("#95 hos data -> "+hospital_all_datas);
-        /*
+
         for(int i=0; i<hospitalListData.size(); i++){
             if(hospitalListData.get(i).getMediCdmStr().equals("종합병원")){
                 hospital_total_datas.add(hospitalListData.get(i));
@@ -313,7 +317,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
                 hospital_korea_datas.add(hospitalListData.get(i));
             }
         }
-        */
+
         hospitalPresenter.getClinicList();
     }
 
