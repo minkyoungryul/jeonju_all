@@ -55,7 +55,7 @@ public class ParkingPresenter implements Presenter<ParkingVIew> {
                         return parkingTotalData.getBody().getData().getList();
                     }
                 })
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<ParkingListData>>() {
                     @Override

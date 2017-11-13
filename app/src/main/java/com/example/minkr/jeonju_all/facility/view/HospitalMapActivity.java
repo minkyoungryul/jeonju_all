@@ -114,9 +114,8 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     ArrayAdapter hospitalAdapter;
 
 
-    List<HospitalListData> datas,hospital_all_datas,clinic_all_datas,original_datas,postpartum_datas,dentist_datas;
-    List<HospitalListData> hospital_total_datas,hospital_nomarl_datas,hospital_grand_datas,hospital_child_datas,hospital_dentist_datas,
-            hospital_korea_datas;
+    List<HospitalListData> datas,hospital_all_datas,hospital_total_datas,hospital_nomarl_datas,hospital_grand_datas,hospital_child_datas,
+            hospital_dentist_datas,hospital_korea_datas;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,19 +124,13 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");//병원전체
-        hospital_total_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_total_datas");//종합
-        hospital_nomarl_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_nomarl_datas");//일반
-        hospital_grand_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_grand_datas");//요양
-        hospital_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_child_datas");//아동
-        hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");//치과
-        hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");//한방
-
-        original_datas = (List<HospitalListData>) intent.getSerializableExtra("original_datas");//한의원
-        //postpartum_datas = (List<HospitalListData>) intent.getSerializableExtra("postpartum_datas");//산후조리원
-        //dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("dentist_datas");//치과의원
-
-        Logger.log("#100 ori -> "+original_datas);
+//        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");
+//        hospital_total_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_total_datas");
+//        hospital_nomarl_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_nomarl_datas");
+//        hospital_grand_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_grand_datas");
+//        hospital_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_child_datas");
+//        hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
+//        hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
 
         tv_title.setText("병원");
 
@@ -229,23 +222,18 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                 if (position == 0){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list2);
                     listPosition = 0;
-                    //datas = hospital_all_datas;
                 }else if (position == 1){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list3);
                     listPosition = 1;
-                    //datas = clinic_all_datas;
                 }else if (position == 2){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 2;
-                    //datas = original_datas;
                 }else if (position == 3){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 3;
-                    //datas = postpartum_datas;
                 }else if (position == 4){
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 4;
-                    //datas = dentist_datas;
                 }else{
                     hospitalAdapter = new ArrayAdapter(HospitalMapActivity.this,R.layout.spinner_center,list4);
                     listPosition = 5;
@@ -254,7 +242,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                 hospitalAdapter.setDropDownViewResource(R.layout.spinner_center);
                 spinner2.setAdapter(hospitalAdapter);
 
-                Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
+                //Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
                 Logger.log("#90 item "+position);
             }
 
@@ -287,51 +275,19 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                     }else{//한방병원
                         datas = hospital_korea_datas;
                     }
-                }else if (listPosition == 1){//클리닉
-
-                    if (position == 0){//전체
-                        //datas = clinic_all_datas;
-                    }else if (position == 1){//내과
-                        //datas = clinic_internal_datas;
-                    }else if (position == 2){//소아청소년
-                        //datas = clinic_child_datas;
-                    }else if (position == 3){//이비인후과
-                        //datas = clinic_ear_datas;
-                    }else if (position == 4){//가정의학과
-                        //datas = clinic_family_datas;
-                    }else if (position == 5){//일반의원
-                        //datas = clinic_normal_datas;
-                    }else if (position == 6){//산부인과
-                        //datas = clinic_baby_datas;
-                    }else if (position == 7){//피부과
-                        //datas = clinic_skin_datas;
-                    }else if(position == 8){//정형외과
-                        //datas = clinic_born_datas;
-                    }else if(position == 9){//외과
-                        //datas = clinic_surgery_datas;
-                    }else if (position == 10){//안과
-                        //datas = clinic_eye_datas;
-                    }else if (position == 11){//재활의학과
-                        //datas = clinic_rehabit_datas;
-                    }else if (position == 12){//정신의학과
-                        //datas = clinic_psy_datas;
-                    }else if (position == 13){//치과
-                        //datas = clinic_dentist_datas;
-                    }else{//신경외과
-                        //datas = clinic_neuro_datas;
-                    }
+                }else if (listPosition == 1){
 
                 }else if (listPosition == 2){
-                        datas = original_datas;
+
                 }else if (listPosition == 3){
-                        //datas = postpartum_datas;
+
                 }else if (listPosition == 4){
-                        //datas = dentist_datas;
+
                 }else{
 
                 }
 
-                Toast.makeText(HospitalMapActivity.this,"position 2-> "+position,Toast.LENGTH_LONG).show();
+                //Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
 
                 doLocationThing();
 
@@ -369,8 +325,8 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
 
         int markerId = NMapPOIflagType.PIN;
-        poiData = new NMapPOIdata(0,nMapViewerResourceProvider);
-        poiData.beginPOIdata(0);
+        poiData = new NMapPOIdata(datas.size(),nMapViewerResourceProvider);
+        poiData.beginPOIdata(datas.size());
 
         for (int i = 0; i<datas.size();i++){
             if (datas.get(i).getPosX().toString().equals(" ")){
@@ -399,8 +355,6 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         // create my location overlay
         nMapMyLocationOverlay = nMapOverlayManager.createMyLocationOverlay(nMapLocationManager, nMapCompassManager);
 
-        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),8);
-
         Logger.log("#22 dolocation end");
 
     }
@@ -409,7 +363,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),8);
+            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
         }else{
         }
     }

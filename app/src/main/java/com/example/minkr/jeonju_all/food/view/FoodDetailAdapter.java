@@ -46,6 +46,7 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Vi
         FoodListData data = datas.get(position);
         Glide.with(mContext)
                 .load(data.getMainImg())
+                .error(R.drawable.wine_satgot)
                 .fitCenter()
                 .into(holder.iv_food);
 

@@ -98,7 +98,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
 
     //    클리닉
     List<HospitalListData> clinic_all_datas = new ArrayList<>();
-    /*
     List<HospitalListData> clinic_internal_datas = new ArrayList<>(); //내과
     List<HospitalListData> clinic_child_datas = new ArrayList<>(); //소아청소년과
     List<HospitalListData> clinic_ear_datas = new ArrayList<>();    //이비인후과
@@ -113,7 +112,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     List<HospitalListData> clinic_psy_datas = new ArrayList<>(); //정신의학과
     List<HospitalListData> clinic_dentist_datas = new ArrayList<>(); //치과
     List<HospitalListData> clinic_neuro_datas = new ArrayList<>(); //신경외과
-    */
 
     //    한의원
     List<HospitalListData> original_datas = new ArrayList<>();
@@ -135,15 +133,12 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
 
         policePresenter = new PolicePresenter();
         policePresenter.attachView(this);
-        policePresenter.getPoliceList();
 
         medicinePresenter = new MedicinePresenter();
         medicinePresenter.attachView(this);
-        medicinePresenter.getMedicineList();
 
         parkPresenter = new ParkPresenter();
         parkPresenter.attachView(this);
-        parkPresenter.getParkList();
 
         parkingPresenter = new ParkingPresenter();
         parkingPresenter.attachView(this);
@@ -155,18 +150,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         healthPresenter.attachView(this);
 
         policePresenter.getPoliceList();
-//        medicinePresenter.getMedicineList();
-//        parkPresenter.getParkList();
-//        parkingPresenter.getParkingList();
-//        hospitalPresenter.getHospitalList();
-//        hospitalPresenter.getClinicList();
-//        hospitalPresenter.getOriginalList();
-//        hospitalPresenter.getPostpartumList();
-//        hospitalPresenter.getDentistList();
-
-
-
-//        healthPresenter.getHealthList();
 
         setListener();
     }
@@ -182,22 +165,15 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         });
 
         rl_hospital.setOnClickListener(v->{
-            Logger.log("#96 hos -> "+hospital_all_datas);
-            Logger.log("#96 cli -> "+clinic_all_datas);
-
             Intent intent = new Intent(FacilityActivity.this, HospitalMapActivity.class);
-            intent.putExtra("hospital_all_datas", (Serializable) hospital_all_datas);//병원
-            intent.putExtra("hospital_total_datas", (Serializable) hospital_total_datas);//종합
-            intent.putExtra("hospital_nomarl_datas", (Serializable) hospital_nomarl_datas);//일반
-            intent.putExtra("hospital_grand_datas", (Serializable) hospital_grand_datas);//요양
-            intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);//아동
-            intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);//치과
-            intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);//한방
-
-            intent.putExtra("original_datas", (Serializable) original_datas);//한의원
-            //intent.putExtra("postpartum_datas", (Serializable) postpartum_datas);//산후조리원
-            //intent.putExtra("dentist_datas", (Serializable) dentist_datas);//치과의원
-            //intent.putExtra("type","병원");
+//            intent.putExtra("hospital_all_datas", (Serializable) hospital_all_datas);
+//            intent.putExtra("hospital_total_datas", (Serializable) hospital_total_datas);
+//            intent.putExtra("hospital_nomarl_datas", (Serializable) hospital_nomarl_datas);
+//            intent.putExtra("hospital_grand_datas", (Serializable) hospital_grand_datas);
+//            intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);
+//            intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);
+//            intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);
+            intent.putExtra("type","병원");
             startActivity(intent);
         });
 
@@ -261,7 +237,8 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         police_datas.addAll(facilityListData);
         Logger.log("#22 data -> "+police_datas);
 
-        hospitalPresenter.getHospitalList();
+//        hospitalPresenter.getHospitalList();
+        parkPresenter.getParkList();
     }
 
     @Override
@@ -300,8 +277,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     @Override
     public void getHospitalList(List<HospitalListData> hospitalListData) {
         hospital_all_datas.addAll(hospitalListData);
-        Logger.log("#95 hos data -> "+hospital_all_datas);
-
         for(int i=0; i<hospitalListData.size(); i++){
             if(hospitalListData.get(i).getMediCdmStr().equals("종합병원")){
                 hospital_total_datas.add(hospitalListData.get(i));
@@ -317,7 +292,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
                 hospital_korea_datas.add(hospitalListData.get(i));
             }
         }
-
         hospitalPresenter.getClinicList();
     }
 
@@ -325,8 +299,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     @Override
     public void getClinicList(List<HospitalListData> hospitalListData) {
         clinic_all_datas.addAll(hospitalListData);
-        Logger.log("#95 cli data -> "+clinic_all_datas);
-        /*
         for(int i=0; i<hospitalListData.size(); i++){
             if(hospitalListData.get(i).getMediCdmStr().equals("내과")){
                 clinic_internal_datas.addAll(hospitalListData);
@@ -358,7 +330,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
                 clinic_neuro_datas.addAll(hospitalListData);
             }
         }
-        */
 
         hospitalPresenter.getOriginalList();
 

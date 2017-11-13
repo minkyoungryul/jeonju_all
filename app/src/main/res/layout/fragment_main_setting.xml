@@ -32,7 +32,7 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
-        android:id="@+id/ll_info"
+        android:id="@+id/ll_intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
@@ -56,6 +56,7 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
+        android:id="@+id/ll_send_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
@@ -97,6 +98,7 @@
         android:layout_height="0.3dp"
         android:background="#bdbdbd"/>
     <LinearLayout
+        android:id="@+id/ll_shareFriend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"

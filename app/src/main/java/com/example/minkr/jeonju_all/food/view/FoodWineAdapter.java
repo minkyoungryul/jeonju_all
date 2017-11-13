@@ -43,6 +43,7 @@ public class FoodWineAdapter extends RecyclerView.Adapter<FoodWineAdapter.ViewHo
         FoodListData data = datas.get(position);
         Glide.with(mContext)
                 .load(data.getMainImg())
+                .error(R.drawable.wine_satgot)
                 .fitCenter()
                 .into(holder.iv_food);
 
