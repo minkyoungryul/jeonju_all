@@ -115,7 +115,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
 
     List<HospitalListData> datas,hospital_all_datas,hospital_total_datas,hospital_nomarl_datas,hospital_grand_datas,hospital_child_datas,
-            hospital_dentist_datas,hospital_korea_datas;
+            hospital_dentist_datas,hospital_korea_datas,original_datas,postpartum_datas,dentist_datas;
 
     HospitalPresenter presenter;
 
@@ -151,12 +151,13 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
         hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
 
+        original_datas = (List<HospitalListData>) intent.getSerializableExtra("original_datas");
+        postpartum_datas = (List<HospitalListData>) intent.getSerializableExtra("postpartum_datas");
+        dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("dentist_datas");
 
         presenter = new HospitalPresenter();
         presenter.attachView(this);
         presenter.getClinicList();
-
-        tv_title.setText("병원");
 
         setSpinnerItem();
         init();
@@ -299,18 +300,47 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                     }else{//한방병원
                         datas = hospital_korea_datas;
                     }
-                }else if (listPosition == 1){
-
-                }else if (listPosition == 2){
-
-                }else if (listPosition == 3){
-
-                }else if (listPosition == 4){
-
+                }else if (listPosition == 1){//클리닉
+                    if (position == 0){//전체
+                        datas = clinic_all_datas;
+                    }else if (position == 1){//내과
+                        datas = clinic_internal_datas;
+                    }else if (position == 2){//소아청소년과
+                        datas = clinic_child_datas;
+                    }else if (position == 3){//이비인후과
+                        datas = clinic_ear_datas;
+                    }else if (position == 4){//가정의학과
+                        datas = clinic_family_datas;
+                    }else if (position == 5){//일반의원
+                        datas = clinic_normal_datas;
+                    }else if (position == 6){//산부인과
+                        datas = clinic_baby_datas;
+                    }else if (position == 7){//피부과
+                        datas = clinic_skin_datas;
+                    }else if (position == 8){//정형외과
+                        datas = clinic_born_datas;
+                    }else if (position == 9){//외과
+                        datas = clinic_surgery_datas;
+                    }else if (position == 10){//안과
+                        datas = clinic_eye_datas;
+                    }else if (position == 11){//재활의학
+                        datas = clinic_rehabit_datas;
+                    }else if (position == 12){//정신건강의학과
+                        datas = clinic_psy_datas;
+                    }else if (position == 13){//치과
+                        datas = clinic_dentist_datas;
+                    }else{
+                        datas = clinic_neuro_datas;
+                    }
+                }else if (listPosition == 2){//한의원
+                        datas = original_datas;
+                }else if (listPosition == 3){//산후조리원
+                        datas = postpartum_datas;
+                }else if (listPosition == 4){//치과의원
+                        datas = dentist_datas;
                 }else{
 
                 }
-
                 //Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
 
                 doLocationThing();
@@ -378,6 +408,8 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
         // create my location overlay
         nMapMyLocationOverlay = nMapOverlayManager.createMyLocationOverlay(nMapLocationManager, nMapCompassManager);
+
+        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
 
         Logger.log("#22 dolocation end");
 

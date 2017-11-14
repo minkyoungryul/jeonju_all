@@ -157,7 +157,11 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
             intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);
             intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);
             intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);
-            intent.putExtra("type","병원");
+
+            intent.putExtra("original_datas", (Serializable) original_datas);//한의원
+            intent.putExtra("postpartum_datas", (Serializable) postpartum_datas);//산후조리원
+            intent.putExtra("dentist_datas", (Serializable) dentist_datas);//치과의원
+
             startActivity(intent);
         });
 
