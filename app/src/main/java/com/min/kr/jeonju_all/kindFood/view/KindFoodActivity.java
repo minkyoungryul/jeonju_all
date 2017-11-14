@@ -18,6 +18,7 @@ import com.min.kr.jeonju_all.kindFood.data.KindFoodListData;
 import com.min.kr.jeonju_all.kindFood.presenter.KindFoodPresenter;
 import com.min.kr.jeonju_all.main.data.BookmarkList;
 import com.min.kr.jeonju_all.util.Logger;
+import com.min.kr.jeonju_all.util.Variable;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.Serializable;
@@ -66,7 +67,12 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
         init();
         setListener();
-        presenter.getKindFoodList();
+        if(Variable.isOnline(Variable.CONNECTION_CONFIRM_CLIENT_URL)){
+            presenter.getKindFoodList();
+        }else{
+            Toast.makeText(this, "인터넷 연결을 확인해주세요.",Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void setListener() {
@@ -97,7 +103,8 @@ public class KindFoodActivity extends AppCompatActivity implements KindFoodVIew{
 
     @Override
     public void notConnectNetworking() {
-
+        Logger.log("#35 internet is Online? ->"+ Variable.isOnline(Variable.CONNECTION_CONFIRM_CLIENT_URL));
+        Logger.log("#35 internet check->"+Variable.getWhatKindOfNetwork(this));
     }
 
     @Override

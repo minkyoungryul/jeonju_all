@@ -18,6 +18,7 @@ import com.min.kr.jeonju_all.culture.presenter.CulturePresenter;
 import com.min.kr.jeonju_all.custom.CultureShareDialog;
 import com.min.kr.jeonju_all.house.view.HouseStoreInfoActivity;
 import com.min.kr.jeonju_all.main.data.BookmarkList;
+import com.min.kr.jeonju_all.util.Variable;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.Serializable;
@@ -60,7 +61,13 @@ public class CultureActivity extends AppCompatActivity implements CultureView{
         progress_bar.setVisibility(View.VISIBLE);
         presenter = new CulturePresenter();
         presenter.attachView(this);
-        presenter.getCultureList();
+
+        if(Variable.isOnline(Variable.CONNECTION_CONFIRM_CLIENT_URL)){
+            presenter.getCultureList();
+        }else{
+            Toast.makeText(this, "인터넷 연결을 확인해주세요.",Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         init();
         setListener();

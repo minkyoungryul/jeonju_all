@@ -1,5 +1,6 @@
 package com.min.kr.jeonju_all.facility.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -38,6 +39,7 @@ import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.List;
 
@@ -81,6 +83,9 @@ public class HealthMapActivity extends NMapActivity implements OnMapStateChangeL
     @BindView(R.id.ib_back)
     ImageButton ib_back;
 
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+
     //List<FacilityListData> datas = new ArrayList<>();
 
     int locationType = 0;
@@ -106,6 +111,8 @@ public class HealthMapActivity extends NMapActivity implements OnMapStateChangeL
     }
 
     public void init(){
+        tv_title.setText("체육 시설");
+
         doLocationThing();
         Logger.log("#22 init datas -> "+datas);
     }
@@ -444,4 +451,8 @@ public class HealthMapActivity extends NMapActivity implements OnMapStateChangeL
 
     };
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

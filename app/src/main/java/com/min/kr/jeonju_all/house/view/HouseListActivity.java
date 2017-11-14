@@ -18,6 +18,7 @@ import com.min.kr.jeonju_all.house.data.HouseListData;
 import com.min.kr.jeonju_all.house.presenter.HousePresenter;
 import com.min.kr.jeonju_all.main.data.BookmarkList;
 import com.min.kr.jeonju_all.util.Logger;
+import com.min.kr.jeonju_all.util.Variable;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.Serializable;
@@ -59,7 +60,13 @@ public class HouseListActivity extends AppCompatActivity implements HouseView{
 
         presenter = new HousePresenter();
         presenter.attachView(this);
-        presenter.getHouseList();
+
+        if(Variable.isOnline(Variable.CONNECTION_CONFIRM_CLIENT_URL)){
+            presenter.getHouseList();
+        }else{
+            Toast.makeText(this, "인터넷 연결을 확인해주세요.",Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         init();
         setListener();

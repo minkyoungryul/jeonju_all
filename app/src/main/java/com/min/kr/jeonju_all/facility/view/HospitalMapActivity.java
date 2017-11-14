@@ -27,6 +27,7 @@ import com.min.kr.jeonju_all.house.view.map.NMapCalloutCustomOverlayView;
 import com.min.kr.jeonju_all.kindFood.view.map.NMapPOIflagType;
 import com.min.kr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
 import com.min.kr.jeonju_all.util.Logger;
+import com.min.kr.jeonju_all.util.Variable;
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapCompassManager;
 import com.nhn.android.maps.NMapController;
@@ -147,7 +148,14 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
         presenter = new HospitalPresenter();
         presenter.attachView(this);
-        presenter.getClinicList();
+
+        if(Variable.isOnline(Variable.CONNECTION_CONFIRM_CLIENT_URL)){
+            presenter.getClinicList();
+        }else{
+            Toast.makeText(this, "인터넷 연결을 확인해주세요.",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
 
         tv_title.setText("병원");
 
