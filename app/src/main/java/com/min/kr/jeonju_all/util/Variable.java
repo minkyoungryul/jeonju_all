@@ -1,5 +1,13 @@
 package com.min.kr.jeonju_all.util;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  * Created by mkr on 2017-08-21.
  */
@@ -49,4 +57,71 @@ public class Variable {
     public static final String _HEALTH_LIST_SERVER_REQUEST_URL = "health/getHealthList?pageSize=50"; // 체유시설
 
     public static final String _NAVER_STORE_INFO_URL = "https://store.naver.com/restaurants/detail?id=";
+
+    public static final String WIFE_STATE = "WIFI";
+    public static final String MOBILE_STATE = "MOBILE";
+    public static final String NONE_STATE = "NONE";
+
+
+    public static String getWhatKindOfNetwork(Context context){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null) {
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                return WIFE_STATE;
+            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                return MOBILE_STATE;
+            }
+        }
+        return NONE_STATE;
+    }
+
+    private static class CheckConnect extends Thread{
+        private boolean success;
+        private String host;
+
+        public CheckConnect(String host){
+            this.host = host;
+        }
+
+        @Override
+        public void run() {
+
+            HttpURLConnection conn = null;
+            try {
+                conn = (HttpURLConnection)new URL(host).openConnection();
+                conn.setRequestProperty("User-Agent","Android");
+                conn.setConnectTimeout(1000);
+                conn.connect();
+                int responseCode = conn.getResponseCode();
+                if(responseCode == 204) success = true;
+                else success = false;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                success = false;
+            }
+            if(conn != null){
+                conn.disconnect();
+            }
+        }
+
+        public boolean isSuccess(){
+            return success;
+        }
+    }
+    public static final String CONNECTION_CONFIRM_CLIENT_URL = "http://clients3.google.com/generate_204";
+
+
+    public static boolean isOnline(String Url) {
+        CheckConnect cc = new CheckConnect(Url);
+        cc.start();
+        try{
+            cc.join();
+            return cc.isSuccess();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

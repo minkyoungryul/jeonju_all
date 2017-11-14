@@ -1,6 +1,8 @@
 package com.min.kr.jeonju_all.intro;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,12 +51,30 @@ public class IntroActivity extends AppCompatActivity{
         mHanlder.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                Intent intent;
+                if(CheckAppFirstExecute()){
+                    intent = new Intent(IntroActivity.this, IntroduceFirstActivity.class);
+                }else {
+                    intent = new Intent(IntroActivity.this, MainActivity.class);
+
+                }
                 startActivity(intent);
                 finish();
             }
         },2000);
 
+    }
+
+    public boolean CheckAppFirstExecute(){
+        SharedPreferences pref = getSharedPreferences("IsFirst" , Activity.MODE_PRIVATE);
+        boolean isFirst = pref.getBoolean("isFirst", false);
+        if(!isFirst){ //최초 실행시 true 저장
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("isFirst", true);
+            editor.commit();
+        }
+
+        return !isFirst;
     }
 
 }

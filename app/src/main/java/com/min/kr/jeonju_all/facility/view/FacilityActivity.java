@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.min.kr.jeonju_all.R;
 import com.min.kr.jeonju_all.facility.data.FacilityListData;
@@ -23,6 +24,7 @@ import com.min.kr.jeonju_all.facility.presenter.ParkPresenter;
 import com.min.kr.jeonju_all.facility.presenter.PolicePresenter;
 import com.min.kr.jeonju_all.parking.data.ParkingListData;
 import com.min.kr.jeonju_all.parking.presenter.ParkingPresenter;
+import com.min.kr.jeonju_all.util.Variable;
 import com.tsengvn.typekit.TypekitContextWrapper;
 import com.min.kr.jeonju_all.parking.view.ParkingMapActivity;
 import com.min.kr.jeonju_all.parking.view.ParkingVIew;
@@ -132,7 +134,12 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         healthPresenter = new HealthPresenter();
         healthPresenter.attachView(this);
 
-        policePresenter.getPoliceList();
+        if(Variable.isOnline(Variable.CONNECTION_CONFIRM_CLIENT_URL)){
+            policePresenter.getPoliceList();
+        }else{
+            Toast.makeText(this, "인터넷 연결을 확인해주세요.",Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         setListener();
     }

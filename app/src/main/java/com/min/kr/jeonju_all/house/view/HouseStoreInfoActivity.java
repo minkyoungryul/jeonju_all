@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.min.kr.jeonju_all.R;
+import com.min.kr.jeonju_all.util.Variable;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import butterknife.BindView;
@@ -51,7 +52,13 @@ public class HouseStoreInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         url = intent.getStringExtra("data");
         type = intent.getStringExtra("type");
-        init();
+
+        if(Variable.isOnline(Variable.CONNECTION_CONFIRM_CLIENT_URL)){
+            init();
+        }else{
+            Toast.makeText(this, "인터넷 연결을 확인해주세요.",Toast.LENGTH_SHORT).show();
+            finish();
+        }
         setListener();
     }
 

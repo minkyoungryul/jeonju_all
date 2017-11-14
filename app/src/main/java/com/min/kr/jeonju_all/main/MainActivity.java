@@ -1,7 +1,9 @@
 package com.min.kr.jeonju_all.main;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -21,6 +23,7 @@ import com.min.kr.jeonju_all.main.view.MainBookmarkFrag;
 import com.min.kr.jeonju_all.main.view.MainHomeFrag;
 import com.min.kr.jeonju_all.main.view.MainSettingFrag;
 import com.min.kr.jeonju_all.util.Logger;
+import com.min.kr.jeonju_all.util.Variable;
 import com.nhn.android.maps.NMapLocationManager;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity{
         setCheckLocation();
 
     }
+
 
     private void init() {
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);

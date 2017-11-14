@@ -18,7 +18,7 @@
     <application
         android:name="com.min.kr.jeonju_all.util.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -47,6 +47,12 @@
                     android:host="@string/kakaolink_host" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".intro.IntroduceFirstActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name="com.min.kr.jeonju_all.kindFood.view.KindFoodActivity"

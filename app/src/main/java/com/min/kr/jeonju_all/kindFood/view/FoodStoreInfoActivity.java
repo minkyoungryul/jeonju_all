@@ -13,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.min.kr.jeonju_all.R;
 import com.min.kr.jeonju_all.util.Variable;
@@ -53,7 +54,12 @@ public class FoodStoreInfoActivity extends AppCompatActivity {
         storeId = intent.getStringExtra("storeId");
         data_map = intent.getIntExtra("datas",0);
         type = intent.getStringExtra("type");
-        init();
+        if(Variable.isOnline(Variable.CONNECTION_CONFIRM_CLIENT_URL)){
+            init();
+        }else{
+            Toast.makeText(this, "인터넷 연결을 확인해주세요.",Toast.LENGTH_SHORT).show();
+            finish();
+        }
         setListener();
     }
 
