@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.min.kr.jeonju_all.R;
 import com.min.kr.jeonju_all.facility.data.HospitalListData;
+import com.min.kr.jeonju_all.facility.presenter.HospitalPresenter;
 import com.min.kr.jeonju_all.house.view.map.NMapCalloutCustomOverlayView;
 import com.min.kr.jeonju_all.kindFood.view.map.NMapPOIflagType;
 import com.min.kr.jeonju_all.kindFood.view.map.NMapViewerResourceProvider;
@@ -57,7 +58,7 @@ import butterknife.ButterKnife;
  */
 
 public class HospitalMapActivity extends NMapActivity implements OnMapStateChangeListener,OnMapViewTouchEventListener,
-        NMapOverlayManager.OnCalloutOverlayViewListener,NMapPOIdataOverlay.OnStateChangeListener{
+        NMapOverlayManager.OnCalloutOverlayViewListener,NMapPOIdataOverlay.OnStateChangeListener, HospitalView{
 
     private final String API_KEY = "5lvyL1UwyDdfnK1Xxig6";
     NMapController mMapController = null;
@@ -116,6 +117,25 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     List<HospitalListData> datas,hospital_all_datas,hospital_total_datas,hospital_nomarl_datas,hospital_grand_datas,hospital_child_datas,
             hospital_dentist_datas,hospital_korea_datas;
 
+    HospitalPresenter presenter;
+
+    //    클리닉
+    List<HospitalListData> clinic_all_datas = new ArrayList<>();
+    List<HospitalListData> clinic_internal_datas = new ArrayList<>(); //내과
+    List<HospitalListData> clinic_child_datas = new ArrayList<>(); //소아청소년과
+    List<HospitalListData> clinic_ear_datas = new ArrayList<>();    //이비인후과
+    List<HospitalListData> clinic_family_datas = new ArrayList<>(); //가정의학과
+    List<HospitalListData> clinic_normal_datas = new ArrayList<>(); //일반의원
+    List<HospitalListData> clinic_baby_datas = new ArrayList<>(); //산부인과
+    List<HospitalListData> clinic_skin_datas = new ArrayList<>(); //피부과
+    List<HospitalListData> clinic_born_datas = new ArrayList<>(); //정형외과
+    List<HospitalListData> clinic_surgery_datas = new ArrayList<>(); //외과
+    List<HospitalListData> clinic_eye_datas = new ArrayList<>(); //안과
+    List<HospitalListData> clinic_rehabit_datas = new ArrayList<>(); //재활의학과
+    List<HospitalListData> clinic_psy_datas = new ArrayList<>(); //정신의학과
+    List<HospitalListData> clinic_dentist_datas = new ArrayList<>(); //치과
+    List<HospitalListData> clinic_neuro_datas = new ArrayList<>(); //신경외과
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,17 +151,19 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
         hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
 
+
+        presenter = new HospitalPresenter();
+        presenter.attachView(this);
+        presenter.getClinicList();
+
         tv_title.setText("병원");
 
         setSpinnerItem();
         init();
         setListener();
-
-
     }
 
     public void init(){
-        Logger.log("#110 datas -> "+datas);
         doLocationThing();
     }
 
@@ -356,8 +378,6 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
         // create my location overlay
         nMapMyLocationOverlay = nMapOverlayManager.createMyLocationOverlay(nMapLocationManager, nMapCompassManager);
-
-        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
 
         Logger.log("#22 dolocation end");
 
@@ -614,4 +634,65 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void notConnectNetworking() {
+
+    }
+
+    @Override
+    public void getHospitalList(List<HospitalListData> hospitalListData) {
+    }
+
+    @Override
+    public void getClinicList(List<HospitalListData> hospitalListData) {
+        clinic_all_datas.addAll(hospitalListData);
+        for(int i=0; i<hospitalListData.size(); i++){
+            if(hospitalListData.get(i).getMediCdmStr().equals("내과")){
+                clinic_internal_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("소아청소년과")){
+                clinic_child_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("이비인후과")){
+                clinic_ear_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("가정의학과")){
+                clinic_family_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("일반의원")){
+                clinic_normal_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("산부인과")){
+                clinic_baby_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("피부과")){
+                clinic_skin_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("정형외과")){
+                clinic_born_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("외과")){
+                clinic_surgery_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("안과")){
+                clinic_eye_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("재활의학과")){
+                clinic_rehabit_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("정신건강의학과")){
+                clinic_psy_datas.addAll(hospitalListData);
+            }else if(hospitalListData.get(i).getMediCdmStr().equals("치과")){
+                clinic_dentist_datas.addAll(hospitalListData);
+            }else{
+                clinic_neuro_datas.addAll(hospitalListData);
+            }
+        }
+    }
+
+    @Override
+    public void getOriginalList(List<HospitalListData> hospitalListData) {
+    }
+
+    @Override
+    public void getDentistList(List<HospitalListData> hospitalListData) {
+    }
+
+    @Override
+    public void getPostpartumList(List<HospitalListData> hospitalListData) {
+    }
 }

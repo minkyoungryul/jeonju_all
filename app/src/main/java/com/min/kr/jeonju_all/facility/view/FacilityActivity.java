@@ -94,22 +94,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     List<HospitalListData> hospital_dentist_datas = new ArrayList<>(); //치과병원
     List<HospitalListData> hospital_korea_datas = new ArrayList<>(); //한방병원
 
-    //    클리닉
-    List<HospitalListData> clinic_all_datas = new ArrayList<>();
-    List<HospitalListData> clinic_internal_datas = new ArrayList<>(); //내과
-    List<HospitalListData> clinic_child_datas = new ArrayList<>(); //소아청소년과
-    List<HospitalListData> clinic_ear_datas = new ArrayList<>();    //이비인후과
-    List<HospitalListData> clinic_family_datas = new ArrayList<>(); //가정의학과
-    List<HospitalListData> clinic_normal_datas = new ArrayList<>(); //일반의원
-    List<HospitalListData> clinic_baby_datas = new ArrayList<>(); //산부인과
-    List<HospitalListData> clinic_skin_datas = new ArrayList<>(); //피부과
-    List<HospitalListData> clinic_born_datas = new ArrayList<>(); //정형외과
-    List<HospitalListData> clinic_surgery_datas = new ArrayList<>(); //외과
-    List<HospitalListData> clinic_eye_datas = new ArrayList<>(); //안과
-    List<HospitalListData> clinic_rehabit_datas = new ArrayList<>(); //재활의학과
-    List<HospitalListData> clinic_psy_datas = new ArrayList<>(); //정신의학과
-    List<HospitalListData> clinic_dentist_datas = new ArrayList<>(); //치과
-    List<HospitalListData> clinic_neuro_datas = new ArrayList<>(); //신경외과
+
 
     //    한의원
     List<HospitalListData> original_datas = new ArrayList<>();
@@ -236,9 +221,7 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         police_datas.addAll(facilityListData);
         Logger.log("#22 data -> "+police_datas);
 
-        //hospitalPresenter.getHospitalList();
-        //medicinePresenter.getMedicineList();
-        parkPresenter.getParkList();
+        hospitalPresenter.getHospitalList();
     }
 
     @Override
@@ -292,47 +275,13 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
                 hospital_korea_datas.add(hospitalListData.get(i));
             }
         }
-        hospitalPresenter.getClinicList();
+//        hospitalPresenter.getClinicList();
+        hospitalPresenter.getOriginalList();
     }
 
 
     @Override
     public void getClinicList(List<HospitalListData> hospitalListData) {
-        clinic_all_datas.addAll(hospitalListData);
-        for(int i=0; i<hospitalListData.size(); i++){
-            if(hospitalListData.get(i).getMediCdmStr().equals("내과")){
-                clinic_internal_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("소아청소년과")){
-                clinic_child_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("이비인후과")){
-                clinic_ear_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("가정의학과")){
-                clinic_family_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("일반의원")){
-                clinic_normal_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("산부인과")){
-                clinic_baby_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("피부과")){
-                clinic_skin_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("정형외과")){
-                clinic_born_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("외과")){
-                clinic_surgery_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("안과")){
-                clinic_eye_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("재활의학과")){
-                clinic_rehabit_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("정신건강의학과")){
-                clinic_psy_datas.addAll(hospitalListData);
-            }else if(hospitalListData.get(i).getMediCdmStr().equals("치과")){
-                clinic_dentist_datas.addAll(hospitalListData);
-            }else{
-                clinic_neuro_datas.addAll(hospitalListData);
-            }
-        }
-
-        hospitalPresenter.getOriginalList();
-
     }
 
     @Override
@@ -353,6 +302,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     public void getDentistList(List<HospitalListData> hospitalListData) {
         dentist_datas.addAll(hospitalListData);
 
-        //medicinePresenter.getMedicineList();
+        medicinePresenter.getMedicineList();
     }
 }
