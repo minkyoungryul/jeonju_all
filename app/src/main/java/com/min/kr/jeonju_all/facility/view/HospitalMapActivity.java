@@ -123,22 +123,25 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-//        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");
-//        hospital_total_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_total_datas");
-//        hospital_nomarl_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_nomarl_datas");
-//        hospital_grand_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_grand_datas");
-//        hospital_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_child_datas");
-//        hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
-//        hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
+        datas = hospital_all_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_all_datas");
+        hospital_total_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_total_datas");
+        hospital_nomarl_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_nomarl_datas");
+        hospital_grand_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_grand_datas");
+        hospital_child_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_child_datas");
+        hospital_dentist_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_dentist_datas");
+        hospital_korea_datas = (List<HospitalListData>) intent.getSerializableExtra("hospital_korea_datas");
 
         tv_title.setText("병원");
 
         setSpinnerItem();
         init();
         setListener();
+
+
     }
 
     public void init(){
+        Logger.log("#110 datas -> "+datas);
         doLocationThing();
     }
 
@@ -353,6 +356,8 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
         // create my location overlay
         nMapMyLocationOverlay = nMapOverlayManager.createMyLocationOverlay(nMapLocationManager, nMapCompassManager);
+
+        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
 
         Logger.log("#22 dolocation end");
 

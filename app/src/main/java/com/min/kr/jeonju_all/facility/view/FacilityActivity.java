@@ -164,13 +164,14 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
 
         rl_hospital.setOnClickListener(v->{
             Intent intent = new Intent(FacilityActivity.this, HospitalMapActivity.class);
-//            intent.putExtra("hospital_all_datas", (Serializable) hospital_all_datas);
-//            intent.putExtra("hospital_total_datas", (Serializable) hospital_total_datas);
-//            intent.putExtra("hospital_nomarl_datas", (Serializable) hospital_nomarl_datas);
-//            intent.putExtra("hospital_grand_datas", (Serializable) hospital_grand_datas);
-//            intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);
-//            intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);
-//            intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);
+            Logger.log("#110 datas -> "+hospital_all_datas);
+            intent.putExtra("hospital_all_datas", (Serializable) hospital_all_datas);
+            intent.putExtra("hospital_total_datas", (Serializable) hospital_total_datas);
+            intent.putExtra("hospital_nomarl_datas", (Serializable) hospital_nomarl_datas);
+            intent.putExtra("hospital_grand_datas", (Serializable) hospital_grand_datas);
+            intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);
+            intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);
+            intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);
             intent.putExtra("type","병원");
             startActivity(intent);
         });
@@ -235,7 +236,8 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
         police_datas.addAll(facilityListData);
         Logger.log("#22 data -> "+police_datas);
 
-//        hospitalPresenter.getHospitalList();
+        //hospitalPresenter.getHospitalList();
+        //medicinePresenter.getMedicineList();
         parkPresenter.getParkList();
     }
 
@@ -351,6 +353,6 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
     public void getDentistList(List<HospitalListData> hospitalListData) {
         dentist_datas.addAll(hospitalListData);
 
-        medicinePresenter.getMedicineList();
+        //medicinePresenter.getMedicineList();
     }
 }
