@@ -49,6 +49,12 @@
         </activity>
 
         <activity
+            android:name=".intro.IntroduceFirstActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name="com.min.kr.jeonju_all.kindFood.view.KindFoodActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"

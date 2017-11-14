@@ -145,7 +145,6 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
         Intent intent = getIntent();
 
-
         presenter = new HospitalPresenter();
         presenter.attachView(this);
 
