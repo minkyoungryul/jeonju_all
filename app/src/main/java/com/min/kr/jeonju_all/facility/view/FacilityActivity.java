@@ -156,7 +156,19 @@ public class FacilityActivity extends AppCompatActivity implements PoliceView, M
 
         rl_hospital.setOnClickListener(v->{
             Intent intent = new Intent(FacilityActivity.this, HospitalMapActivity.class);
-            intent.putExtra("type","병원");
+            Logger.log("#110 datas -> "+hospital_all_datas);
+            intent.putExtra("hospital_all_datas", (Serializable) hospital_all_datas);
+            intent.putExtra("hospital_total_datas", (Serializable) hospital_total_datas);
+            intent.putExtra("hospital_nomarl_datas", (Serializable) hospital_nomarl_datas);
+            intent.putExtra("hospital_grand_datas", (Serializable) hospital_grand_datas);
+            intent.putExtra("hospital_child_datas", (Serializable) hospital_child_datas);
+            intent.putExtra("hospital_dentist_datas", (Serializable) hospital_dentist_datas);
+            intent.putExtra("hospital_korea_datas", (Serializable) hospital_korea_datas);
+
+            intent.putExtra("original_datas", (Serializable) original_datas);//한의원
+            intent.putExtra("postpartum_datas", (Serializable) postpartum_datas);//산후조리원
+            intent.putExtra("dentist_datas", (Serializable) dentist_datas);//치과의원
+
             startActivity(intent);
         });
 
