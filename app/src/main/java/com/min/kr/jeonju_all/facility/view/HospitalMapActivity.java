@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -291,6 +292,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
                 poiData.removeAllPOIdata();
                 nMapOverlayManager.clearOverlays();
+                datas.clear();
 
                 if (listPosition == 0){//병원
                     if (position == 0){//전체
@@ -350,7 +352,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
                 }
                 //Toast.makeText(HospitalMapActivity.this,"position -> "+position,Toast.LENGTH_LONG).show();
-
+                Logger.log("#33 datas size->"+datas.size());
                 doLocationThing();
 
             }
@@ -366,7 +368,9 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     private void doLocationThing() {
         //Toast.makeText(this, "위치정보 활용에 동의하셨습니다.", Toast.LENGTH_SHORT).show();
 
-        Logger.log("#22 dolocation start");
+        Logger.log("#22 dolocation start Thread ->"+ Looper.myLooper());
+
+
 
         mMapController = mMapView.getMapController();
 
@@ -693,38 +697,38 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         clinic_all_datas.addAll(hospitalListData);
         for(int i=0; i<hospitalListData.size(); i++){
             if(hospitalListData.get(i).getMediCdmStr().equals("내과")){
-                clinic_internal_datas.addAll(hospitalListData);
+                clinic_internal_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("소아청소년과")){
-                clinic_child_datas.addAll(hospitalListData);
+                clinic_child_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("이비인후과")){
-                clinic_ear_datas.addAll(hospitalListData);
+                clinic_ear_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("가정의학과")){
-                clinic_family_datas.addAll(hospitalListData);
+                clinic_family_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("일반의원")){
-                clinic_normal_datas.addAll(hospitalListData);
+                clinic_normal_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("산부인과")){
-                clinic_baby_datas.addAll(hospitalListData);
+                clinic_baby_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("피부과")){
-                clinic_skin_datas.addAll(hospitalListData);
+                clinic_skin_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("정형외과")){
-                clinic_born_datas.addAll(hospitalListData);
+                clinic_born_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("외과")){
-                clinic_surgery_datas.addAll(hospitalListData);
+                clinic_surgery_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("안과")){
-                clinic_eye_datas.addAll(hospitalListData);
+                clinic_eye_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("재활의학과")){
-                clinic_rehabit_datas.addAll(hospitalListData);
+                clinic_rehabit_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("정신건강의학과")){
-                clinic_psy_datas.addAll(hospitalListData);
+                clinic_psy_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("치과")){
-                clinic_dentist_datas.addAll(hospitalListData);
+                clinic_dentist_datas.add(hospitalListData.get(i));
             }else{
-                clinic_neuro_datas.addAll(hospitalListData);
+                clinic_neuro_datas.add(hospitalListData.get(i));
             }
         }
 
 
-        Logger.log("#106 clinic_internal_datas -> "+clinic_internal_datas);
+        Logger.log("#106 clinic_internal_datas size-> "+clinic_internal_datas.size());
         Logger.log("#106 clinic_child_datas -> "+clinic_child_datas);
 
 
