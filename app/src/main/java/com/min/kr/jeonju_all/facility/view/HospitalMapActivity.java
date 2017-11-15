@@ -105,6 +105,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     double myLocationY = 0.0;
 
     int listPosition = 0;
+    int listPosition2 = 0;
 
     ArrayList<String> list1 = new ArrayList<>();
     ArrayList<String> list2 = new ArrayList<>();
@@ -295,50 +296,72 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                 if (listPosition == 0){//병원
                     if (position == 0){//전체
                         datas = hospital_all_datas;
+                        listPosition2 = 0;
                     }else if (position == 1){//종합병원
                         datas = hospital_total_datas;
+                        listPosition2 = 1;
                     }else if (position == 2){//일반병원
                         datas = hospital_nomarl_datas;
+                        listPosition2 = 2;
                     }else if (position == 3){//요양병원
                         datas = hospital_grand_datas;
+                        listPosition2 = 3;
                     }else if (position == 4){//아동병원
                         datas = hospital_child_datas;
+                        listPosition2 = 4;
                     }else if (position == 5){//치과병원
                         datas = hospital_dentist_datas;
+                        listPosition2 = 5;
                     }else{//한방병원
                         datas = hospital_korea_datas;
+                        listPosition2 = 6;
                     }
                 }else if (listPosition == 1){//클리닉
                     if (position == 0){//전체
                         datas = clinic_all_datas;
+                        listPosition2 = 0;
                     }else if (position == 1){//내과
                         datas = clinic_internal_datas;
+                        listPosition2 = 1;
                     }else if (position == 2){//소아청소년과
                         datas = clinic_child_datas;
+                        listPosition2 = 2;
                     }else if (position == 3){//이비인후과
                         datas = clinic_ear_datas;
+                        listPosition2 = 3;
                     }else if (position == 4){//가정의학과
                         datas = clinic_family_datas;
+                        listPosition2 = 4;
                     }else if (position == 5){//일반의원
                         datas = clinic_normal_datas;
+                        listPosition2 = 5;
                     }else if (position == 6){//산부인과
                         datas = clinic_baby_datas;
+                        listPosition2 = 6;
                     }else if (position == 7){//피부과
                         datas = clinic_skin_datas;
+                        listPosition2 = 7;
                     }else if (position == 8){//정형외과
                         datas = clinic_born_datas;
+                        listPosition2 = 8;
                     }else if (position == 9){//외과
                         datas = clinic_surgery_datas;
+                        listPosition2 = 9;
                     }else if (position == 10){//안과
                         datas = clinic_eye_datas;
+                        listPosition2 = 10;
                     }else if (position == 11){//재활의학
                         datas = clinic_rehabit_datas;
+                        listPosition2 = 11;
                     }else if (position == 12){//정신건강의학과
                         datas = clinic_psy_datas;
+                        listPosition2 = 12;
                     }else if (position == 13){//치과
                         datas = clinic_dentist_datas;
+                        listPosition2 = 13;
                     }else{
                         datas = clinic_neuro_datas;
+                        listPosition2 = 14;
                     }
                 }else if (listPosition == 2){//한의원
                         datas = original_datas;
@@ -417,7 +440,15 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         // create my location overlay
         nMapMyLocationOverlay = nMapOverlayManager.createMyLocationOverlay(nMapLocationManager, nMapCompassManager);
 
-        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
+        if (listPosition == 0 && listPosition2 == 4){
+            mMapController.setMapCenter(new NGeoPoint(127.1114600, 35.8155320),10);
+        }else if (listPosition == 0 && listPosition2 == 5){
+            mMapController.setMapCenter(new NGeoPoint(127.1364460, 35.8373860),10);
+        }else if (listPosition == 1 && listPosition2 == 13){
+            mMapController.setMapCenter(new NGeoPoint(127.1087270, 35.8203600), 10);
+        }else{
+            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 10);
+        }
 
         Logger.log("#22 dolocation end");
 
