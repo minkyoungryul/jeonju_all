@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Looper;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -367,9 +366,6 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
     private void doLocationThing() {
         //Toast.makeText(this, "위치정보 활용에 동의하셨습니다.", Toast.LENGTH_SHORT).show();
-
-        Logger.log("#22 dolocation start Thread ->"+ Looper.myLooper());
-
 
 
         mMapController = mMapView.getMapController();
