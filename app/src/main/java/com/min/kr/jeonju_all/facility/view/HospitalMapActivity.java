@@ -722,6 +722,12 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                 clinic_neuro_datas.addAll(hospitalListData);
             }
         }
+
+
+        Logger.log("#106 clinic_internal_datas -> "+clinic_internal_datas);
+        Logger.log("#106 clinic_child_datas -> "+clinic_child_datas);
+
+
     }
 
     @Override
