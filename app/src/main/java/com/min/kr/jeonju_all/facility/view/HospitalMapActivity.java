@@ -106,8 +106,6 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
     int listPosition = 0;
 
-    int markerId = NMapPOIflagType.PIN;
-
     ArrayList<String> list1 = new ArrayList<>();
     ArrayList<String> list2 = new ArrayList<>();
     ArrayList<String> list3 = new ArrayList<>();
@@ -175,27 +173,6 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     }
 
     public void init(){
-
-        mMapController = mMapView.getMapController();
-
-        mMapView.setApiKey(API_KEY); // 클라이언트 아이디 값 설정
-
-        mMapView.setScalingFactor(2.0f);
-
-        mMapView.setClickable(true);
-
-        mMapView.setBuiltInZoomControls(true, null);
-
-        mMapView.setOnMapStateChangeListener(this);
-
-        nMapViewerResourceProvider = new NMapViewerResourceProvider(this);
-
-        nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
-
-        //int markerId = NMapPOIflagType.PIN;
-        poiData = new NMapPOIdata(0,nMapViewerResourceProvider);
-        poiData.beginPOIdata(0);
-
         doLocationThing();
     }
 
@@ -335,7 +312,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                     if (position == 0){//전체
                         datas = clinic_all_datas;
                     }else if (position == 1){//내과
-                        //datas = clinic_internal_datas;
+                        datas = clinic_internal_datas;
                     }else if (position == 2){//소아청소년과
                         datas = clinic_child_datas;
                     }else if (position == 3){//이비인후과
@@ -391,7 +368,27 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
         Logger.log("#22 dolocation start");
 
+        mMapController = mMapView.getMapController();
 
+        mMapView.setApiKey(API_KEY); // 클라이언트 아이디 값 설정
+
+        mMapView.setScalingFactor(2.0f);
+
+        mMapView.setClickable(true);
+
+        mMapView.setBuiltInZoomControls(true, null);
+
+        mMapView.setOnMapStateChangeListener(this);
+
+
+        nMapViewerResourceProvider = new NMapViewerResourceProvider(this);
+
+        nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
+
+
+        int markerId = NMapPOIflagType.PIN;
+        poiData = new NMapPOIdata(datas.size(),nMapViewerResourceProvider);
+        poiData.beginPOIdata(datas.size());
 
         for (int i = 0; i<datas.size();i++){
             if (datas.get(i).getPosX().toString().equals(" ")){
@@ -430,7 +427,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            //mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
+            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
         }else{
         }
     }
@@ -693,43 +690,42 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
     @Override
     public void getClinicList(List<HospitalListData> hospitalListData) {
-
         clinic_all_datas.addAll(hospitalListData);
         for(int i=0; i<hospitalListData.size(); i++){
             if(hospitalListData.get(i).getMediCdmStr().equals("내과")){
-                clinic_internal_datas.addAll(hospitalListData);
+                clinic_internal_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("소아청소년과")){
-                clinic_child_datas.addAll(hospitalListData);
+                clinic_child_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("이비인후과")){
-                clinic_ear_datas.addAll(hospitalListData);
+                clinic_ear_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("가정의학과")){
-                clinic_family_datas.addAll(hospitalListData);
+                clinic_family_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("일반의원")){
-                clinic_normal_datas.addAll(hospitalListData);
+                clinic_normal_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("산부인과")){
-                clinic_baby_datas.addAll(hospitalListData);
+                clinic_baby_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("피부과")){
-                clinic_skin_datas.addAll(hospitalListData);
+                clinic_skin_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("정형외과")){
-                clinic_born_datas.addAll(hospitalListData);
+                clinic_born_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("외과")){
-                clinic_surgery_datas.addAll(hospitalListData);
+                clinic_surgery_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("안과")){
-                clinic_eye_datas.addAll(hospitalListData);
+                clinic_eye_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("재활의학과")){
-                clinic_rehabit_datas.addAll(hospitalListData);
+                clinic_rehabit_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("정신건강의학과")){
-                clinic_psy_datas.addAll(hospitalListData);
+                clinic_psy_datas.add(hospitalListData.get(i));
             }else if(hospitalListData.get(i).getMediCdmStr().equals("치과")){
-                clinic_dentist_datas.addAll(hospitalListData);
+                clinic_dentist_datas.add(hospitalListData.get(i));
             }else{
-                clinic_neuro_datas.addAll(hospitalListData);
+                clinic_neuro_datas.add(hospitalListData.get(i));
             }
         }
 
 
-        Logger.log("#106 data a count -> "+clinic_internal_datas.size());
-        Logger.log("#106 data b count -> "+clinic_dentist_datas.size());
+        Logger.log("#106 clinic_internal_datas -> "+clinic_internal_datas);
+        Logger.log("#106 clinic_child_datas -> "+clinic_child_datas);
 
 
     }

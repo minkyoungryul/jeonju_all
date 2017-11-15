@@ -54,6 +54,9 @@ public class MainSettingFrag extends Fragment {
     @BindView(R.id.ll_intro)
     LinearLayout ll_intro;
 
+    @BindView(R.id.ll_version)
+    LinearLayout ll_version;
+
     private String download_url = "http://www.google.com/";
 
     @Nullable
@@ -124,6 +127,12 @@ public class MainSettingFrag extends Fragment {
             email.putExtra(Intent.EXTRA_SUBJECT, "전주의 모든 것 문의사항 입니다.");
             email.putExtra(Intent.EXTRA_TEXT, "내용을 입력해주세요.\n");
             startActivity(email);
+        });
+
+        ll_version.setOnClickListener(v->{
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=com.min.kr.jeonju_all"));
+            startActivity(intent);
         });
     }
 
