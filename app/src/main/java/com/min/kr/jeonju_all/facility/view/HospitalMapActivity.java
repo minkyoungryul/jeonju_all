@@ -106,6 +106,8 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
     int listPosition = 0;
 
+    int markerId = NMapPOIflagType.PIN;
+
     ArrayList<String> list1 = new ArrayList<>();
     ArrayList<String> list2 = new ArrayList<>();
     ArrayList<String> list3 = new ArrayList<>();
@@ -173,6 +175,27 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     }
 
     public void init(){
+
+        mMapController = mMapView.getMapController();
+
+        mMapView.setApiKey(API_KEY); // 클라이언트 아이디 값 설정
+
+        mMapView.setScalingFactor(2.0f);
+
+        mMapView.setClickable(true);
+
+        mMapView.setBuiltInZoomControls(true, null);
+
+        mMapView.setOnMapStateChangeListener(this);
+
+        nMapViewerResourceProvider = new NMapViewerResourceProvider(this);
+
+        nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
+
+        //int markerId = NMapPOIflagType.PIN;
+        poiData = new NMapPOIdata(0,nMapViewerResourceProvider);
+        poiData.beginPOIdata(0);
+
         doLocationThing();
     }
 
@@ -312,7 +335,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
                     if (position == 0){//전체
                         datas = clinic_all_datas;
                     }else if (position == 1){//내과
-                        datas = clinic_internal_datas;
+                        //datas = clinic_internal_datas;
                     }else if (position == 2){//소아청소년과
                         datas = clinic_child_datas;
                     }else if (position == 3){//이비인후과
@@ -368,27 +391,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
         Logger.log("#22 dolocation start");
 
-        mMapController = mMapView.getMapController();
 
-        mMapView.setApiKey(API_KEY); // 클라이언트 아이디 값 설정
-
-        mMapView.setScalingFactor(2.0f);
-
-        mMapView.setClickable(true);
-
-        mMapView.setBuiltInZoomControls(true, null);
-
-        mMapView.setOnMapStateChangeListener(this);
-
-
-        nMapViewerResourceProvider = new NMapViewerResourceProvider(this);
-
-        nMapOverlayManager = new NMapOverlayManager(this,mMapView,nMapViewerResourceProvider);
-
-
-        int markerId = NMapPOIflagType.PIN;
-        poiData = new NMapPOIdata(datas.size(),nMapViewerResourceProvider);
-        poiData.beginPOIdata(datas.size());
 
         for (int i = 0; i<datas.size();i++){
             if (datas.get(i).getPosX().toString().equals(" ")){
@@ -427,7 +430,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
+            //mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
         }else{
         }
     }
@@ -690,6 +693,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
     @Override
     public void getClinicList(List<HospitalListData> hospitalListData) {
+
         clinic_all_datas.addAll(hospitalListData);
         for(int i=0; i<hospitalListData.size(); i++){
             if(hospitalListData.get(i).getMediCdmStr().equals("내과")){
@@ -724,8 +728,8 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
         }
 
 
-        Logger.log("#106 clinic_internal_datas -> "+clinic_internal_datas);
-        Logger.log("#106 clinic_child_datas -> "+clinic_child_datas);
+        Logger.log("#106 data a count -> "+clinic_internal_datas.size());
+        Logger.log("#106 data b count -> "+clinic_dentist_datas.size());
 
 
     }
