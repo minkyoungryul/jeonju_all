@@ -96,6 +96,8 @@ public class FoodMap2Activity extends NMapActivity implements OnMapStateChangeLi
         Intent intent = getIntent();
         data = (List<FoodListData>) intent.getSerializableExtra("data");
 
+        Logger.log("#130 data -> "+data);
+
         init();
         setListener();
 
@@ -115,24 +117,23 @@ public class FoodMap2Activity extends NMapActivity implements OnMapStateChangeLi
                     if (locationType == 0){
                         stopMyLocation();
                         startMyLocation();
-                        /*
-                        layoutProgressbar.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.VISIBLE);
-                        imgbtLocation.setImageResource(R.drawable.jeonjulocation);
-                        imgbtLocation.setBackgroundResource(R.drawable.jeonjulocation);
-                        txtLocation.setText("가게위치");
-                        stopMyLocation();
-                        Toast.makeText(KindFoodMap2Activity.this,"현재위치를 찾고 있습니다...",Toast.LENGTH_LONG).show();
-                        locationType = 1;
-                        startMyLocation();
-                        */
                     }else {
                         imgbtLocation.setImageResource(R.drawable.mylocation);
                         imgbtLocation.setBackgroundResource(R.drawable.mylocation);
                         txtLocation.setText("현재위치");
                         stopMyLocation();
                         locationType = 0;
-                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 12);
+                        if (data.get(0).getType().equals("한옥마을 맛집")){
+                            mMapController.setMapCenter(new NGeoPoint(127.1539640, 35.8151060), 12);
+                        }else if (data.get(0).getType().equals("막걸리")){
+                            mMapController.setMapCenter(new NGeoPoint(127.1218920, 35.8243870), 10);
+                        }else if (data.get(0).getType().equals("콩나물국밥")){
+                            mMapController.setMapCenter(new NGeoPoint(127.1539640, 35.8151060), 10);
+                        }else if (data.get(0).getType().equals("한정식")){
+                            mMapController.setMapCenter(new NGeoPoint(127.1539640, 35.8151060), 10);
+                        }else{
+                            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 12);
+                        }
                     }
             }
         });
@@ -200,7 +201,17 @@ public class FoodMap2Activity extends NMapActivity implements OnMapStateChangeLi
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),12);
+            if (data.get(0).getType().equals("한옥마을 맛집")){
+                mMapController.setMapCenter(new NGeoPoint(127.1539640, 35.8151060), 12);
+            }else if (data.get(0).getType().equals("막걸리")){
+                mMapController.setMapCenter(new NGeoPoint(127.1218920, 35.8243870), 10);
+            }else if (data.get(0).getType().equals("콩나물국밥")){
+                mMapController.setMapCenter(new NGeoPoint(127.1539640, 35.8151060), 10);
+            }else if (data.get(0).getType().equals("한정식")){
+                mMapController.setMapCenter(new NGeoPoint(127.1539640, 35.8151060), 10);
+            }else{
+                mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 12);
+            }
         }else{
         }
     }
