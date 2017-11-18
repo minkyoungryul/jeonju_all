@@ -131,7 +131,7 @@ public class HealthMapActivity extends NMapActivity implements OnMapStateChangeL
                         txtLocation.setText("현재위치");
                         stopMyLocation();
                         locationType = 0;
-                        mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930), 10);
+                        mMapController.setMapCenter(new NGeoPoint(127.1293630, 35.8468290), 10);
                     }
                 }
 
@@ -210,7 +210,7 @@ public class HealthMapActivity extends NMapActivity implements OnMapStateChangeL
     @Override
     public void onMapInitHandler(NMapView nMapView, NMapError nMapError) {
         if (nMapError == null){
-            mMapController.setMapCenter(new NGeoPoint(127.1480000, 35.8241930),10);
+            mMapController.setMapCenter(new NGeoPoint(127.1293630, 35.8468290),10);
         }else{
         }
     }
