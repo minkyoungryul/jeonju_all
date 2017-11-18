@@ -25,6 +25,7 @@ import com.kakao.kakaolink.v2.model.LinkObject;
 import com.kakao.kakaolink.v2.model.LocationTemplate;
 import com.kakao.network.ErrorResult;
 import com.kakao.network.callback.ResponseCallback;
+import com.min.kr.jeonju_all.util.Variable;
 
 import butterknife.BindView;
 
@@ -98,8 +99,8 @@ public class BookmarkShareDialog extends Dialog {
                         .build())
                 .setAddressTitle(data.getTitle())
                 .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
-                        .setWebUrl(url)
-                        .setMobileWebUrl(url)
+                        .setWebUrl(Variable._GOOGLEPLAY_DOWNLOAD_URL)
+                        .setMobileWebUrl(Variable._GOOGLEPLAY_DOWNLOAD_URL)
                         .setAndroidExecutionParams("key1=value1")
                         .setIosExecutionParams("key1=value1")
                         .build()))
