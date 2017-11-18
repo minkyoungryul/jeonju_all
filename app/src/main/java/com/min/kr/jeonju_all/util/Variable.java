@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -62,6 +61,7 @@ public class Variable {
     public static final String MOBILE_STATE = "MOBILE";
     public static final String NONE_STATE = "NONE";
 
+    public static final String _GOOGLEPLAY_DOWNLOAD_URL = "market://details?id=com.min.kr.jeonju_all";
 
     public static String getWhatKindOfNetwork(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

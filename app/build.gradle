@@ -17,10 +17,22 @@ apply plugin: 'com.jakewharton.butterknife'
 //apply plugin: 'me.tatarka.retrolambda' // ----- add
 
 android {
-
+    signingConfigs {
+        release {
+            keyAlias 'command'
+            keyPassword '01072245741'
+            storeFile file('/Users/Jun/AndroidStudioProjects/Junju_Project/keystores/jeonju_all.jks')
+            storePassword '01072245741'
+        }
+        debug {
+            keyAlias 'command'
+            keyPassword '01072245741'
+            storeFile file('/Users/Jun/AndroidStudioProjects/Junju_Project/keystores/jeonju_all.jks')
+            storePassword '01072245741'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
-
     defaultConfig {
         applicationId "com.min.kr.jeonju_all"
         minSdkVersion 16
@@ -33,13 +45,12 @@ android {
 //    C:\Users\minkr\AndroidStudioProjects\Jeonju_all\keystore\jeonju_all.jks
 //    keyAlias : command
 //    password : 01072245741
-
-
     buildTypes {
         release {
             zipAlignEnabled true  // apk 최적화
             minifyEnabled false
             debuggable false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt')
 
             proguardFile 'proguard-common.pro'
@@ -52,12 +63,10 @@ android {
             proguardFile 'proguard-bean.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     android {
         packagingOptions {
             exclude 'META-INF/DEPENDENCIES.txt'
@@ -124,13 +133,10 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.naver.maps.open:naver-map-api:2.1.2@aar'
     compile 'gun0912.ted:tedpermission:2.0.0'
-
     compile 'com.tsengvn:Typekit:1.0.0'
-
     compile('com.mikepenz:aboutlibraries:5.9.6@aar') {
         transitive = true
     }
-
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'

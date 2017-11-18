@@ -27,6 +27,7 @@ import com.kakao.network.callback.ResponseCallback;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
+import com.min.kr.jeonju_all.util.Variable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,8 +57,6 @@ public class MainSettingFrag extends Fragment {
 
     @BindView(R.id.ll_version)
     LinearLayout ll_version;
-
-    private String download_url = "http://www.google.com/";
 
     @Nullable
     @Override
@@ -131,7 +130,7 @@ public class MainSettingFrag extends Fragment {
 
         ll_version.setOnClickListener(v->{
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://details?id=com.min.kr.jeonju_all"));
+            intent.setData(Uri.parse(Variable._GOOGLEPLAY_DOWNLOAD_URL));
             startActivity(intent);
         });
     }
@@ -141,15 +140,15 @@ public class MainSettingFrag extends Fragment {
         FeedTemplate params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder("전주의 모든 것",
                         "https://k.kakaocdn.net/14/dn/btqip6WEWBr/XVp6Cq68vGqp1VlKckkWQ0/o.jpg",
-                        LinkObject.newBuilder().setWebUrl(download_url)
-                                .setMobileWebUrl(download_url).build())
+                        LinkObject.newBuilder().setWebUrl(Variable._GOOGLEPLAY_DOWNLOAD_URL)
+                                .setMobileWebUrl(Variable._GOOGLEPLAY_DOWNLOAD_URL).build())
                         .setDescrption("전주의 모든 것을 경험해보세요.")
                         .build())
                 .addButton(new ButtonObject("앱 다운로드", LinkObject.newBuilder()
-                        .setWebUrl(download_url)
-                        .setMobileWebUrl(download_url)
+                        .setWebUrl(Variable._GOOGLEPLAY_DOWNLOAD_URL)
+                        .setMobileWebUrl(Variable._GOOGLEPLAY_DOWNLOAD_URL)
                         .setAndroidExecutionParams("key1=value1")
-                        .setIosExecutionParams("key1=value1")
+                        .setIosExecutionParams("key1=value2")
                         .build()))
                 .build();
 
