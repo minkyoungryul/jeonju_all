@@ -250,6 +250,8 @@ public class HouseMap2Activity extends NMapActivity implements OnMapStateChangeL
         Double x = Double.parseDouble(data.getPosX());
         Double y = Double.parseDouble(data.getPosY());
 
+        Logger.log("#90 data overlayview x -> "+x+" / y -> "+y);
+
         return new NMapCalloutCustomOverlayView(HouseMap2Activity.this, nMapOverlay, nMapOverlayItem, rect, name, address, homepage, info, img_url, x, y, 1);
     }
 
@@ -393,6 +395,7 @@ public class HouseMap2Activity extends NMapActivity implements OnMapStateChangeL
 
     public void getStreetView(double x, double y){
         Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
+        Logger.log("#90 house2 streetView -> x : "+y+" y : "+x);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);

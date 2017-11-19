@@ -32,6 +32,7 @@ import com.min.kr.jeonju_all.facility.view.PoliceMapActivity;
 import com.min.kr.jeonju_all.house.view.HouseMap2Activity;
 import com.min.kr.jeonju_all.house.view.HouseMapActivity;
 import com.min.kr.jeonju_all.parking.view.ParkingMapActivity;
+import com.min.kr.jeonju_all.util.Logger;
 import com.nhn.android.maps.NMapOverlay;
 import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.overlay.NMapPOIitem;
@@ -56,7 +57,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
                                         String address, String tel, String info, String url, Double x, Double y, int type) {
 		super(context, itemOverlay, item, itemBounds, name, address, tel, info, url, x, y, type);
 
-		//Logger.log("#30 datas ->" +datas);
+		Logger.log("#90 datas nmapcallout x -> "+x+" / y -> "+y);
 
 		if (type == 0){
 			house = (HouseMapActivity) getContext();
@@ -155,7 +156,7 @@ public class NMapCalloutCustomOverlayView extends NMapCalloutOverlayView {
 
 				if (type == 0){
 					house.getStreetView(x,y);
-				}else if (type == 0){
+				}else if (type == 1){
 					house2.getStreetView(x,y);
 				}else if (type == 10){
 					police.getStreetView(y,x);
