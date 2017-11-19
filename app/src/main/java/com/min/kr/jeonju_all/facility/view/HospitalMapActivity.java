@@ -175,6 +175,7 @@ public class HospitalMapActivity extends NMapActivity implements OnMapStateChang
 
     public void init(){
         doLocationThing();
+        tv_title.setText("병원");
     }
 
     public void setSpinnerItem(){
