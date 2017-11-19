@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity{
 
         ButterKnife.bind(this);
 
+        Logger.log("Hashkey ->"+Variable.getKeyHash(this));
         init();
         setListener();
 
