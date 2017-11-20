@@ -355,7 +355,6 @@ public class HouseMapActivity extends NMapActivity implements OnMapStateChangeLi
     }
 
     public void getStreetView(double x, double y){
-
         Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+y+","+x);
         Logger.log("#90 house streetView -> x : "+y+" y : "+x);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
